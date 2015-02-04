@@ -1,0 +1,24 @@
+.themeColor, .wrap a {
+    color:#336633;
+}
+.themeBg, .themeBgImg, #moduleTabs div {
+	background-color:#669933;
+}
+.themeDarkerBg, #moduleTabs .active {
+	background-color:#336633;
+}
+.themeBorder, #moduleTabs div {
+	border-color:#B6E074;
+}
+.themeBgImg	{
+    background-image:url(theme-bg.gif);
+}
+.header1 {
+    background-color:#999;
+}
+.header1, .header1 th a, .header1 th a:hover {
+    color:#fff;
+}
+.header2 {
+    background-color:#B6E074; font-size:12px; color:#669933; padding-left:5px
+}

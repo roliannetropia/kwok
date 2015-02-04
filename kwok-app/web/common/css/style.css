@@ -1,0 +1,381 @@
+/*
+	 Default Stylesheet
+*/
+
+/* Layout */
+html,body {
+	margin:0;
+	padding:0;
+	height:100%; /* needed for container min-height */
+    width:100%;
+}
+#container {
+	position:relative; /* needed for footer positioning*/
+	margin:0 auto; /* center, not in IE5 */
+	width:100%;
+	height:auto !important; /* real browsers */
+	height:100%; /* IE6: treaded as min-height*/
+	min-height:100%; /* real browsers */
+}
+#content {
+	padding:0;
+    height:100%; width:100%;
+}
+#contentContainer {
+    padding:0 0 5em 0; width:100%; vertical-align:top; /* bottom padding for footer */
+}
+#sponsorAd {
+    vertical-align:top; border-left:#ddd 1px solid;
+}
+.section , h1, h2, h3, h4, h5, h6 {
+    padding:0 10px 0 10px;
+}
+#header {
+    padding:6px 6px 12px 6px;
+}
+#footer {
+	position:absolute;
+	width:100%;
+	bottom:0; /* stick to bottom */
+    padding-top:4px;
+    padding-bottom:4px;
+    text-align:center;
+}
+#footer a {
+    text-decoration:underline;
+}
+body, select, textarea, input, pre {
+	font-family:arial,verdana,sans-serif;
+}
+a:link, a:visited  {
+    text-decoration:none;
+}
+a:hover {
+    text-decoration:underline;
+}
+img {
+    border:0;
+}
+img.standard {
+    vertical-align:middle; padding-left:3px; padding-right:3px; padding-bottom:3px;
+}
+p {
+    line-height:1.5;
+}
+ul {
+    margin:.3em 0 0 1.5em; list-style-type:square; padding:0; list-style-image:url( ../images/bullet.gif );
+}
+li {
+    line-height:1.6;
+}
+.brown, .warning, .message {
+    color:brown;
+}
+/* Colors. Don't use the first descriptive name in this section. They're for identifying the color and subject to change. */
+.darkOrange, h1, h2, h3, h4, h5, h6, a.h1:link, a.h1:visited, a.rssTitle, .expiredDate {
+    color:#cc6633;
+}
+.white, #footer, #footer a, #genericHeaderTitle, #moduleTabs a {
+    color:white;
+}
+.lightGray, .inactive , div.blogPostCommentHeader, div.blogPostCommentBody {
+	color:#999;
+}
+.darkGray, div.blogPermalink, .formSubscriberHeader , .infoContent, .formFieldDesc, span.command , #tabs a.inactive , .attrFieldName, .header3 {
+	color:#666;
+}
+.black, body, select, textarea, #tabs .active, .stats tr th a {
+    color:#0D0D0D;
+}
+.lightGrayBorder, .subCmds, .solidLine, h3, h2, .mediawikiH1, .mediawikiH2, .smallDottedLine, .attrFieldName, #rssItems,
+    .btn:hover, div.blogPostCommentBody {
+    border-color:#ddd;
+}
+.standardBorder, #hardwareDetail, .kbArticleInfo, #tabs a, #tabs .active, .userInfo, iframe.portalIframe,
+    table.listTable, table.listTable td, table.listTable th, table.tabBody {
+    border:#ddd 1px solid;
+}
+.darkGrayBorder, pre {
+    border-color:#bbb;
+}
+.whiteBg, .row2, body, select, textarea, #hardwareDetail {
+    background-color:#fff;
+}
+.lightGrayBg, .row1, div.blogPostCommentBody, table.details th, .btn:hover, #tabs a.inactive, pre {
+    background-color:#f3f3f3;
+}
+.notificationBar {
+    background-color:#90ee90;
+}
+.red, .error, .required {
+    color:red;
+}
+/* Font sizes */
+body {
+    font-size:12px;
+}
+.standardFont, select, textarea, input, pre {
+    font-size:100%;
+}
+.smallerFont, #footer, .infoContent, .formFieldDesc, span.command, div.blogPermalink {
+    font-size:90%;
+}
+/* Title */
+h1, h2, h3, h4, h5, h6 {
+    margin:0;
+}
+h1 {
+    font-size:160%; padding-top:1.2em; padding-bottom:0.2em;
+}
+h2, a.rssTitle {
+    font-size:130%; padding-top:1em; padding-bottom:0.1em; margin-bottom:0.4em;
+}
+h3 {
+    font-size:110%; padding-top:1em; padding-bottom:0.1em; margin-bottom:0.2em;
+}
+h4 {
+    font-size:100%;
+}
+h5 {
+    font-size:100%;
+}
+h6 {
+    font-size:90%;
+}
+pre {
+    border-width:1px; border-style:dashed; padding:1em;
+}
+ul.hideIcon li {
+    list-style-type:none; line-height:1.6; list-style-image:none;
+}
+table.standard {
+    width:100%;
+}
+table.standard th {
+    font-weight:normal; text-align:left; white-space:nowrap;
+}
+table.standard td {
+    width:100%;
+}
+table.standardForm, table.standardForm2 {
+    width:100%; padding:2px;
+}
+table.standardForm th {
+    text-align:right; white-space:nowrap;
+}
+table.standardForm2 th {
+    text-align:left; white-space:nowrap;
+}
+table.standardForm2 td {
+    width:100%;
+}
+table.standard th, table.standard td,
+table.standardForm th, table.standardForm td,
+table.standardForm2 th, table.standardForm2 td {
+    padding:4px; vertical-align:top;
+}
+table.listTable,
+table.listTable td,
+table.listTable th,
+table.tabBody {
+    border-collapse:collapse;
+}
+table.listTable,
+table.tabBody {
+    width:100%;
+}
+table.listTable td,
+table.listTable th,
+table.tabBody td {
+    padding:5px;
+}
+table.noBorder, table.noBorder td {
+    border:0px;
+}
+th.rownum {
+    width:1%;
+}
+.solidLine, h3, h2, .mediawikiH1, .mediawikiH2 {
+    border-bottom-width:1px; border-bottom-style:solid;
+}
+.noLine {
+    border:none;
+}
+.smallDottedLine, .attrFieldName {
+    border-top-width:1px; border-top-style:dotted; padding:4px;
+}
+/* Main header */
+.mainHeader {
+    margin:0; padding:4px;
+}
+.header1, .header1 th a, .header1 th a:hover {
+    text-decoration:none;
+}
+tr.header1 td {
+    padding:2px 6px;
+}
+#genericHeaderTitle {
+    font-weight:bold; padding:4px;
+}
+.emptyHeader {
+    line-height:0.2pt;
+}
+.stats {
+    width:100%;
+}
+.stats tr th, .stats tr td {
+    width:50%; padding:4px;
+}
+.stats a {
+    text-decoration:none;
+}
+.stats tr td a:hover {
+    text-decoration:underline;
+}
+
+.infoContent, .formFieldDesc, span.command {
+    font-weight:normal;
+}
+.wrap {
+    padding:0; margin:0; width:100%; height:100%; border-spacing:0; border-collapse:collapse;
+}
+.btn {
+	padding:2px 6px 2px 6px;
+}
+.btn:hover {
+    border-width:1px; border-style:solid; border-radius:2px; text-decoration:none; margin:-1px;
+}
+a.btn {
+    text-decoration:none;
+}
+a.cancel {
+    padding-left:10px;
+}
+#shortcuts {
+    float:right;
+}
+/* Module tabs */
+#moduleTabs div {
+    border-right:1px solid; border-bottom:1px solid; padding:10px; float:left; font-weight:bold;
+}
+#moduleTabs .end {
+    float:none;
+}
+/* Command menu */
+.subCmds {
+    padding:6px; border-bottom-width:1px; border-bottom-style:solid; clear:both;
+}
+.subCmds img {
+    vertical-align:bottom; padding-right:2px;
+}
+/* Navigations */
+.nav {
+    padding-top:6px;
+}
+/* Tabs */
+#tabs {
+    margin:0; height:20px;
+}
+#tabs a.inactive {
+    border-bottom:none; font-weight:bold; float:left; line-height:14px; margin-right:4px; padding:3px 10px 3px 10px;
+}
+#tabs .active {
+    border-bottom:none; font-weight:bold; float:left; line-height:14px; margin-right:4px; padding:3px 10px 3px 10px;
+}
+
+/* Common styles */
+.customField {
+    margin-bottom:12px;
+}
+
+.customFieldEmbedded table,
+.customFieldEmbedded table td,
+.customFieldEmbedded table th {
+    border:0; margin-bottom:-12px;
+}
+/* Home module */
+.userInfo {
+    padding:4px 14px 4px 14px; text-align:left;
+}
+.userInfo ul {
+    margin-left:0;
+}
+.userInfoHeader {
+    font-weight:bold; padding:4px;
+}
+
+/* Admin module */
+.attrFieldName {
+    font-weight:bold; padding:4px;
+}
+
+/* Auth module */
+.authDomain {
+    width:196px;
+}
+
+/* Hardware module */
+#hardwareDetail {
+    line-height:18px; position:absolute; top:0; visibility:hidden; width:360px; z-index:100;
+}
+#hardwareDetailActive {
+	height:300px; overflow:auto;
+}
+
+/* Issues module */
+.formSubscriberSelectbox {
+    width:196px;
+}
+.formSubscriberButton {
+    width:120px;
+}
+.formSubscriberHeader {
+    font-weight:bold;
+}
+
+/* Knowledge Base module */
+.kbArticleInfo {
+    padding-left:10px;
+}
+
+/* Used in wiki */
+.link_https {
+    background:url(../images/opensource/silkicons/ext_link_https.gif) center right no-repeat;
+    padding-right:18px;
+}
+
+.link_http {
+    background:url(../images/opensource/silkicons/ext_link_http.png) center right no-repeat;
+    padding-right:14px;
+}
+
+.link_ftp {
+    background:url(../images/opensource/silkicons/ext_link_ftp.gif) center right no-repeat;
+    padding-right:18px;
+}
+
+/* Blogs module */
+div.blogPermalink {
+    margin-bottom:8px; padding-bottom:10px; padding-top:8px;
+}
+div.blogPostCommentBody {
+    border-top-width:1px; border-top-style:dotted; padding:2px;
+}
+
+/* RSS Feed module */
+#rssItems {
+    border-left-width:1px; border-left-style:dotted; padding-left:14px; width:96%;
+}
+div.rssTitle {
+    margin-bottom:4px; margin-top:12px; padding-top:12px; padding-bottom:2px;
+}
+a.rssTitle {
+    font-weight:bold;
+}
+/* Images */
+.image {
+	background-repeat:no-repeat; background-position:0 0; padding:0 0 1px 18px;
+}
+.loadingImg {
+    background-image:url(../jstree-pre1.0/images/throbber.gif);
+}

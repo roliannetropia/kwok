@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="194067679">
+    <data-source source="LOCAL" name="PostgreSQL - kwokdb@localhost" uuid="4e719f4b-2701-4ad5-abd1-6df02f57a65d">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/kwokdb</jdbc-url>
+      <libraries />
+    </data-source>
+  </component>
+</project>

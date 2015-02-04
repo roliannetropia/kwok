@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="kwok-dist" default="dist" basedir=".">
+	<description>
+		Build file for the distribution.
+	</description>
+
+	<echo message="Starting build process"/>
+
+	<property file="../kwok-app/web/WEB-INF/classes/properties/Build.properties"/>
+
+    <!-- Set global properties for this build -->
+	<property name="app.dir" value="../kwok-app"/>
+	<property name="schemasetup.dir" value="../kwok-schemasetup"/>
+
+    <property name="linux.distname" value="dist-linux"/>
+	<property name="linux.kwok.dir" value="${linux.distname}/server/tomcat_7.0.41_x64/webapps/kwok"/>
+
+    <property name="upgrade.distname" value="dist-upgrade"/>
+	<property name="upgrade.kwok.dir" value="${upgrade.distname}/server/tomcat/webapps/kwok"/>
+
+    <property name="windows.distname" value="dist-windows"/>
+	<property name="windows.kwok.dir" value="${windows.distname}/server/tomcat_8.0.9_x64/webapps/kwok"/>
+
+    <property name="main.dist.dir" value="dist"/>
+
+	<!-- Create distribution -->
+    <target name="dist">
+		<!-- Rebuild app -->
+		<ant antfile="build.xml"
+			dir="${app.dir}"
+			target="dist"/>
+
+		<!-- Rebuild schemasetup -->
+		<ant antfile="build.xml"
+			dir="${schemasetup.dir}"
+			target="dist"/>
+
+		<!-- Delete distribution directories -->
+		<delete dir="${linux.kwok.dir}"/>
+		<delete dir="${upgrade.kwok.dir}"/>
+		<delete dir="${windows.kwok.dir}"/>
+		<delete dir="${linux.distname}/database"/>
+		<delete dir="${upgrade.distname}/database"/>
+		<delete dir="${windows.distname}/database"/>
+		<delete dir="${main.dist.dir}"/>
+
+		<!-- Copy app files -->
+        <copy todir="${linux.kwok.dir}">
+            <fileset dir="${app.dir}/dist/kwok"/>
+        </copy>
+        <copy todir="${upgrade.kwok.dir}">
+            <fileset dir="${app.dir}/dist/kwok"/>
+        </copy>
+        <copy todir="${windows.kwok.dir}">
+            <fileset dir="${app.dir}/dist/kwok"/>
+        </copy>
+
+		<!-- Copy schemasetup files -->
+        <copy todir="${linux.distname}" overwrite="true">
+            <fileset dir="${schemasetup.dir}/dist"/>
+			<fileset file="Installation Guide-${app.version}-linux.pdf"/>
+			<fileset file="Kwok_Information_Server_License.txt"/>
+        </copy>
+        <copy todir="${upgrade.distname}" overwrite="true">
+            <fileset dir="${schemasetup.dir}/dist"/>
+			<fileset file="Installation Guide-${app.version}-linux.pdf"/>
+			<fileset file="Installation Guide-${app.version}-windows.pdf"/>
+			<fileset file="Kwok_Information_Server_License.txt"/>
+        </copy>
+        <copy todir="${windows.distname}" overwrite="true">
+            <fileset dir="${schemasetup.dir}/dist"/>			
+			<fileset file="Installation Guide-${app.version}-windows.pdf"/>
+			<fileset file="Kwok_Information_Server_License.txt"/>
+        </copy>
+
+		<!-- Create zip files -->
+		<mkdir dir="${main.dist.dir}" />
+		<tar destfile="${main.dist.dir}/kwok-information-server-${app.version}-linux.tar.gz" basedir="${linux.distname}" longfile="gnu" compression="gzip"/>
+		<zip destfile="${main.dist.dir}/kwok-information-server-${app.version}-upgrade.zip" basedir="${upgrade.distname}" update="true"/>
+		<zip destfile="${main.dist.dir}/kwok-information-server-${app.version}-windows.zip" basedir="${windows.distname}" update="true"/>
+	</target>
+</project>

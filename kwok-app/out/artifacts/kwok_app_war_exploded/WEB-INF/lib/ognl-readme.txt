@@ -1,0 +1,1 @@
+Required by Apache Struts 2
