@@ -53,4 +53,6 @@ public class ObjectTypes {
     public static final Integer KB_ARTICLE = 14;
 
     public static final Integer HARDWARE_COMPONENT = 15;
+
+    public static final Integer TAPE = 16;
 }
