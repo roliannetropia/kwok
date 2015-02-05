@@ -17,7 +17,7 @@ import java.util.Set;
 /**
  * This is for building search queries.
  */
-public class HardwareSearch extends BaseSearch {
+public class TapeSearch extends BaseSearch {
 
     public static final String HARDWARE_ID_EQUALS = "hardwareIdEquals";
 
@@ -48,65 +48,65 @@ public class HardwareSearch extends BaseSearch {
     public static final String HARDWARE_VENDOR_EQUALS = "vendorIdEquals";
     public static final String HARDWARE_MANUFACTURER_EQUALS = "manufacturerIdEquals";
 
-    public HardwareSearch(RequestContext requestContext, String sessionKey) {
+    public TapeSearch(RequestContext requestContext, String sessionKey) {
         super(requestContext, sessionKey);
     }
 
-    public HardwareSearch() {}
+    public TapeSearch() {}
 
     /**
      * This would generate searchCriteriaMap.
      *
      * @return ..
      */
-    public void prepareMap(HardwareSearchForm hardwareSearchForm) {
+    public void prepareMap(TapeSearchForm hardwareSearchForm) {
         String cmd = requestContext.getParameterString("cmd");
         String attrId = hardwareSearchForm.getAttrId();
         String attrValue = hardwareSearchForm.getAttrValue();
         String compTypeId = hardwareSearchForm.getCompTypeId();
         String compValue = hardwareSearchForm.getCompValue();
-        String hardwareNameCriteria = hardwareSearchForm.getHardwareNameCriteria();
-        String hardwareName = hardwareSearchForm.getHardwareName();
+        String hardwareNameCriteria = hardwareSearchForm.getTapeNameCriteria();
+        String hardwareName = hardwareSearchForm.getTapeName();
         String description = hardwareSearchForm.getDescription();
 
         if (!cmd.isEmpty()) {
             if (cmd.equals("filter")) {
                 Integer hardwareType = requestContext.getParameterInteger("hardwareType");
                 if (hardwareType != null) {
-                    hardwareSearchForm.setHardwareTypes(Arrays.asList(hardwareType));
-                    hardwareSearchForm.setHardwareType(hardwareType);
-                    searchCriteriaMap.put(HardwareSearch.HARDWARE_TYPE_CONTAINS, hardwareSearchForm.getHardwareTypes());
+                    hardwareSearchForm.setTapeTypes(Arrays.asList(hardwareType));
+                    hardwareSearchForm.setTapeType(hardwareType);
+                    searchCriteriaMap.put(TapeSearch.HARDWARE_TYPE_CONTAINS, hardwareSearchForm.getTapeTypes());
                 }
             } else {
                 reset();
                 hardwareSearchForm.setRequest(requestContext);
 
                 if (cmd.equals("groupBy")) {
-                    Integer hardwareType = hardwareSearchForm.getHardwareType();
+                    Integer hardwareType = hardwareSearchForm.getTapeType();
                     if (hardwareType != null) {
-                        hardwareSearchForm.setHardwareTypes(Arrays.asList(hardwareType));
-                        hardwareSearchForm.setHardwareType(hardwareType);
-                        searchCriteriaMap.put(com.kwoksys.biz.hardware.core.HardwareSearch.HARDWARE_TYPE_CONTAINS, hardwareSearchForm.getHardwareTypes());
+                        hardwareSearchForm.setTapeTypes(Arrays.asList(hardwareType));
+                        hardwareSearchForm.setTapeType(hardwareType);
+                        searchCriteriaMap.put(com.kwoksys.biz.hardware.core.TapeSearch.HARDWARE_TYPE_CONTAINS, hardwareSearchForm.getTapeTypes());
                     }
                     Integer hardwareStatus = requestContext.getParameterInteger("hardwareStatus");
                     if (hardwareStatus != null) {
-                        hardwareSearchForm.setHardwareStatus(Arrays.asList(hardwareStatus));
-                        searchCriteriaMap.put("hardwareStatusContains", hardwareSearchForm.getHardwareStatus());
+                        hardwareSearchForm.setTapeStatus(Arrays.asList(hardwareStatus));
+                        searchCriteriaMap.put("hardwareStatusContains", hardwareSearchForm.getTapeStatus());
                     }
                     Integer hardwareLocation = requestContext.getParameterInteger("hardwareLocation");
                     if (hardwareLocation != null) {
-                        hardwareSearchForm.setHardwareLocation(Arrays.asList(hardwareLocation));
-                        searchCriteriaMap.put("hardwareLocationContains", hardwareSearchForm.getHardwareLocation());
+                        hardwareSearchForm.setTapeLocation(Arrays.asList(hardwareLocation));
+                        searchCriteriaMap.put("hardwareLocationContains", hardwareSearchForm.getTapeLocation());
                     }
 
                 } else if (cmd.equals("search")) {
-                    // Search by Hardware Id equals something.
-                    String hardwareId = hardwareSearchForm.getHardwareId();
+                    // Search by Tape Id equals something.
+                    String hardwareId = hardwareSearchForm.getTapeId();
                     if (!hardwareId.isEmpty()) {
                         searchCriteriaMap.put(HARDWARE_ID_EQUALS, hardwareId);
                     }
 
-                    // Search by Hardware model name equals something.
+                    // Search by Tape model name equals something.
                     if (!hardwareName.isEmpty()) {
                         if (hardwareNameCriteria.equals("equals")) {
                             searchCriteriaMap.put(HARDWARE_NAME_EQUALS, hardwareName);
@@ -120,51 +120,51 @@ public class HardwareSearch extends BaseSearch {
                     if (!description.isEmpty()) {
                         searchCriteriaMap.put("hardwareDescription", description);
                     }
-                    // Search by Hardware model name equals something.
-                    String hardwareModelName = hardwareSearchForm.getHardwareModelName();
+                    // Search by Tape model name equals something.
+                    String hardwareModelName = hardwareSearchForm.getTapeModelName();
                     if (!hardwareModelName.isEmpty()) {
                         searchCriteriaMap.put(HARDWARE_MODEL_NAME_CONTAINS, hardwareModelName);
                     }
 
-                    // Search by Hardware model number equals something.
-                    String hardwareModelNumber = hardwareSearchForm.getHardwareModelNumber();
+                    // Search by Tape model number equals something.
+                    String hardwareModelNumber = hardwareSearchForm.getTapeModelNumber();
                     if (!hardwareModelNumber.isEmpty()) {
                         searchCriteriaMap.put("modelNumberContains", hardwareModelNumber);
                     }
 
-                    // Search by Hardware serial number equals something.
+                    // Search by Tape serial number equals something.
                     String hardwareSerialNumber = hardwareSearchForm.getSerialNumber();
                     if (!hardwareSerialNumber.isEmpty()) {
                         searchCriteriaMap.put(HARDWARE_SERIAL_NUMBER_CONTAINS, hardwareSerialNumber);
                     }
 
-                    // Search by Hardware Owner (userDisplayName) contains something.
-                    String hardwareOwner = hardwareSearchForm.getHardwareOwner();
+                    // Search by Tape Owner (userDisplayName) contains something.
+                    String hardwareOwner = hardwareSearchForm.getTapeOwner();
                     if (!hardwareOwner.isEmpty()) {
                         searchCriteriaMap.put("hardwareOwnerContains", hardwareOwner);
                     }
 
-                    // Search by Hardware type.
-                    List<Integer> typeList = hardwareSearchForm.getHardwareTypes();
+                    // Search by Tape type.
+                    List<Integer> typeList = hardwareSearchForm.getTapeTypes();
                     if (!typeList.isEmpty()) {
                         searchCriteriaMap.put(HARDWARE_TYPE_CONTAINS, typeList);
                     }
-                    // Search by Hardware status.
-                    List<Integer> statusList = hardwareSearchForm.getHardwareStatus();
+                    // Search by Tape status.
+                    List<Integer> statusList = hardwareSearchForm.getTapeStatus();
                     if (!statusList.isEmpty()) {
                         searchCriteriaMap.put("hardwareStatusContains", statusList);
                     }
-                    // Search by Hardware location.
-                    List<Integer> locationList = hardwareSearchForm.getHardwareLocation();
+                    // Search by Tape location.
+                    List<Integer> locationList = hardwareSearchForm.getTapeLocation();
                     if (!locationList.isEmpty()) {
                         searchCriteriaMap.put("hardwareLocationContains", locationList);
                     }
-                    // Search by Hardware Manufacturer
+                    // Search by Tape Manufacturer
                     Integer manufacturerId = hardwareSearchForm.getManufacturerId();
                     if (manufacturerId != 0) {
                         searchCriteriaMap.put(HARDWARE_MANUFACTURER_EQUALS, manufacturerId);
                     }
-                    // Search by Hardware Manufacturer
+                    // Search by Tape Manufacturer
                     Integer vendorId = hardwareSearchForm.getVendorId();
                     if (vendorId != 0) {
                         searchCriteriaMap.put(HARDWARE_VENDOR_EQUALS, vendorId);
@@ -228,7 +228,7 @@ public class HardwareSearch extends BaseSearch {
         if (searchCriteriaMap == null) {
             return;
         }
-        // For Hardware Id
+        // For Tape Id
         if (searchCriteriaMap.containsKey(HARDWARE_ID_EQUALS)) {
             query.appendWhereClause("ah.hardware_id = " + SqlUtils.encodeInteger(searchCriteriaMap.get(HARDWARE_ID_EQUALS)));
         }
@@ -244,7 +244,7 @@ public class HardwareSearch extends BaseSearch {
                     SqlUtils.encodeInteger(searchCriteriaMap.get("compTypeId")) + " and lower(comp_description) like lower('%"
                     + SqlUtils.encodeString(searchCriteriaMap.get("compValue")) +"%'))");
         }
-        // For Hardware name (without "%")
+        // For Tape name (without "%")
         if (searchCriteriaMap.containsKey(HARDWARE_NAME_EQUALS)) {
             query.appendWhereClause("lower(ah.hardware_name) = lower('" + SqlUtils.encodeString(searchCriteriaMap.get(HARDWARE_NAME_EQUALS)) + "')");
         }
@@ -253,12 +253,12 @@ public class HardwareSearch extends BaseSearch {
             query.appendWhereClause("ah.hardware_id != " + SqlUtils.encodeInteger(searchCriteriaMap.get(HARDWARE_ID_NOT_EQUALS)));
         }        
 
-        // For Hardware name
+        // For Tape name
         if (searchCriteriaMap.containsKey("hardwareNameContains")) {
             query.appendWhereClause("lower(ah.hardware_name) like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get("hardwareNameContains")) + "%')");
         }
 
-        // For Hardware name
+        // For Tape name
         if (searchCriteriaMap.containsKey(HARDWARE_NAME_BEGINS_WITH)) {
             query.appendWhereClause("lower(ah.hardware_name) like lower('" + SqlUtils.encodeString(searchCriteriaMap.get(HARDWARE_NAME_BEGINS_WITH)) + "%')");
         }
@@ -267,7 +267,7 @@ public class HardwareSearch extends BaseSearch {
         if (searchCriteriaMap.containsKey("hardwareDescription")) {
             query.appendWhereClause("lower(ah.hardware_description) like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get("hardwareDescription")) + "%')");
         }
-        // For Hardware model name
+        // For Tape model name
         if (searchCriteriaMap.containsKey(HARDWARE_MODEL_NAME_CONTAINS)) {
             query.appendWhereClause("lower(ah.hardware_model_name) like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get(HARDWARE_MODEL_NAME_CONTAINS)) + "%')");
         }
@@ -278,7 +278,7 @@ public class HardwareSearch extends BaseSearch {
                 query.appendWhereClause("lower(ah.hardware_model_name) = lower('" + SqlUtils.encodeString(searchCriteriaMap.get(HARDWARE_MODEL_NAME_EQUALS)) + "')");
             }
         }
-        // For Hardware model number
+        // For Tape model number
         if (searchCriteriaMap.containsKey("modelNumberContains")) {
             query.appendWhereClause("lower(ah.hardware_model_number) like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get("modelNumberContains")) + "%')");
         }
@@ -289,21 +289,21 @@ public class HardwareSearch extends BaseSearch {
                 query.appendWhereClause("lower(ah.hardware_model_number) = lower('" + SqlUtils.encodeString(searchCriteriaMap.get(HARDWARE_MODEL_NUMBER_EQUALS)) + "')");
             }
         }
-        // For Hardware serial number
+        // For Tape serial number
         if (searchCriteriaMap.containsKey(HARDWARE_SERIAL_NUMBER_CONTAINS)) {
             query.appendWhereClause("lower(ah.hardware_serial_number) like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get("serialNumberContains")) + "%')");
         }
         if (searchCriteriaMap.containsKey(HARDWARE_SERIAL_NUMBER_EQUALS)) {
             query.appendWhereClause("lower(ah.hardware_serial_number) = lower('" + SqlUtils.encodeString(searchCriteriaMap.get(HARDWARE_SERIAL_NUMBER_EQUALS)) + "')");
         }
-        // For Hardware owner number
+        // For Tape owner number
         if (searchCriteriaMap.containsKey("hardwareOwnerContains")) {
-            query.appendWhereClause(HardwareQueries.getOrderByColumn("hardware_owner_name") + " like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get("hardwareOwnerContains")) + "%')");
+            query.appendWhereClause(TapeQueries.getOrderByColumn("hardware_owner_name") + " like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get("hardwareOwnerContains")) + "%')");
         }
         if (searchCriteriaMap.containsKey("hardwareOwnerId")) {
             query.appendWhereClause("ah.hardware_owner_id = " + SqlUtils.encodeInteger(searchCriteriaMap.get("hardwareOwnerId")));
         }
-        // For Hardware type
+        // For Tape type
         if (searchCriteriaMap.containsKey(HARDWARE_TYPE_CONTAINS)) {
             query.appendWhereClause("ah.hardware_type in (" + SqlUtils.encodeIntegers((List<Integer>) searchCriteriaMap.get(HARDWARE_TYPE_CONTAINS)) + ")");
         }
