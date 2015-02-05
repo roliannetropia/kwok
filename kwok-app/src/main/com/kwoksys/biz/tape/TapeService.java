@@ -8,20 +8,21 @@ import com.kwoksys.biz.contracts.ContractService;
 import com.kwoksys.biz.contracts.dto.Contract;
 import com.kwoksys.biz.files.FileService;
 import com.kwoksys.biz.files.dto.File;
-import com.kwoksys.biz.hardware.core.HardwareSearch;
-import com.kwoksys.biz.hardware.dao.HardwareDao;
-import com.kwoksys.biz.hardware.dto.Hardware;
-import com.kwoksys.biz.hardware.dto.HardwareComponent;
-import com.kwoksys.biz.hardware.dto.HardwareSoftwareMap;
+//import com.kwoksys.biz.hardware.core.HardwareSearch;
+//import com.kwoksys.biz.hardware.dao.HardwareDao;
+//import com.kwoksys.biz.hardware.dto.Hardware;
+//import com.kwoksys.biz.hardware.dto.HardwareComponent;
+//import com.kwoksys.biz.hardware.dto.HardwareSoftwareMap;
 import com.kwoksys.biz.software.dto.SoftwareLicense;
 import com.kwoksys.biz.system.SystemService;
 import com.kwoksys.biz.system.core.ObjectTypes;
 import com.kwoksys.biz.system.core.Schema;
 import com.kwoksys.biz.system.core.configs.ConfigManager;
-import com.kwoksys.biz.system.dto.linking.ContractHardwareLink;
-import com.kwoksys.biz.system.dto.linking.HardwareIssueLink;
-import com.kwoksys.biz.system.dto.linking.HardwareMemberLink;
+import com.kwoksys.biz.system.dto.linking.ContractTapeLink;
+import com.kwoksys.biz.system.dto.linking.TapeIssueLink;
+import com.kwoksys.biz.system.dto.linking.TapeMemberLink;
 import com.kwoksys.biz.system.dto.linking.ObjectLink;
+import com.kwoksys.biz.tape.dto.Tape;
 import com.kwoksys.framework.connections.database.QueryBits;
 import com.kwoksys.framework.exceptions.DatabaseException;
 import com.kwoksys.framework.exceptions.ObjectNotFoundException;
@@ -35,7 +36,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * HardwareService
+ * TapeService
  */
 public class TapeService {
 
@@ -45,149 +46,149 @@ public class TapeService {
         this.requestContext = requestContext;
     }
 
-    // Hardware
-    public List<Hardware> getHardwareList(QueryBits query) throws DatabaseException {
-        return new HardwareDao(requestContext).getHardwareList(query);
+    // Tape
+    public List<Tape> getTapeList(QueryBits query) throws DatabaseException {
+        return new TapeDao(requestContext).getTapeList(query);
     }
 
-    public List<Hardware> getLinkedHardwareList(QueryBits query, ObjectLink objectMap) throws DatabaseException {
-        return new HardwareDao(requestContext).getLinkedHardwareList(query, objectMap);
+    public List<Tape> getLinkedTapeList(QueryBits query, ObjectLink objectMap) throws DatabaseException {
+        return new TapeDao(requestContext).getLinkedTapeList(query, objectMap);
     }
 
-    public int getHardwareCount(QueryBits query) throws DatabaseException {
-        return new HardwareDao(requestContext).getCount(query);
+    public int getTapeCount(QueryBits query) throws DatabaseException {
+        return new TapeDao(requestContext).getCount(query);
     }
 
-    public List<AttributeFieldCount> getHardwareTypeCount(QueryBits query) throws DatabaseException {
-        return new HardwareDao(requestContext).getHardwareTypeCount(query);
+    public List<AttributeFieldCount> getTapeTypeCount(QueryBits query) throws DatabaseException {
+        return new TapeDao(requestContext).getTapeTypeCount(query);
     }
 
-    public List<AttributeFieldCount> getHardwareStatusCount(QueryBits query) throws DatabaseException {
-        return new HardwareDao(requestContext).getHardwareStatusCount(query);
+    public List<AttributeFieldCount> getTapeStatusCount(QueryBits query) throws DatabaseException {
+        return new TapeDao(requestContext).getTapeStatusCount(query);
     }
 
-    public List<AttributeFieldCount> getHardwareLocationCount(QueryBits query) throws DatabaseException {
-        return new HardwareDao(requestContext).getHardwareLocationCount(query);
+    public List<AttributeFieldCount> getTapeLocationCount(QueryBits query) throws DatabaseException {
+        return new TapeDao(requestContext).getTapeLocationCount(query);
     }
 
-    public Hardware getHardware(Integer hardwareId) throws DatabaseException, ObjectNotFoundException {
-        return new HardwareDao(requestContext).getHardware(hardwareId);
+    public Tape getTape(Integer tapeId) throws DatabaseException, ObjectNotFoundException {
+        return new TapeDao(requestContext).getTape(tapeId);
     }
 
-    public List<Hardware> getHardwareParents(QueryBits query, Integer hardwareId) throws DatabaseException {
-        HardwareMemberLink memberMap = new HardwareMemberLink();
-        memberMap.setMemberHardwareId(hardwareId);
+    public List<Tape> getTapeParents(QueryBits query, Integer tapeId) throws DatabaseException {
+        TapeMemberLink memberMap = new TapeMemberLink();
+        memberMap.setMemberTapeId(tapeId);
 
-        return new HardwareDao(requestContext).getLinkedHardwareList(query, memberMap.createObjectMap());
-    }
-
-    /**
-     * Get a list of Hardware Members.
-     * @param query
-     * @param hardwareId
-     * @return
-     * @throws com.kwoksys.framework.exceptions.DatabaseException
-     */
-    public List<Hardware> getHardwareMembers(QueryBits query, Integer hardwareId) throws DatabaseException {
-        HardwareMemberLink memberMap = new HardwareMemberLink(hardwareId);
-        return new HardwareDao(requestContext).getLinkedHardwareList(query, memberMap.createObjectMap());
+        return new TapeDao(requestContext).getLinkedTapeList(query, memberMap.createObjectMap());
     }
 
     /**
-     * Given a hardware id, get linked contracts.
+     * Get a list of Tape Members.
      * @param query
-     * @param hardwareId
+     * @param tapeId
      * @return
      * @throws com.kwoksys.framework.exceptions.DatabaseException
      */
-    public List<Contract> getLinkedContracts(QueryBits query, Integer hardwareId) throws DatabaseException {
-        ContractHardwareLink contractMap = new ContractHardwareLink();
-        contractMap.setHardwareId(hardwareId);
+    public List<Tape> getTapeMembers(QueryBits query, Integer tapeId) throws DatabaseException {
+        TapeMemberLink memberMap = new TapeMemberLink(tapeId);
+        return new TapeDao(requestContext).getLinkedTapeList(query, memberMap.createObjectMap());
+    }
+
+    /**
+     * Given a tape id, get linked contracts.
+     * @param query
+     * @param tapeId
+     * @return
+     * @throws com.kwoksys.framework.exceptions.DatabaseException
+     */
+    public List<Contract> getLinkedContracts(QueryBits query, Integer tapeId) throws DatabaseException {
+        ContractTapeLink contractMap = new ContractTapeLink();
+        contractMap.setTapeId(tapeId);
 
         ContractService contractService = ServiceProvider.getContractService(requestContext);
         return contractService.getLinkedContracts(query, contractMap.createObjectMap());
     }
 
-    public ActionMessages validateHardware(Hardware hardware, Map<Integer, Attribute> customAttributes)
+    public ActionMessages validateTape(Tape tape, Map<Integer, Attribute> customAttributes)
             throws DatabaseException {
 
         ActionMessages errors = new ActionMessages();
 
         // Check inputs
-        if (StringUtils.isEmpty(hardware.getName())) {
+        if (StringUtils.isEmpty(tape.getName())) {
             errors.add("emptyName", new ActionMessage("common.form.fieldRequired",
-                    Localizer.getText(requestContext, "common.column.hardware_name")));
+                    Localizer.getText(requestContext, "common.column.tape_name")));
 
-        } else if (hardware.getName().length() > Schema.AssetHardwareTable.HARDWARE_NAME_MAX_LEN) {
-            String fieldName = Localizer.getText(requestContext, "common.column.hardware_name");
-            errors.add("nameMaxLength", new ActionMessage("common.form.fieldExceededMaxLen", new Object[]{fieldName, Schema.AssetHardwareTable.HARDWARE_NAME_MAX_LEN}));
+        } else if (tape.getName().length() > Schema.AssetTapeTable.TAPE_NAME_MAX_LEN) {
+            String fieldName = Localizer.getText(requestContext, "common.column.tape_name");
+            errors.add("nameMaxLength", new ActionMessage("common.form.fieldExceededMaxLen", new Object[]{fieldName, Schema.AssetTapeTable.TAPE_NAME_MAX_LEN}));
 
-        } else if (isDuplicatedHardwareName(hardware.getId(), hardware.getName())) {
+        } else if (isDuplicatedTapeName(tape.getId(), tape.getName())) {
             // Check unique name
-            errors.add("duplicatedName", new ActionMessage("itMgmt.hardwareAdd.error.nameDuplicated", hardware.getName()));
+            errors.add("duplicatedName", new ActionMessage("itMgmt.tapeAdd.error.nameDuplicated", tape.getName()));
         }
-        if (hardware.getModelName().length() > Schema.AssetHardwareTable.HARDWARE_MODEL_NAME_MAX_LEN) {
-            String fieldName = Localizer.getText(requestContext, "common.column.hardware_model_name");
-            errors.add("modelNameMaxLength", new ActionMessage("common.form.fieldExceededMaxLen", new Object[]{fieldName, Schema.AssetHardwareTable.HARDWARE_MODEL_NAME_MAX_LEN}));
+        if (tape.getModelName().length() > Schema.AssetTapeTable.TAPE_MODEL_NAME_MAX_LEN) {
+            String fieldName = Localizer.getText(requestContext, "common.column.tape_model_name");
+            errors.add("modelNameMaxLength", new ActionMessage("common.form.fieldExceededMaxLen", new Object[]{fieldName, Schema.AssetTapeTable.TAPE_MODEL_NAME_MAX_LEN}));
         }
-        if (hardware.getModelNumber().length() > Schema.AssetHardwareTable.HARDWARE_MODEL_NUMBER_MAX_LEN) {
-            String fieldName = Localizer.getText(requestContext, "common.column.hardware_model_number");
-            errors.add("modelNumberMaxLength", new ActionMessage("common.form.fieldExceededMaxLen", new Object[]{fieldName, Schema.AssetHardwareTable.HARDWARE_MODEL_NUMBER_MAX_LEN}));
+        if (tape.getModelNumber().length() > Schema.AssetTapeTable.TAPE_MODEL_NUMBER_MAX_LEN) {
+            String fieldName = Localizer.getText(requestContext, "common.column.tape_model_number");
+            errors.add("modelNumberMaxLength", new ActionMessage("common.form.fieldExceededMaxLen", new Object[]{fieldName, Schema.AssetTapeTable.TAPE_MODEL_NUMBER_MAX_LEN}));
         }
-        if (hardware.getSerialNumber().length() > Schema.AssetHardwareTable.HARDWARE_SERIAL_NUMBER_MAX_LEN) {
-            String fieldName = Localizer.getText(requestContext, "common.column.hardware_serial_number");
-            errors.add("serialNumberMaxLength", new ActionMessage("common.form.fieldExceededMaxLen", new Object[]{fieldName, Schema.AssetHardwareTable.HARDWARE_SERIAL_NUMBER_MAX_LEN}));
-        } else if (validateDuplicatedHardwareSerialNumber(hardware)) {
-            errors.add("duplicatedSerialNumber", new ActionMessage("itMgmt.hardwareAdd.error.duplicatedSerialNumber", new String[]{hardware.getSerialNumber()}));
+        if (hardware.getSerialNumber().length() > Schema.AssetTapeTable.TAPE_SERIAL_NUMBER_MAX_LEN) {
+            String fieldName = Localizer.getText(requestContext, "common.column.tape_serial_number");
+            errors.add("serialNumberMaxLength", new ActionMessage("common.form.fieldExceededMaxLen", new Object[]{fieldName, Schema.AssetTapeTable.TAPE_SERIAL_NUMBER_MAX_LEN}));
+        } else if (validateDuplicatedTapeSerialNumber(tape)) {
+            errors.add("duplicatedSerialNumber", new ActionMessage("itMgmt.tapeAdd.error.duplicatedSerialNumber", new String[]{tape.getSerialNumber()}));
         }
-        if (!hardware.isValidHardwareCost()) {
+        if (!tape.isValidTapeCost()) {
             errors.add("validCostFormat", new ActionMessage("common.form.fieldFormatError",
-                    Localizer.getText(requestContext, "common.column.hardware_purchase_price")));
+                    Localizer.getText(requestContext, "common.column.tape_purchase_price")));
         }
-        if (hardware.hasHardwarePurchaseDate() && !hardware.isValidPurchaseDate()) {
+        if (tape.hasTapePurchaseDate() && !tape.isValidPurchaseDate()) {
             errors.add("validPurchaseDateFormat", new ActionMessage("common.form.fieldDateInvalid",
-                    Localizer.getText(requestContext, "common.column.hardware_purchase_date")));
+                    Localizer.getText(requestContext, "common.column.tape_purchase_date")));
         }
-        if (hardware.hasHardwareWarrantyExpireDate() && !hardware.isValidWarrantyExpireDate()) {
+        if (tape.hasTapeWarrantyExpireDate() && !tape.isValidWarrantyExpireDate()) {
             errors.add("validWarrantyExpireDateFormat", new ActionMessage("common.form.fieldDateInvalid",
-                    Localizer.getText(requestContext, "common.column.hardware_warranty_expire_date")));
+                    Localizer.getText(requestContext, "common.column.tape_warranty_expire_date")));
         }
 
         // Validate attributes
-        AdminUtils.validateAttributeValues(requestContext, errors, hardware, customAttributes);
+        AdminUtils.validateAttributeValues(requestContext, errors, tape, customAttributes);
         return errors;
     }
 
-    public ActionMessages addHardware(Hardware hardware, Map<Integer, Attribute> customAttributes)
+    public ActionMessages addTape(Tape tape, Map<Integer, Attribute> customAttributes)
             throws DatabaseException {
 
-        ActionMessages errors = validateHardware(hardware, customAttributes);
+        ActionMessages errors = validateTape(tape, customAttributes);
 
         if (!errors.isEmpty()) {
             return errors;
         }
 
-        return new HardwareDao(requestContext).addHardware(hardware);
+        return new TapeDao(requestContext).addTape(tape);
     }
 
-    public ActionMessages updateHardware(Hardware hardware, Map<Integer, Attribute> customAttributes)
+    public ActionMessages updateTape(Tape tape, Map<Integer, Attribute> customAttributes)
             throws DatabaseException {
 
-        ActionMessages errors = validateHardware(hardware, customAttributes);
+        ActionMessages errors = validateTape(tape, customAttributes);
 
         if (!errors.isEmpty()) {
             return errors;
         }
 
-        return new HardwareDao(requestContext).update(hardware);
+        return new TapeDao(requestContext).update(tape);
     }
 
-    public ActionMessages deleteHardware(Hardware hardware) throws DatabaseException {
+    public ActionMessages deleteTape(Tape tape) throws DatabaseException {
         ActionMessages errors = new ActionMessages();
 
         // Check inputs
-        if (hardware.getId() == 0) {
-            errors.add("emptyHardwareId", new ActionMessage("itMgmt.hardwareEdit.error.emptyHardwareId"));
+        if (tape.getId() == 0) {
+            errors.add("emptyTapeId", new ActionMessage("itMgmt.tapeEdit.error.emptyTapeId"));
         }
         if (!errors.isEmpty()) {
             return errors;
@@ -195,99 +196,99 @@ public class TapeService {
 
         /**
          * Here is what i can do. First, collect a list of file names to be deleted (probably in a dataset).
-         * Then, delete the Hardware, which would also delete the File records. Next, delete the actual files.
+         * Then, delete the Tape, which would also delete the File records. Next, delete the actual files.
          */
-        List<File> deleteFileList = getHardwareFiles(new QueryBits(), hardware.getId());
+        List<File> deleteFileList = getTapeFiles(new QueryBits(), tape.getId());
 
-        errors = new HardwareDao(requestContext).delete(hardware);
+        errors = new TapeDao(requestContext).delete(tape);
 
         FileService fileService = ServiceProvider.getFileService(requestContext);
 
         // Delete actual files
         if (errors.isEmpty()) {
-            fileService.bulkDelete(ConfigManager.file.getHardwareFileRepositoryLocation(), deleteFileList);
+            fileService.bulkDelete(ConfigManager.file.getTapeFileRepositoryLocation(), deleteFileList);
         }
 
         return errors;
     }
 
-    // Hardware installed license
+    // Tape installed license
     public List getAvailableSoftware(QueryBits query) throws DatabaseException {
-        return new HardwareDao(requestContext).getAvailableSoftware(query);
+        return new TapeDao(requestContext).getAvailableSoftware(query);
     }
 
     public List<SoftwareLicense> getAvailableLicenses(QueryBits query, Integer softwareId) throws DatabaseException {
-        return new HardwareDao(requestContext).getAvailableLicense(query, softwareId);
+        return new TapeDao(requestContext).getAvailableLicense(query, softwareId);
     }
 
-    public List<HardwareSoftwareMap> getInstalledLicense(QueryBits query, Integer hardwareId) throws DatabaseException {
-        return new HardwareDao(requestContext).getInstalledLicense(query, hardwareId);
+    public List<TapeSoftwareMap> getInstalledLicense(QueryBits query, Integer tapeId) throws DatabaseException {
+        return new TapeDao(requestContext).getInstalledLicense(query, tapeId);
     }
 
-    public ActionMessages assignSoftwareLicense(HardwareSoftwareMap hsm) throws DatabaseException {
+    public ActionMessages assignSoftwareLicense(TapeSoftwareMap hsm) throws DatabaseException {
         ActionMessages errors = new ActionMessages();
 
         // Check inputs
-        if (hsm.getHardwareId() == 0) {
-            errors.add("emptyHardwareId", new ActionMessage("hardware.error.emptyHardwareId"));
+        if (hsm.getTapeId() == 0) {
+            errors.add("emptyTapeId", new ActionMessage("tape.error.emptyTapeId"));
         }
         if (hsm.getSoftwareId() == 0) {
-            errors.add("emptySoftwareId", new ActionMessage("hardware.error.emptySoftwareId"));
+            errors.add("emptySoftwareId", new ActionMessage("tape.error.emptySoftwareId"));
         }
         if (!errors.isEmpty()) {
             return errors;
         }
 
-        return new HardwareDao(requestContext).assignSoftwareLicense(hsm);
+        return new TapeDao(requestContext).assignSoftwareLicense(hsm);
     }
 
-    public ActionMessages unassignSoftwareLicense(HardwareSoftwareMap hsm) throws DatabaseException {
+    public ActionMessages unassignSoftwareLicense(TapeSoftwareMap hsm) throws DatabaseException {
         ActionMessages errors = new ActionMessages();
 
         // Check inputs
         if (hsm.getMapId() == 0) {
-            errors.add("emptyMapId", new ActionMessage("hardware.error.emptyMapId"));
+            errors.add("emptyMapId", new ActionMessage("tape.error.emptyMapId"));
         }
         if (!errors.isEmpty()) {
             return errors;
         }
 
-        return new HardwareDao(requestContext).unassignSoftwareLicense(hsm);
+        return new TapeDao(requestContext).unassignSoftwareLicense(hsm);
     }
 
-    public ActionMessages resetHardwareSoftwareCount(Integer hardwareId) throws DatabaseException {
-        return new HardwareDao(requestContext).resetHardwareSoftwareCount(hardwareId);
-    }
-
-    /**
-     * Get hardware components.
-     */
-    public List getHardwareComponents(QueryBits query, Integer hardwareId) throws DatabaseException {
-        return new HardwareDao(requestContext).getHardwareComponents(query, hardwareId);
+    public ActionMessages resetTapeSoftwareCount(Integer tapeId) throws DatabaseException {
+        return new TapeDao(requestContext).resetTapeSoftwareCount(tapeId);
     }
 
     /**
-     * Get a hardware component.
+     * Get tape components.
      */
-    public HardwareComponent getHardwareComponent(Integer hardwareId, Integer componentId) throws DatabaseException,
+    public List getTapeComponents(QueryBits query, Integer tapeId) throws DatabaseException {
+        return new TapeDao(requestContext).getTapeComponents(query, tapeId);
+    }
+
+    /**
+     * Get a tape component.
+     */
+    public TapeComponent getTapeComponent(Integer tapeId, Integer componentId) throws DatabaseException,
             ObjectNotFoundException {
-        return new HardwareDao(requestContext).getHardwareComponentDetail(hardwareId, componentId);
+        return new TapeDao(requestContext).getTapeComponentDetail(tapeId, componentId);
     }
 
     /**
-     * This is for adding hardware component
+     * This is for adding tape component
      * @param component
      * @return
      * @throws com.kwoksys.framework.exceptions.DatabaseException
      */
-    public ActionMessages addHardwareComponent(HardwareComponent component,
+    public ActionMessages addTapeComponent(TapeComponent component,
                                                Map<Integer, Attribute> customAttributes) throws DatabaseException {
          ActionMessages errors = new ActionMessages();
 
         // Check inputs
         if (component.getType() == 0) {
             errors.add("emptyComponentType", new ActionMessage("common.form.fieldRequired",
-                    Localizer.getText(requestContext, "common.column.hardware_component_type")));
+                    Localizer.getText(requestContext, "common.column.tape_component_type")));
         }
 
         // Validate attributes
@@ -297,16 +298,16 @@ public class TapeService {
             return errors;
         }
 
-        return new HardwareDao(requestContext).addHardwareComponent(component);
+        return new TapeDao(requestContext).addTapeComponent(component);
     }
 
     /**
-     * This is for updating hardware component
+     * This is for updating tape component
      * @param component
      * @return
      * @throws com.kwoksys.framework.exceptions.DatabaseException
      */
-    public ActionMessages updateHardwareComponent(HardwareComponent component, Map<Integer, Attribute> customAttributes) throws DatabaseException {
+    public ActionMessages updateTapeComponent(TapeComponent component, Map<Integer, Attribute> customAttributes) throws DatabaseException {
         ActionMessages errors = new ActionMessages();
 
         // Validate attributes
@@ -316,134 +317,134 @@ public class TapeService {
             return errors;
         }
 
-        return new HardwareDao(requestContext).updateHardwareComponent(component);
+        return new TapeDao(requestContext).updateTapeComponent(component);
     }
 
     /**
-     * This is for deleting a hardware component
+     * This is for deleting a tape component
      * @param component
      * @return
      * @throws com.kwoksys.framework.exceptions.DatabaseException
      */
-    public ActionMessages deleteHardwareComponent(HardwareComponent component) throws DatabaseException {
-        return new HardwareDao(requestContext).deleteHardwareComponent(component);
+    public ActionMessages deleteTapeComponent(TapeComponent component) throws DatabaseException {
+        return new TapeDao(requestContext).deleteTapeComponent(component);
     }
 
     /**
-     * Get a list of Hardware files.
+     * Get a list of Tape files.
      *
      * @param query
      * @return ..
      */
-    public List<File> getHardwareFiles(QueryBits query, Integer hardwareId) throws DatabaseException {
+    public List<File> getTapeFiles(QueryBits query, Integer tapeId) throws DatabaseException {
         FileService fileService = ServiceProvider.getFileService(requestContext);
-        return fileService.getFiles(query, ObjectTypes.HARDWARE, hardwareId);
+        return fileService.getFiles(query, ObjectTypes.TAPE, tapeId);
     }
 
-    public ActionMessages resetHardwareFileCount(Integer hardwareId) throws DatabaseException {
-        return new HardwareDao(requestContext).resetFileCount(hardwareId);
+    public ActionMessages resetTapeFileCount(Integer tapeId) throws DatabaseException {
+        return new TapeDao(requestContext).resetFileCount(tapeId);
     }
 
     /**
-     * This is for resetting hardware component count.
-     * @param hardwareId
+     * This is for resetting tape component count.
+     * @param tapeId
      * @return
      * @throws com.kwoksys.framework.exceptions.DatabaseException
      */
-    public ActionMessages resetHardwareComponentCount(Integer hardwareId) throws DatabaseException {
-        return new HardwareDao(requestContext).resetComponentCount(hardwareId);
+    public ActionMessages resetTapeComponentCount(Integer tapeId) throws DatabaseException {
+        return new TapeDao(requestContext).resetComponentCount(tapeId);
     }
 
-    public File getHardwareFile(Integer hardwareId, Integer fileId) throws DatabaseException, ObjectNotFoundException {
+    public File getTapeFile(Integer tapeId, Integer fileId) throws DatabaseException, ObjectNotFoundException {
         FileService fileService = ServiceProvider.getFileService(requestContext);
-        File file = fileService.getFile(ObjectTypes.HARDWARE, hardwareId, fileId);
-        file.setConfigRepositoryPath(ConfigManager.file.getHardwareFileRepositoryLocation());
-        file.setConfigUploadedFilePrefix(ConfigManager.file.getHardwareUploadedFilePrefix());
+        File file = fileService.getFile(ObjectTypes.TAPE, tapeId, fileId);
+        file.setConfigRepositoryPath(ConfigManager.file.getTapeFileRepositoryLocation());
+        file.setConfigUploadedFilePrefix(ConfigManager.file.getTapeUploadedFilePrefix());
         return file;
     }
 
     /**
-     * Add Hardware Issue map.
+     * Add Tape Issue map.
      * @param issueMap
      * @return
      * @throws com.kwoksys.framework.exceptions.DatabaseException
      */
-    public ActionMessages addHardwareIssue(HardwareIssueLink issueMap) throws DatabaseException {
+    public ActionMessages addTapeIssue(TapeIssueLink issueMap) throws DatabaseException {
         SystemService systemService = ServiceProvider.getSystemService(requestContext);
         return systemService.addObjectMapping(issueMap.createObjectMap());
     }
 
     /**
-     * Delete Hardware Issue map.
+     * Delete Tape Issue map.
      * @param issueMap
      * @return
      * @throws com.kwoksys.framework.exceptions.DatabaseException
      */
-    public ActionMessages deleteHardwareIssue(HardwareIssueLink issueMap) throws DatabaseException {
+    public ActionMessages deleteTapeIssue(TapeIssueLink issueMap) throws DatabaseException {
         SystemService systemService = ServiceProvider.getSystemService(requestContext);
         return systemService.deleteObjectMapping(issueMap.createObjectMap());
     }
 
-    public ActionMessages addHardwareMember(HardwareMemberLink memberMap) throws DatabaseException {
+    public ActionMessages addTapeMember(TapeMemberLink memberMap) throws DatabaseException {
         SystemService systemService = ServiceProvider.getSystemService(requestContext);
         return systemService.addObjectMapping(memberMap.createObjectMap());
     }
 
-    public ActionMessages removeHardwareMember(HardwareMemberLink memberMap) throws DatabaseException {
+    public ActionMessages removeTapeMember(TapeMemberLink memberMap) throws DatabaseException {
         SystemService systemService = ServiceProvider.getSystemService(requestContext);
         return systemService.deleteObjectMapping(memberMap.createObjectMap());
     }
 
     /**
-     * Checks whether the given hardwareName already exists in the database (case-insensitive) with a different id.
-     * @param hardwareService
-     * @param hardwareId
-     * @param hardwareName
+     * Checks whether the given tapeName already exists in the database (case-insensitive) with a different id.
+     * @param tapeService
+     * @param tapeId
+     * @param tapeName
      * @return
      * @throws Exception
      */
-    public boolean isDuplicatedHardwareName(Integer hardwareId, String hardwareName)
+    public boolean isDuplicatedTapeName(Integer tapeId, String tapeName)
             throws DatabaseException {
 
-        if (ConfigManager.app.isCheckUniqueHardwareName()) {
-            HardwareSearch hardwareSearch = new HardwareSearch();
-            if (hardwareId != null) {
-                hardwareSearch.put(HardwareSearch.HARDWARE_ID_NOT_EQUALS, hardwareId);
+        if (ConfigManager.app.isCheckUniqueTapeName()) {
+            TapeSearch tapeSearch = new TapeSearch();
+            if (tapeId != null) {
+                tapeSearch.put(TapeSearch.TAPE_ID_NOT_EQUALS, tapeId);
             }
-            hardwareSearch.put(HardwareSearch.HARDWARE_NAME_EQUALS, hardwareName);
-            return getHardwareCount(new QueryBits(hardwareSearch)) > 0;
+            tapeSearch.put(TapeSearch.TAPE_NAME_EQUALS, tapeName);
+            return getTapeCount(new QueryBits(tapeSearch)) > 0;
         } else {
             return false;
         }
     }
 
-    private boolean validateDuplicatedHardwareSerialNumber(Hardware hardware)
+    private boolean validateDuplicatedTapeSerialNumber(Tape tape)
             throws DatabaseException {
 
         if (ConfigManager.app.isCheckUniqueSerialNumber()) {
-            HardwareSearch hardwareSearch = new HardwareSearch();
-            if (hardware.getId() != null) {
-                hardwareSearch.put(HardwareSearch.HARDWARE_ID_NOT_EQUALS, hardware.getId());
+            TapeSearch tapeSearch = new TapeSearch();
+            if (tape.getId() != null) {
+                tapeSearch.put(TapeSearch.TAPE_ID_NOT_EQUALS, tape.getId());
             }
-            hardwareSearch.put(HardwareSearch.HARDWARE_MANUFACTURER_EQUALS, hardware.getManufacturerId());
-            hardwareSearch.put(HardwareSearch.HARDWARE_SERIAL_NUMBER_EQUALS, hardware.getSerialNumber());
+            tapeSearch.put(TapeSearch.TAPE_MANUFACTURER_EQUALS, tape.getManufacturerId());
+            tapeSearch.put(TapeSearch.TAPE_SERIAL_NUMBER_EQUALS, tape.getSerialNumber());
 
-            return getHardwareCount(new QueryBits(hardwareSearch)) > 0;
+            return getTapeCount(new QueryBits(tapeSearch)) > 0;
         } else {
             return false;
         }
     }
 
-    public Hardware getSingleHardwareByName(String hardwareName) throws DatabaseException {
-        HardwareSearch hardwareSearch = new HardwareSearch();
-        hardwareSearch.put(HardwareSearch.HARDWARE_NAME_EQUALS, hardwareName);
-        QueryBits queryBits = new QueryBits(hardwareSearch);
+    public Tape getSingleTapeByName(String tapeName) throws DatabaseException {
+        TapeSearch tapeSearch = new TapeSearch();
+        tapeSearch.put(TapeSearch.TAPE_NAME_EQUALS, tapeName);
+        QueryBits queryBits = new QueryBits(tapeSearch);
         queryBits.setLimit(2, 0);
 
-        List<Hardware> hardwareList = getHardwareList(queryBits);
+        List<Tape> tapeList = getTapeList(queryBits);
 
-        if (hardwareList.size() == 1) {
-            return hardwareList.get(0);
+        if (tapeList.size() == 1) {
+            return tapeList.get(0);
         } else {
             return null;
         }
