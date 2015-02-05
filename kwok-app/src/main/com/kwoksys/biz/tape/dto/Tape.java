@@ -252,9 +252,7 @@ public class Tape extends BaseObject {
 //        return DatetimeUtils.createDatetimeString(purchaseYear, purchaseMonth, purchaseDate);
 //    }
 
-    public String getTapeManufacturedDateString() {
-        return DatetimeUtils.createDatetimeString(manufacturedYear, manufacturedMonth, manufacturedDate);
-    }
+
 
     /**
      * Checks whether tapeCost is in valid format.
@@ -318,7 +316,9 @@ public class Tape extends BaseObject {
 //    public void setLastServicedOn(Date lastServicedOn) {
 //        this.lastServicedOn = lastServicedOn;
 //    }
-
+    public String getTapeManufacturedDateString() {
+    return DatetimeUtils.createDatetimeString(manufacturedYear, manufacturedMonth, manufacturedDate);
+}
     public Date getTapeManufacturedDate() {
         return tapeManufacturedDate;
     }
@@ -331,8 +331,19 @@ public class Tape extends BaseObject {
     public String getManufacturedYear() {
         return manufacturedYear;
     }
-
-//    public String getWarrantyDate() {
+    public void setTapeManufacturedDate(Date tapeManufacturedDate) {
+        this.tapeManufacturedDate = tapeManufacturedDate;
+    }
+    public void setManufacturedDate(String manufacturedDate) {
+        this.manufacturedDate = manufacturedDate;
+    }
+    public void setManufacturedMonth(String manufacturedMonth) {
+        this.manufacturedMonth = manufacturedMonth;
+    }
+    public void setManufacturedYear(String manufacturedYear) {
+        this.manufacturedYear = manufacturedYear;
+    }
+    //    public String getWarrantyDate() {
 //        return warrantyDate;
 //    }
 //    public String getWarrantyYear() {
@@ -450,16 +461,21 @@ public class Tape extends BaseObject {
     public String getRetention() {
         return retention;
     }
-
     public void setRetention(String retention) {
         this.retention = retention;
     }
-
     public String getTapeSystem() {
         return tapeSystem;
     }
-
     public void setTapeSystem(String tapeSystem) {
         this.tapeSystem = tapeSystem;
     }
+    public String getBarcodeNumber() {
+        return barcodeNumber;
+    }
+    public void setBarcodeNumber(String barcodeNumber) {
+        this.barcodeNumber = barcodeNumber;
+    }
+
+
 }
