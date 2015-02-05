@@ -1,22 +1,3 @@
-/*
- * ====================================================================
- * Copyright 2005-2011 Wai-Lun Kwok
- *
- * http://www.kwoksys.com/LICENSE
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * ====================================================================
- */
 package com.kwoksys.biz.tape.dao;
 
 import com.kwoksys.biz.admin.core.AdminUtils;
@@ -36,31 +17,43 @@ public class TapeQueries {
         } else if (column.equals(Tape.LOCATION)) {
             return "lower(hwloc.attribute_field_name)";
 
-        } else if (column.equals("software_name")) {
-            return "lower(software_name)";
-
-        } else if (column.equals("license_key")) {
-            return "lower(asl.license_key)";
-
-        } else if (column.equals("tape_serial_number")) {
+        } else if (column.equals(Tape.SERIAL_NUMBER)) {
             return "lower(tape_serial_number)";
 
-        } else if (column.equals(Tape.MODEL_NAME)) {
-            return "lower(tape_model_name)";
+//        } else if (column.equals("software_name")) {
+//            return "lower(software_name)";
+//
+//        } else if (column.equals("license_key")) {
+//            return "lower(asl.license_key)";
+//
+//        } else if (column.equals("tape_serial_number")) {
+//            return "lower(tape_serial_number)";
 
-        } else if (column.equals(Tape.MODEL_NUMBER)) {
-            return "lower(tape_model_number)";
+        } else if (column.equals(Tape.MANUFACTURED_DATE)) {
+            return "lower(tape_manufacturer_date)";
 
-        } else if (column.equals(Tape.OWNER_NAME)) {
-            return ConfigManager.system.getUsernameDisplay().equals(AdminUtils.USER_USERNAME) ?
-                    "lower(tape_owner_username)" : "lower(tape_owner_display_name)";
+        } else if (column.equals(Tape.MANUFACTURER_NAME)) {
+            return "lower(tape_manufacturer_name)";
 
-        } else if (column.equals("attribute_field_name")) {
-            return "lower(af.attribute_field_name)";
+        } else if (column.equals(Tape.VENDOR_NAME)) {
+            return "lower(tape_vendor_name)";
 
-        } else if (column.equals("comp_name")) {
-            // Tape component name
-            return "lower(af.attribute_field_name)";
+        } else if (column.equals(Tape.SYSTEM)) {
+            return "lower(tape_system)";
+
+        } else if (column.equals(Tape.RETENTION)) {
+            return "lower(tape_retention)";
+
+//        } else if (column.equals(Tape.OWNER_NAME)) {
+//            return ConfigManager.system.getUsernameDisplay().equals(AdminUtils.USER_USERNAME) ?
+//                    "lower(tape_owner_username)" : "lower(tape_owner_display_name)";
+//
+//        } else if (column.equals("attribute_field_name")) {
+//            return "lower(af.attribute_field_name)";
+//
+//        } else if (column.equals("comp_name")) {
+//            // Tape component name
+//            return "lower(af.attribute_field_name)";
 
         } else {
             return column;
