@@ -51,9 +51,9 @@ import java.util.List;
 /**
  * HardwareDao.
  */
-public class HardwareDao extends BaseDao {
+public class TapeDao extends BaseDao {
 
-    public HardwareDao(RequestContext requestContext) {
+    public TapeDao(RequestContext requestContext) {
         super(requestContext);
     }
 
