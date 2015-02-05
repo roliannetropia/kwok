@@ -1,8 +1,8 @@
 package com.kwoksys.biz.tape.core;
 
-import com.kwoksys.action.hardware.HardwareSearchForm;
+import com.kwoksys.action.hardware.TapeSearchForm;
 import com.kwoksys.biz.base.BaseSearch;
-import com.kwoksys.biz.hardware.dao.HardwareQueries;
+import com.kwoksys.biz.hardware.dao.TapeQueries;
 import com.kwoksys.framework.connections.database.QueryBits;
 import com.kwoksys.framework.connections.database.SqlUtils;
 import com.kwoksys.framework.http.RequestContext;
@@ -307,7 +307,7 @@ public class TapeSearch extends BaseSearch {
         if (searchCriteriaMap.containsKey(HARDWARE_TYPE_CONTAINS)) {
             query.appendWhereClause("ah.hardware_type in (" + SqlUtils.encodeIntegers((List<Integer>) searchCriteriaMap.get(HARDWARE_TYPE_CONTAINS)) + ")");
         }
-        // For Hardware status
+        // For Tape status
         if (searchCriteriaMap.containsKey("hardwareStatusContains")) {
             query.appendWhereClause("ah.hardware_status in (" + SqlUtils.encodeIntegers((List<Integer>) searchCriteriaMap.get("hardwareStatusContains")) + ")");
         }
