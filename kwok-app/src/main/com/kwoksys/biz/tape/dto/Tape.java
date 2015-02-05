@@ -19,7 +19,7 @@ public class Tape extends BaseObject {
 
     public static final String ID = "tape_id";
     public static final String BARCODE = "barcode_number";
-//    public static final String TAPE_NAME = "tape_name";
+    public static final String TAPE_NAME = "tape_name";
 //    public static final String TAPE_DESCRIPTION = "tape_description";
 //    public static final String MODEL_NAME = "tape_model_name";
 //    public static final String MODEL_NUMBER = "tape_model_number";
