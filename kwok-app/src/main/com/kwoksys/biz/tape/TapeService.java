@@ -8,11 +8,14 @@ import com.kwoksys.biz.contracts.ContractService;
 import com.kwoksys.biz.contracts.dto.Contract;
 import com.kwoksys.biz.files.FileService;
 import com.kwoksys.biz.files.dto.File;
+
+//todo delete
 //import com.kwoksys.biz.hardware.core.HardwareSearch;
 //import com.kwoksys.biz.hardware.dao.HardwareDao;
 //import com.kwoksys.biz.hardware.dto.Hardware;
 //import com.kwoksys.biz.hardware.dto.HardwareComponent;
 //import com.kwoksys.biz.hardware.dto.HardwareSoftwareMap;
+
 import com.kwoksys.biz.software.dto.SoftwareLicense;
 import com.kwoksys.biz.system.SystemService;
 import com.kwoksys.biz.system.core.ObjectTypes;
@@ -22,7 +25,11 @@ import com.kwoksys.biz.system.dto.linking.ContractTapeLink;
 import com.kwoksys.biz.system.dto.linking.TapeIssueLink;
 import com.kwoksys.biz.system.dto.linking.TapeMemberLink;
 import com.kwoksys.biz.system.dto.linking.ObjectLink;
+import com.kwoksys.biz.tape.core.TapeSearch;
+import com.kwoksys.biz.tape.dao.TapeDao;
 import com.kwoksys.biz.tape.dto.Tape;
+//import com.kwoksys.biz.tape.dto.TapeComponent;
+//import com.kwoksys.biz.tape.dto.TapeSoftwareMap;
 import com.kwoksys.framework.connections.database.QueryBits;
 import com.kwoksys.framework.exceptions.DatabaseException;
 import com.kwoksys.framework.exceptions.ObjectNotFoundException;
@@ -135,7 +142,7 @@ public class TapeService {
             String fieldName = Localizer.getText(requestContext, "common.column.tape_model_number");
             errors.add("modelNumberMaxLength", new ActionMessage("common.form.fieldExceededMaxLen", new Object[]{fieldName, Schema.AssetTapeTable.TAPE_MODEL_NUMBER_MAX_LEN}));
         }
-        if (hardware.getSerialNumber().length() > Schema.AssetTapeTable.TAPE_SERIAL_NUMBER_MAX_LEN) {
+        if (tape.getSerialNumber().length() > Schema.AssetTapeTable.TAPE_SERIAL_NUMBER_MAX_LEN) {
             String fieldName = Localizer.getText(requestContext, "common.column.tape_serial_number");
             errors.add("serialNumberMaxLength", new ActionMessage("common.form.fieldExceededMaxLen", new Object[]{fieldName, Schema.AssetTapeTable.TAPE_SERIAL_NUMBER_MAX_LEN}));
         } else if (validateDuplicatedTapeSerialNumber(tape)) {
