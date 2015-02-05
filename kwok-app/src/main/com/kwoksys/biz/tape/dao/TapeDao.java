@@ -4,10 +4,16 @@ import com.kwoksys.biz.admin.dao.AttributeDao;
 import com.kwoksys.biz.admin.dto.AccessUser;
 import com.kwoksys.biz.admin.dto.AttributeFieldCount;
 import com.kwoksys.biz.base.BaseDao;
-import com.kwoksys.biz.hardware.dao.HardwareQueries;
-import com.kwoksys.biz.hardware.dto.Hardware;
-import com.kwoksys.biz.hardware.dto.HardwareComponent;
-import com.kwoksys.biz.hardware.dto.HardwareSoftwareMap;
+//import com.kwoksys.biz.hardware.dao.HardwareQueries;
+//import com.kwoksys.biz.hardware.dto.Hardware;
+//import com.kwoksys.biz.hardware.dto.HardwareComponent;
+//import com.kwoksys.biz.hardware.dto.HardwareSoftwareMap;
+
+import com.kwoksys.biz.tape.dao.TapeQueries;
+import com.kwoksys.biz.tape.dto.Tape;
+import com.kwoksys.biz.tape.dto.TapeComponent;
+import com.kwoksys.biz.tape.dto.TapeSoftwareMap;
+
 import com.kwoksys.biz.software.dto.SoftwareLicense;
 import com.kwoksys.biz.system.core.ObjectTypes;
 import com.kwoksys.biz.system.dto.linking.ObjectLink;
@@ -29,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * HardwareDao.
+ * TapeDao.
  */
 public class TapeDao extends BaseDao {
 
@@ -37,11 +43,11 @@ public class TapeDao extends BaseDao {
         super(requestContext);
     }
 
-    public List<Hardware> getHardwareList(QueryBits query) throws DatabaseException {
-        return getHardwareList(new QueryHelper(TapeQueries.selectHardwareListQuery(query)));
+    public List<Tape> getTapeList(QueryBits query) throws DatabaseException {
+        return getTapeList(new QueryHelper(TapeQueries.selectTapeListQuery(query)));
     }
 
-    private List<Hardware> getHardwareList(QueryHelper queryHelper) throws DatabaseException {
+    private List<Tape> getTapeList(QueryHelper queryHelper) throws DatabaseException {
         Connection conn = getConnection();
 
         try {
@@ -49,8 +55,8 @@ public class TapeDao extends BaseDao {
             ResultSet rs = queryHelper.executeQuery(conn);
 
             while (rs.next()) {
-                Hardware hardware = newHardware(rs);
-                list.add(hardware);
+                Tape tape = newTape(rs);
+                list.add(tape);
             }
             return list;
 
@@ -64,20 +70,20 @@ public class TapeDao extends BaseDao {
         }
     }
 
-    public Hardware getHardware(Integer hardwareId) throws DatabaseException, ObjectNotFoundException {
+    public Tape getTape(Integer tapeId) throws DatabaseException, ObjectNotFoundException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.hardware.dao.HardwareQueries.selectHardwareDetailQuery());
-        queryHelper.addInputInt(hardwareId);
+        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectTapeDetailQuery());
+        queryHelper.addInputInt(tapeId);
 
         try {
             ResultSet rs = queryHelper.executeQuery(conn);
             if (rs.next()) {
-                Hardware hardware = newHardware(rs);
-                hardware.setCountSoftware(rs.getInt("software_count"));
-                hardware.setCountFile(rs.getInt("file_count"));
-                hardware.setCountComponent(rs.getInt("component_count"));
-                return hardware;
+                Tape tape = newTape(rs);
+                tape.setCountSoftware(rs.getInt("software_count"));
+                tape.setCountFile(rs.getInt("file_count"));
+                tape.setCountComponent(rs.getInt("component_count"));
+                return tape;
             }
         } catch (Exception e) {
             // Database problem
@@ -91,36 +97,36 @@ public class TapeDao extends BaseDao {
     }
 
     public int getCount(QueryBits query) throws DatabaseException {
-        return getRowCount(com.kwoksys.biz.hardware.dao.HardwareQueries.getHardwareCountQuery(query));
+        return getRowCount(com.kwoksys.biz.tape.dao.TapeQueries.getTapeCountQuery(query));
     }
 
-    public List<Hardware> getLinkedHardwareList(QueryBits query, ObjectLink objectMap) throws DatabaseException {
+    public List<Tape> getLinkedTapeList(QueryBits query, ObjectLink objectMap) throws DatabaseException {
         QueryHelper queryHelper;
 
         if (objectMap.getLinkedObjectId() == null || objectMap.getLinkedObjectId() == 0) {
-            queryHelper = new QueryHelper(com.kwoksys.biz.hardware.dao.HardwareQueries.selectLinkedHardwareListQuery(query));
+            queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectLinkedTapeListQuery(query));
             queryHelper.addInputInt(objectMap.getObjectId());
             queryHelper.addInputInt(objectMap.getObjectTypeId());
             queryHelper.addInputInt(objectMap.getLinkedObjectTypeId());
 
         } else {
-            queryHelper = new QueryHelper(com.kwoksys.biz.hardware.dao.HardwareQueries.selectObjectHardwareListQuery(query));
+            queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectObjectTapeListQuery(query));
             queryHelper.addInputInt(objectMap.getLinkedObjectId());
             queryHelper.addInputInt(objectMap.getLinkedObjectTypeId());
             queryHelper.addInputInt(objectMap.getObjectTypeId());
         }
-        return getHardwareList(queryHelper);
+        return getTapeList(queryHelper);
     }
 
     /**
-     * Return number of hardware grouped by type.
+     * Return number of tape grouped by type.
      *
      * @return ..
      */
-    public List<AttributeFieldCount> getHardwareTypeCount(QueryBits query) throws DatabaseException {
+    public List<AttributeFieldCount> getTapeTypeCount(QueryBits query) throws DatabaseException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.hardware.dao.HardwareQueries.selectHardwareTypeCountQuery(query));
+        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectTapeTypeCountQuery(query));
 
         try {
             List list = new ArrayList();
@@ -128,8 +134,8 @@ public class TapeDao extends BaseDao {
 
             while (rs.next()) {
                 AttributeFieldCount count = new AttributeFieldCount();
-                count.setAttrFieldId(rs.getInt("hardware_type"));
-                count.setObjectCount(rs.getInt("hardware_count"));
+                count.setAttrFieldId(rs.getInt("tape_type"));
+                count.setObjectCount(rs.getInt("tape_count"));
 
                 list.add(count);
             }
@@ -146,14 +152,14 @@ public class TapeDao extends BaseDao {
     }
 
     /**
-     * Return number of hardware grouped by status.
+     * Return number of tape grouped by status.
      *
      * @return ..
      */
-    public List<AttributeFieldCount> getHardwareStatusCount(QueryBits query) throws DatabaseException {
+    public List<AttributeFieldCount> getTapeStatusCount(QueryBits query) throws DatabaseException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.hardware.dao.HardwareQueries.selectHardwareCountByStatusQuery(query));
+        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectTapeCountByStatusQuery(query));
 
         try {
             List list = new ArrayList();
@@ -161,8 +167,8 @@ public class TapeDao extends BaseDao {
 
             while (rs.next()) {
                 AttributeFieldCount count = new AttributeFieldCount();
-                count.setAttrFieldId(rs.getInt("hardware_status"));
-                count.setObjectCount(rs.getInt("hardware_count"));
+                count.setAttrFieldId(rs.getInt("tape_status"));
+                count.setObjectCount(rs.getInt("tape_count"));
 
                 list.add(count);
             }
@@ -179,14 +185,14 @@ public class TapeDao extends BaseDao {
     }
 
     /**
-     * Return number of hardware grouped by location.
+     * Return number of tape grouped by location.
      *
      * @return ..
      */
-    public List<AttributeFieldCount> getHardwareLocationCount(QueryBits query) throws DatabaseException {
+    public List<AttributeFieldCount> getTapeLocationCount(QueryBits query) throws DatabaseException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.hardware.dao.HardwareQueries.selectHardwareCountByLocationQuery(query));
+        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectTapeCountByLocationQuery(query));
 
         try {
             List list = new ArrayList();
@@ -194,8 +200,8 @@ public class TapeDao extends BaseDao {
 
             while (rs.next()) {
                 AttributeFieldCount count = new AttributeFieldCount();
-                count.setAttrFieldId(rs.getInt("hardware_location"));
-                count.setObjectCount(rs.getInt("hardware_count"));
+                count.setAttrFieldId(rs.getInt("tape_location"));
+                count.setObjectCount(rs.getInt("tape_count"));
 
                 list.add(count);
             }
@@ -212,7 +218,7 @@ public class TapeDao extends BaseDao {
     }
 
     public List getAvailableSoftware(QueryBits query) throws DatabaseException {
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.hardware.dao.HardwareQueries.selectHardwareAvailableSoftwareQuery(query));
+        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectTapeAvailableSoftwareQuery(query));
 
         return executeQueryReturnList(queryHelper);
     }
@@ -220,7 +226,7 @@ public class TapeDao extends BaseDao {
     public List<SoftwareLicense> getAvailableLicense(QueryBits query, Integer softwareId) throws DatabaseException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.hardware.dao.HardwareQueries.selectHardwareAvailableLicensesQuery(query));
+        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectTapeAvailableLicensesQuery(query));
         queryHelper.addInputInt(softwareId);
 
         try {
@@ -248,21 +254,21 @@ public class TapeDao extends BaseDao {
     }
 
     /**
-     * Returns Software Licenses installed on a Hardware.
+     * Returns Software Licenses installed on a Tape.
      *
      */
-    public List<HardwareSoftwareMap> getInstalledLicense(QueryBits query, Integer hardwareId) throws DatabaseException {
+    public List<TapeSoftwareMap> getInstalledLicense(QueryBits query, Integer tapeId) throws DatabaseException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.hardware.dao.HardwareQueries.selectInstalledLicenseQuery(query));
-        queryHelper.addInputInt(hardwareId);
+        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectInstalledLicenseQuery(query));
+        queryHelper.addInputInt(tapeId);
 
         try {
             List list = new ArrayList();
             ResultSet rs = queryHelper.executeQuery(conn);
 
             while (rs.next()) {
-                HardwareSoftwareMap map = new HardwareSoftwareMap();
+                TapeSoftwareMap map = new TapeSoftwareMap();
                 map.setMapId(rs.getInt("map_id"));
                 map.setSoftwareId(rs.getInt("software_id"));
                 map.getSoftware().setName(rs.getString("software_name"));
@@ -285,20 +291,20 @@ public class TapeDao extends BaseDao {
     }
 
     /**
-     * Return Components for a particular Hardware.
+     * Return Components for a particular Tape.
      */
-    public List<HardwareComponent> getHardwareComponents(QueryBits query, Integer hardwareId) throws DatabaseException {
+    public List<TapeComponent> getTapeComponents(QueryBits query, Integer tapeId) throws DatabaseException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.hardware.dao.HardwareQueries.selectHardwareComponentsQuery(query));
-        queryHelper.addInputInt(hardwareId);
+        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectTapeComponentsQuery(query));
+        queryHelper.addInputInt(tapeId);
 
         try {
             List list = new ArrayList();
             ResultSet rs = queryHelper.executeQuery(conn);
 
             while (rs.next()) {
-                HardwareComponent component = new HardwareComponent();
+                TapeComponent component = new TapeComponent();
                 component.setId(rs.getInt("comp_id"));
                 component.setTypeName(rs.getString("comp_name"));
                 component.setDescription(StringUtils.replaceNull(rs.getString("comp_description")));
@@ -317,25 +323,25 @@ public class TapeDao extends BaseDao {
     }
 
     /**
-     * Return a specified hardware component.
+     * Return a specified tape component.
      */
-    public HardwareComponent getHardwareComponentDetail(Integer hardwareId, Integer componentId) throws DatabaseException,
+    public TapeComponent getTapeComponentDetail(Integer tapeId, Integer componentId) throws DatabaseException,
             ObjectNotFoundException {
 
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.hardware.dao.HardwareQueries.selectHardwareComponentDetailQuery());
-        queryHelper.addInputInt(hardwareId);
+        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectTapeComponentDetailQuery());
+        queryHelper.addInputInt(tapeId);
         queryHelper.addInputInt(componentId);
 
         try {
             ResultSet rs = queryHelper.executeQuery(conn);
 
             if (rs.next()) {
-                HardwareComponent component = new HardwareComponent();
-                component.setHardwareId(rs.getInt("hardware_id"));
+                TapeComponent component = new TapeComponent();
+                component.setTapeId(rs.getInt("tape_id"));
                 component.setId(rs.getInt("comp_id"));
-                component.setType(rs.getInt("hardware_component_type"));
+                component.setType(rs.getInt("tape_component_type"));
                 component.setDescription(StringUtils.replaceNull(rs.getString("comp_description")));
                 return component;
             }
@@ -350,45 +356,45 @@ public class TapeDao extends BaseDao {
         throw new ObjectNotFoundException();
     }
 
-    public ActionMessages addHardware(Hardware hardware) throws DatabaseException {
+    public ActionMessages addTape(Tape tape) throws DatabaseException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.hardware.dao.HardwareQueries.insertHardwareQuery());
+        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.insertTapeQuery());
         queryHelper.addOutputParam(Types.INTEGER);
-        queryHelper.addInputStringConvertNull(hardware.getName());
+        queryHelper.addInputStringConvertNull(tape.getName());
         queryHelper.addInputStringConvertNull("");
-        queryHelper.addInputStringConvertNull(hardware.getDescription());
-        queryHelper.addInputIntegerConvertNull(hardware.getManufacturerId());
-        queryHelper.addInputIntegerConvertNull(hardware.getVendorId());
+        queryHelper.addInputStringConvertNull(tape.getDescription());
+        queryHelper.addInputIntegerConvertNull(tape.getManufacturerId());
+        queryHelper.addInputIntegerConvertNull(tape.getVendorId());
 
-        // We don't want hardware type to be null before it's hard to search for it.
-        queryHelper.addInputInt(hardware.getType());
-        queryHelper.addInputInt(hardware.getStatus());
-        queryHelper.addInputIntegerConvertNull(hardware.getOwnerId());
-        queryHelper.addInputInt(hardware.getLocation());
-        queryHelper.addInputStringConvertNull(hardware.getModelName());
-        queryHelper.addInputStringConvertNull(hardware.getModelNumber());
-        queryHelper.addInputStringConvertNull(hardware.getSerialNumber());
-        if (hardware.getPurchasePriceRaw() == 0) {
+        // We don't want tape type to be null before it's hard to search for it.
+        queryHelper.addInputInt(tape.getType());
+        queryHelper.addInputInt(tape.getStatus());
+        queryHelper.addInputIntegerConvertNull(tape.getOwnerId());
+        queryHelper.addInputInt(tape.getLocation());
+        queryHelper.addInputStringConvertNull(tape.getModelName());
+        queryHelper.addInputStringConvertNull(tape.getModelNumber());
+        queryHelper.addInputStringConvertNull(tape.getSerialNumber());
+        if (tape.getPurchasePriceRaw() == 0) {
             queryHelper.addInputDoubleConvertNull(null);
         } else {
-            queryHelper.addInputDouble(hardware.getPurchasePriceRaw());
+            queryHelper.addInputDouble(tape.getPurchasePriceRaw());
         }
-        queryHelper.addInputInt(hardware.getResetLastServiceDate());
-        queryHelper.addInputStringConvertNull(hardware.getHardwarePurchaseDateString());
-        queryHelper.addInputStringConvertNull(hardware.getWarrantyExpireDateString());
+        queryHelper.addInputInt(tape.getResetLastServiceDate());
+        queryHelper.addInputStringConvertNull(tape.getTapePurchaseDateString());
+        queryHelper.addInputStringConvertNull(tape.getWarrantyExpireDateString());
         queryHelper.addInputInt(requestContext.getUser().getId());
 
         try {
             queryHelper.executeProcedure(conn);
 
             // Put some values in the result.
-            hardware.setId((Integer) queryHelper.getSqlOutputs().get(0));
+            tape.setId((Integer) queryHelper.getSqlOutputs().get(0));
 
             // Update custom fields
-            if (!hardware.getCustomValues().isEmpty()) {
+            if (!tape.getCustomValues().isEmpty()) {
                 AttributeDao attributeDao = new AttributeDao(requestContext);
-                attributeDao.updateAttributeValue(conn, hardware.getId(), hardware.getCustomValues());
+                attributeDao.updateAttributeValue(conn, tape.getId(), tape.getCustomValues());
             }
         } catch (Exception e) {
             // Database problem
@@ -400,44 +406,44 @@ public class TapeDao extends BaseDao {
         return errors;
     }
 
-    public ActionMessages update(Hardware hardware) throws DatabaseException {
+    public ActionMessages update(Tape tape) throws DatabaseException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.hardware.dao.HardwareQueries.updateHardwareQuery());
-        queryHelper.addInputInt(hardware.getId());
-        queryHelper.addInputStringConvertNull(hardware.getName());
+        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.updateTapeQuery());
+        queryHelper.addInputInt(tape.getId());
+        queryHelper.addInputStringConvertNull(tape.getName());
         queryHelper.addInputStringConvertNull(null);
-        queryHelper.addInputStringConvertNull(hardware.getDescription());
-        queryHelper.addInputIntegerConvertNull(hardware.getManufacturerId());
-        queryHelper.addInputIntegerConvertNull(hardware.getVendorId());
+        queryHelper.addInputStringConvertNull(tape.getDescription());
+        queryHelper.addInputIntegerConvertNull(tape.getManufacturerId());
+        queryHelper.addInputIntegerConvertNull(tape.getVendorId());
 
-        // We don't want hardware type to be null before it's hard to search for it.
-        queryHelper.addInputInt(hardware.getType());
-        queryHelper.addInputInt(hardware.getStatus());
-        queryHelper.addInputIntegerConvertNull(hardware.getOwnerId());
-        queryHelper.addInputInt(hardware.getLocation());
-        queryHelper.addInputStringConvertNull(hardware.getModelName());
-        queryHelper.addInputStringConvertNull(hardware.getModelNumber());
-        queryHelper.addInputStringConvertNull(hardware.getSerialNumber());
-        if (hardware.getPurchasePriceRaw() == 0) {
+        // We don't want tape type to be null before it's hard to search for it.
+        queryHelper.addInputInt(tape.getType());
+        queryHelper.addInputInt(tape.getStatus());
+        queryHelper.addInputIntegerConvertNull(tape.getOwnerId());
+        queryHelper.addInputInt(tape.getLocation());
+        queryHelper.addInputStringConvertNull(tape.getModelName());
+        queryHelper.addInputStringConvertNull(tape.getModelNumber());
+        queryHelper.addInputStringConvertNull(tape.getSerialNumber());
+        if (tape.getPurchasePriceRaw() == 0) {
             queryHelper.addInputDoubleConvertNull(null);
         } else {
-            queryHelper.addInputDouble(hardware.getPurchasePriceRaw());
+            queryHelper.addInputDouble(tape.getPurchasePriceRaw());
         }
-        queryHelper.addInputInt(hardware.getResetLastServiceDate());
-        queryHelper.addInputStringConvertNull(hardware.hasHardwarePurchaseDate() ?
-                hardware.getHardwarePurchaseDateString() : null);
-        queryHelper.addInputStringConvertNull(hardware.hasHardwareWarrantyExpireDate() ?
-                hardware.getWarrantyExpireDateString() : null);
+        queryHelper.addInputInt(tape.getResetLastServiceDate());
+        queryHelper.addInputStringConvertNull(tape.hasTapePurchaseDate() ?
+                tape.getTapePurchaseDateString() : null);
+        queryHelper.addInputStringConvertNull(tape.hasTapeWarrantyExpireDate() ?
+                tape.getWarrantyExpireDateString() : null);
         queryHelper.addInputInt(requestContext.getUser().getId());
 
         try {
             queryHelper.executeProcedure(conn);
 
             // Update custom fields
-            if (!hardware.getCustomValues().isEmpty()) {
+            if (!tape.getCustomValues().isEmpty()) {
                 AttributeDao attributeDao = new AttributeDao(requestContext);
-                attributeDao.updateAttributeValue(conn, hardware.getId(), hardware.getCustomValues());
+                attributeDao.updateAttributeValue(conn, tape.getId(), tape.getCustomValues());
             }
         } catch (Exception e) {
             // Database problem
@@ -449,18 +455,18 @@ public class TapeDao extends BaseDao {
         return errors;
     }
 
-    public ActionMessages delete(Hardware hardware) throws DatabaseException {
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.hardware.dao.HardwareQueries.deleteHardwareQuery());
+    public ActionMessages delete(Tape tape) throws DatabaseException {
+        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.deleteTapeQuery());
         queryHelper.addInputInt(ObjectTypes.HARDWARE);
-        queryHelper.addInputInt(hardware.getId());
+        queryHelper.addInputInt(tape.getId());
 
         return executeProcedure(queryHelper);
     }
 
-    public ActionMessages assignSoftwareLicense(HardwareSoftwareMap hsm) throws DatabaseException {
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.hardware.dao.HardwareQueries.insertAssignLicenseQuery());
+    public ActionMessages assignSoftwareLicense(TapeSoftwareMap hsm) throws DatabaseException {
+        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.insertAssignLicenseQuery());
         queryHelper.addOutputParam(Types.INTEGER);
-        queryHelper.addInputInt(hsm.getHardwareId());
+        queryHelper.addInputInt(hsm.getTapeId());
         queryHelper.addInputInt(hsm.getSoftwareId());
         queryHelper.addInputInt(hsm.getLicenseId());
         queryHelper.addInputInt(hsm.getLicenseEntitlement());
@@ -475,25 +481,25 @@ public class TapeDao extends BaseDao {
         return errors;
     }
 
-    public ActionMessages unassignSoftwareLicense(HardwareSoftwareMap hsm) throws DatabaseException {
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.hardware.dao.HardwareQueries.deleteAssignedLicenseQuery());
+    public ActionMessages unassignSoftwareLicense(TapeSoftwareMap hsm) throws DatabaseException {
+        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.deleteAssignedLicenseQuery());
         queryHelper.addInputInt(hsm.getMapId());
 
         return executeProcedure(queryHelper);
     }
 
     /**
-     * Adds hardware component.
+     * Adds tape component.
      * @param component
      * @return
      * @throws com.kwoksys.framework.exceptions.DatabaseException
      */
-    public ActionMessages addHardwareComponent(HardwareComponent component) throws DatabaseException {
+    public ActionMessages addTapeComponent(TapeComponent component) throws DatabaseException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.hardware.dao.HardwareQueries.insertHardwareComponentQuery());
+        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.insertTapeComponentQuery());
         queryHelper.addOutputParam(Types.INTEGER);
-        queryHelper.addInputInt(component.getHardwareId());
+        queryHelper.addInputInt(component.getTapeId());
         queryHelper.addInputStringConvertNull(component.getDescription());
         queryHelper.addInputInt(component.getType());
         queryHelper.addInputInt(requestContext.getUser().getId());
@@ -519,16 +525,16 @@ public class TapeDao extends BaseDao {
     }
 
     /**
-     * Updates hardware component.
+     * Updates tape component.
      * @param component
      * @return
      * @throws com.kwoksys.framework.exceptions.DatabaseException
      */
-    public ActionMessages updateHardwareComponent(HardwareComponent component) throws DatabaseException {
+    public ActionMessages updateTapeComponent(TapeComponent component) throws DatabaseException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.hardware.dao.HardwareQueries.updateHardwareComponentQuery());
-        queryHelper.addInputInt(component.getHardwareId());
+        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.updateTapeComponentQuery());
+        queryHelper.addInputInt(component.getTapeId());
         queryHelper.addInputInt(component.getId());
         queryHelper.addInputStringConvertNull(component.getDescription());
         queryHelper.addInputInt(component.getType());
@@ -553,107 +559,107 @@ public class TapeDao extends BaseDao {
     }
 
     /**
-     * Deletes hardware component.
+     * Deletes tape component.
      * @param component
      * @return
      * @throws com.kwoksys.framework.exceptions.DatabaseException
      */
-    public ActionMessages deleteHardwareComponent(HardwareComponent component) throws DatabaseException {
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.hardware.dao.HardwareQueries.deleteHardwareComponentQuery());
+    public ActionMessages deleteTapeComponent(TapeComponent component) throws DatabaseException {
+        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.deleteTapeComponentQuery());
         queryHelper.addInputInt(ObjectTypes.HARDWARE_COMPONENT);
-        queryHelper.addInputInt(component.getHardwareId());
+        queryHelper.addInputInt(component.getTapeId());
         queryHelper.addInputInt(component.getId());
 
         return executeProcedure(queryHelper);
     }
 
-    public ActionMessages resetHardwareSoftwareCount(Integer hardwareId) throws DatabaseException {
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.hardware.dao.HardwareQueries.updateHardwareSoftwareCountQuery());
-        queryHelper.addInputInt(hardwareId);
+    public ActionMessages resetTapeSoftwareCount(Integer tapeId) throws DatabaseException {
+        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.updateTapeSoftwareCountQuery());
+        queryHelper.addInputInt(tapeId);
 
         return executeProcedure(queryHelper);
     }
 
     /**
-     * Resets hardware file count.
-     * @param hardwareId
+     * Resets tape file count.
+     * @param tapeId
      * @return
      * @throws com.kwoksys.framework.exceptions.DatabaseException
      */
-    public ActionMessages resetFileCount(Integer hardwareId) throws DatabaseException {
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.hardware.dao.HardwareQueries.updateHardwareFileCountQuery());
+    public ActionMessages resetFileCount(Integer tapeId) throws DatabaseException {
+        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.updateTapeFileCountQuery());
         queryHelper.addInputInt(ObjectTypes.HARDWARE);
-        queryHelper.addInputInt(hardwareId);
+        queryHelper.addInputInt(tapeId);
 
         return executeProcedure(queryHelper);
     }
 
     /**
-     * Resets hardware component count.
-     * @param hardwareId
+     * Resets tape component count.
+     * @param tapeId
      * @return
      * @throws com.kwoksys.framework.exceptions.DatabaseException
      */
-    public ActionMessages resetComponentCount(Integer hardwareId) throws DatabaseException {
-        QueryHelper queryHelper = new QueryHelper(HardwareQueries.updateHardwareComponentCountQuery());
-        queryHelper.addInputInt(hardwareId);
+    public ActionMessages resetComponentCount(Integer tapeId) throws DatabaseException {
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.updateTapeComponentCountQuery());
+        queryHelper.addInputInt(tapeId);
 
         return executeProcedure(queryHelper);
     }
 
-    private Hardware newHardware(ResultSet rs) throws SQLException, DatabaseException {
-        Hardware hardware = new Hardware();
-        hardware.setId(rs.getInt("hardware_id"));
-        hardware.setName(rs.getString("hardware_name"));
-        hardware.setDescription(StringUtils.replaceNull(rs.getString("hardware_description")));
-        hardware.setSerialNumber(StringUtils.replaceNull(rs.getString("hardware_serial_number")));
-        hardware.setModelName(StringUtils.replaceNull(rs.getString("hardware_model_name")));
-        hardware.setModelNumber(StringUtils.replaceNull(rs.getString("hardware_model_number")));
-        hardware.setManufacturerId(rs.getInt("manufacturer_company_id"));
-        hardware.setManufacturerName(StringUtils.replaceNull(rs.getString("hardware_manufacturer_name")));
-        hardware.setVendorId(rs.getInt("vendor_company_id"));
-        hardware.setVendorName(StringUtils.replaceNull(rs.getString("hardware_vendor_name")));
+    private Tape newTape(ResultSet rs) throws SQLException, DatabaseException {
+        Tape tape = new Tape();
+        tape.setId(rs.getInt("tape_id"));
+        tape.setName(rs.getString("tape_name"));
+        tape.setDescription(StringUtils.replaceNull(rs.getString("tape_description")));
+        tape.setSerialNumber(StringUtils.replaceNull(rs.getString("tape_serial_number")));
+        tape.setModelName(StringUtils.replaceNull(rs.getString("tape_model_name")));
+        tape.setModelNumber(StringUtils.replaceNull(rs.getString("tape_model_number")));
+        tape.setManufacturerId(rs.getInt("manufacturer_company_id"));
+        tape.setManufacturerName(StringUtils.replaceNull(rs.getString("tape_manufacturer_name")));
+        tape.setVendorId(rs.getInt("vendor_company_id"));
+        tape.setVendorName(StringUtils.replaceNull(rs.getString("tape_vendor_name")));
 
-        hardware.setLocation(rs.getInt("hardware_location"));
-        hardware.setType(rs.getInt("hardware_type"));
-        hardware.setStatus(rs.getInt("hardware_status"));
-        hardware.setPurchasePrice(CurrencyUtils.formatCurrency(rs.getDouble("hardware_purchase_price"), ""));
-        hardware.setLastServicedOn(DatetimeUtils.getDate(rs, "hardware_last_service_date"));
+        tape.setLocation(rs.getInt("tape_location"));
+        tape.setType(rs.getInt("tape_type"));
+        tape.setStatus(rs.getInt("tape_status"));
+        tape.setPurchasePrice(CurrencyUtils.formatCurrency(rs.getDouble("tape_purchase_price"), ""));
+        tape.setLastServicedOn(DatetimeUtils.getDate(rs, "tape_last_service_date"));
 
-        hardware.setHardwarePurchaseDate(DatetimeUtils.getDate(rs, "hardware_purchase_date"));
-        if (hardware.getHardwarePurchaseDate() != null) {
-            hardware.setHardwarePurchaseDate(
-                    DatetimeUtils.toYearString(hardware.getHardwarePurchaseDate()),
-                    DatetimeUtils.toMonthString(hardware.getHardwarePurchaseDate()),
-                    DatetimeUtils.toDateString(hardware.getHardwarePurchaseDate()));
+        tape.setTapePurchaseDate(DatetimeUtils.getDate(rs, "tape_purchase_date"));
+        if (tape.getTapePurchaseDate() != null) {
+            tape.setTapePurchaseDate(
+                    DatetimeUtils.toYearString(tape.getTapePurchaseDate()),
+                    DatetimeUtils.toMonthString(tape.getTapePurchaseDate()),
+                    DatetimeUtils.toDateString(tape.getTapePurchaseDate()));
         }
 
-        hardware.setWarrantyExpireDate(DatetimeUtils.getDate(rs, "hardware_warranty_expire_date"));
-        if (hardware.getWarrantyExpireDate() != null) {
-            hardware.setHardwareWarrantyExpireDate(
-                    DatetimeUtils.toYearString(hardware.getWarrantyExpireDate()),
-                    DatetimeUtils.toMonthString(hardware.getWarrantyExpireDate()),
-                    DatetimeUtils.toDateString(hardware.getWarrantyExpireDate()));
+        tape.setWarrantyExpireDate(DatetimeUtils.getDate(rs, "tape_warranty_expire_date"));
+        if (tape.getWarrantyExpireDate() != null) {
+            tape.setTapeWarrantyExpireDate(
+                    DatetimeUtils.toYearString(tape.getWarrantyExpireDate()),
+                    DatetimeUtils.toMonthString(tape.getWarrantyExpireDate()),
+                    DatetimeUtils.toDateString(tape.getWarrantyExpireDate()));
         }
 
-        hardware.setCreationDate(DatetimeUtils.getDate(rs, "creation_date"));
-        hardware.setModificationDate(DatetimeUtils.getDate(rs, "modification_date"));
+        tape.setCreationDate(DatetimeUtils.getDate(rs, "creation_date"));
+        tape.setModificationDate(DatetimeUtils.getDate(rs, "modification_date"));
 
-        hardware.setOwner(new AccessUser());
-        hardware.getOwner().setId(rs.getInt("hardware_owner_id"));
-        hardware.setOwnerId(hardware.getOwner().getId());
-        hardware.getOwner().setUsername(rs.getString("hardware_owner_username"));
-        hardware.getOwner().setDisplayName(rs.getString("hardware_owner_display_name"));
+        tape.setOwner(new AccessUser());
+        tape.getOwner().setId(rs.getInt("tape_owner_id"));
+        tape.setOwnerId(tape.getOwner().getId());
+        tape.getOwner().setUsername(rs.getString("tape_owner_username"));
+        tape.getOwner().setDisplayName(rs.getString("tape_owner_display_name"));
 
-        hardware.setCreator(new AccessUser());
-        hardware.getCreator().setId(rs.getInt("creator"));
-        hardware.getCreator().setUsername(rs.getString("creator_username"));
-        hardware.getCreator().setDisplayName(rs.getString("creator_display_name"));
+        tape.setCreator(new AccessUser());
+        tape.getCreator().setId(rs.getInt("creator"));
+        tape.getCreator().setUsername(rs.getString("creator_username"));
+        tape.getCreator().setDisplayName(rs.getString("creator_display_name"));
 
-        hardware.setModifier(new AccessUser());
-        hardware.getModifier().setId(rs.getInt("modifier"));
-        hardware.getModifier().setUsername(rs.getString("modifier_username"));
-        hardware.getModifier().setDisplayName(rs.getString("modifier_display_name"));
-        return hardware;
+        tape.setModifier(new AccessUser());
+        tape.getModifier().setId(rs.getInt("modifier"));
+        tape.getModifier().setUsername(rs.getString("modifier_username"));
+        tape.getModifier().setDisplayName(rs.getString("modifier_display_name"));
+        return tape;
     }
 }
