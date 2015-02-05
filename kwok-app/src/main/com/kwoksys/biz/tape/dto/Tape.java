@@ -32,7 +32,7 @@ public class Tape extends BaseObject {
 //    public static final String PURCHASE_DATE = "tape_purchase_date";
 //    public static final String WARRANTY_EXPIRATION = "tape_warranty_expire_date";
     public static final String MANUFACTURER_NAME = "tape_manufacturer_name";
-    public static final String MANUFACTURER_DATE = "tape_manufacturer_date";
+    public static final String MANUFACTURED_DATE = "tapeManufacturedDate";
     public static final String VENDOR_NAME = "tape_vendor_name";
     public static final String RETENTION = "tape_retention";
     public static final String SYSTEM = "tape_system";
@@ -100,7 +100,7 @@ public class Tape extends BaseObject {
 //        countFile = 0;
 //        fileId = 0;
     }
-
+//todo
 //    public void setForm(TapeForm actionForm) {
 //        setName(actionForm.getTapeName());
 //        setDescription(actionForm.getTapeDescription());
