@@ -23,7 +23,6 @@ import com.kwoksys.biz.admin.dao.AttributeDao;
 import com.kwoksys.biz.admin.dto.AccessUser;
 import com.kwoksys.biz.admin.dto.AttributeFieldCount;
 import com.kwoksys.biz.base.BaseDao;
-import com.kwoksys.biz.hardware.dao.*;
 import com.kwoksys.biz.hardware.dao.HardwareQueries;
 import com.kwoksys.biz.hardware.dto.Hardware;
 import com.kwoksys.biz.hardware.dto.HardwareComponent;
@@ -58,7 +57,7 @@ public class TapeDao extends BaseDao {
     }
 
     public List<Hardware> getHardwareList(QueryBits query) throws DatabaseException {
-        return getHardwareList(new QueryHelper(com.kwoksys.biz.tape.dao.HardwareQueries.selectHardwareListQuery(query)));
+        return getHardwareList(new QueryHelper(TapeQueries.selectHardwareListQuery(query)));
     }
 
     private List<Hardware> getHardwareList(QueryHelper queryHelper) throws DatabaseException {

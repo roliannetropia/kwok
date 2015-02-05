@@ -30,8 +30,8 @@ import com.kwoksys.framework.connections.database.QueryBits;
 public class TapeQueries {
 
     public static String getOrderByColumn(String column) {
-        if (column.equals(Tape.TAPE_NAME)) {
-            return "lower(tape_name)";
+        if (column.equals(Tape.BARCODE)) {
+            return "lower(barcode_number)";
 
         } else if (column.equals(Tape.LOCATION)) {
             return "lower(hwloc.attribute_field_name)";
