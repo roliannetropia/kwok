@@ -25,23 +25,23 @@ import com.kwoksys.framework.http.RequestContext;
 import java.util.List;
 
 /**
- * ActionForm for Hardware index page.
+ * ActionForm for Tape index page.
  */
 public class TapeSearchForm extends ReportForm {
 
     private String cmd;
-    private String hardwareId;
-    private String hardwareName;
+    private String tapeId;
+    private String tapeName;
     private String description;
-    private String hardwareModelName;
-    private String hardwareModelNumber;
+    private String tapeModelName;
+    private String tapeModelNumber;
     private String serialNumber;
-    private String hardwareOwner;
-    private List<Integer> hardwareTypes;
-    private Integer hardwareType;
-    private List<Integer> hardwareStatus;
-    private List<Integer> hardwareLocation;
-    private String hardwareNameCriteria;
+    private String tapeOwner;
+    private List<Integer> tapeTypes;
+    private Integer tapeType;
+    private List<Integer> tapeStatus;
+    private List<Integer> tapeLocation;
+    private String tapeNameCriteria;
     private Integer manufacturerId;
     private Integer vendorId;
     private String attrId;
@@ -58,18 +58,18 @@ public class TapeSearchForm extends ReportForm {
     @Override
     public void setRequest(RequestContext requestContext) {
         cmd = requestContext.getParameterString("cmd");
-        hardwareId = requestContext.getParameterString("hardwareId");
-        hardwareName = requestContext.getParameterString("hardwareName");
+        tapeId = requestContext.getParameterString("tapeId");
+        tapeName = requestContext.getParameterString("tapeName");
         description = requestContext.getParameterString("description");
-        hardwareModelName = requestContext.getParameterString("hardwareModelName");
-        hardwareModelNumber = requestContext.getParameterString("hardwareModelNumber");
+        tapeModelName = requestContext.getParameterString("tapeModelName");
+        tapeModelNumber = requestContext.getParameterString("tapeModelNumber");
         serialNumber = requestContext.getParameterString("serialNumber");
-        hardwareOwner = requestContext.getParameterString("hardwareOwner");
-        hardwareTypes = requestContext.getParameters("hardwareTypes");
-        hardwareType = requestContext.getParameterInteger("hardwareType");
-        hardwareStatus = requestContext.getParameters("hardwareStatus");
-        hardwareLocation = requestContext.getParameters("hardwareLocation");
-        hardwareNameCriteria = requestContext.getParameterString("hardwareNameCriteria");
+        tapeOwner = requestContext.getParameterString("tapeOwner");
+        tapeTypes = requestContext.getParameters("tapeTypes");
+        tapeType = requestContext.getParameterInteger("tapeType");
+        tapeStatus = requestContext.getParameters("tapeStatus");
+        tapeLocation = requestContext.getParameters("tapeLocation");
+        tapeNameCriteria = requestContext.getParameterString("tapeNameCriteria");
         manufacturerId = requestContext.getParameterInteger("manufacturerId");
         vendorId = requestContext.getParameterInteger("vendorId");
         attrId = requestContext.getParameterString("attrId");
@@ -90,54 +90,54 @@ public class TapeSearchForm extends ReportForm {
     public void setCmd(String cmd) {
         this.cmd = cmd;
     }
-    public String getHardwareId() {
-        return hardwareId;
+    public String getTapeId() {
+        return tapeId;
     }
-    public void setHardwareId(String hardwareId) {
-        this.hardwareId = hardwareId;
+    public void setTapeId(String tapeId) {
+        this.tapeId = tapeId;
     }
-    public String getHardwareName() {
-        return hardwareName;
+    public String getTapeName() {
+        return tapeName;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public String getHardwareModelName() {
-        return hardwareModelName;
+    public String getTapeModelName() {
+        return tapeModelName;
     }
 
-    public String getHardwareModelNumber() {
-        return hardwareModelNumber;
+    public String getTapeModelNumber() {
+        return tapeModelNumber;
     }
 
     public String getSerialNumber() {
         return serialNumber;
     }
 
-    public String getHardwareOwner() {
-        return hardwareOwner;
+    public String getTapeOwner() {
+        return tapeOwner;
     }
 
-    public List<Integer> getHardwareTypes() {
-        return hardwareTypes;
+    public List<Integer> getTapeTypes() {
+        return tapeTypes;
     }
 
-    public void setHardwareTypes(List<Integer> hardwareTypes) {
-        this.hardwareTypes = hardwareTypes;
+    public void setTapeTypes(List<Integer> tapeTypes) {
+        this.tapeTypes = tapeTypes;
     }
 
-    public List<Integer> getHardwareStatus() {
-        return hardwareStatus;
+    public List<Integer> getTapeStatus() {
+        return tapeStatus;
     }
 
-    public List<Integer> getHardwareLocation() {
-        return hardwareLocation;
+    public List<Integer> getTapeLocation() {
+        return tapeLocation;
     }
 
-    public String getHardwareNameCriteria() {
-        return hardwareNameCriteria;
+    public String getTapeNameCriteria() {
+        return tapeNameCriteria;
     }
 
     public String getAttrId() {
@@ -148,8 +148,8 @@ public class TapeSearchForm extends ReportForm {
         return attrValue;
     }
 
-    public Integer getHardwareType() {
-        return hardwareType;
+    public Integer getTapeType() {
+        return tapeType;
     }
 
     public Integer getManufacturerId() {
@@ -192,15 +192,15 @@ public class TapeSearchForm extends ReportForm {
         return purchasedBeforeYear;
     }
 
-    public void setHardwareType(Integer hardwareType) {
-        this.hardwareType = hardwareType;
+    public void setTapeType(Integer tapeType) {
+        this.tapeType = tapeType;
     }
 
-    public void setHardwareStatus(List<Integer> hardwareStatus) {
-        this.hardwareStatus = hardwareStatus;
+    public void setTapeStatus(List<Integer> tapeStatus) {
+        this.tapeStatus = tapeStatus;
     }
 
-    public void setHardwareLocation(List<Integer> hardwareLocation) {
-        this.hardwareLocation = hardwareLocation;
+    public void setTapeLocation(List<Integer> tapeLocation) {
+        this.tapeLocation = tapeLocation;
     }
 }
