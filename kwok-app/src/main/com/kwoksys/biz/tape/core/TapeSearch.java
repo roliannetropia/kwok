@@ -1,8 +1,8 @@
 package com.kwoksys.biz.tape.core;
 
-import com.kwoksys.action.hardware.TapeSearchForm;
+import com.kwoksys.action.tape.TapeSearchForm;
 import com.kwoksys.biz.base.BaseSearch;
-import com.kwoksys.biz.hardware.dao.TapeQueries;
+import com.kwoksys.biz.tape.dao.TapeQueries;
 import com.kwoksys.framework.connections.database.QueryBits;
 import com.kwoksys.framework.connections.database.SqlUtils;
 import com.kwoksys.framework.http.RequestContext;
@@ -19,34 +19,34 @@ import java.util.Set;
  */
 public class TapeSearch extends BaseSearch {
 
-    public static final String HARDWARE_ID_EQUALS = "hardwareIdEquals";
+    public static final String TAPE_ID_EQUALS = "tapeIdEquals";
 
-    public static final String HARDWARE_ID_NOT_EQUALS = "hardwareIdNotEquals";
+    public static final String TAPE_ID_NOT_EQUALS = "tapeIdNotEquals";
 
-    public static final String HARDWARE_NAME_EQUALS = "hardwareNameEquals";
+    public static final String TAPE_NAME_EQUALS = "tapeNameEquals";
 
-    public static final String HARDWARE_NAME_BEGINS_WITH = "hardwareNameBeginsWith";
+    public static final String TAPE_NAME_BEGINS_WITH = "tapeNameBeginsWith";
 
-    public static final String HARDWARE_TYPE_CONTAINS = "hardwareTypeContains";
+    public static final String TAPE_TYPE_CONTAINS = "tapeTypeContains";
 
-    public static final String HARDWARE_PURCHASED_BEFORE = "purchasedBefore";
+    public static final String TAPE_PURCHASED_BEFORE = "purchasedBefore";
 
-    public static final String HARDWARE_PURCHASED_AFTER = "purchasedAfter";
+    public static final String TAPE_PURCHASED_AFTER = "purchasedAfter";
 
-    public static final String HARDWARE_MODEL_NAME_CONTAINS = "modelNameContains";
-    public static final String HARDWARE_MODEL_NAME_EQUALS = "modelNameEquals";
+    public static final String TAPE_MODEL_NAME_CONTAINS = "modelNameContains";
+    public static final String TAPE_MODEL_NAME_EQUALS = "modelNameEquals";
 
-    public static final String HARDWARE_MODEL_NUMBER_EQUALS = "modelNumberEquals";
+    public static final String TAPE_MODEL_NUMBER_EQUALS = "modelNumberEquals";
 
-    public static final String HARDWARE_SERIAL_NUMBER_CONTAINS = "serialNumberContains";
-    public static final String HARDWARE_SERIAL_NUMBER_EQUALS = "serialNumberEquals";
+    public static final String TAPE_SERIAL_NUMBER_CONTAINS = "serialNumberContains";
+    public static final String TAPE_SERIAL_NUMBER_EQUALS = "serialNumberEquals";
 
-    public static final String HARDWARE_WARRANTY_EXPIRED = "warrantyExpired";
-    public static final String HARDWARE_WARRANTY_NOT_EXPIRED = "warrantyNotExpired";
-    public static final String HARDWARE_WARRANTY_NOT_SET = "warrantyNotSet";
+    public static final String TAPE_WARRANTY_EXPIRED = "warrantyExpired";
+    public static final String TAPE_WARRANTY_NOT_EXPIRED = "warrantyNotExpired";
+    public static final String TAPE_WARRANTY_NOT_SET = "warrantyNotSet";
 
-    public static final String HARDWARE_VENDOR_EQUALS = "vendorIdEquals";
-    public static final String HARDWARE_MANUFACTURER_EQUALS = "manufacturerIdEquals";
+    public static final String TAPE_VENDOR_EQUALS = "vendorIdEquals";
+    public static final String TAPE_MANUFACTURER_EQUALS = "manufacturerIdEquals";
 
     public TapeSearch(RequestContext requestContext, String sessionKey) {
         super(requestContext, sessionKey);
@@ -59,150 +59,150 @@ public class TapeSearch extends BaseSearch {
      *
      * @return ..
      */
-    public void prepareMap(TapeSearchForm hardwareSearchForm) {
+    public void prepareMap(TapeSearchForm tapeSearchForm) {
         String cmd = requestContext.getParameterString("cmd");
-        String attrId = hardwareSearchForm.getAttrId();
-        String attrValue = hardwareSearchForm.getAttrValue();
-        String compTypeId = hardwareSearchForm.getCompTypeId();
-        String compValue = hardwareSearchForm.getCompValue();
-        String hardwareNameCriteria = hardwareSearchForm.getTapeNameCriteria();
-        String hardwareName = hardwareSearchForm.getTapeName();
-        String description = hardwareSearchForm.getDescription();
+        String attrId = tapeSearchForm.getAttrId();
+        String attrValue = tapeSearchForm.getAttrValue();
+        String compTypeId = tapeSearchForm.getCompTypeId();
+        String compValue = tapeSearchForm.getCompValue();
+        String tapeNameCriteria = tapeSearchForm.getTapeNameCriteria();
+        String tapeName = tapeSearchForm.getTapeName();
+        String description = tapeSearchForm.getDescription();
 
         if (!cmd.isEmpty()) {
             if (cmd.equals("filter")) {
-                Integer hardwareType = requestContext.getParameterInteger("hardwareType");
-                if (hardwareType != null) {
-                    hardwareSearchForm.setTapeTypes(Arrays.asList(hardwareType));
-                    hardwareSearchForm.setTapeType(hardwareType);
-                    searchCriteriaMap.put(TapeSearch.HARDWARE_TYPE_CONTAINS, hardwareSearchForm.getTapeTypes());
+                Integer tapeType = requestContext.getParameterInteger("tapeType");
+                if (tapeType != null) {
+                    tapeSearchForm.setTapeTypes(Arrays.asList(tapeType));
+                    tapeSearchForm.setTapeType(tapeType);
+                    searchCriteriaMap.put(TapeSearch.TAPE_TYPE_CONTAINS, tapeSearchForm.getTapeTypes());
                 }
             } else {
                 reset();
-                hardwareSearchForm.setRequest(requestContext);
+                tapeSearchForm.setRequest(requestContext);
 
                 if (cmd.equals("groupBy")) {
-                    Integer hardwareType = hardwareSearchForm.getTapeType();
-                    if (hardwareType != null) {
-                        hardwareSearchForm.setTapeTypes(Arrays.asList(hardwareType));
-                        hardwareSearchForm.setTapeType(hardwareType);
-                        searchCriteriaMap.put(com.kwoksys.biz.hardware.core.TapeSearch.HARDWARE_TYPE_CONTAINS, hardwareSearchForm.getTapeTypes());
+                    Integer tapeType = tapeSearchForm.getTapeType();
+                    if (tapeType != null) {
+                        tapeSearchForm.setTapeTypes(Arrays.asList(tapeType));
+                        tapeSearchForm.setTapeType(tapeType);
+                        searchCriteriaMap.put(com.kwoksys.biz.tape.core.TapeSearch.TAPE_TYPE_CONTAINS, tapeSearchForm.getTapeTypes());
                     }
-                    Integer hardwareStatus = requestContext.getParameterInteger("hardwareStatus");
-                    if (hardwareStatus != null) {
-                        hardwareSearchForm.setTapeStatus(Arrays.asList(hardwareStatus));
-                        searchCriteriaMap.put("hardwareStatusContains", hardwareSearchForm.getTapeStatus());
+                    Integer tapeStatus = requestContext.getParameterInteger("tapeStatus");
+                    if (tapeStatus != null) {
+                        tapeSearchForm.setTapeStatus(Arrays.asList(tapeStatus));
+                        searchCriteriaMap.put("tapeStatusContains", tapeSearchForm.getTapeStatus());
                     }
-                    Integer hardwareLocation = requestContext.getParameterInteger("hardwareLocation");
-                    if (hardwareLocation != null) {
-                        hardwareSearchForm.setTapeLocation(Arrays.asList(hardwareLocation));
-                        searchCriteriaMap.put("hardwareLocationContains", hardwareSearchForm.getTapeLocation());
+                    Integer tapeLocation = requestContext.getParameterInteger("tapeLocation");
+                    if (tapeLocation != null) {
+                        tapeSearchForm.setTapeLocation(Arrays.asList(tapeLocation));
+                        searchCriteriaMap.put("tapeLocationContains", tapeSearchForm.getTapeLocation());
                     }
 
                 } else if (cmd.equals("search")) {
                     // Search by Tape Id equals something.
-                    String hardwareId = hardwareSearchForm.getTapeId();
-                    if (!hardwareId.isEmpty()) {
-                        searchCriteriaMap.put(HARDWARE_ID_EQUALS, hardwareId);
+                    String tapeId = tapeSearchForm.getTapeId();
+                    if (!tapeId.isEmpty()) {
+                        searchCriteriaMap.put(TAPE_ID_EQUALS, tapeId);
                     }
 
                     // Search by Tape model name equals something.
-                    if (!hardwareName.isEmpty()) {
-                        if (hardwareNameCriteria.equals("equals")) {
-                            searchCriteriaMap.put(HARDWARE_NAME_EQUALS, hardwareName);
-                        } else if (hardwareNameCriteria.equals("contains")) {
-                            searchCriteriaMap.put("hardwareNameContains", hardwareName);
-                        } else if (hardwareNameCriteria.equals("begins")) {
-                            searchCriteriaMap.put(HARDWARE_NAME_BEGINS_WITH, hardwareName);
+                    if (!tapeName.isEmpty()) {
+                        if (tapeNameCriteria.equals("equals")) {
+                            searchCriteriaMap.put(TAPE_NAME_EQUALS, tapeName);
+                        } else if (tapeNameCriteria.equals("contains")) {
+                            searchCriteriaMap.put("tapeNameContains", tapeName);
+                        } else if (tapeNameCriteria.equals("begins")) {
+                            searchCriteriaMap.put(TAPE_NAME_BEGINS_WITH, tapeName);
                         }
                     }
-                    // Search by hardware description
+                    // Search by tape description
                     if (!description.isEmpty()) {
-                        searchCriteriaMap.put("hardwareDescription", description);
+                        searchCriteriaMap.put("tapeDescription", description);
                     }
                     // Search by Tape model name equals something.
-                    String hardwareModelName = hardwareSearchForm.getTapeModelName();
-                    if (!hardwareModelName.isEmpty()) {
-                        searchCriteriaMap.put(HARDWARE_MODEL_NAME_CONTAINS, hardwareModelName);
+                    String tapeModelName = tapeSearchForm.getTapeModelName();
+                    if (!tapeModelName.isEmpty()) {
+                        searchCriteriaMap.put(TAPE_MODEL_NAME_CONTAINS, tapeModelName);
                     }
 
                     // Search by Tape model number equals something.
-                    String hardwareModelNumber = hardwareSearchForm.getTapeModelNumber();
-                    if (!hardwareModelNumber.isEmpty()) {
-                        searchCriteriaMap.put("modelNumberContains", hardwareModelNumber);
+                    String tapeModelNumber = tapeSearchForm.getTapeModelNumber();
+                    if (!tapeModelNumber.isEmpty()) {
+                        searchCriteriaMap.put("modelNumberContains", tapeModelNumber);
                     }
 
                     // Search by Tape serial number equals something.
-                    String hardwareSerialNumber = hardwareSearchForm.getSerialNumber();
-                    if (!hardwareSerialNumber.isEmpty()) {
-                        searchCriteriaMap.put(HARDWARE_SERIAL_NUMBER_CONTAINS, hardwareSerialNumber);
+                    String tapeSerialNumber = tapeSearchForm.getSerialNumber();
+                    if (!tapeSerialNumber.isEmpty()) {
+                        searchCriteriaMap.put(TAPE_SERIAL_NUMBER_CONTAINS, tapeSerialNumber);
                     }
 
                     // Search by Tape Owner (userDisplayName) contains something.
-                    String hardwareOwner = hardwareSearchForm.getTapeOwner();
-                    if (!hardwareOwner.isEmpty()) {
-                        searchCriteriaMap.put("hardwareOwnerContains", hardwareOwner);
+                    String tapeOwner = tapeSearchForm.getTapeOwner();
+                    if (!tapeOwner.isEmpty()) {
+                        searchCriteriaMap.put("tapeOwnerContains", tapeOwner);
                     }
 
                     // Search by Tape type.
-                    List<Integer> typeList = hardwareSearchForm.getTapeTypes();
+                    List<Integer> typeList = tapeSearchForm.getTapeTypes();
                     if (!typeList.isEmpty()) {
-                        searchCriteriaMap.put(HARDWARE_TYPE_CONTAINS, typeList);
+                        searchCriteriaMap.put(TAPE_TYPE_CONTAINS, typeList);
                     }
                     // Search by Tape status.
-                    List<Integer> statusList = hardwareSearchForm.getTapeStatus();
+                    List<Integer> statusList = tapeSearchForm.getTapeStatus();
                     if (!statusList.isEmpty()) {
-                        searchCriteriaMap.put("hardwareStatusContains", statusList);
+                        searchCriteriaMap.put("tapeStatusContains", statusList);
                     }
                     // Search by Tape location.
-                    List<Integer> locationList = hardwareSearchForm.getTapeLocation();
+                    List<Integer> locationList = tapeSearchForm.getTapeLocation();
                     if (!locationList.isEmpty()) {
-                        searchCriteriaMap.put("hardwareLocationContains", locationList);
+                        searchCriteriaMap.put("tapeLocationContains", locationList);
                     }
                     // Search by Tape Manufacturer
-                    Integer manufacturerId = hardwareSearchForm.getManufacturerId();
+                    Integer manufacturerId = tapeSearchForm.getManufacturerId();
                     if (manufacturerId != 0) {
-                        searchCriteriaMap.put(HARDWARE_MANUFACTURER_EQUALS, manufacturerId);
+                        searchCriteriaMap.put(TAPE_MANUFACTURER_EQUALS, manufacturerId);
                     }
                     // Search by Tape Manufacturer
-                    Integer vendorId = hardwareSearchForm.getVendorId();
+                    Integer vendorId = tapeSearchForm.getVendorId();
                     if (vendorId != 0) {
-                        searchCriteriaMap.put(HARDWARE_VENDOR_EQUALS, vendorId);
+                        searchCriteriaMap.put(TAPE_VENDOR_EQUALS, vendorId);
                     }
 
                     // Search by purchase date
-                    String purchasedAfterDate = hardwareSearchForm.getPurchasedAfterDate();
-                    String purchasedAfterMonth = hardwareSearchForm.getPurchasedAfterMonth();
-                    String purchasedAfterYear = hardwareSearchForm.getPurchasedAfterYear();
+                    String purchasedAfterDate = tapeSearchForm.getPurchasedAfterDate();
+                    String purchasedAfterMonth = tapeSearchForm.getPurchasedAfterMonth();
+                    String purchasedAfterYear = tapeSearchForm.getPurchasedAfterYear();
 
                     if (DatetimeUtils.isValidDate(purchasedAfterYear, purchasedAfterMonth, purchasedAfterDate)) {
-                        searchCriteriaMap.put(HARDWARE_PURCHASED_AFTER, purchasedAfterYear + "-" + purchasedAfterMonth + "-" + purchasedAfterDate);
+                        searchCriteriaMap.put(TAPE_PURCHASED_AFTER, purchasedAfterYear + "-" + purchasedAfterMonth + "-" + purchasedAfterDate);
                     }
 
                     // Search by purchased before
-                    String purchasedBeforeDate = hardwareSearchForm.getPurchasedBeforeDate();
-                    String purchasedBeforeMonth = hardwareSearchForm.getPurchasedBeforeMonth();
-                    String purchasedBeforeYear = hardwareSearchForm.getPurchasedBeforeYear();
+                    String purchasedBeforeDate = tapeSearchForm.getPurchasedBeforeDate();
+                    String purchasedBeforeMonth = tapeSearchForm.getPurchasedBeforeMonth();
+                    String purchasedBeforeYear = tapeSearchForm.getPurchasedBeforeYear();
 
                     if (DatetimeUtils.isValidDate(purchasedBeforeYear, purchasedBeforeMonth, purchasedBeforeDate)) {
-                        searchCriteriaMap.put(HARDWARE_PURCHASED_BEFORE, purchasedBeforeYear + "-" + purchasedBeforeMonth + "-" + purchasedBeforeDate);
+                        searchCriteriaMap.put(TAPE_PURCHASED_BEFORE, purchasedBeforeYear + "-" + purchasedBeforeMonth + "-" + purchasedBeforeDate);
                     }
 
-                    boolean warrantyExpired = requestContext.getParameterBoolean(HARDWARE_WARRANTY_EXPIRED);
-                    boolean warrantyNotExpired = requestContext.getParameterBoolean(HARDWARE_WARRANTY_NOT_EXPIRED);
-                    boolean warrantyNotSet = requestContext.getParameterBoolean(HARDWARE_WARRANTY_NOT_SET);
+                    boolean warrantyExpired = requestContext.getParameterBoolean(TAPE_WARRANTY_EXPIRED);
+                    boolean warrantyNotExpired = requestContext.getParameterBoolean(TAPE_WARRANTY_NOT_EXPIRED);
+                    boolean warrantyNotSet = requestContext.getParameterBoolean(TAPE_WARRANTY_NOT_SET);
 
                     if (warrantyExpired && warrantyNotExpired && warrantyNotSet) {
                         // Search all
                     } else {
                         if (warrantyExpired) {
-                            searchCriteriaMap.put(HARDWARE_WARRANTY_EXPIRED, true);
+                            searchCriteriaMap.put(TAPE_WARRANTY_EXPIRED, true);
                         }
                         if (warrantyNotExpired) {
-                            searchCriteriaMap.put(HARDWARE_WARRANTY_NOT_EXPIRED, true);
+                            searchCriteriaMap.put(TAPE_WARRANTY_NOT_EXPIRED, true);
                         }
                         if (warrantyNotSet) {
-                            searchCriteriaMap.put(HARDWARE_WARRANTY_NOT_SET, true);
+                            searchCriteriaMap.put(TAPE_WARRANTY_NOT_SET, true);
                         }
                     }
 
@@ -211,7 +211,7 @@ public class TapeSearch extends BaseSearch {
                         searchCriteriaMap.put("attrId", attrId);
                         searchCriteriaMap.put("attrValue", attrValue);
                     }
-                    // Search by hardware components
+                    // Search by tape components
                     if (!compTypeId.isEmpty() && !compValue.isEmpty()) {
                         searchCriteriaMap.put("compTypeId", compTypeId);
                         searchCriteriaMap.put("compValue", compValue);
@@ -229,128 +229,128 @@ public class TapeSearch extends BaseSearch {
             return;
         }
         // For Tape Id
-        if (searchCriteriaMap.containsKey(HARDWARE_ID_EQUALS)) {
-            query.appendWhereClause("ah.hardware_id = " + SqlUtils.encodeInteger(searchCriteriaMap.get(HARDWARE_ID_EQUALS)));
+        if (searchCriteriaMap.containsKey(TAPE_ID_EQUALS)) {
+            query.appendWhereClause("ah.tape_id = " + SqlUtils.encodeInteger(searchCriteriaMap.get(TAPE_ID_EQUALS)));
         }
         // For custom fields
         if (searchCriteriaMap.containsKey("attrId") && searchCriteriaMap.containsKey("attrValue")) {
-            query.appendWhereClause("ah.hardware_id in (select object_id from object_attribute_value where attribute_id = "+
+            query.appendWhereClause("ah.tape_id in (select object_id from object_attribute_value where attribute_id = "+
                     SqlUtils.encodeInteger(searchCriteriaMap.get("attrId")) + " and lower(attr_value) like lower('%"
                     + SqlUtils.encodeString(searchCriteriaMap.get("attrValue")) +"%'))");
         }
-        // For hardware components
+        // For tape components
         if (searchCriteriaMap.containsKey("compTypeId") && searchCriteriaMap.containsKey("compValue")) {
-            query.appendWhereClause("ah.hardware_id in (select hardware_id from asset_hardware_component where hardware_component_type = "+
+            query.appendWhereClause("ah.tape_id in (select tape_id from asset_tape_component where tape_component_type = "+
                     SqlUtils.encodeInteger(searchCriteriaMap.get("compTypeId")) + " and lower(comp_description) like lower('%"
                     + SqlUtils.encodeString(searchCriteriaMap.get("compValue")) +"%'))");
         }
         // For Tape name (without "%")
-        if (searchCriteriaMap.containsKey(HARDWARE_NAME_EQUALS)) {
-            query.appendWhereClause("lower(ah.hardware_name) = lower('" + SqlUtils.encodeString(searchCriteriaMap.get(HARDWARE_NAME_EQUALS)) + "')");
+        if (searchCriteriaMap.containsKey(TAPE_NAME_EQUALS)) {
+            query.appendWhereClause("lower(ah.tape_name) = lower('" + SqlUtils.encodeString(searchCriteriaMap.get(TAPE_NAME_EQUALS)) + "')");
         }
 
-        if (searchCriteriaMap.containsKey(HARDWARE_ID_NOT_EQUALS)) {
-            query.appendWhereClause("ah.hardware_id != " + SqlUtils.encodeInteger(searchCriteriaMap.get(HARDWARE_ID_NOT_EQUALS)));
+        if (searchCriteriaMap.containsKey(TAPE_ID_NOT_EQUALS)) {
+            query.appendWhereClause("ah.tape_id != " + SqlUtils.encodeInteger(searchCriteriaMap.get(TAPE_ID_NOT_EQUALS)));
         }        
 
         // For Tape name
-        if (searchCriteriaMap.containsKey("hardwareNameContains")) {
-            query.appendWhereClause("lower(ah.hardware_name) like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get("hardwareNameContains")) + "%')");
+        if (searchCriteriaMap.containsKey("tapeNameContains")) {
+            query.appendWhereClause("lower(ah.tape_name) like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get("tapeNameContains")) + "%')");
         }
 
         // For Tape name
-        if (searchCriteriaMap.containsKey(HARDWARE_NAME_BEGINS_WITH)) {
-            query.appendWhereClause("lower(ah.hardware_name) like lower('" + SqlUtils.encodeString(searchCriteriaMap.get(HARDWARE_NAME_BEGINS_WITH)) + "%')");
+        if (searchCriteriaMap.containsKey(TAPE_NAME_BEGINS_WITH)) {
+            query.appendWhereClause("lower(ah.tape_name) like lower('" + SqlUtils.encodeString(searchCriteriaMap.get(TAPE_NAME_BEGINS_WITH)) + "%')");
         }
 
-        // For hardware description
-        if (searchCriteriaMap.containsKey("hardwareDescription")) {
-            query.appendWhereClause("lower(ah.hardware_description) like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get("hardwareDescription")) + "%')");
+        // For tape description
+        if (searchCriteriaMap.containsKey("tapeDescription")) {
+            query.appendWhereClause("lower(ah.tape_description) like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get("tapeDescription")) + "%')");
         }
         // For Tape model name
-        if (searchCriteriaMap.containsKey(HARDWARE_MODEL_NAME_CONTAINS)) {
-            query.appendWhereClause("lower(ah.hardware_model_name) like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get(HARDWARE_MODEL_NAME_CONTAINS)) + "%')");
+        if (searchCriteriaMap.containsKey(TAPE_MODEL_NAME_CONTAINS)) {
+            query.appendWhereClause("lower(ah.tape_model_name) like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get(TAPE_MODEL_NAME_CONTAINS)) + "%')");
         }
-        if (searchCriteriaMap.containsKey(HARDWARE_MODEL_NAME_EQUALS)) {
-            if (((String)searchCriteriaMap.get(HARDWARE_MODEL_NAME_EQUALS)).isEmpty()) {
-                query.appendWhereClause("ah.hardware_model_name is null");
+        if (searchCriteriaMap.containsKey(TAPE_MODEL_NAME_EQUALS)) {
+            if (((String)searchCriteriaMap.get(TAPE_MODEL_NAME_EQUALS)).isEmpty()) {
+                query.appendWhereClause("ah.tape_model_name is null");
             } else {
-                query.appendWhereClause("lower(ah.hardware_model_name) = lower('" + SqlUtils.encodeString(searchCriteriaMap.get(HARDWARE_MODEL_NAME_EQUALS)) + "')");
+                query.appendWhereClause("lower(ah.tape_model_name) = lower('" + SqlUtils.encodeString(searchCriteriaMap.get(TAPE_MODEL_NAME_EQUALS)) + "')");
             }
         }
         // For Tape model number
         if (searchCriteriaMap.containsKey("modelNumberContains")) {
-            query.appendWhereClause("lower(ah.hardware_model_number) like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get("modelNumberContains")) + "%')");
+            query.appendWhereClause("lower(ah.tape_model_number) like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get("modelNumberContains")) + "%')");
         }
-        if (searchCriteriaMap.containsKey(HARDWARE_MODEL_NUMBER_EQUALS)) {
-            if (((String)searchCriteriaMap.get(HARDWARE_MODEL_NUMBER_EQUALS)).isEmpty()) {
-                query.appendWhereClause("ah.hardware_model_number is null");
+        if (searchCriteriaMap.containsKey(TAPE_MODEL_NUMBER_EQUALS)) {
+            if (((String)searchCriteriaMap.get(TAPE_MODEL_NUMBER_EQUALS)).isEmpty()) {
+                query.appendWhereClause("ah.tape_model_number is null");
             } else {
-                query.appendWhereClause("lower(ah.hardware_model_number) = lower('" + SqlUtils.encodeString(searchCriteriaMap.get(HARDWARE_MODEL_NUMBER_EQUALS)) + "')");
+                query.appendWhereClause("lower(ah.tape_model_number) = lower('" + SqlUtils.encodeString(searchCriteriaMap.get(TAPE_MODEL_NUMBER_EQUALS)) + "')");
             }
         }
         // For Tape serial number
-        if (searchCriteriaMap.containsKey(HARDWARE_SERIAL_NUMBER_CONTAINS)) {
-            query.appendWhereClause("lower(ah.hardware_serial_number) like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get("serialNumberContains")) + "%')");
+        if (searchCriteriaMap.containsKey(TAPE_SERIAL_NUMBER_CONTAINS)) {
+            query.appendWhereClause("lower(ah.tape_serial_number) like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get("serialNumberContains")) + "%')");
         }
-        if (searchCriteriaMap.containsKey(HARDWARE_SERIAL_NUMBER_EQUALS)) {
-            query.appendWhereClause("lower(ah.hardware_serial_number) = lower('" + SqlUtils.encodeString(searchCriteriaMap.get(HARDWARE_SERIAL_NUMBER_EQUALS)) + "')");
+        if (searchCriteriaMap.containsKey(TAPE_SERIAL_NUMBER_EQUALS)) {
+            query.appendWhereClause("lower(ah.tape_serial_number) = lower('" + SqlUtils.encodeString(searchCriteriaMap.get(TAPE_SERIAL_NUMBER_EQUALS)) + "')");
         }
         // For Tape owner number
-        if (searchCriteriaMap.containsKey("hardwareOwnerContains")) {
-            query.appendWhereClause(TapeQueries.getOrderByColumn("hardware_owner_name") + " like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get("hardwareOwnerContains")) + "%')");
+        if (searchCriteriaMap.containsKey("tapeOwnerContains")) {
+            query.appendWhereClause(TapeQueries.getOrderByColumn("tape_owner_name") + " like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get("tapeOwnerContains")) + "%')");
         }
-        if (searchCriteriaMap.containsKey("hardwareOwnerId")) {
-            query.appendWhereClause("ah.hardware_owner_id = " + SqlUtils.encodeInteger(searchCriteriaMap.get("hardwareOwnerId")));
+        if (searchCriteriaMap.containsKey("tapeOwnerId")) {
+            query.appendWhereClause("ah.tape_owner_id = " + SqlUtils.encodeInteger(searchCriteriaMap.get("tapeOwnerId")));
         }
         // For Tape type
-        if (searchCriteriaMap.containsKey(HARDWARE_TYPE_CONTAINS)) {
-            query.appendWhereClause("ah.hardware_type in (" + SqlUtils.encodeIntegers((List<Integer>) searchCriteriaMap.get(HARDWARE_TYPE_CONTAINS)) + ")");
+        if (searchCriteriaMap.containsKey(TAPE_TYPE_CONTAINS)) {
+            query.appendWhereClause("ah.tape_type in (" + SqlUtils.encodeIntegers((List<Integer>) searchCriteriaMap.get(TAPE_TYPE_CONTAINS)) + ")");
         }
         // For Tape status
-        if (searchCriteriaMap.containsKey("hardwareStatusContains")) {
-            query.appendWhereClause("ah.hardware_status in (" + SqlUtils.encodeIntegers((List<Integer>) searchCriteriaMap.get("hardwareStatusContains")) + ")");
+        if (searchCriteriaMap.containsKey("tapeStatusContains")) {
+            query.appendWhereClause("ah.tape_status in (" + SqlUtils.encodeIntegers((List<Integer>) searchCriteriaMap.get("tapeStatusContains")) + ")");
         }
-        // For Hardware location
-        if (searchCriteriaMap.containsKey("hardwareLocationContains")) {
-            query.appendWhereClause("ah.hardware_location in (" + SqlUtils.encodeIntegers((List<Integer>) searchCriteriaMap.get("hardwareLocationContains")) + ")");
+        // For Tape location
+        if (searchCriteriaMap.containsKey("tapeLocationContains")) {
+            query.appendWhereClause("ah.tape_location in (" + SqlUtils.encodeIntegers((List<Integer>) searchCriteriaMap.get("tapeLocationContains")) + ")");
         }
         // For manufacturer by id
-        if (searchCriteriaMap.containsKey(HARDWARE_MANUFACTURER_EQUALS)) {
-            if (searchCriteriaMap.get(HARDWARE_MANUFACTURER_EQUALS).equals(0)) {
+        if (searchCriteriaMap.containsKey(TAPE_MANUFACTURER_EQUALS)) {
+            if (searchCriteriaMap.get(TAPE_MANUFACTURER_EQUALS).equals(0)) {
                 query.appendWhereClause("mftr.company_id is null");
             } else {
-                query.appendWhereClause("mftr.company_id = " + SqlUtils.encodeInteger(searchCriteriaMap.get(HARDWARE_MANUFACTURER_EQUALS)));
+                query.appendWhereClause("mftr.company_id = " + SqlUtils.encodeInteger(searchCriteriaMap.get(TAPE_MANUFACTURER_EQUALS)));
             }
         }
         // For vendor by id
-        if (searchCriteriaMap.containsKey(HARDWARE_VENDOR_EQUALS)) {
-            if (searchCriteriaMap.get(HARDWARE_VENDOR_EQUALS).equals(0)) {
+        if (searchCriteriaMap.containsKey(TAPE_VENDOR_EQUALS)) {
+            if (searchCriteriaMap.get(TAPE_VENDOR_EQUALS).equals(0)) {
                 query.appendWhereClause("vndr.company_id is null");
             } else {
-                query.appendWhereClause("vndr.company_id = " + SqlUtils.encodeInteger(searchCriteriaMap.get(HARDWARE_VENDOR_EQUALS)));
+                query.appendWhereClause("vndr.company_id = " + SqlUtils.encodeInteger(searchCriteriaMap.get(TAPE_VENDOR_EQUALS)));
             }
         }
 
-        // Hardware purchased after this date.
-        if (searchCriteriaMap.containsKey(HARDWARE_PURCHASED_AFTER)) {
-            query.appendWhereClause("ah.hardware_purchase_date >= '" + SqlUtils.encodeString(searchCriteriaMap.get(HARDWARE_PURCHASED_AFTER)) + "'");
+        // Tape purchased after this date.
+        if (searchCriteriaMap.containsKey(TAPE_PURCHASED_AFTER)) {
+            query.appendWhereClause("ah.tape_purchase_date >= '" + SqlUtils.encodeString(searchCriteriaMap.get(TAPE_PURCHASED_AFTER)) + "'");
         }
-        // Hardware purchased before this date.
-        if (searchCriteriaMap.containsKey(HARDWARE_PURCHASED_BEFORE)) {
-            query.appendWhereClause("ah.hardware_purchase_date <= '" + SqlUtils.encodeString(searchCriteriaMap.get(HARDWARE_PURCHASED_BEFORE)) + "'");
+        // Tape purchased before this date.
+        if (searchCriteriaMap.containsKey(TAPE_PURCHASED_BEFORE)) {
+            query.appendWhereClause("ah.tape_purchase_date <= '" + SqlUtils.encodeString(searchCriteriaMap.get(TAPE_PURCHASED_BEFORE)) + "'");
         }
 
         // Warranty expiration filter
         Set<String> warranty = new HashSet();
-        if (searchCriteriaMap.containsKey(HARDWARE_WARRANTY_EXPIRED)) {
-            warranty.add("ah.hardware_warranty_expire_date < now()");
+        if (searchCriteriaMap.containsKey(TAPE_WARRANTY_EXPIRED)) {
+            warranty.add("ah.tape_warranty_expire_date < now()");
         }
-        if (searchCriteriaMap.containsKey(HARDWARE_WARRANTY_NOT_EXPIRED)) {
-            warranty.add("ah.hardware_warranty_expire_date > now()");
+        if (searchCriteriaMap.containsKey(TAPE_WARRANTY_NOT_EXPIRED)) {
+            warranty.add("ah.tape_warranty_expire_date > now()");
 
-        } else if (searchCriteriaMap.containsKey(HARDWARE_WARRANTY_NOT_SET)) {
-            warranty.add("ah.hardware_warranty_expire_date is null");
+        } else if (searchCriteriaMap.containsKey(TAPE_WARRANTY_NOT_SET)) {
+            warranty.add("ah.tape_warranty_expire_date is null");
         }
 
         String warrantyWhereClause = StringUtils.join(warranty, " or ");
