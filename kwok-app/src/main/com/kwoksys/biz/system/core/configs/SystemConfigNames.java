@@ -85,6 +85,14 @@ public class SystemConfigNames {
     public static final String HARDWARE_WARRANTY_EXPIRE_COUNTDOWN = "hardware.warrantyExpireCountdown";
     public static final String CUSTOM_HOME_DESCRIPTION = "home.customDescription";
 
+//    Tape
+    public static final String TAPE_CHECK_UNIQUE_NAME = "Tape.CheckUniqueTapeName";
+    public static final String TAPE_CHECK_SERIAL_NUMBER = "Tape.CheckUniqueSerialNumber";
+    public static final String TAPE_ROWS = "tape.numberOfRowsToShow";
+    public static final String TAPE_COLUMNS = "tape.columnList";
+    public static final String TAPE_WARRANTY_EXPIRE_COUNTDOWN = "tape.warrantyExpireCountdown";
+//    public static final String CUSTOM_HOME_DESCRIPTION = "home.customDescription";
+
     public static final String ISSUE_ROWS = "issues.numberOfRowsToShow";
     public static final String ISSUE_COLUMNS = "issues.columnList";
     public static final String ISSUE_GUEST_SUBMIT_MODULE_ENABLED = "Issues.ReportIssueModuleEnabled";
