@@ -87,6 +87,7 @@ public class AppConfigManager extends BaseConfigManager {
     private List<String> hardwareImportExportColumns;
     private int hardwareWarrantyExpireCountdown;
     private boolean isCheckUniqueHardwareName;
+    private boolean isCheckUniqueTapeName;
     private boolean isCheckUniqueSerialNumber;
 
     /*
@@ -193,6 +194,7 @@ public class AppConfigManager extends BaseConfigManager {
         hardwareLicenseExportColumns = Arrays.asList("hardware_id", "hardware_name", "software_name", "license_key", "license_note");
         hardwareWarrantyExpireCountdown = getInt(SystemConfigNames.HARDWARE_WARRANTY_EXPIRE_COUNTDOWN);
         isCheckUniqueHardwareName = getBoolean(SystemConfigNames.HARDWARE_CHECK_UNIQUE_NAME);
+        isCheckUniqueTapeName = getBoolean(SystemConfigNames.TAPE_CHECK_UNIQUE_NAME);
         isCheckUniqueSerialNumber = getBoolean(SystemConfigNames.HARDWARE_CHECK_SERIAL_NUMBER);
 
         /**
@@ -381,6 +383,10 @@ public class AppConfigManager extends BaseConfigManager {
 
     public boolean isCheckUniqueHardwareName() {
         return isCheckUniqueHardwareName;
+    }
+
+    public boolean isCheckUniqueTapeName() {
+        return isCheckUniqueTapeName;
     }
 
     public boolean isIssuesGuestSubmitModuleEnabled() {
