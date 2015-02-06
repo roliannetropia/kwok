@@ -29,7 +29,7 @@ import com.kwoksys.biz.tape.core.TapeSearch;
 import com.kwoksys.biz.tape.dao.TapeDao;
 import com.kwoksys.biz.tape.dto.Tape;
 import com.kwoksys.biz.tape.dto.TapeComponent;
-//import com.kwoksys.biz.tape.dto.TapeSoftwareMap;
+import com.kwoksys.biz.tape.dto.TapeSoftwareMap;
 import com.kwoksys.framework.connections.database.QueryBits;
 import com.kwoksys.framework.exceptions.DatabaseException;
 import com.kwoksys.framework.exceptions.ObjectNotFoundException;
