@@ -70,6 +70,7 @@ public class SystemConfigNames {
     public static final String COMPANY_FILE_PATH = "file.company.repositoryPath";
     public static final String CONTRACT_FILE_PATH = "file.contract.repositoryPath";
     public static final String HARDWARE_FILE_PATH = "file.hardware.repositoryPath";
+    public static final String TAPE_FILE_PATH = "file.tape.repositoryPath";
     public static final String ISSUE_FILE_PATH = "file.issue.repositoryPath";
     public static final String KB_FILE_PATH = "file.kb.repositoryPath";
     public static final String SOFTWARE_FILE_PATH = "file.software.repositoryPath";
