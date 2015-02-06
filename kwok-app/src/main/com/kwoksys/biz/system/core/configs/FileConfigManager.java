@@ -44,6 +44,10 @@ public class FileConfigManager extends BaseConfigManager {
     private String hardwareFileRepositoryLocation;
     private String hardwareUploadedFilePrefix;
 
+    // Tape files.
+    private String tapeFileRepositoryLocation;
+    private String tapeUploadedFilePrefix;
+
     // Software files.
     private String softwareFileRepositoryLocation;
     private String softwareUploadedFilePrefix;
@@ -79,6 +83,9 @@ public class FileConfigManager extends BaseConfigManager {
         companyUploadedFilePrefix = getString("file.company.uploadFilePrefix");
         hardwareFileRepositoryLocation = getString(SystemConfigNames.HARDWARE_FILE_PATH);
         hardwareUploadedFilePrefix = getString("file.hardware.uploadFilePrefix");
+
+        tapeFileRepositoryLocation = getString(SystemConfigNames.TAPE_FILE_PATH);
+        tapeUploadedFilePrefix = getString("file.tape.uploadFilePrefix");
         softwareFileRepositoryLocation = getString(SystemConfigNames.SOFTWARE_FILE_PATH);
         softwareUploadedFilePrefix = getString("file.software.uploadFilePrefix");
         issueFileRepositoryLocation = getString(SystemConfigNames.ISSUE_FILE_PATH);
@@ -113,6 +120,9 @@ public class FileConfigManager extends BaseConfigManager {
     }
     public String getHardwareFileRepositoryLocation() {
         return hardwareFileRepositoryLocation;
+    }
+    public String getTapeFileRepositoryLocation() {
+        return tapeFileRepositoryLocation;
     }
     public String getIssueUploadedFilePrefix() {
         return issueUploadedFilePrefix;
