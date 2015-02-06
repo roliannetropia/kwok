@@ -362,13 +362,13 @@ public class TapeService {
         return new TapeDao(requestContext).resetComponentCount(tapeId);
     }
 
-    public File getTapeFile(Integer tapeId, Integer fileId) throws DatabaseException, ObjectNotFoundException {
-        FileService fileService = ServiceProvider.getFileService(requestContext);
-        File file = fileService.getFile(ObjectTypes.TAPE, tapeId, fileId);
-        file.setConfigRepositoryPath(ConfigManager.file.getTapeFileRepositoryLocation());
-        file.setConfigUploadedFilePrefix(ConfigManager.file.getTapeUploadedFilePrefix());
-        return file;
-    }
+//    public File getTapeFile(Integer tapeId, Integer fileId) throws DatabaseException, ObjectNotFoundException {
+//        FileService fileService = ServiceProvider.getFileService(requestContext);
+//        File file = fileService.getFile(ObjectTypes.TAPE, tapeId, fileId);
+//        file.setConfigRepositoryPath(ConfigManager.file.getTapeFileRepositoryLocation());
+//        file.setConfigUploadedFilePrefix(ConfigManager.file.getTapeUploadedFilePrefix());
+//        return file;
+//    }
 
     /**
      * Add Tape Issue map.
