@@ -20,6 +20,7 @@
 package com.kwoksys.biz.system.core;
 
 import com.kwoksys.biz.hardware.dto.Hardware;
+import com.kwoksys.biz.tape.dto.Tape;
 import com.kwoksys.biz.software.dto.Software;
 import com.kwoksys.biz.contracts.dto.Contract;
 import com.kwoksys.biz.issues.dto.Issue;
@@ -59,7 +60,15 @@ public class Attributes {
     public static final Integer HARDWARE_TYPE = -10;
 
     public static final Integer HARDWARE_STATUS = -12;
+//    todo what is this?
+    public static final Integer TAPE_COMPONENT_TYPE = -22;
 
+    public static final Integer TAPE_LOCATION = -23;
+
+    public static final Integer TAPE_TYPE = -24;
+
+    public static final Integer TAPE_STATUS = -25;
+// todo what is this
     public static final Integer CONTRACT_STAGE = -21;
 
     public static final Integer CONTRACT_TYPE = -14;
@@ -80,6 +89,10 @@ public class Attributes {
         nameIdMap.put(Hardware.LOCATION, HARDWARE_LOCATION);
         nameIdMap.put(Hardware.STATUS, HARDWARE_STATUS);
         nameIdMap.put(Hardware.TYPE, HARDWARE_TYPE);
+
+        nameIdMap.put(Tape.LOCATION, TAPE_LOCATION);
+        nameIdMap.put(Tape.STATUS, TAPE_STATUS);
+        nameIdMap.put(Tape.TYPE, TAPE_TYPE);
 
         nameIdMap.put(Software.TYPE, SOFTWARE_TYPE);
         nameIdMap.put(Software.OS, SOFTWARE_OS);
