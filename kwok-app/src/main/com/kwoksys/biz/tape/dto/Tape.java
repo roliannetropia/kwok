@@ -19,13 +19,13 @@ public class Tape extends BaseObject {
 
     public static final String ID = "tape_id";
     public static final String BARCODE = "barcode_number";
+    public static final String SERIAL_NUMBER = "tape_serial_number";
     public static final String TAPE_NAME = "tape_name";
-//
+    //
     public static final String TAPE_DESCRIPTION = "tape_description";
     public static final String MODEL_NAME = "tape_model_name";
-    public static final String MODEL_NUMBER = "tape_model_number";
 
-    public static final String SERIAL_NUMBER = "tape_serial_number";
+    public static final String MODEL_NUMBER = "tape_model_number";
 //
     public static final String SERVICE_DATE = "tape_last_service_date";
 
@@ -98,11 +98,11 @@ public class Tape extends BaseObject {
         super(ObjectTypes.TAPE);
         name = "";
         barcodeNumber = "";
+        serialNumber = "";
 //
         modelName = "";
         modelNumber = "";
 
-        serialNumber = "";
         manufacturerId = 0;
         vendorId = 0;
         retention = "";
@@ -122,6 +122,8 @@ public class Tape extends BaseObject {
 
     public void setForm(TapeForm actionForm) {
         setName(actionForm.getTapeName());
+        setSerialNumber(actionForm.getSerialNumber());
+        setBarcodeNumber(actionForm.getBarcodeNumber());
         setDescription(actionForm.getTapeDescription());
         setOwnerId(actionForm.getTapeOwner());
         setManufacturerId(actionForm.getManufacturerId());
@@ -130,7 +132,6 @@ public class Tape extends BaseObject {
         setStatus(actionForm.getTapeStatus());
         setModelName(actionForm.getTapeModelName());
         setModelNumber(actionForm.getTapeModelNumber());
-        setSerialNumber(actionForm.getSerialNumber());
         setPurchasePrice(actionForm.getTapeCost());
         setResetLastServiceDate(actionForm.getLastServicedOn());
         setTapePurchaseDate(actionForm.getPurchaseYear(), actionForm.getPurchaseMonth(), actionForm.getPurchaseDate());
@@ -476,5 +477,15 @@ public class Tape extends BaseObject {
         this.barcodeNumber = barcodeNumber;
     }
 
+    public String getPurchaseYear() {
+        return purchaseYear;
+    }
 
+    public String getPurchaseMonth() {
+        return purchaseMonth;
+    }
+
+    public String getPurchaseDate() {
+        return purchaseDate;
+    }
 }
