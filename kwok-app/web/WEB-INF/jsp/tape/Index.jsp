@@ -22,7 +22,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 
 <div class="section">
-<p><bean:message key="itMgmt.hardwareIndex.numRecords" arg0="${numHardwareRecords}"/>
+<p><bean:message key="itMgmt.tapeIndex.numRecords" arg0="${numTapeRecords}"/>
 
 <div>
     <ul><logic:iterate id="row" name="linkList">
@@ -31,39 +31,39 @@
 </div>
 </div>
 
-<%-- Hardware summary. --%>
-<h3><bean:message key="itMgmt.index.hardwareTypeCountHeader"/></h3>
+<%-- Tape summary. --%>
+<h3><bean:message key="itMgmt.index.tapeTypeCountHeader"/></h3>
 <table class="section standard">
     <tr>
-    <%-- Hardware type count --%>
+    <%-- Tape type count --%>
     <th>
-        <p><b><bean:message key="itMgmt.index.hardwareTypeCountDesc"/></b> &nbsp;
+        <p><b><bean:message key="itMgmt.index.tapeTypeCountDesc"/></b> &nbsp;
         <p>
         <table class="stats">
-        <logic:iterate id="row" name="hardwareTypeCountList">
+        <logic:iterate id="row" name="tapeTypeCountList">
             <tr class="${row.style}">
                 <th><a href="${row.path}"><div><bean:write name="row" property="countKey" filter="false"/></div></a></th>
                 <td><a href="${row.path}"><div><bean:write name="row" property="countValue"/></div></a></td></tr>
         </logic:iterate>
         </table>
     </th>
-    <%-- Hardware status count --%>
+    <%-- Tape status count --%>
     <th class="borderLeft">
-        <p><b><bean:message key="itMgmt.index.hardwareStatusCountDesc"/></b> &nbsp;
+        <p><b><bean:message key="itMgmt.index.tapeStatusCountDesc"/></b> &nbsp;
         <p>
         <table class="stats">
-        <logic:iterate id="row" name="hardwareStatusCounts">
+        <logic:iterate id="row" name="tapeStatusCounts">
             <tr class="${row.style}">
                 <th><a href="${row.path}"><div><bean:write name="row" property="countKey"/></div></a></th>
                 <td><a href="${row.path}"><div><bean:write name="row" property="countValue"/></div></a></td></tr>
         </logic:iterate>
         </table>
     </th>
-    <%-- Hardware location count --%>
+    <%-- Tape location count --%>
     <th class="borderLeft">
-        <p><b><bean:message key="itMgmt.index.hardwareLocationCountDesc"/></b>
+        <p><b><bean:message key="itMgmt.index.tapeLocationCountDesc"/></b>
         <p><table class="stats">
-        <logic:iterate id="row" name="hardwareLocationCountList">
+        <logic:iterate id="row" name="tapeLocationCountList">
             <tr class="${row.style}">
                 <th><a href="${row.path}"><div><bean:write name="row" property="countKey"/></div></a></th>
                 <td><a href="${row.path}"><div><bean:write name="row" property="countValue"/></div></a></td></tr>
@@ -73,7 +73,7 @@
     </tr>
 </table>
 
-<%-- Hardware search --%>
+<%-- Tape search --%>
 <h3><bean:message key="itMgmt.index.searchHeader"/></h3>
 
-<jsp:include page="/WEB-INF/jsp/hardware/HardwareSearchTemplate.jsp"/>
+<jsp:include page="/WEB-INF/jsp/tape/TapeSearchTemplate.jsp"/>
