@@ -10,7 +10,7 @@
     <constant name="struts.enable.DynamicMethodInvocation" value="false" />
     <!-- Allow slashes in path -->
     <constant name="struts.enable.SlashesInActionNames" value="true"/>
-    <constant name="struts.devMode" value="false" />
+    <constant name="struts.devMode" value="true" />
 
     <package name="kwok-default" extends="struts-default">
         <interceptors>
@@ -449,6 +449,44 @@
         <action name="hardware/custom-fields" class="com.kwoksys.action.hardware.HardwareCustomFieldsAction">
             <result name="success">/WEB-INF/jsp/common/template/CustomFieldsTable.jsp</result>
         </action>
+
+
+        <!--
+            Tape
+        -->
+        <!--<action name="IT/ajax-get-tape-detail" class="com.kwoksys.action.tape.AjaxGetTapeDetailAction">-->
+            <!--<result name="success">/WEB-INF/jsp/tape/AjaxGetTapeDetail.jsp</result>-->
+        <!--</action>-->
+        <!--<action name="IT/ajax-get-license-by-software" class="com.kwoksys.action.software.AjaxGetLicenseBySoftwareAction">-->
+            <!--<result name="success" >/WEB-INF/jsp/software/AjaxGetLicenseBySoftware.jsp</result>-->
+        <!--</action>-->
+        <!--<action name="IT/ajax-get-software-by-maker" class="com.kwoksys.action.software.AjaxGetSoftwareByMakerAction">-->
+            <!--<result name="success">/WEB-INF/jsp/software/AjaxGetSoftwareByMaker.jsp</result>-->
+        <!--</action>-->
+        <!--<action name="tape/ajax-get-component-custom-fields" class="com.kwoksys.action.tape.AjaxGetComponentCustomFieldsAction">-->
+            <!--<result name="success">/WEB-INF/jsp/tape/AjaxGetComponentCustomFields.jsp</result>-->
+        <!--</action>-->
+        <action name="tape/index" class="com.kwoksys.action.tape.IndexAction">
+            <result name="success">/WEB-INF/jsp/tape/Index.jsp</result>
+        </action>
+        <!--<action name="tape/add" class="com.kwoksys.action.tape.TapeAddAction">-->
+            <!--<result name="success">/WEB-INF/jsp/tape/TapeAdd.jsp</result>-->
+        <!--</action>-->
+        <!--<action name="tape/add-2" class="com.kwoksys.action.tape.TapeAdd2Action"/>-->
+        <!--<action name="tape/detail" class="com.kwoksys.action.tape.TapeDetailAction">-->
+            <!--<result name="success">/WEB-INF/jsp/tape/TapeDetail.jsp</result>-->
+        <!--</action>-->
+        <!--<action name="tape/delete" class="com.kwoksys.action.tape.TapeDeleteAction"/>-->
+        <!--<action name="tape/delete-2" class="com.kwoksys.action.tape.TapeDelete2Action"/>-->
+        <!--<action name="tape/edit" class="com.kwoksys.action.tape.TapeEditAction">-->
+            <!--<result name="success">/WEB-INF/jsp/tape/TapeEdit.jsp</result>-->
+        <!--</action>-->
+        <!--<action name="tape/edit-2" class="com.kwoksys.action.tape.TapeEdit2Action"/>-->
+        <!--<action name="tape/list" class="com.kwoksys.action.tape.TapeListAction">-->
+            <!--<result name="success">/WEB-INF/jsp/tape/TapeList.jsp</result>-->
+        <!--</action>-->
+        <!--<action name="tape/list-export" class="com.kwoksys.action.tape.TapeListExportAction"/>-->
+        <!--end of tapes-->
         
         <!-- Home -->
         <action name="home/index" class="com.kwoksys.action.home.IndexAction">
