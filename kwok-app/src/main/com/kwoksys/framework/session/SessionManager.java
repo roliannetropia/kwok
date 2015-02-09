@@ -65,6 +65,10 @@ public class SessionManager {
 
     public static final String HARDWARE_REPORT_CRITERIA_MAP = "HARDWARE_REPORT_CRITERIA_MAP";
 
+    public static final String TAPE_SEARCH_CRITERIA_MAP = "TAPE_SEARCH_CRITERIA_MAP";
+
+//    public static final String TAPE_REPORT_CRITERIA_MAP = "TAPE_REPORT_CRITERIA_MAP";
+
     public static final String SOFTWARE_SEARCH_CRITERIA_MAP = "SOFTWARE_SEARCH_CRITERIA_MAP";
 
     public static final String SOFTWARE_REPORT_CRITERIA_MAP = "SOFTWARE_REPORT_CRITERIA_MAP";
