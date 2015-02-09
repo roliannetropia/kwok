@@ -31,8 +31,10 @@ public class AttributeFieldIds {
     public static final Integer COMPANY_TYPE_HARDWARE_VENDOR = -4;
     public static final Integer COMPANY_TYPE_SOFTWARE_MAKER = -5;
     public static final Integer COMPANY_TYPE_SOFTWARE_VENDOR = -6;
-
     public static final Integer KB_ARTICLE_SYNTAX_HTML = -7;
+
     public static final Integer KB_ARTICLE_SYNTAX_MEDIAWIKI = -8;
     public static final Integer KB_ARTICLE_SYNTAX_TWIKI = -9;
+    public static final Integer COMPANY_TYPE_TAPE_MANUFACTURER = -10;
+    public static final Integer COMPANY_TYPE_TAPE_VENDOR = -11;
 }
