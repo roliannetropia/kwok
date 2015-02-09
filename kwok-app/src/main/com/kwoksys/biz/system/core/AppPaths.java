@@ -258,6 +258,49 @@ public class AppPaths {
     public static final String HARDWARE_MEMBER_ADD_2 = "/hardware/hardware-member-add-2" + EXT;
     public static final String HARDWARE_MEMBER_REMOVE_2 = "/hardware/hardware-member-remove" + EXT;
 
+//    tape module
+//    public static final String IT_MGMT_AJAX_GET_SOFTWARE_BY_MAKER = "/IT/ajax-get-software-by-maker" + EXT;
+//    public static final String IT_MGMT_AJAX_GET_TAPE_DETAIL = "/IT/ajax-get-tape-detail" + EXT;
+//    public static final String IT_MGMT_AJAX_TAPE_ASSIGN_LICENSE = "/IT/ajax-get-license-by-software" + EXT;
+//    public static final String TAPE_AJAX_COMP_CUSTOM_FIELDS = "/tape/ajax-get-component-custom-fields" + EXT;
+
+    public static final String TAPE_INDEX = "/tape/index" + EXT;
+    public static final String TAPE_LIST = "/tape/list" + EXT;
+    public static final String TAPE_LIST_EXPORT = "/tape/list-export" + EXT;
+    public static final String TAPE_DETAIL = "/tape/detail" + EXT;
+    public static final String TAPE_ADD = "/tape/add" + EXT;
+    public static final String TAPE_ADD_2 = "/tape/add-2" + EXT;
+    public static final String TAPE_EDIT = "/tape/edit" + EXT;
+    public static final String TAPE_EDIT_2 = "/tape/edit-2" + EXT;
+    public static final String TAPE_DELETE = "/tape/delete" + EXT;
+    public static final String TAPE_DELETE_2 = "/tape/delete-2" + EXT;
+    public static final String TAPE_LICENSE_REMOVE_2 = "/tape/license-remove-2" + EXT;
+    public static final String TAPE_LICENSE_ADD_2 = "/tape/license-add-2" + EXT;
+    public static final String TAPE_COMP = "/tape/comp" + EXT;
+    public static final String TAPE_COMP_ADD = "/tape/comp-add" + EXT;
+    public static final String TAPE_COMP_ADD_2 = "/tape/comp-add-2" + EXT;
+    public static final String TAPE_COMP_EDIT = "/tape/comp-edit" + EXT;
+    public static final String TAPE_COMP_EDIT_2 = "/tape/comp-edit-2" + EXT;
+    public static final String TAPE_COMP_DELETE_2 = "/tape/comp-delete-2" + EXT;
+    public static final String TAPE_CONTACTS = "/tape/contacts" + EXT;
+    public static final String TAPE_CONTACT_ADD = "/tape/contact-add" + EXT;
+    public static final String TAPE_CONTACT_ADD_2 = "/tape/contact-add-2" + EXT;
+    public static final String TAPE_CONTACT_REMOVE = "/tape/contact-remove" + EXT;
+    public static final String TAPE_FILE = "/tape/file" + EXT;
+    public static final String TAPE_FILE_ADD = "/tape/file-add" + EXT;
+    public static final String TAPE_FILE_ADD_2 = "/tape/file-add-2" + EXT;
+    public static final String TAPE_FILE_DELETE = "/tape/file-delete" + EXT;
+    public static final String TAPE_FILE_DELETE_2 = "/tape/file-delete-2" + EXT;
+    public static final String TAPE_FILE_DOWNLOAD = "/tape/file-download" + EXT;
+    public static final String TAPE_ISSUE = "/tape/issue" + EXT;
+    public static final String TAPE_ISSUE_ADD = "/tape/issue-add" + EXT;
+    public static final String TAPE_ISSUE_ADD_2 = "/tape/issue-add-2" + EXT;
+    public static final String TAPE_ISSUE_REMOVE_2 = "/tape/issue-remove-2" + EXT;
+    public static final String TAPE_MEMBER = "/tape/tape-member" + EXT;
+    public static final String TAPE_MEMBER_ADD = "/tape/tape-member-add" + EXT;
+    public static final String TAPE_MEMBER_ADD_2 = "/tape/tape-member-add-2" + EXT;
+    public static final String TAPE_MEMBER_REMOVE_2 = "/tape/tape-member-remove" + EXT;
+
     // Knowledge Base
     public static final String KB_INDEX = "/kb/index" + EXT;
     public static final String KB_ARTICLE_SEARCH = "/kb/article-search" + EXT;
