@@ -25,9 +25,9 @@ import com.kwoksys.biz.admin.dto.AttributeField;
 import com.kwoksys.biz.admin.dto.AttributeFieldCount;
 import com.kwoksys.biz.base.BaseTemplate;
 import com.kwoksys.biz.contacts.core.CompanyUtils;
-import com.kwoksys.biz.hardware.HardwareService;
-import com.kwoksys.biz.hardware.core.HardwareSearch;
-import com.kwoksys.biz.hardware.dao.HardwareQueries;
+import com.kwoksys.biz.tape.TapeService;
+import com.kwoksys.biz.tape.core.TapeSearch;
+import com.kwoksys.biz.tape.dao.TapeQueries;
 import com.kwoksys.biz.system.core.AppPaths;
 import com.kwoksys.biz.system.core.AttributeManager;
 import com.kwoksys.biz.system.core.Attributes;
@@ -42,14 +42,14 @@ import org.apache.struts.util.LabelValueBean;
 import java.util.*;
 
 /**
- * HardwareSearchTemplate
+ * TapeSearchTemplate
  */
 public class TapeSearchTemplate extends BaseTemplate {
 
     private String formAction;
-    private List<AttributeFieldCount> hardwareTypeData;
-    private List<AttributeFieldCount> hardwareStatusData;
-    private List<AttributeFieldCount> hardwareLocationData;
+    private List<AttributeFieldCount> tapeTypeData;
+    private List<AttributeFieldCount> tapeStatusData;
+    private List<AttributeFieldCount> tapeLocationData;
     private boolean hideSearchButton;
 
     public TapeSearchTemplate() {
@@ -57,7 +57,7 @@ public class TapeSearchTemplate extends BaseTemplate {
     }
 
     public void applyTemplate() throws DatabaseException {
-        // Hardware name criteria
+        // Tape name criteria
         List nameCriteriaOptions = Arrays.asList(
                 new LabelValueBean(Localizer.getText(requestContext, "core.search.criteria.exactMatch"), "equals"),
                 new LabelValueBean(Localizer.getText(requestContext, "core.search.criteria.contains"), "contains"),
@@ -68,98 +68,98 @@ public class TapeSearchTemplate extends BaseTemplate {
         companyOptions.add(new SelectOneLabelValueBean(requestContext, "0"));
         companyOptions.addAll(CompanyUtils.getCompanyOptions(requestContext));
 
-        HardwareService hardwareService = ServiceProvider.getHardwareService(requestContext);
+        TapeService tapeService = ServiceProvider.getTapeService(requestContext);
 
         // We'll use the same queryBits for a few different queries below
         QueryBits query = new QueryBits();
-        query.addSortColumn(HardwareQueries.getOrderByColumn(AttributeField.NAME));
+        query.addSortColumn(TapeQueries.getOrderByColumn(AttributeField.NAME));
 
         AttributeManager attributeManager = new AttributeManager(requestContext);
 
-        Map attrFieldTypeMap = attributeManager.getAttrFieldMapCache(Attributes.HARDWARE_TYPE);
-        Map attrFieldStatusMap = attributeManager.getAttrFieldMapCache(Attributes.HARDWARE_STATUS);
-        Map attrFieldLocMap = attributeManager.getAttrFieldMapCache(Attributes.HARDWARE_LOCATION);
+        Map attrFieldTypeMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_TYPE);
+        Map attrFieldStatusMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_STATUS);
+        Map attrFieldLocMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_LOCATION);
 
-        // Group by Hardware type.
-        List hardwareTypeOptions = new ArrayList();
-        hardwareTypeOptions.add(new SelectOneLabelValueBean(requestContext));
+        // Group by Tape type.
+        List tapeTypeOptions = new ArrayList();
+        tapeTypeOptions.add(new SelectOneLabelValueBean(requestContext));
 
-        if (hardwareTypeData == null) {
-            hardwareTypeData = hardwareService.getHardwareTypeCount(query);
+        if (tapeTypeData == null) {
+            tapeTypeData = tapeService.getTapeTypeCount(query);
         }
-        for (AttributeFieldCount hardware : hardwareTypeData) {
-            AttributeField attrField = (AttributeField) attrFieldTypeMap.get(hardware.getAttrFieldId());
-            String hardwareTypeName;
+        for (AttributeFieldCount tape : tapeTypeData) {
+            AttributeField attrField = (AttributeField) attrFieldTypeMap.get(tape.getAttrFieldId());
+            String tapeTypeName;
 
             if (attrField != null) {
-                hardwareTypeName = attrField.getName();
+                tapeTypeName = attrField.getName();
             } else {
-                hardwareTypeName = Localizer.getText(requestContext, "itMgmt.index.na");
+                tapeTypeName = Localizer.getText(requestContext, "itMgmt.index.na");
             }
-            hardwareTypeOptions.add(new LabelValueBean(hardwareTypeName, String.valueOf(hardware.getAttrFieldId())));
+            tapeTypeOptions.add(new LabelValueBean(tapeTypeName, String.valueOf(tape.getAttrFieldId())));
         }
 
-        // Group by Hardware status.
+        // Group by Tape status.
         List statusOptions = new ArrayList();
         statusOptions.add(new SelectOneLabelValueBean(requestContext));
 
-        if (hardwareStatusData == null) {
-            hardwareStatusData = hardwareService.getHardwareStatusCount(query);
+        if (tapeStatusData == null) {
+            tapeStatusData = tapeService.getTapeStatusCount(query);
         }
-        for (AttributeFieldCount hardware : hardwareStatusData) {
-            AttributeField attrField = (AttributeField) attrFieldStatusMap.get(hardware.getAttrFieldId());
-            String hardwareStatusName;
+        for (AttributeFieldCount tape : tapeStatusData) {
+            AttributeField attrField = (AttributeField) attrFieldStatusMap.get(tape.getAttrFieldId());
+            String tapeStatusName;
 
             if (attrField != null) {
-                hardwareStatusName = attrField.getName();
+                tapeStatusName = attrField.getName();
             } else {
-                hardwareStatusName = Localizer.getText(requestContext, "itMgmt.index.na");
+                tapeStatusName = Localizer.getText(requestContext, "itMgmt.index.na");
             }
-            statusOptions.add(new LabelValueBean(hardwareStatusName, String.valueOf(hardware.getAttrFieldId())));
+            statusOptions.add(new LabelValueBean(tapeStatusName, String.valueOf(tape.getAttrFieldId())));
         }
 
-        // Group by Hardware location.
+        // Group by Tape location.
         List locationOptions = new ArrayList();
         locationOptions.add(new SelectOneLabelValueBean(requestContext));
 
-        if (hardwareLocationData == null) {
-            hardwareLocationData = hardwareService.getHardwareLocationCount(query);
+        if (tapeLocationData == null) {
+            tapeLocationData = tapeService.getTapeLocationCount(query);
         }
-        for (AttributeFieldCount hardware : hardwareLocationData) {
-            AttributeField attrField = (AttributeField) attrFieldLocMap.get(hardware.getAttrFieldId());
-            String hardwareLocName;
+        for (AttributeFieldCount tape : tapeLocationData) {
+            AttributeField attrField = (AttributeField) attrFieldLocMap.get(tape.getAttrFieldId());
+            String tapeLocName;
 
             if (attrField != null) {
-                hardwareLocName = attrField.getName();
+                tapeLocName = attrField.getName();
             } else {
-                hardwareLocName = Localizer.getText(requestContext, "itMgmt.index.na");
+                tapeLocName = Localizer.getText(requestContext, "itMgmt.index.na");
             }
-            locationOptions.add(new LabelValueBean(hardwareLocName, String.valueOf(hardware.getAttrFieldId())));
+            locationOptions.add(new LabelValueBean(tapeLocName, String.valueOf(tape.getAttrFieldId())));
         }
 
-        request.setAttribute("HardwareSearchTemplate_formAction", AppPaths.ROOT + formAction);
-        request.setAttribute("hardwareNameCriteriaOptions", nameCriteriaOptions);
+        request.setAttribute("TapeSearchTemplate_formAction", AppPaths.ROOT + formAction);
+        request.setAttribute("tapeNameCriteriaOptions", nameCriteriaOptions);
         request.setAttribute("manufacturersOptions", companyOptions);
         request.setAttribute("vendorsOptions", companyOptions);
         request.setAttribute("monthOptions", CalendarUtils.getMonthOptions(requestContext));
         request.setAttribute("dateOptions", CalendarUtils.getDateOptions(requestContext));
         request.setAttribute("yearOptions", CalendarUtils.getPastYearOptions(requestContext));
-        request.setAttribute("hardwareTypeOptions", hardwareTypeOptions);
-        request.setAttribute("hardwareStatusOptions", statusOptions);
-        request.setAttribute("hardwareLocationOptions", locationOptions);
-        request.setAttribute("customFieldsOptions", new AttributeManager(requestContext).getCustomFieldOptions(ObjectTypes.HARDWARE));
-        request.setAttribute("HardwareSearchTemplate_hideSearchButton", hideSearchButton);
+        request.setAttribute("tapeTypeOptions", tapeTypeOptions);
+        request.setAttribute("tapeStatusOptions", statusOptions);
+        request.setAttribute("tapeLocationOptions", locationOptions);
+        request.setAttribute("customFieldsOptions", new AttributeManager(requestContext).getCustomFieldOptions(ObjectTypes.TAPE));
+        request.setAttribute("TapeSearchTemplate_hideSearchButton", hideSearchButton);
 
-        HardwareSearch hardwareSearch = new HardwareSearch(requestContext, SessionManager.HARDWARE_SEARCH_CRITERIA_MAP);
+        TapeSearch tapeSearch = new TapeSearch(requestContext, SessionManager.TAPE_SEARCH_CRITERIA_MAP);
 
         List warrantyOptions = new ArrayList();
-        for (String key : new String[]{HardwareSearch.HARDWARE_WARRANTY_EXPIRED,
-                HardwareSearch.HARDWARE_WARRANTY_NOT_EXPIRED,
-                HardwareSearch.HARDWARE_WARRANTY_NOT_SET}) {
+        for (String key : new String[]{TapeSearch.TAPE_WARRANTY_EXPIRED,
+                TapeSearch.TAPE_WARRANTY_NOT_EXPIRED,
+                TapeSearch.TAPE_WARRANTY_NOT_SET}) {
 
             Map map = new HashMap();
             map.put("key", key);
-            map.put("checked", hardwareSearch.getSearchCriteriaMap().containsKey(key) ? "checked" : "");
+            map.put("checked", tapeSearch.getSearchCriteriaMap().containsKey(key) ? "checked" : "");
             warrantyOptions.add(map);
         }
         request.setAttribute("warrantyOptions", warrantyOptions);
@@ -167,7 +167,7 @@ public class TapeSearchTemplate extends BaseTemplate {
         List options = new ArrayList();
         options.add(new SelectOneLabelValueBean(requestContext, "0"));
         request.setAttribute("componentTypeOptions",
-                attributeManager.getActiveAttrFieldOptionsCache(Attributes.HARDWARE_COMPONENT_TYPE, options));
+                attributeManager.getActiveAttrFieldOptionsCache(Attributes.TAPE_COMPONENT_TYPE, options));
     }
 
     public String getFormAction() {
@@ -176,14 +176,14 @@ public class TapeSearchTemplate extends BaseTemplate {
     public void setFormAction(String formAction) {
         this.formAction = formAction;
     }
-    public void setHardwareTypeData(List<AttributeFieldCount> hardwareTypeData) {
-        this.hardwareTypeData = hardwareTypeData;
+    public void setTapeTypeData(List<AttributeFieldCount> tapeTypeData) {
+        this.tapeTypeData = tapeTypeData;
     }
-    public void setHardwareStatusData(List<AttributeFieldCount> hardwareStatusData) {
-        this.hardwareStatusData = hardwareStatusData;
+    public void setTapeStatusData(List<AttributeFieldCount> tapeStatusData) {
+        this.tapeStatusData = tapeStatusData;
     }
-    public void setHardwareLocationData(List<AttributeFieldCount> hardwareLocationData) {
-        this.hardwareLocationData = hardwareLocationData;
+    public void setTapeLocationData(List<AttributeFieldCount> tapeLocationData) {
+        this.tapeLocationData = tapeLocationData;
     }
 
     public boolean getHideSearchButton() {
