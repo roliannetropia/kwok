@@ -34,6 +34,7 @@ public class TapeForm extends BaseObjectForm {
     private String tapeModelName;
     private String tapeModelNumber;
     private String serialNumber;
+    private String barcodeNumber;
     private String tapeCost;
     private int lastServicedOn;
     private String purchaseDate;
@@ -63,6 +64,7 @@ public class TapeForm extends BaseObjectForm {
         tapeModelName = requestContext.getParameterString("tapeModelName");
         tapeModelNumber = requestContext.getParameterString("tapeModelNumber");
         serialNumber = requestContext.getParameterString("serialNumber");
+        barcodeNumber = requestContext.getParameterString("barcodeNumber");
         tapeCost = requestContext.getParameterString("tapeCost");
         lastServicedOn = requestContext.getParameter("lastServicedOn");
         purchaseDate = requestContext.getParameterString("purchaseDate");
@@ -106,6 +108,8 @@ public class TapeForm extends BaseObjectForm {
         warrantyMonth = tape.getWarrantyMonth();
         warrantyDate = tape.getWarrantyDate();
         warrantyDuration = "";
+
+
     }
 
     public Integer getTapeId() {
@@ -128,6 +132,10 @@ public class TapeForm extends BaseObjectForm {
 
     public String getSerialNumber() {
         return serialNumber;
+    }
+
+    public String getBarcodeNumber(){
+        return barcodeNumber;
     }
 
     public String getTapeCost() {
