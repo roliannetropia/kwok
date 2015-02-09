@@ -23,6 +23,7 @@ import com.kwoksys.biz.contacts.dto.Company;
 import com.kwoksys.biz.contacts.dto.Contact;
 import com.kwoksys.biz.issues.dto.Issue;
 import com.kwoksys.biz.hardware.dto.Hardware;
+import com.kwoksys.biz.tape.dto.Tape;
 import com.kwoksys.biz.software.dto.Software;
 import com.kwoksys.biz.contracts.dto.Contract;
 
@@ -80,6 +81,7 @@ public class AppConfigManager extends BaseConfigManager {
      * Hardware module
      */
     private int hardwareRowsToShow;
+
     private List<String> hardwareColumns;
     private List<String> hardwareExportColumns;
     private List<String> hardwareMembersExportColumns;
@@ -89,6 +91,18 @@ public class AppConfigManager extends BaseConfigManager {
     private boolean isCheckUniqueHardwareName;
     private boolean isCheckUniqueTapeName;
     private boolean isCheckUniqueSerialNumber;
+
+    /*
+     * Tape module
+     */
+    private int tapeRowsToShow;
+    private List<String> tapeColumns;
+    private List<String> tapeExportColumns;
+    private List<String> tapeMembersExportColumns;
+    private List<String> tapeLicenseExportColumns;
+    private List<String> tapeImportExportColumns;
+    private int tapeWarrantyExpireCountdown;
+
 
     /*
      * Knowledge Base module
@@ -160,7 +174,7 @@ public class AppConfigManager extends BaseConfigManager {
 
         // Default: rownum,contact_first_name,contact_last_name,contact_title,company_name
         contactsExportColumns = Arrays.asList(Contact.COMPANY_NAME, Contact.FIRST_NAME, Contact.LAST_NAME, Contact.TITLE, Contact.PRIMARY_EMAIL,
-            Contact.WORK_PHONE);
+                Contact.WORK_PHONE);
 
         companyRows = getInt(SystemConfigNames.COMPANY_ROWS);
         contactRows = getInt(SystemConfigNames.CONTACT_ROWS);
@@ -171,7 +185,7 @@ public class AppConfigManager extends BaseConfigManager {
         issueRows = getInt(SystemConfigNames.ISSUE_ROWS);
         issuesColumns = (configMap.get("issues.columnList")).split(",");
         issueExportColumns = Arrays.asList(Issue.ID, Issue.TITLE, Issue.DESCRIPTION, Issue.TYPE, Issue.STATUS, Issue.PRIORITY,
-            Issue.ASSIGNEE_NAME, Issue.CREATOR_NAME, Issue.CREATION_DATE, Issue.MODIFIER_NAME, Issue.MODIFICATION_DATE, Issue.DUE_DATE);
+                Issue.ASSIGNEE_NAME, Issue.CREATOR_NAME, Issue.CREATION_DATE, Issue.MODIFIER_NAME, Issue.MODIFICATION_DATE, Issue.DUE_DATE);
         issuesGuestSubmitModuleEnabled = getBoolean(SystemConfigNames.ISSUE_GUEST_SUBMIT_MODULE_ENABLED);
         issuesGuestSubmitFooterEnabled = getBoolean(SystemConfigNames.ISSUE_GUEST_SUBMIT_FOOTER_ENABLED);
         issuesMultipleDeleteEnabled = getBoolean(SystemConfigNames.ISSUE_MULTIPLE_DELETE_ENABLED);
@@ -196,6 +210,27 @@ public class AppConfigManager extends BaseConfigManager {
         isCheckUniqueHardwareName = getBoolean(SystemConfigNames.HARDWARE_CHECK_UNIQUE_NAME);
         isCheckUniqueTapeName = getBoolean(SystemConfigNames.TAPE_CHECK_UNIQUE_NAME);
         isCheckUniqueSerialNumber = getBoolean(SystemConfigNames.HARDWARE_CHECK_SERIAL_NUMBER);
+
+        /*
+         * Tape module
+         */
+        tapeRowsToShow = getInt(SystemConfigNames.TAPE_ROWS);
+        tapeColumns = Arrays.asList(getStringArray(SystemConfigNames.TAPE_COLUMNS));
+        tapeExportColumns = Arrays.asList("tape_id", "tape_name","tape_description","tape_manufacturer_name",
+                "tape_vendor_name","tape_type","tape_status","tape_model_name","tape_model_number",
+                "tape_serial_number",Tape.PURCAHSE_PRICE,"tape_purchase_date","tape_warranty_expire_date",
+                "tape_last_service_date","tape_location", Tape.OWNER_NAME,
+                Tape.CREATOR_NAME, Tape.CREATION_DATE, Tape.MODIFIER_NAME, Tape.MODIFICATION_DATE);
+
+        // Another set of columns that are for exporting in importable format.
+        tapeImportExportColumns = Arrays.asList("tape_id", "tape_name", "tape_description");
+
+        tapeMembersExportColumns = Arrays.asList("tape_id", "tape_name", "tape_member_id", "tape_member_name");
+        tapeLicenseExportColumns = Arrays.asList("tape_id", "tape_name", "software_name", "license_key", "license_note");
+        tapeWarrantyExpireCountdown = getInt(SystemConfigNames.TAPE_WARRANTY_EXPIRE_COUNTDOWN);
+        isCheckUniqueTapeName = getBoolean(SystemConfigNames.TAPE_CHECK_UNIQUE_NAME);
+        isCheckUniqueTapeName = getBoolean(SystemConfigNames.TAPE_CHECK_UNIQUE_NAME);
+        isCheckUniqueSerialNumber = getBoolean(SystemConfigNames.TAPE_CHECK_SERIAL_NUMBER);
 
         /**
          * Knowledge Base module
@@ -276,6 +311,10 @@ public class AppConfigManager extends BaseConfigManager {
     public List<String> getHardwareColumns() {
         return hardwareColumns;
     }
+
+    public List<String> getTapeColumns() {
+        return tapeColumns;
+    }
     public String[] getSoftwareColumns() {
         return softwareColumns;
     }
@@ -307,6 +346,10 @@ public class AppConfigManager extends BaseConfigManager {
 
     public int getHardwareWarrantyExpireCountdown() {
         return hardwareWarrantyExpireCountdown;
+    }
+
+    public int getTapeWarrantyExpireCountdown() {
+        return tapeWarrantyExpireCountdown;
     }
 
     public int getKbArticleNumberOfSearchResults() {
