@@ -488,4 +488,8 @@ public class Tape extends BaseObject {
     public String getPurchaseDate() {
         return purchaseDate;
     }
+
+    public Date getTapePurchaseDate() {
+        return tapePurchaseDate;
+    }
 }
