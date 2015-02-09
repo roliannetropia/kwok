@@ -26,6 +26,7 @@ import com.kwoksys.biz.contacts.ContactService;
 import com.kwoksys.biz.contracts.ContractService;
 import com.kwoksys.biz.files.FileService;
 import com.kwoksys.biz.hardware.HardwareService;
+import com.kwoksys.biz.tape.TapeService;
 import com.kwoksys.biz.issues.IssueService;
 import com.kwoksys.biz.kb.KbService;
 import com.kwoksys.biz.portal.PortalService;
@@ -71,6 +72,10 @@ public class ServiceProvider {
 
     public static HardwareService getHardwareService(RequestContext requestContext) {
         return new HardwareService(requestContext);
+    }
+
+    public static TapeService getTapeService(RequestContext requestContext) {
+        return new TapeService(requestContext);
     }
 
     public static IssueService getIssueService(RequestContext requestContext) {
