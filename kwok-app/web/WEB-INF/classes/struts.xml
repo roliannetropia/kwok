@@ -469,9 +469,9 @@
         <action name="tape/index" class="com.kwoksys.action.tape.IndexAction">
             <result name="success">/WEB-INF/jsp/tape/Index.jsp</result>
         </action>
-        <!--<action name="tape/add" class="com.kwoksys.action.tape.TapeAddAction">-->
-            <!--<result name="success">/WEB-INF/jsp/tape/TapeAdd.jsp</result>-->
-        <!--</action>-->
+        <action name="tape/add" class="com.kwoksys.action.tape.TapeAddAction">
+            <result name="success">/WEB-INF/jsp/tape/TapeAdd.jsp</result>
+        </action>
         <!--<action name="tape/add-2" class="com.kwoksys.action.tape.TapeAdd2Action"/>-->
         <!--<action name="tape/detail" class="com.kwoksys.action.tape.TapeDetailAction">-->
             <!--<result name="success">/WEB-INF/jsp/tape/TapeDetail.jsp</result>-->
