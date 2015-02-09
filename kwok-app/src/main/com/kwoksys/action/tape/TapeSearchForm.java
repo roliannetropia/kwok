@@ -31,11 +31,12 @@ public class TapeSearchForm extends ReportForm {
 
     private String cmd;
     private String tapeId;
+    private String serialNumber;
+    private String barcodeNumber;
     private String tapeName;
     private String description;
     private String tapeModelName;
     private String tapeModelNumber;
-    private String serialNumber;
     private String tapeOwner;
     private List<Integer> tapeTypes;
     private Integer tapeType;
@@ -59,11 +60,12 @@ public class TapeSearchForm extends ReportForm {
     public void setRequest(RequestContext requestContext) {
         cmd = requestContext.getParameterString("cmd");
         tapeId = requestContext.getParameterString("tapeId");
+        serialNumber = requestContext.getParameterString("serialNumber");
+        barcodeNumber = requestContext.getParameterString("barcodeNumber");
         tapeName = requestContext.getParameterString("tapeName");
         description = requestContext.getParameterString("description");
         tapeModelName = requestContext.getParameterString("tapeModelName");
         tapeModelNumber = requestContext.getParameterString("tapeModelNumber");
-        serialNumber = requestContext.getParameterString("serialNumber");
         tapeOwner = requestContext.getParameterString("tapeOwner");
         tapeTypes = requestContext.getParameters("tapeTypes");
         tapeType = requestContext.getParameterInteger("tapeType");
@@ -114,6 +116,10 @@ public class TapeSearchForm extends ReportForm {
 
     public String getSerialNumber() {
         return serialNumber;
+    }
+
+    public String getBarcodeNumber() {
+        return barcodeNumber;
     }
 
     public String getTapeOwner() {
