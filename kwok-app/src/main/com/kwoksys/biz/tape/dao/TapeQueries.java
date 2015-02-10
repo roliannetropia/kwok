@@ -94,7 +94,7 @@ public class TapeQueries {
 
     public static String selectObjectTapeListQuery(QueryBits query) {
         return selectTapeListQuery(new QueryBits()) +
-                "where ah.tape_id in (select om.object_id from object_map om where om.linked_object_id=? and om.linked_object_type_id=? " +
+                "where at.tape_id in (select om.object_id from object_map om where om.linked_object_id=? and om.linked_object_type_id=? " +
                 "and om.object_type_id=?) "
                 + query.createAndClause();
     }
@@ -117,19 +117,19 @@ public class TapeQueries {
      */
     public static String selectTapeDetailQuery() {
         return selectTapeListQuery(new QueryBits()) +
-                "where ah.tape_id = ?";
+                "where at.tape_id = ?";
     }
 
     /**
      * Return number of tape grouped by type.
      */
     public static String selectTapeTypeCountQuery(QueryBits query) {
-        return "select h.tape_type, count(h.tape_id) as tape_count " +
-                "from asset_tape h " +
+        return "select t.tape_type, count(t.tape_id) as tape_count " +
+                "from asset_tape t " +
                 "left outer join (select af.attribute_field_id, af.attribute_field_name " +
                 "from attribute_view an, attribute_field_view af " +
                 "where an.object_key='tape' and an.attribute_name='tape_type' " +
-                "and an.attribute_id = af.attribute_id) af on h.tape_type = af.attribute_field_id " +
+                "and an.attribute_id = af.attribute_id) af on t.tape_type = af.attribute_field_id " +
                 "group by tape_type, af.attribute_field_name " + query.createClause();
     }
 
@@ -137,12 +137,12 @@ public class TapeQueries {
      * Return number of tape grouped by status.
      */
     public static String selectTapeCountByStatusQuery(QueryBits query) {
-        return "select h.tape_status, count(h.tape_id) as tape_count " +
-                "from asset_tape h " +
+        return "select t.tape_status, count(t.tape_id) as tape_count " +
+                "from asset_tape t " +
                 "left outer join (select af.attribute_field_id, af.attribute_field_name " +
                 "from attribute_view an, attribute_field_view af " +
                 "where an.object_key='tape' and an.attribute_name='tape_status' " +
-                "and an.attribute_id = af.attribute_id) af on h.tape_status = af.attribute_field_id " +
+                "and an.attribute_id = af.attribute_id) af on t.tape_status = af.attribute_field_id " +
                 "group by tape_status, af.attribute_field_name " + query.createClause();
     }
 
