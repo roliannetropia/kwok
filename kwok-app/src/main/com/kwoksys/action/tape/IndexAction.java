@@ -70,7 +70,7 @@ public class IndexAction extends Action2 {
         QueryBits query = new QueryBits();
         query.addSortColumn(TapeQueries.getOrderByColumn(AttributeField.NAME));
 
-        Map attrFieldTypeMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_TYPE);
+        Map attrFieldTypeMap = attributeManager.getAttrFieldMapCache(Attributes.MEDIA_TYPE);
         Map attrFieldStatusMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_STATUS);
         Map attrFieldLocMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_LOCATION);
 

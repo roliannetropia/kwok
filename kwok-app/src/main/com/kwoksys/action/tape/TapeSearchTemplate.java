@@ -76,7 +76,7 @@ public class TapeSearchTemplate extends BaseTemplate {
 
         AttributeManager attributeManager = new AttributeManager(requestContext);
 
-        Map attrFieldTypeMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_TYPE);
+        Map attrFieldTypeMap = attributeManager.getAttrFieldMapCache(Attributes.MEDIA_TYPE);
         Map attrFieldStatusMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_STATUS);
         Map attrFieldLocMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_LOCATION);
 

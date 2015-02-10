@@ -83,7 +83,7 @@ public class TapeAddAction extends Action2 {
         // Get tape_type options
         List typeOptions = new ArrayList();
         typeOptions.add(selectOneLabel);
-        attributeManager.getActiveAttrFieldOptionsCache(Attributes.TAPE_TYPE, typeOptions);
+        attributeManager.getActiveAttrFieldOptionsCache(Attributes.MEDIA_TYPE, typeOptions);
 
         // Get tape_status options
         List statusOptions = new ArrayList();

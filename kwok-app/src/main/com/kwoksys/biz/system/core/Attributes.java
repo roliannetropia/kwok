@@ -65,7 +65,7 @@ public class Attributes {
 
     public static final Integer TAPE_LOCATION = -23;
 
-    public static final Integer TAPE_TYPE = -24;
+    public static final Integer MEDIA_TYPE = -24;
 
     public static final Integer TAPE_STATUS = -25;
 // todo what is this
@@ -92,7 +92,7 @@ public class Attributes {
 
         nameIdMap.put(Tape.LOCATION, TAPE_LOCATION);
         nameIdMap.put(Tape.STATUS, TAPE_STATUS);
-        nameIdMap.put(Tape.TYPE, TAPE_TYPE);
+        nameIdMap.put(Tape.TYPE, MEDIA_TYPE);
 
         nameIdMap.put(Software.TYPE, SOFTWARE_TYPE);
         nameIdMap.put(Software.OS, SOFTWARE_OS);

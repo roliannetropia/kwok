@@ -111,7 +111,7 @@ public class Tape extends BaseObject {
         resetLastServiceDate = 0;
 
         location = 0;
-        type = new CacheManager().getSystemAttrCache(Attributes.TAPE_TYPE).getDefaultAttrFieldId();
+        type = new CacheManager().getSystemAttrCache(Attributes.MEDIA_TYPE).getDefaultAttrFieldId();
         status = 0;
 //
         countSoftware = 0;
