@@ -55,6 +55,8 @@ public class Modules {
 
     public static final int REPORTS = 15;
 
+    public static final int TAPE = 16;
+
     /**
      * Given a module id, returns the path of that module's index page.
      * @param moduleId
@@ -95,6 +97,9 @@ public class Modules {
                 break;
             case REPORTS:
                 path = AppPaths.REPORTS_TYPE_SELECT;
+                break;
+            case TAPE:
+                path = AppPaths.TAPE_INDEX;
                 break;
         }
         return path;
