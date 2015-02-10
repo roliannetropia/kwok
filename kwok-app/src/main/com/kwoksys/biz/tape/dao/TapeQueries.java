@@ -71,20 +71,14 @@ public class TapeQueries {
      * Return all tape.
      */
     public static String selectTapeListQuery(QueryBits query) {
-        return "select ah.tape_id, ah.tape_number, ah.tape_name, ah.tape_description, " +
-                "ah.tape_owner_display_name, ah.tape_owner_username, ah.tape_owner_id, " +
-                "ah.tape_type, ah.tape_status, ah.tape_model_name, " +
-                "ah.tape_model_number, ah.tape_serial_number, ah.tape_cost as tape_purchase_price, ah.tape_last_service_date, " +
-                "ah.tape_purchase_date, ah.tape_warranty_expire_date, ah.tape_location, " +
-                "ah.software_count, ah.file_count, ah.component_count," +
-                "ah.manufacturer_company_id, mftr.company_name as tape_manufacturer_name, " +
-                "ah.vendor_company_id, vndr.company_name as tape_vendor_name, " +
-                "ah.creator, ah.creation_date, ah.creator_username, ah.creator_display_name, " +
-                "ah.modifier, ah.modification_date, ah.modifier_username, ah.modifier_display_name " +
-                "from asset_tape_view ah " +
-                "left outer join company mftr on ah.manufacturer_company_id = mftr.company_id " +
-                "left outer join company vndr on ah.vendor_company_id = vndr.company_id " +
-                "left outer join attribute_field_view hwloc on hwloc.attribute_field_id = ah.tape_location "
+        return "select at.tape_id, at.tape_name, at.serial_number, at.barcode_number, " +
+                "at.manufacturer_company_id, at.vendor_company_id, at.media_type, " +
+                "at.manufactured_date, at.location, at.retention, at.system, at.status, " +
+                "at.transaction_date, at.transaction_time, at.date_move, at.date_expire" +
+                "from asset_tape_view at " +
+                "left outer join company mftr on at.manufacturer_company_id = mftr.company_id " +
+                "left outer join company vndr on at.vendor_company_id = vndr.company_id " +
+                "left outer join attribute_field_view hwloc on hwloc.attribute_field_id = at.tape_location "
                 + query.createWhereClause();
     }
 
@@ -93,7 +87,7 @@ public class TapeQueries {
      */
     public static String selectLinkedTapeListQuery(QueryBits query) {
         return selectTapeListQuery(new QueryBits()) +
-                "where ah.tape_id in (select om.linked_object_id from object_map om where om.object_id=? and om.object_type_id=? " +
+                "where at.tape_id in (select om.linked_object_id from object_map om where om.object_id=? and om.object_type_id=? " +
                 "and om.linked_object_type_id=?) "
                 + query.createWhereClause();
     }
@@ -111,10 +105,10 @@ public class TapeQueries {
      * @return ..
      */
     public static String getTapeCountQuery(QueryBits query) {
-        return "select count(ah.tape_id) as row_count " +
-                "from asset_tape_view ah " +
-                "left outer join company mftr on ah.manufacturer_company_id = mftr.company_id " +
-                "left outer join company vndr on ah.vendor_company_id = vndr.company_id "
+        return "select count(at.tape_id) as row_count " +
+                "from asset_tape_view at " +
+                "left outer join company mftr on at.manufacturer_company_id = mftr.company_id " +
+                "left outer join company vndr on at.vendor_company_id = vndr.company_id "
                 + query.createWhereCountClause();
     }
 
