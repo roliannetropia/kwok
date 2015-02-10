@@ -73,7 +73,7 @@ public class TapeDao extends BaseDao {
     public Tape getTape(Integer tapeId) throws DatabaseException, ObjectNotFoundException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectTapeDetailQuery());
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.selectTapeDetailQuery());
         queryHelper.addInputInt(tapeId);
 
         try {
@@ -97,20 +97,20 @@ public class TapeDao extends BaseDao {
     }
 
     public int getCount(QueryBits query) throws DatabaseException {
-        return getRowCount(com.kwoksys.biz.tape.dao.TapeQueries.getTapeCountQuery(query));
+        return getRowCount(TapeQueries.getTapeCountQuery(query));
     }
 
     public List<Tape> getLinkedTapeList(QueryBits query, ObjectLink objectMap) throws DatabaseException {
         QueryHelper queryHelper;
 
         if (objectMap.getLinkedObjectId() == null || objectMap.getLinkedObjectId() == 0) {
-            queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectLinkedTapeListQuery(query));
+            queryHelper = new QueryHelper(TapeQueries.selectLinkedTapeListQuery(query));
             queryHelper.addInputInt(objectMap.getObjectId());
             queryHelper.addInputInt(objectMap.getObjectTypeId());
             queryHelper.addInputInt(objectMap.getLinkedObjectTypeId());
 
         } else {
-            queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectObjectTapeListQuery(query));
+            queryHelper = new QueryHelper(TapeQueries.selectObjectTapeListQuery(query));
             queryHelper.addInputInt(objectMap.getLinkedObjectId());
             queryHelper.addInputInt(objectMap.getLinkedObjectTypeId());
             queryHelper.addInputInt(objectMap.getObjectTypeId());
@@ -126,7 +126,7 @@ public class TapeDao extends BaseDao {
     public List<AttributeFieldCount> getTapeTypeCount(QueryBits query) throws DatabaseException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectTapeTypeCountQuery(query));
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.selectTapeTypeCountQuery(query));
 
         try {
             List list = new ArrayList();
@@ -159,7 +159,7 @@ public class TapeDao extends BaseDao {
     public List<AttributeFieldCount> getTapeStatusCount(QueryBits query) throws DatabaseException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectTapeCountByStatusQuery(query));
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.selectTapeCountByStatusQuery(query));
 
         try {
             List list = new ArrayList();
@@ -192,7 +192,7 @@ public class TapeDao extends BaseDao {
     public List<AttributeFieldCount> getTapeLocationCount(QueryBits query) throws DatabaseException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectTapeCountByLocationQuery(query));
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.selectTapeCountByLocationQuery(query));
 
         try {
             List list = new ArrayList();
@@ -218,7 +218,7 @@ public class TapeDao extends BaseDao {
     }
 
     public List getAvailableSoftware(QueryBits query) throws DatabaseException {
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectTapeAvailableSoftwareQuery(query));
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.selectTapeAvailableSoftwareQuery(query));
 
         return executeQueryReturnList(queryHelper);
     }
@@ -226,7 +226,7 @@ public class TapeDao extends BaseDao {
     public List<SoftwareLicense> getAvailableLicense(QueryBits query, Integer softwareId) throws DatabaseException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectTapeAvailableLicensesQuery(query));
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.selectTapeAvailableLicensesQuery(query));
         queryHelper.addInputInt(softwareId);
 
         try {
@@ -260,7 +260,7 @@ public class TapeDao extends BaseDao {
     public List<TapeSoftwareMap> getInstalledLicense(QueryBits query, Integer tapeId) throws DatabaseException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectInstalledLicenseQuery(query));
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.selectInstalledLicenseQuery(query));
         queryHelper.addInputInt(tapeId);
 
         try {
@@ -296,7 +296,7 @@ public class TapeDao extends BaseDao {
     public List<TapeComponent> getTapeComponents(QueryBits query, Integer tapeId) throws DatabaseException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectTapeComponentsQuery(query));
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.selectTapeComponentsQuery(query));
         queryHelper.addInputInt(tapeId);
 
         try {
@@ -330,7 +330,7 @@ public class TapeDao extends BaseDao {
 
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.selectTapeComponentDetailQuery());
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.selectTapeComponentDetailQuery());
         queryHelper.addInputInt(tapeId);
         queryHelper.addInputInt(componentId);
 
@@ -359,7 +359,7 @@ public class TapeDao extends BaseDao {
     public ActionMessages addTape(Tape tape) throws DatabaseException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.insertTapeQuery());
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.insertTapeQuery());
         queryHelper.addOutputParam(Types.INTEGER);
         queryHelper.addInputStringConvertNull(tape.getName());
         queryHelper.addInputStringConvertNull("");
@@ -409,7 +409,7 @@ public class TapeDao extends BaseDao {
     public ActionMessages update(Tape tape) throws DatabaseException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.updateTapeQuery());
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.updateTapeQuery());
         queryHelper.addInputInt(tape.getId());
         queryHelper.addInputStringConvertNull(tape.getName());
         queryHelper.addInputStringConvertNull(null);
@@ -456,7 +456,7 @@ public class TapeDao extends BaseDao {
     }
 
     public ActionMessages delete(Tape tape) throws DatabaseException {
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.deleteTapeQuery());
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.deleteTapeQuery());
         queryHelper.addInputInt(ObjectTypes.HARDWARE);
         queryHelper.addInputInt(tape.getId());
 
@@ -464,7 +464,7 @@ public class TapeDao extends BaseDao {
     }
 
     public ActionMessages assignSoftwareLicense(TapeSoftwareMap hsm) throws DatabaseException {
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.insertAssignLicenseQuery());
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.insertAssignLicenseQuery());
         queryHelper.addOutputParam(Types.INTEGER);
         queryHelper.addInputInt(hsm.getTapeId());
         queryHelper.addInputInt(hsm.getSoftwareId());
@@ -482,7 +482,7 @@ public class TapeDao extends BaseDao {
     }
 
     public ActionMessages unassignSoftwareLicense(TapeSoftwareMap hsm) throws DatabaseException {
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.deleteAssignedLicenseQuery());
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.deleteAssignedLicenseQuery());
         queryHelper.addInputInt(hsm.getMapId());
 
         return executeProcedure(queryHelper);
@@ -497,7 +497,7 @@ public class TapeDao extends BaseDao {
     public ActionMessages addTapeComponent(TapeComponent component) throws DatabaseException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.insertTapeComponentQuery());
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.insertTapeComponentQuery());
         queryHelper.addOutputParam(Types.INTEGER);
         queryHelper.addInputInt(component.getTapeId());
         queryHelper.addInputStringConvertNull(component.getDescription());
@@ -533,7 +533,7 @@ public class TapeDao extends BaseDao {
     public ActionMessages updateTapeComponent(TapeComponent component) throws DatabaseException {
         Connection conn = getConnection();
 
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.updateTapeComponentQuery());
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.updateTapeComponentQuery());
         queryHelper.addInputInt(component.getTapeId());
         queryHelper.addInputInt(component.getId());
         queryHelper.addInputStringConvertNull(component.getDescription());
@@ -565,7 +565,7 @@ public class TapeDao extends BaseDao {
      * @throws com.kwoksys.framework.exceptions.DatabaseException
      */
     public ActionMessages deleteTapeComponent(TapeComponent component) throws DatabaseException {
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.deleteTapeComponentQuery());
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.deleteTapeComponentQuery());
         queryHelper.addInputInt(ObjectTypes.HARDWARE_COMPONENT);
         queryHelper.addInputInt(component.getTapeId());
         queryHelper.addInputInt(component.getId());
@@ -574,7 +574,7 @@ public class TapeDao extends BaseDao {
     }
 
     public ActionMessages resetTapeSoftwareCount(Integer tapeId) throws DatabaseException {
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.updateTapeSoftwareCountQuery());
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.updateTapeSoftwareCountQuery());
         queryHelper.addInputInt(tapeId);
 
         return executeProcedure(queryHelper);
@@ -587,7 +587,7 @@ public class TapeDao extends BaseDao {
      * @throws com.kwoksys.framework.exceptions.DatabaseException
      */
     public ActionMessages resetFileCount(Integer tapeId) throws DatabaseException {
-        QueryHelper queryHelper = new QueryHelper(com.kwoksys.biz.tape.dao.TapeQueries.updateTapeFileCountQuery());
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.updateTapeFileCountQuery());
         queryHelper.addInputInt(ObjectTypes.HARDWARE);
         queryHelper.addInputInt(tapeId);
 
