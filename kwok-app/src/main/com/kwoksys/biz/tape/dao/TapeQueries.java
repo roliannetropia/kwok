@@ -124,39 +124,39 @@ public class TapeQueries {
      * Return number of tape grouped by type.
      */
     public static String selectTapeTypeCountQuery(QueryBits query) {
-        return "select t.tape_type, count(t.tape_id) as tape_count " +
+        return "select t.media_type, count(t.tape_id) as tape_count " +
                 "from asset_tape t " +
                 "left outer join (select af.attribute_field_id, af.attribute_field_name " +
                 "from attribute_view an, attribute_field_view af " +
-                "where an.object_key='tape' and an.attribute_name='tape_type' " +
-                "and an.attribute_id = af.attribute_id) af on t.tape_type = af.attribute_field_id " +
-                "group by tape_type, af.attribute_field_name " + query.createClause();
+                "where an.object_key='tape' and an.attribute_name='media_type' " +
+                "and an.attribute_id = af.attribute_id) af on t.media_type = af.attribute_field_id " +
+                "group by media_type, af.attribute_field_name " + query.createClause();
     }
 
     /**
      * Return number of tape grouped by status.
      */
     public static String selectTapeCountByStatusQuery(QueryBits query) {
-        return "select t.tape_status, count(t.tape_id) as tape_count " +
+        return "select t.status, count(t.tape_id) as tape_count " +
                 "from asset_tape t " +
                 "left outer join (select af.attribute_field_id, af.attribute_field_name " +
                 "from attribute_view an, attribute_field_view af " +
-                "where an.object_key='tape' and an.attribute_name='tape_status' " +
-                "and an.attribute_id = af.attribute_id) af on t.tape_status = af.attribute_field_id " +
-                "group by tape_status, af.attribute_field_name " + query.createClause();
+                "where an.object_key='tape' and an.attribute_name='status' " +
+                "and an.attribute_id = af.attribute_id) af on t.status = af.attribute_field_id " +
+                "group by status, af.attribute_field_name " + query.createClause();
     }
 
     /**
      * Return number of tape grouped by location.
      */
     public static String selectTapeCountByLocationQuery(QueryBits query) {
-        return "select t.tape_location, count(t.tape_id) as tape_count " +
+        return "select t.location, count(t.tape_id) as tape_count " +
                 "from asset_tape t " +
                 "left outer join (select af.attribute_field_id, af.attribute_field_name " +
                 "from attribute_view an, attribute_field_view af " +
-                "where an.object_key='tape' and an.attribute_name='tape_location' " +
-                "and an.attribute_id = af.attribute_id) af on t.tape_location = af.attribute_field_id " +
-                "group by tape_location, af.attribute_field_name " + query.createClause();
+                "where an.object_key='tape' and an.attribute_name='location' " +
+                "and an.attribute_id = af.attribute_id) af on t.location = af.attribute_field_id " +
+                "group by location, af.attribute_field_name " + query.createClause();
     }
 
     /**
