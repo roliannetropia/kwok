@@ -134,7 +134,7 @@ public class TapeDao extends BaseDao {
 
             while (rs.next()) {
                 AttributeFieldCount count = new AttributeFieldCount();
-                count.setAttrFieldId(rs.getInt("tape_type"));
+                count.setAttrFieldId(rs.getInt("media_type"));
                 count.setObjectCount(rs.getInt("tape_count"));
 
                 list.add(count);
@@ -167,7 +167,7 @@ public class TapeDao extends BaseDao {
 
             while (rs.next()) {
                 AttributeFieldCount count = new AttributeFieldCount();
-                count.setAttrFieldId(rs.getInt("tape_status"));
+                count.setAttrFieldId(rs.getInt("status"));
                 count.setObjectCount(rs.getInt("tape_count"));
 
                 list.add(count);
@@ -200,7 +200,7 @@ public class TapeDao extends BaseDao {
 
             while (rs.next()) {
                 AttributeFieldCount count = new AttributeFieldCount();
-                count.setAttrFieldId(rs.getInt("tape_location"));
+                count.setAttrFieldId(rs.getInt("location"));
                 count.setObjectCount(rs.getInt("tape_count"));
 
                 list.add(count);
@@ -620,9 +620,9 @@ public class TapeDao extends BaseDao {
         tape.setVendorId(rs.getInt("vendor_company_id"));
         tape.setVendorName(StringUtils.replaceNull(rs.getString("tape_vendor_name")));
 
-        tape.setLocation(rs.getInt("tape_location"));
-        tape.setType(rs.getInt("tape_type"));
-        tape.setStatus(rs.getInt("tape_status"));
+        tape.setLocation(rs.getInt("location"));
+        tape.setType(rs.getInt("media_type"));
+        tape.setStatus(rs.getInt("status"));
         tape.setPurchasePrice(CurrencyUtils.formatCurrency(rs.getDouble("tape_purchase_price"), ""));
         tape.setLastServicedOn(DatetimeUtils.getDate(rs, "tape_last_service_date"));
 
