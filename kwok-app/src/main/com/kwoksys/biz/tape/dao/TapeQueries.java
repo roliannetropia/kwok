@@ -150,12 +150,12 @@ public class TapeQueries {
      * Return number of tape grouped by location.
      */
     public static String selectTapeCountByLocationQuery(QueryBits query) {
-        return "select h.tape_location, count(h.tape_id) as tape_count " +
-                "from asset_tape h " +
+        return "select t.tape_location, count(t.tape_id) as tape_count " +
+                "from asset_tape t " +
                 "left outer join (select af.attribute_field_id, af.attribute_field_name " +
                 "from attribute_view an, attribute_field_view af " +
                 "where an.object_key='tape' and an.attribute_name='tape_location' " +
-                "and an.attribute_id = af.attribute_id) af on h.tape_location = af.attribute_field_id " +
+                "and an.attribute_id = af.attribute_id) af on t.tape_location = af.attribute_field_id " +
                 "group by tape_location, af.attribute_field_name " + query.createClause();
     }
 
