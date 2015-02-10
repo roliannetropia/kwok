@@ -69,6 +69,22 @@ public class Access {
         publicPagesMap.add(AppPaths.HOME_FILE_NOT_FOUND);
         publicPagesMap.add(AppPaths.HOME_OBJECT_NOT_FOUND);
 
+//      todo  test public page si tape
+// ==================================
+//      You need an entry in the postgres database for the new page. See the upgrade sql file I sent you earlier.
+
+//        The application first checks to see if the path is in the database and whether the user has the required permission (all those database access_ tables).
+//
+//        Something like this (replace with the your page name, correct permission id and module id, next page_id):
+//
+//        insert into access_page (page_id, page_name, module_id) values (326, '/contacts/company-list-export', 5);
+//        insert into access_perm_page_map(perm_id, page_id) values (10, 326);
+//
+//        Wai-Lun
+        publicPagesMap.add(AppPaths.TAPE_INDEX);
+
+// ==================================
+
         // IssuePlugin module
         publicPagesMap.add(AppPaths.ISSUE_PLUGIN_ADD);
         publicPagesMap.add(AppPaths.ISSUE_PLUGIN_ADD_2);
