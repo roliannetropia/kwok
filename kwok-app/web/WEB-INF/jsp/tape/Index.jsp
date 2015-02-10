@@ -76,4 +76,4 @@
 <%-- Tape search --%>
 <h3><bean:message key="itMgmt.index.searchHeader"/></h3>
 
-<jsp:include page="/WEB-INF/jsp/tape/TapeSearchTemplate.jsp"/>
+<%--<jsp:include page="/WEB-INF/jsp/tape/TapeSearchTemplate.jsp"/>--%>
