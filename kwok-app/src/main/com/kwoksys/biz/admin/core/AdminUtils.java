@@ -115,8 +115,8 @@ public class AdminUtils {
 
     /**
      * Given an objectTypeId, get a list of values from requests.
-     * @param request
-     * @param objectTypeId
+//     * @param request
+//     * @param objectTypeId
      * @return
      * @throws DatabaseException
      */
@@ -149,7 +149,7 @@ public class AdminUtils {
 
     /**
      * @param contact
-     * @param request
+//     * @param request
      * @return ..
      */
     public static DetailTableTemplate formatUserContact(Contact contact, RequestContext requestContext, boolean showAdminNotes) throws DatabaseException {
@@ -439,8 +439,8 @@ public class AdminUtils {
 
     /**
      * Returns system username, this function also handles users who have been removed.
-     * @param request
-     * @param username
+//     * @param request
+//     * @param username
      * @return
      */
     public static String getSystemUsername(RequestContext requestContext, AccessUser accessUser) {
@@ -484,8 +484,8 @@ public class AdminUtils {
 
     /**
      * Returns a list of enabled users (plus the one specified), sort by display name.
-     * @param request
-     * @param owner
+//     * @param request
+//     * @param owner
      * @return
      * @throws Exception
      */
@@ -516,7 +516,7 @@ public class AdminUtils {
 
     /**
      * Validates required attributes
-     * @param request
+//     * @param request
      * @param errors
      * @param baseObject
      */
