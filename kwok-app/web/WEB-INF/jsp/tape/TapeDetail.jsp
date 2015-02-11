@@ -27,50 +27,50 @@
 <logic:equal name="form" property="cmd" value="add">
 <jsp:include page="/WEB-INF/jsp/common/template/ActionError.jsp"/>
 
-<form action="${formAddLicAction}" method="post">
-<html:hidden name="form" property="tapeId"/>
-<table class="listTable">
-<tr class="header1"><td colspan="2"><b><bean:message key="itMgmt.tapeDetail.addLicenseHeader"/> </b></td></tr>
-<tr>
-    <td class="row2" width="20%"><bean:message key="itMgmt.tapeDetail.addLicenseStep1"/></td>
-    <td class="row2">
-        <logic:notEmpty name="softwareOptions">
-            <html:select name="form" property="softwareId" onchange="updateView('softwareLicensesDiv', '${formGetSoftwareLicenseAction}'+this.value);" >
-                <html:options collection="softwareOptions" property="value" labelProperty="label"/>
-            </html:select>
-        </logic:notEmpty>
-        <logic:empty name="softwareOptions" >
-            <bean:message key="itMgmt.tapeDetail.noSoftware"/>
-        </logic:empty>
-    </td>
-</tr>
-<tr>
-    <td class="row2"><bean:message key="itMgmt.tapeDetail.addLicenseStep2"/></td>
-    <%-- This area is left empty for AJAX script to get data. --%>
-    <td class="row2" id="softwareLicensesDiv">&nbsp;</td>
-</tr>
-<tr>
-    <td class="row2">
-        <bean:message key="common.column.license_entitlement"/>
-    </td>
-    <td class="row2">
-        <bean:write name="form" property="licenseEntitlement"/>
-        <html:hidden name="form" property="licenseEntitlement"/>
-    </td>
-</tr>
-<tr>
-<td class="row2"><bean:message key="itMgmt.tapeDetail.addLicenseStep3"/></td>
-<td class="row2">
-    <logic:notEmpty name="softwareOptions">
-        <html:submit onclick="disableButton(this)">
-            <bean:message key="form.button.save"/>
-        </html:submit>
-        ${formCancelLink}
-    </logic:notEmpty>
-</td>
-</tr>
-</table>
-</form>
+<%--<form action="${formAddLicAction}" method="post">--%>
+<%--<html:hidden name="form" property="tapeId"/>--%>
+<%--<table class="listTable">--%>
+<%--<tr class="header1"><td colspan="2"><b><bean:message key="itMgmt.tapeDetail.addLicenseHeader"/> </b></td></tr>--%>
+<%--<tr>--%>
+    <%--<td class="row2" width="20%"><bean:message key="itMgmt.tapeDetail.addLicenseStep1"/></td>--%>
+    <%--<td class="row2">--%>
+        <%--<logic:notEmpty name="softwareOptions">--%>
+            <%--<html:select name="form" property="softwareId" onchange="updateView('softwareLicensesDiv', '${formGetSoftwareLicenseAction}'+this.value);" >--%>
+                <%--<html:options collection="softwareOptions" property="value" labelProperty="label"/>--%>
+            <%--</html:select>--%>
+        <%--</logic:notEmpty>--%>
+        <%--<logic:empty name="softwareOptions" >--%>
+            <%--<bean:message key="itMgmt.tapeDetail.noSoftware"/>--%>
+        <%--</logic:empty>--%>
+    <%--</td>--%>
+<%--</tr>--%>
+<%--<tr>--%>
+    <%--<td class="row2"><bean:message key="itMgmt.tapeDetail.addLicenseStep2"/></td>--%>
+     <%--This area is left empty for AJAX script to get data. --%>
+    <%--<td class="row2" id="softwareLicensesDiv">&nbsp;</td>--%>
+<%--</tr>--%>
+<%--<tr>--%>
+    <%--<td class="row2">--%>
+        <%--<bean:message key="common.column.license_entitlement"/>--%>
+    <%--</td>--%>
+    <%--<td class="row2">--%>
+        <%--<bean:write name="form" property="licenseEntitlement"/>--%>
+        <%--<html:hidden name="form" property="licenseEntitlement"/>--%>
+    <%--</td>--%>
+<%--</tr>--%>
+<%--<tr>--%>
+<%--<td class="row2"><bean:message key="itMgmt.tapeDetail.addLicenseStep3"/></td>--%>
+<%--<td class="row2">--%>
+    <%--<logic:notEmpty name="softwareOptions">--%>
+        <%--<html:submit onclick="disableButton(this)">--%>
+            <%--<bean:message key="form.button.save"/>--%>
+        <%--</html:submit>--%>
+        <%--${formCancelLink}--%>
+    <%--</logic:notEmpty>--%>
+<%--</td>--%>
+<%--</tr>--%>
+<%--</table>--%>
+<%--</form>--%>
 </logic:equal>
 
 <p>
