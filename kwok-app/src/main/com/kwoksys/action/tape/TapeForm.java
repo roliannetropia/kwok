@@ -30,86 +30,99 @@ public class TapeForm extends BaseObjectForm {
 
     private Integer tapeId;
     private Integer copyTapeId;
+
     private String tapeName;
-    private String tapeModelName;
-    private String tapeModelNumber;
     private String serialNumber;
     private String barcodeNumber;
-    private String tapeCost;
-    private int lastServicedOn;
-    private String purchaseDate;
-    private String purchaseMonth;
-    private String purchaseYear;
-    private String warrantyDate;
-    private String warrantyMonth;
-    private String warrantyYear;
-    private String warrantyDuration;
+//    private String tapeModelName;
+//    private String tapeModelNumber;
+
+//    private String tapeCost;
+//    private int lastServicedOn;
+//    private String purchaseDate;
+//    private String purchaseMonth;
+//    private String purchaseYear;
+//    private String warrantyDate;
+//    private String warrantyMonth;
+//    private String warrantyYear;
+//    private String warrantyDuration;
+//    private String tapeDescription;
     private Integer tapeLocation;
-    private String tapeDescription;
-    private Integer tapeType;
+    private Integer mediaType;
     private Integer tapeStatus;
-    private Integer tapeOwner;
+//    private Integer tapeOwner;
     private Integer manufacturerId;
     private Integer vendorId;
-    private String issueId;
-    private String contactId;
-    private String formContactId;
-    private String relationshipDescription;
+
+    private Integer retention;
+    private Integer system;
+//    private String issueId;
+//    private String contactId;
+//    private String formContactId;
+//    private String relationshipDescription;
 
     @Override
     public void setRequest(RequestContext requestContext) {
         tapeId = requestContext.getParameterInteger("tapeId");
         copyTapeId = requestContext.getParameterInteger("copyTapeId");
+
         tapeName = requestContext.getParameterString("tapeName");
-        tapeModelName = requestContext.getParameterString("tapeModelName");
-        tapeModelNumber = requestContext.getParameterString("tapeModelNumber");
         serialNumber = requestContext.getParameterString("serialNumber");
         barcodeNumber = requestContext.getParameterString("barcodeNumber");
-        tapeCost = requestContext.getParameterString("tapeCost");
-        lastServicedOn = requestContext.getParameter("lastServicedOn");
-        purchaseDate = requestContext.getParameterString("purchaseDate");
-        purchaseMonth = requestContext.getParameterString("purchaseMonth");
-        purchaseYear = requestContext.getParameterString("purchaseYear");
-        warrantyDate = requestContext.getParameterString("warrantyDate");
-        warrantyMonth = requestContext.getParameterString("warrantyMonth");
-        warrantyYear = requestContext.getParameterString("warrantyYear");
-        warrantyDuration = requestContext.getParameterString("warrantyDuration");
+//        tapeModelName = requestContext.getParameterString("tapeModelName");
+//        tapeModelNumber = requestContext.getParameterString("tapeModelNumber");
+
+//        tapeCost = requestContext.getParameterString("tapeCost");
+//        lastServicedOn = requestContext.getParameter("lastServicedOn");
+//        purchaseDate = requestContext.getParameterString("purchaseDate");
+//        purchaseMonth = requestContext.getParameterString("purchaseMonth");
+//        purchaseYear = requestContext.getParameterString("purchaseYear");
+//        warrantyDate = requestContext.getParameterString("warrantyDate");
+//        warrantyMonth = requestContext.getParameterString("warrantyMonth");
+//        warrantyYear = requestContext.getParameterString("warrantyYear");
+//        warrantyDuration = requestContext.getParameterString("warrantyDuration");
+//        tapeDescription = requestContext.getParameterString("tapeDescription");
         tapeLocation = requestContext.getParameterInteger("tapeLocation");
-        tapeDescription = requestContext.getParameterString("tapeDescription");
-        tapeType = requestContext.getParameterInteger("tapeType");
+        mediaType = requestContext.getParameterInteger("mediaType");
         tapeStatus = requestContext.getParameterInteger("tapeStatus");
-        tapeOwner = requestContext.getParameterInteger("tapeOwner");
+//        tapeOwner = requestContext.getParameterInteger("tapeOwner");
         manufacturerId = requestContext.getParameterInteger("manufacturerId");
         vendorId = requestContext.getParameterInteger("vendorId");
-        issueId = requestContext.getParameterString("issueId");
-        contactId = requestContext.getParameterString("contactId");
-        formContactId = requestContext.getParameterString("formContactId");
-        relationshipDescription = requestContext.getParameterString("relationshipDescription");
+
+        retention = requestContext.getParameterInteger("retention");
+        system = requestContext.getParameterInteger("system");
+//        issueId = requestContext.getParameterString("issueId");
+//        contactId = requestContext.getParameterString("contactId");
+//        formContactId = requestContext.getParameterString("formContactId");
+//        relationshipDescription = requestContext.getParameterString("relationshipDescription");
     }
 
     public void setTape(Tape tape) {
-        tapeName = tape.getName();
-        tapeDescription = tape.getDescription();
-        tapeOwner = tape.getOwner() != null ? tape.getOwner().getId() : 0;
-        tapeType = tape.getType();
-        tapeStatus = tape.getStatus();
-        tapeModelName = tape.getModelName();
-        tapeModelNumber = tape.getModelNumber();
-        serialNumber = tape.getSerialNumber();
-        tapeCost = tape.getPurchasePrice();
-        lastServicedOn = tape.getResetLastServiceDate();
-        tapeLocation = tape.getLocation();
+//        tapeDescription = tape.getDescription();
+//        tapeOwner = tape.getOwner() != null ? tape.getOwner().getId() : 0;
+        tapeName = tape.getTapeName();
+        serialNumber = tape.getTapeSerialNumber();
+        barcodeNumber = tape.getTapeBarcodeNumber();
+
+
+        tapeLocation = tape.getTapeLocation();
+        mediaType = tape.getMediaType();
+        tapeStatus = tape.getTapeStatus();
+//        tapeModelName = tape.getModelName();
+//        tapeModelNumber = tape.getModelNumber();
+//        tapeCost = tape.getPurchasePrice();
+//        lastServicedOn = tape.getResetLastServiceDate();
         manufacturerId = tape.getManufacturerId();
         vendorId = tape.getVendorId();
-        purchaseYear = tape.getPurchaseYear();
-        purchaseMonth = tape.getPurchaseMonth();
-        purchaseDate = tape.getPurchaseDate();
-        warrantyYear = tape.getWarrantyYear();
-        warrantyMonth = tape.getWarrantyMonth();
-        warrantyDate = tape.getWarrantyDate();
-        warrantyDuration = "";
-
-
+//        purchaseYear = tape.getPurchaseYear();
+//        purchaseMonth = tape.getPurchaseMonth();
+//        purchaseDate = tape.getPurchaseDate();
+//        warrantyYear = tape.getWarrantyYear();
+//        warrantyMonth = tape.getWarrantyMonth();
+//        warrantyDate = tape.getWarrantyDate();
+//        warrantyDuration = "";
+        system = tape.getTapeSystem();
+        retention = tape.getTapeRetention();
     }
 
     public Integer getTapeId() {
@@ -118,107 +131,108 @@ public class TapeForm extends BaseObjectForm {
     public void setTapeId(Integer tapeId) {
         this.tapeId = tapeId;
     }
-    public String getTapeName() {
-        return tapeName;
-    }
-
-    public String getTapeModelName() {
-        return tapeModelName;
-    }
-
-    public String getTapeModelNumber() {
-        return tapeModelNumber;
-    }
-
-    public String getSerialNumber() {
-        return serialNumber;
-    }
-
-    public String getBarcodeNumber(){
-        return barcodeNumber;
-    }
-
-    public String getTapeCost() {
-        return tapeCost;
-    }
-
-    public int getLastServicedOn() {
-        return lastServicedOn;
-    }
-
-    public String getPurchaseDate() {
-        return purchaseDate;
-    }
-
-    public String getPurchaseMonth() {
-        return purchaseMonth;
-    }
-
-    public String getPurchaseYear() {
-        return purchaseYear;
-    }
-
-    public String getWarrantyDate() {
-        return warrantyDate;
-    }
-
-    public String getWarrantyYear() {
-        return warrantyYear;
-    }
-
-    public String getWarrantyMonth() {
-        return warrantyMonth;
-    }
-
-    public Integer getTapeLocation() {
-        return tapeLocation;
-    }
-
-    public String getTapeDescription() {
-        return tapeDescription;
-    }
-
-    public Integer getTapeType() {
-        return tapeType;
-    }
-
-    public Integer getTapeStatus() {
-        return tapeStatus;
-    }
-
-    public Integer getTapeOwner() {
-        return tapeOwner;
-    }
-
-    public Integer getManufacturerId() {
-        return manufacturerId;
-    }
-
-    public Integer getVendorId() {
-        return vendorId;
-    }
-
     public Integer getCopyTapeId() {
         return copyTapeId;
     }
 
-    public String getWarrantyDuration() {
-        return warrantyDuration;
+//    public String getTapeModelName() {
+//        return tapeModelName;
+//    }
+
+//    public String getTapeModelNumber() {
+//        return tapeModelNumber;
+//    }
+    public String getTapeName() {
+    return tapeName;
+}
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+    public String getBarcodeNumber(){
+        return barcodeNumber;
     }
 
-    public String getIssueId() {
-        return issueId;
+//    public String getTapeCost() {
+//        return tapeCost;
+//    }
+
+//    public int getLastServicedOn() {
+//        return lastServicedOn;
+//    }
+
+//    public String getPurchaseDate() {
+//        return purchaseDate;
+//    }
+
+//    public String getPurchaseMonth() {
+//        return purchaseMonth;
+//    }
+
+//    public String getPurchaseYear() {
+//        return purchaseYear;
+//    }
+
+//    public String getWarrantyDate() {
+//        return warrantyDate;
+//    }
+
+//    public String getWarrantyYear() {
+//        return warrantyYear;
+//    }
+
+//    public String getWarrantyMonth() {
+//        return warrantyMonth;
+//    }
+
+//    public String getTapeDescription() {
+//        return tapeDescription;
+//    }
+
+    public Integer getTapeLocation() {
+        return tapeLocation;
+    }
+    public Integer getMediaType() {
+        return mediaType;
+    }
+    public Integer getTapeStatus() {
+        return tapeStatus;
     }
 
-    public String getContactId() {
-        return contactId;
+//    public Integer getTapeOwner() {
+//        return tapeOwner;
+//    }
+
+    public Integer getManufacturerId() {
+        return manufacturerId;
+    }
+    public Integer getVendorId() {
+        return vendorId;
     }
 
-    public String getRelationshipDescription() {
-        return relationshipDescription;
+    public Integer getRetention() {
+        return retention;
     }
 
-    public String getFormContactId() {
-        return formContactId;
+    public Integer getSystem() {
+        return system;
     }
+    //    public String getWarrantyDuration() {
+//        return warrantyDuration;
+//    }
+//
+//    public String getIssueId() {
+//        return issueId;
+//    }
+//
+//    public String getContactId() {
+//        return contactId;
+//    }
+//
+//    public String getRelationshipDescription() {
+//        return relationshipDescription;
+//    }
+//
+//    public String getFormContactId() {
+//        return formContactId;
+//    }
 }
