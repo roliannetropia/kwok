@@ -33,34 +33,17 @@ public class TapeQueries {
         if (column.equals(Tape.TAPE_NAME)) {
             return "lower(tape_name)";
 
-        } else if (column.equals(Tape.LOCATION)) {
-            return "lower(hwloc.attribute_field_name)";
+        } else if (column.equals(Tape.TAPE_LOCATION)) {
+            return "lower(tape_location)";
 
-        } else if (column.equals("software_name")) {
-            return "lower(software_name)";
+        } else if (column.equals(Tape.MEDIA_TYPE)) {
+            return "lower(media_type)";
 
-        } else if (column.equals("license_key")) {
-            return "lower(asl.license_key)";
+        } else if (column.equals(Tape.TAPE_STATUS)) {
+            return "lower(tape_status)";
 
-        } else if (column.equals("tape_serial_number")) {
-            return "lower(tape_serial_number)";
-
-        } else if (column.equals(Tape.MODEL_NAME)) {
-            return "lower(tape_model_name)";
-
-        } else if (column.equals(Tape.MODEL_NUMBER)) {
-            return "lower(tape_model_number)";
-
-        } else if (column.equals(Tape.OWNER_NAME)) {
-            return ConfigManager.system.getUsernameDisplay().equals(AdminUtils.USER_USERNAME) ?
-                    "lower(tape_owner_username)" : "lower(tape_owner_display_name)";
-
-        } else if (column.equals("attribute_field_name")) {
-            return "lower(af.attribute_field_name)";
-
-        } else if (column.equals("comp_name")) {
-            // Tape component name
-            return "lower(af.attribute_field_name)";
+        } else if (column.equals(Tape.TAPE_SYSTEM)) {
+            return "lower(tape_system)";
 
         } else {
             return column;
