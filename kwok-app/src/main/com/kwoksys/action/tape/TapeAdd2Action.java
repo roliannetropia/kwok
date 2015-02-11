@@ -19,12 +19,12 @@
  */
 package com.kwoksys.action.tape;
 
-import com.kwoksys.action.hardware.HardwareForm;
+import com.kwoksys.action.tape.TapeForm;
 import com.kwoksys.biz.ServiceProvider;
 import com.kwoksys.biz.admin.core.AdminUtils;
 import com.kwoksys.biz.admin.dto.Attribute;
-import com.kwoksys.biz.hardware.HardwareService;
-import com.kwoksys.biz.hardware.dto.Hardware;
+import com.kwoksys.biz.tape.TapeService;
+import com.kwoksys.biz.tape.dto.Tape;
 import com.kwoksys.biz.system.core.AppPaths;
 import com.kwoksys.biz.system.core.AttributeManager;
 import com.kwoksys.biz.system.core.ObjectTypes;
@@ -35,29 +35,29 @@ import org.apache.struts.action.ActionMessages;
 import java.util.Map;
 
 /**
- * Action class for adding hardware.
+ * Action class for adding tape.
  */
 public class TapeAdd2Action extends Action2 {
 
     public String execute() throws Exception {
-        HardwareForm actionForm = saveActionForm(new HardwareForm());
+        TapeForm actionForm = saveActionForm(new TapeForm());
 
-        Hardware hardware = new Hardware();
-        hardware.setForm(actionForm);
+        Tape tape = new Tape();
+        tape.setForm(actionForm);
 
         // Get custom field values from request
-        Map<Integer, Attribute> customAttributes = new AttributeManager(requestContext).getCustomFieldMap(ObjectTypes.HARDWARE);
-        AdminUtils.populateCustomFieldValues(requestContext, actionForm, hardware, customAttributes);
+        Map<Integer, Attribute> customAttributes = new AttributeManager(requestContext).getCustomFieldMap(ObjectTypes.TAPE);
+        AdminUtils.populateCustomFieldValues(requestContext, actionForm, tape, customAttributes);
         
-        HardwareService hardwareService = ServiceProvider.getHardwareService(requestContext);
+        TapeService tapeService = ServiceProvider.getTapeService(requestContext);
 
-        // Add the hardware
-        ActionMessages errors = hardwareService.addHardware(hardware, customAttributes);
+        // Add the tape
+        ActionMessages errors = tapeService.addTape(tape, customAttributes);
         if (!errors.isEmpty()) {
             saveActionErrors(errors);
-            return redirect(AppPaths.HARDWARE_ADD + "?" + RequestContext.URL_PARAM_ERROR_TRUE);
+            return redirect(AppPaths.TAPE_ADD + "?" + RequestContext.URL_PARAM_ERROR_TRUE);
         } else {
-            return redirect(AppPaths.HARDWARE_DETAIL + "?hardwareId=" + hardware.getId());
+            return redirect(AppPaths.TAPE_DETAIL + "?tapeId=" + tape.getId());
         }
     }
 }
