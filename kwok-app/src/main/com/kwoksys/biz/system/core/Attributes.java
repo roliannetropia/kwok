@@ -90,9 +90,9 @@ public class Attributes {
         nameIdMap.put(Hardware.STATUS, HARDWARE_STATUS);
         nameIdMap.put(Hardware.TYPE, HARDWARE_TYPE);
 
-        nameIdMap.put(Tape.LOCATION, TAPE_LOCATION);
-        nameIdMap.put(Tape.STATUS, TAPE_STATUS);
-        nameIdMap.put(Tape.TYPE, MEDIA_TYPE);
+        nameIdMap.put(Tape.TAPE_LOCATION, TAPE_LOCATION);
+        nameIdMap.put(Tape.TAPE_STATUS, TAPE_STATUS);
+        nameIdMap.put(Tape.MEDIA_TYPE, MEDIA_TYPE);
 
         nameIdMap.put(Software.TYPE, SOFTWARE_TYPE);
         nameIdMap.put(Software.OS, SOFTWARE_OS);
