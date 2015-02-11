@@ -65,7 +65,6 @@ public class TapeAddAction extends Action2 {
 
         // Load attributes
         tape.loadAttrs(requestContext);
-        
         TapeForm actionForm = (TapeForm) getBaseForm(TapeForm.class);
         
         // Not a resubmit, set some defaults
@@ -162,7 +161,7 @@ public class TapeAddAction extends Action2 {
         if (copyTapeId != 0) {
             customFieldsTemplate.setObjectId(copyTapeId);
         }
-        customFieldsTemplate.setObjectAttrTypeId(actionForm.getTapeType());
+        customFieldsTemplate.setObjectAttrTypeId(actionForm.getMediaType());
         customFieldsTemplate.setForm(actionForm);
 
         //
