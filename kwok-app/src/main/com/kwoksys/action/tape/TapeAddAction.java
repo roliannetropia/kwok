@@ -90,9 +90,9 @@ public class TapeAddAction extends Action2 {
         attributeManager.getActiveAttrFieldOptionsCache(Attributes.TAPE_STATUS, statusOptions);
 
         // Tape owner options
-        List<LabelValueBean> tapeOwnerOptions = new ArrayList();
-        tapeOwnerOptions.add(new SelectOneLabelValueBean(requestContext));
-        tapeOwnerOptions.addAll(AdminUtils.getUserOptions(requestContext));
+//        List<LabelValueBean> tapeOwnerOptions = new ArrayList();
+//        tapeOwnerOptions.add(new SelectOneLabelValueBean(requestContext));
+//        tapeOwnerOptions.addAll(AdminUtils.getUserOptions(requestContext));
 
         // Get company list
         List tapeVendors = new ArrayList();
@@ -115,13 +115,13 @@ public class TapeAddAction extends Action2 {
         manufacturerQuery.addSortColumn(Company.COMPANY_NAME);
         tapeManufacturers.addAll(CompanyUtils.getCompanyOptions(requestContext, manufacturerQuery));
 
-        List warrantyOptions = new ArrayList();
-        warrantyOptions.add(new LabelValueBean(Localizer.getText(requestContext, "tape.selectWarrantyPeriod"), "0"));
-        for (int i=1; i<=3; i++) {
-            String numYear = String.valueOf(i);
-            warrantyOptions.add(new LabelValueBean(Localizer.getText(requestContext, "tape.predefinedWarranty",
-                    new String[]{numYear}), numYear));
-        }
+//        List warrantyOptions = new ArrayList();
+//        warrantyOptions.add(new LabelValueBean(Localizer.getText(requestContext, "tape.selectWarrantyPeriod"), "0"));
+//        for (int i=1; i<=3; i++) {
+//            String numYear = String.valueOf(i);
+//            warrantyOptions.add(new LabelValueBean(Localizer.getText(requestContext, "tape.predefinedWarranty",
+//                    new String[]{numYear}), numYear));
+//        }
 
         //
         // Template: StandardTemplate
@@ -132,19 +132,19 @@ public class TapeAddAction extends Action2 {
         standardTemplate.setPathAttribute("formThisAction", AppPaths.TAPE_ADD);
         standardTemplate.setAttribute("formCancelLink", Links.getCancelLink(requestContext, AppPaths.TAPE_LIST).getString());
         request.setAttribute("currencySymbol", ConfigManager.system.getCurrencySymbol());
-        request.setAttribute("tapeTypeOptions", typeOptions);
+        request.setAttribute("mediaTypeOptions", typeOptions);
         request.setAttribute("tapeStatusOptions", statusOptions);
-        request.setAttribute("purchaseYearOptions", CalendarUtils.getPastYearOptions(requestContext));
-        request.setAttribute("purchaseMonthOptions", CalendarUtils.getMonthOptions(requestContext));
-        request.setAttribute("purchaseDateOptions", CalendarUtils.getDateOptions(requestContext));
-        request.setAttribute("warrantyYearOptions", CalendarUtils.getYearOptions(requestContext));
-        request.setAttribute("warrantyMonthOptions", CalendarUtils.getMonthOptions(requestContext));
-        request.setAttribute("warrantyDateOptions", CalendarUtils.getDateOptions(requestContext));
-        request.setAttribute("tapeOwnerOptions", tapeOwnerOptions);
+//        request.setAttribute("purchaseYearOptions", CalendarUtils.getPastYearOptions(requestContext));
+//        request.setAttribute("purchaseMonthOptions", CalendarUtils.getMonthOptions(requestContext));
+//        request.setAttribute("purchaseDateOptions", CalendarUtils.getDateOptions(requestContext));
+//        request.setAttribute("warrantyYearOptions", CalendarUtils.getYearOptions(requestContext));
+//        request.setAttribute("warrantyMonthOptions", CalendarUtils.getMonthOptions(requestContext));
+//        request.setAttribute("warrantyDateOptions", CalendarUtils.getDateOptions(requestContext));
+//        request.setAttribute("tapeOwnerOptions", tapeOwnerOptions);
         request.setAttribute("locationOptions", locationOptions);
         request.setAttribute("manufacturersOptions", tapeManufacturers);
         request.setAttribute("vendorsOptions", tapeVendors);
-        request.setAttribute("warrantyPeriodOptions", warrantyOptions);
+//        request.setAttribute("warrantyPeriodOptions", warrantyOptions);
 
         //
         // Template: HeaderTemplate
@@ -155,14 +155,14 @@ public class TapeAddAction extends Action2 {
         //
         // Template: CustomFieldsTemplate
         //
-        CustomFieldsTemplate customFieldsTemplate = new CustomFieldsTemplate();
-        standardTemplate.addTemplate(customFieldsTemplate);
-        customFieldsTemplate.setObjectTypeId(ObjectTypes.TAPE);
-        if (copyTapeId != 0) {
-            customFieldsTemplate.setObjectId(copyTapeId);
-        }
-        customFieldsTemplate.setObjectAttrTypeId(actionForm.getMediaType());
-        customFieldsTemplate.setForm(actionForm);
+//        CustomFieldsTemplate customFieldsTemplate = new CustomFieldsTemplate();
+//        standardTemplate.addTemplate(customFieldsTemplate);
+//        customFieldsTemplate.setObjectTypeId(ObjectTypes.TAPE);
+//        if (copyTapeId != 0) {
+//            customFieldsTemplate.setObjectId(copyTapeId);
+//        }
+//        customFieldsTemplate.setObjectAttrTypeId(actionForm.getMediaType());
+//        customFieldsTemplate.setForm(actionForm);
 
         //
         // Template: ActionErrorsTemplate
