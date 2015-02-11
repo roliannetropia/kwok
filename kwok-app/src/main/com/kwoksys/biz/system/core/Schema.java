@@ -32,10 +32,12 @@ public class Schema {
     }
 
     public static class AssetTapeTable {
+//        todo
         public static final int TAPE_NAME_MAX_LEN = 100;
-        public static final int TAPE_MODEL_NAME_MAX_LEN = 50;
-        public static final int TAPE_MODEL_NUMBER_MAX_LEN = 50;
+//        public static final int TAPE_MODEL_NAME_MAX_LEN = 50;
+//        public static final int TAPE_MODEL_NUMBER_MAX_LEN = 50;
         public static final int TAPE_SERIAL_NUMBER_MAX_LEN = 50;
+        public static final int TAPE_BARCODE_NUMBER_MAX_LEN = 50;
     }
 
     public static class CompanyTable {
