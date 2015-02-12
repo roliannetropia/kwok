@@ -104,7 +104,6 @@ public class TapeForm extends BaseObjectForm {
         serialNumber = tape.getTapeSerialNumber();
         barcodeNumber = tape.getTapeBarcodeNumber();
 
-
         tapeLocation = tape.getTapeLocation();
         mediaType = tape.getMediaType();
         tapeStatus = tape.getTapeStatus();
