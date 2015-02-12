@@ -139,7 +139,7 @@ public class IndexAction extends Action2 {
         // Template: HeaderTemplate
         //
         HeaderTemplate header = standardTemplate.getHeaderTemplate();
-        header.setTitleKey("core.moduleName.1");
+        header.setTitleKey("core.moduleName.9");
         header.setTitleClassNoLine();
         
         // Link to add tape.
@@ -156,6 +156,7 @@ public class IndexAction extends Action2 {
         TapeSearchTemplate searchTemplate = new TapeSearchTemplate();
         standardTemplate.addTemplate(searchTemplate);
         searchTemplate.setFormAction(AppPaths.TAPE_LIST);
+//        todo media type
         searchTemplate.setTapeTypeData(tapeTypeData);
         searchTemplate.setTapeStatusData(tapeStatusData);
         searchTemplate.setTapeLocationData(tapeLocationData);
