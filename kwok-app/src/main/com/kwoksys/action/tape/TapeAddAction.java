@@ -56,6 +56,8 @@ public class TapeAddAction extends Action2 {
         TapeService tapeService = ServiceProvider.getTapeService(requestContext);
         Tape tape;
 
+        System.out.println("pumasok na sa tape add controller!");
+
         // If copyTapeId is provided, we get the tape spec of that id
         if (copyTapeId == 0) {
             tape = new Tape();
@@ -66,28 +68,35 @@ public class TapeAddAction extends Action2 {
         // Load attributes
         tape.loadAttrs(requestContext);
         TapeForm actionForm = (TapeForm) getBaseForm(TapeForm.class);
-        
+
         // Not a resubmit, set some defaults
         if (!actionForm.isResubmit()) {
             actionForm.setTape(tape);
         }
 
+        if(tape.isAttrEmpty("tapeName")){
+            System.out.println("Tape name: "+tape.getTapeName());
+            System.out.println("Tape serial number: "+tape.getTapeSerialNumber());
+            System.out.println("Tape barcode number: "+tape.getTapeBarcodeNumber());
+        }else
+            System.out.println("SHIT KA");
+
         LabelValueBean selectOneLabel = new SelectOneLabelValueBean(requestContext, "0");
 
-        // Get tape_location options
-        List locationOptions = new ArrayList();
-        locationOptions.add(selectOneLabel);
-        attributeManager.getActiveAttrFieldOptionsCache(Attributes.TAPE_LOCATION, locationOptions);
-
-        // Get tape_type options
-        List typeOptions = new ArrayList();
-        typeOptions.add(selectOneLabel);
-        attributeManager.getActiveAttrFieldOptionsCache(Attributes.MEDIA_TYPE, typeOptions);
-
-        // Get tape_status options
-        List statusOptions = new ArrayList();
-        statusOptions.add(selectOneLabel);
-        attributeManager.getActiveAttrFieldOptionsCache(Attributes.TAPE_STATUS, statusOptions);
+//        // Get tape_location options
+//        List locationOptions = new ArrayList();
+//        locationOptions.add(selectOneLabel);
+//        attributeManager.getActiveAttrFieldOptionsCache(Attributes.TAPE_LOCATION, locationOptions);
+//
+//        // Get tape_type options
+//        List typeOptions = new ArrayList();
+//        typeOptions.add(selectOneLabel);
+//        attributeManager.getActiveAttrFieldOptionsCache(Attributes.MEDIA_TYPE, typeOptions);
+//
+//        // Get tape_status options
+//        List statusOptions = new ArrayList();
+//        statusOptions.add(selectOneLabel);
+//        attributeManager.getActiveAttrFieldOptionsCache(Attributes.TAPE_STATUS, statusOptions);
 
         // Tape owner options
 //        List<LabelValueBean> tapeOwnerOptions = new ArrayList();
@@ -95,25 +104,25 @@ public class TapeAddAction extends Action2 {
 //        tapeOwnerOptions.addAll(AdminUtils.getUserOptions(requestContext));
 
         // Get company list
-        List tapeVendors = new ArrayList();
-        tapeVendors.add(selectOneLabel);
-
-        CompanySearch vendorSearch = new CompanySearch();
-        vendorSearch.put(CompanySearch.COMPANY_TYPE_EQUALS, AttributeFieldIds.COMPANY_TYPE_TAPE_VENDOR);
-
-        QueryBits vendorQuery = new QueryBits(vendorSearch);
-        vendorQuery.addSortColumn(Company.COMPANY_NAME);
-        tapeVendors.addAll(CompanyUtils.getCompanyOptions(requestContext, vendorQuery));
-
-        List tapeManufacturers = new ArrayList();
-        tapeManufacturers.add(selectOneLabel);
-
-        CompanySearch manufacturerSearch = new CompanySearch();
-        manufacturerSearch.put(CompanySearch.COMPANY_TYPE_EQUALS, AttributeFieldIds.COMPANY_TYPE_TAPE_MANUFACTURER);
-
-        QueryBits manufacturerQuery = new QueryBits(manufacturerSearch);
-        manufacturerQuery.addSortColumn(Company.COMPANY_NAME);
-        tapeManufacturers.addAll(CompanyUtils.getCompanyOptions(requestContext, manufacturerQuery));
+//        List tapeVendors = new ArrayList();
+//        tapeVendors.add(selectOneLabel);
+//
+//        CompanySearch vendorSearch = new CompanySearch();
+//        vendorSearch.put(CompanySearch.COMPANY_TYPE_EQUALS, AttributeFieldIds.COMPANY_TYPE_TAPE_VENDOR);
+//
+//        QueryBits vendorQuery = new QueryBits(vendorSearch);
+//        vendorQuery.addSortColumn(Company.COMPANY_NAME);
+//        tapeVendors.addAll(CompanyUtils.getCompanyOptions(requestContext, vendorQuery));
+//
+//        List tapeManufacturers = new ArrayList();
+//        tapeManufacturers.add(selectOneLabel);
+//
+//        CompanySearch manufacturerSearch = new CompanySearch();
+//        manufacturerSearch.put(CompanySearch.COMPANY_TYPE_EQUALS, AttributeFieldIds.COMPANY_TYPE_TAPE_MANUFACTURER);
+//
+//        QueryBits manufacturerQuery = new QueryBits(manufacturerSearch);
+//        manufacturerQuery.addSortColumn(Company.COMPANY_NAME);
+//        tapeManufacturers.addAll(CompanyUtils.getCompanyOptions(requestContext, manufacturerQuery));
 
 //        List warrantyOptions = new ArrayList();
 //        warrantyOptions.add(new LabelValueBean(Localizer.getText(requestContext, "tape.selectWarrantyPeriod"), "0"));
@@ -131,9 +140,9 @@ public class TapeAddAction extends Action2 {
         standardTemplate.setPathAttribute("formAction", AppPaths.TAPE_ADD_2);
         standardTemplate.setPathAttribute("formThisAction", AppPaths.TAPE_ADD);
         standardTemplate.setAttribute("formCancelLink", Links.getCancelLink(requestContext, AppPaths.TAPE_LIST).getString());
-        request.setAttribute("currencySymbol", ConfigManager.system.getCurrencySymbol());
-        request.setAttribute("mediaTypeOptions", typeOptions);
-        request.setAttribute("tapeStatusOptions", statusOptions);
+//        request.setAttribute("currencySymbol", ConfigManager.system.getCurrencySymbol());
+//        request.setAttribute("mediaTypeOptions", typeOptions);
+//        request.setAttribute("tapeStatusOptions", statusOptions);
 //        request.setAttribute("purchaseYearOptions", CalendarUtils.getPastYearOptions(requestContext));
 //        request.setAttribute("purchaseMonthOptions", CalendarUtils.getMonthOptions(requestContext));
 //        request.setAttribute("purchaseDateOptions", CalendarUtils.getDateOptions(requestContext));
@@ -141,9 +150,9 @@ public class TapeAddAction extends Action2 {
 //        request.setAttribute("warrantyMonthOptions", CalendarUtils.getMonthOptions(requestContext));
 //        request.setAttribute("warrantyDateOptions", CalendarUtils.getDateOptions(requestContext));
 //        request.setAttribute("tapeOwnerOptions", tapeOwnerOptions);
-        request.setAttribute("locationOptions", locationOptions);
-        request.setAttribute("manufacturersOptions", tapeManufacturers);
-        request.setAttribute("vendorsOptions", tapeVendors);
+//        request.setAttribute("locationOptions", locationOptions);
+//        request.setAttribute("manufacturersOptions", tapeManufacturers);
+//        request.setAttribute("vendorsOptions", tapeVendors);
 //        request.setAttribute("warrantyPeriodOptions", warrantyOptions);
 
         //
