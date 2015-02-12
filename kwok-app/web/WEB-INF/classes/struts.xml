@@ -454,9 +454,9 @@
         <!--
             Tape
         -->
-        <action name="IT/ajax-get-tape-detail" class="com.kwoksys.action.tape.AjaxGetTapeDetailAction">
-            <result name="success">/WEB-INF/jsp/tape/AjaxGetTapeDetail.jsp</result>
-        </action>
+        <!--<action name="IT/ajax-get-tape-detail" class="com.kwoksys.action.tape.AjaxGetTapeDetailAction">-->
+            <!--<result name="success">/WEB-INF/jsp/tape/AjaxGetTapeDetail.jsp</result>-->
+        <!--</action>-->
         <!--<action name="IT/ajax-get-license-by-software" class="com.kwoksys.action.software.AjaxGetLicenseBySoftwareAction">-->
             <!--<result name="success" >/WEB-INF/jsp/software/AjaxGetLicenseBySoftware.jsp</result>-->
         <!--</action>-->
