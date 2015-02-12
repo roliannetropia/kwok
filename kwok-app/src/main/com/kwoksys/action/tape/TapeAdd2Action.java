@@ -42,6 +42,8 @@ public class TapeAdd2Action extends Action2 {
     public String execute() throws Exception {
         TapeForm actionForm = saveActionForm(new TapeForm());
 
+        System.out.println("pumasok na sa tape add 2 controller!");
+
         Tape tape = new Tape();
         tape.setForm(actionForm);
 
