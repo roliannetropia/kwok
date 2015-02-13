@@ -56,8 +56,6 @@ public class TapeAddAction extends Action2 {
         TapeService tapeService = ServiceProvider.getTapeService(requestContext);
         Tape tape;
 
-        System.out.println("pumasok na sa tape add controller!");
-
         // If copyTapeId is provided, we get the tape spec of that id
         if (copyTapeId == 0) {
             tape = new Tape();
@@ -73,13 +71,6 @@ public class TapeAddAction extends Action2 {
         if (!actionForm.isResubmit()) {
             actionForm.setTape(tape);
         }
-
-        if(tape.isAttrEmpty("tapeName")){
-            System.out.println("Tape name: "+tape.getTapeName());
-            System.out.println("Tape serial number: "+tape.getTapeSerialNumber());
-            System.out.println("Tape barcode number: "+tape.getTapeBarcodeNumber());
-        }else
-            System.out.println("SHIT KA");
 
         LabelValueBean selectOneLabel = new SelectOneLabelValueBean(requestContext, "0");
 
@@ -131,7 +122,7 @@ public class TapeAddAction extends Action2 {
 //            warrantyOptions.add(new LabelValueBean(Localizer.getText(requestContext, "tape.predefinedWarranty",
 //                    new String[]{numYear}), numYear));
 //        }
-
+        System.out.println("request context: "+requestContext);
         //
         // Template: StandardTemplate
         //

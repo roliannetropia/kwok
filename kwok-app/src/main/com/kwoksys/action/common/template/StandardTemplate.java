@@ -40,6 +40,8 @@ public class StandardTemplate extends RootTemplate {
         headerTemplate = new HeaderTemplate();
         addTemplate(headerTemplate);
 
+        System.out.println("standard template request context page name!" + requestContext.getPageName());
+
         ajax = requestContext.isAjax();
 
         adEnabled = FeatureManager.isSponsorAdEnabled();

@@ -9,13 +9,6 @@ import com.kwoksys.biz.contracts.dto.Contract;
 import com.kwoksys.biz.files.FileService;
 import com.kwoksys.biz.files.dto.File;
 
-//todo delete
-//import com.kwoksys.biz.hardware.core.HardwareSearch;
-//import com.kwoksys.biz.hardware.dao.HardwareDao;
-//import com.kwoksys.biz.hardware.dto.Hardware;
-//import com.kwoksys.biz.hardware.dto.HardwareComponent;
-//import com.kwoksys.biz.hardware.dto.HardwareSoftwareMap;
-
 import com.kwoksys.biz.software.dto.SoftwareLicense;
 import com.kwoksys.biz.system.SystemService;
 import com.kwoksys.biz.system.core.ObjectTypes;
@@ -66,17 +59,17 @@ public class TapeService {
         return new TapeDao(requestContext).getCount(query);
     }
 
-    public List<AttributeFieldCount> getTapeTypeCount(QueryBits query) throws DatabaseException {
-        return new TapeDao(requestContext).getTapeTypeCount(query);
-    }
-
-    public List<AttributeFieldCount> getTapeStatusCount(QueryBits query) throws DatabaseException {
-        return new TapeDao(requestContext).getTapeStatusCount(query);
-    }
-
-    public List<AttributeFieldCount> getTapeLocationCount(QueryBits query) throws DatabaseException {
-        return new TapeDao(requestContext).getTapeLocationCount(query);
-    }
+//    public List<AttributeFieldCount> getTapeTypeCount(QueryBits query) throws DatabaseException {
+//        return new TapeDao(requestContext).getTapeTypeCount(query);
+//    }
+//
+//    public List<AttributeFieldCount> getTapeStatusCount(QueryBits query) throws DatabaseException {
+//        return new TapeDao(requestContext).getTapeStatusCount(query);
+//    }
+//
+//    public List<AttributeFieldCount> getTapeLocationCount(QueryBits query) throws DatabaseException {
+//        return new TapeDao(requestContext).getTapeLocationCount(query);
+//    }
 
     public Tape getTape(Integer tapeId) throws DatabaseException, ObjectNotFoundException {
         return new TapeDao(requestContext).getTape(tapeId);
@@ -433,7 +426,7 @@ public class TapeService {
             if (tape.getId() != null) {
                 tapeSearch.put(TapeSearch.TAPE_ID_NOT_EQUALS, tape.getId());
             }
-            tapeSearch.put(TapeSearch.TAPE_MANUFACTURER_EQUALS, tape.getManufacturerId());
+//            tapeSearch.put(TapeSearch.TAPE_MANUFACTURER_EQUALS, tape.getManufacturerId());
             tapeSearch.put(TapeSearch.TAPE_SERIAL_NUMBER_EQUALS, tape.getTapeSerialNumber());
 
             return getTapeCount(new QueryBits(tapeSearch)) > 0;

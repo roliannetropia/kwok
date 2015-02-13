@@ -33,17 +33,17 @@ public class TapeQueries {
         if (column.equals(Tape.TAPE_NAME)) {
             return "lower(tape_name)";
 
-        } else if (column.equals(Tape.TAPE_LOCATION)) {
-            return "lower(tape_location)";
-
-        } else if (column.equals(Tape.MEDIA_TYPE)) {
-            return "lower(media_type)";
-
-        } else if (column.equals(Tape.TAPE_STATUS)) {
-            return "lower(tape_status)";
-
-        } else if (column.equals(Tape.TAPE_SYSTEM)) {
-            return "lower(tape_system)";
+//        } else if (column.equals(Tape.TAPE_LOCATION)) {
+//            return "lower(tape_location)";
+//
+//        } else if (column.equals(Tape.MEDIA_TYPE)) {
+//            return "lower(media_type)";
+//
+//        } else if (column.equals(Tape.TAPE_STATUS)) {
+//            return "lower(tape_status)";
+//
+//        } else if (column.equals(Tape.TAPE_SYSTEM)) {
+//            return "lower(tape_system)";
 
         } else {
             return column;
@@ -201,8 +201,9 @@ public class TapeQueries {
      *
      * @return ..
      */
+//  todo eto yung nag cacall ng function
     public static String insertTapeQuery() {
-        return "{call sp_tape_add(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        return "{call sp_tape_add(?,?,?)}";
     }
 
     /**

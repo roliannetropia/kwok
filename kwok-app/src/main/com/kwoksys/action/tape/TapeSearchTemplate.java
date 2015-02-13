@@ -76,66 +76,66 @@ public class TapeSearchTemplate extends BaseTemplate {
 
         AttributeManager attributeManager = new AttributeManager(requestContext);
 
-        Map attrFieldTypeMap = attributeManager.getAttrFieldMapCache(Attributes.MEDIA_TYPE);
-        Map attrFieldStatusMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_STATUS);
-        Map attrFieldLocMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_LOCATION);
+//        Map attrFieldTypeMap = attributeManager.getAttrFieldMapCache(Attributes.MEDIA_TYPE);
+//        Map attrFieldStatusMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_STATUS);
+//        Map attrFieldLocMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_LOCATION);
 
         // Group by Tape type.
-        List tapeTypeOptions = new ArrayList();
-        tapeTypeOptions.add(new SelectOneLabelValueBean(requestContext));
+//        List tapeTypeOptions = new ArrayList();
+//        tapeTypeOptions.add(new SelectOneLabelValueBean(requestContext));
 
-        if (tapeTypeData == null) {
-            tapeTypeData = tapeService.getTapeTypeCount(query);
-        }
-        for (AttributeFieldCount tape : tapeTypeData) {
-            AttributeField attrField = (AttributeField) attrFieldTypeMap.get(tape.getAttrFieldId());
-            String tapeTypeName;
-
-            if (attrField != null) {
-                tapeTypeName = attrField.getName();
-            } else {
-                tapeTypeName = Localizer.getText(requestContext, "itMgmt.index.na");
-            }
-            tapeTypeOptions.add(new LabelValueBean(tapeTypeName, String.valueOf(tape.getAttrFieldId())));
-        }
+//        if (tapeTypeData == null) {
+//            tapeTypeData = tapeService.getTapeTypeCount(query);
+//        }
+//        for (AttributeFieldCount tape : tapeTypeData) {
+//            AttributeField attrField = (AttributeField) attrFieldTypeMap.get(tape.getAttrFieldId());
+//            String tapeTypeName;
+//
+//            if (attrField != null) {
+//                tapeTypeName = attrField.getName();
+//            } else {
+//                tapeTypeName = Localizer.getText(requestContext, "itMgmt.index.na");
+//            }
+//            tapeTypeOptions.add(new LabelValueBean(tapeTypeName, String.valueOf(tape.getAttrFieldId())));
+//        }
 
         // Group by Tape status.
-        List statusOptions = new ArrayList();
-        statusOptions.add(new SelectOneLabelValueBean(requestContext));
-
-        if (tapeStatusData == null) {
-            tapeStatusData = tapeService.getTapeStatusCount(query);
-        }
-        for (AttributeFieldCount tape : tapeStatusData) {
-            AttributeField attrField = (AttributeField) attrFieldStatusMap.get(tape.getAttrFieldId());
-            String tapeStatusName;
-
-            if (attrField != null) {
-                tapeStatusName = attrField.getName();
-            } else {
-                tapeStatusName = Localizer.getText(requestContext, "itMgmt.index.na");
-            }
-            statusOptions.add(new LabelValueBean(tapeStatusName, String.valueOf(tape.getAttrFieldId())));
-        }
+//        List statusOptions = new ArrayList();
+//        statusOptions.add(new SelectOneLabelValueBean(requestContext));
+//
+//        if (tapeStatusData == null) {
+//            tapeStatusData = tapeService.getTapeStatusCount(query);
+//        }
+//        for (AttributeFieldCount tape : tapeStatusData) {
+//            AttributeField attrField = (AttributeField) attrFieldStatusMap.get(tape.getAttrFieldId());
+//            String tapeStatusName;
+//
+//            if (attrField != null) {
+//                tapeStatusName = attrField.getName();
+//            } else {
+//                tapeStatusName = Localizer.getText(requestContext, "itMgmt.index.na");
+//            }
+//            statusOptions.add(new LabelValueBean(tapeStatusName, String.valueOf(tape.getAttrFieldId())));
+//        }
 
         // Group by Tape location.
-        List locationOptions = new ArrayList();
-        locationOptions.add(new SelectOneLabelValueBean(requestContext));
-
-        if (tapeLocationData == null) {
-            tapeLocationData = tapeService.getTapeLocationCount(query);
-        }
-        for (AttributeFieldCount tape : tapeLocationData) {
-            AttributeField attrField = (AttributeField) attrFieldLocMap.get(tape.getAttrFieldId());
-            String tapeLocName;
-
-            if (attrField != null) {
-                tapeLocName = attrField.getName();
-            } else {
-                tapeLocName = Localizer.getText(requestContext, "itMgmt.index.na");
-            }
-            locationOptions.add(new LabelValueBean(tapeLocName, String.valueOf(tape.getAttrFieldId())));
-        }
+//        List locationOptions = new ArrayList();
+//        locationOptions.add(new SelectOneLabelValueBean(requestContext));
+//
+//        if (tapeLocationData == null) {
+//            tapeLocationData = tapeService.getTapeLocationCount(query);
+//        }
+//        for (AttributeFieldCount tape : tapeLocationData) {
+//            AttributeField attrField = (AttributeField) attrFieldLocMap.get(tape.getAttrFieldId());
+//            String tapeLocName;
+//
+//            if (attrField != null) {
+//                tapeLocName = attrField.getName();
+//            } else {
+//                tapeLocName = Localizer.getText(requestContext, "itMgmt.index.na");
+//            }
+//            locationOptions.add(new LabelValueBean(tapeLocName, String.valueOf(tape.getAttrFieldId())));
+//        }
 
         request.setAttribute("TapeSearchTemplate_formAction", AppPaths.ROOT + formAction);
         request.setAttribute("tapeNameCriteriaOptions", nameCriteriaOptions);
@@ -144,30 +144,30 @@ public class TapeSearchTemplate extends BaseTemplate {
         request.setAttribute("monthOptions", CalendarUtils.getMonthOptions(requestContext));
         request.setAttribute("dateOptions", CalendarUtils.getDateOptions(requestContext));
         request.setAttribute("yearOptions", CalendarUtils.getPastYearOptions(requestContext));
-        request.setAttribute("tapeTypeOptions", tapeTypeOptions);
-        request.setAttribute("tapeStatusOptions", statusOptions);
-        request.setAttribute("tapeLocationOptions", locationOptions);
+//        request.setAttribute("tapeTypeOptions", tapeTypeOptions);
+//        request.setAttribute("tapeStatusOptions", statusOptions);
+//        request.setAttribute("tapeLocationOptions", locationOptions);
         request.setAttribute("customFieldsOptions", new AttributeManager(requestContext).getCustomFieldOptions(ObjectTypes.TAPE));
         request.setAttribute("TapeSearchTemplate_hideSearchButton", hideSearchButton);
 
         TapeSearch tapeSearch = new TapeSearch(requestContext, SessionManager.TAPE_SEARCH_CRITERIA_MAP);
 
-        List warrantyOptions = new ArrayList();
-        for (String key : new String[]{TapeSearch.TAPE_WARRANTY_EXPIRED,
-                TapeSearch.TAPE_WARRANTY_NOT_EXPIRED,
-                TapeSearch.TAPE_WARRANTY_NOT_SET}) {
+//        List warrantyOptions = new ArrayList();
+//        for (String key : new String[]{TapeSearch.TAPE_WARRANTY_EXPIRED,
+//                TapeSearch.TAPE_WARRANTY_NOT_EXPIRED,
+//                TapeSearch.TAPE_WARRANTY_NOT_SET}) {
+//
+//            Map map = new HashMap();
+//            map.put("key", key);
+//            map.put("checked", tapeSearch.getSearchCriteriaMap().containsKey(key) ? "checked" : "");
+//            warrantyOptions.add(map);
+//        }
+//        request.setAttribute("warrantyOptions", warrantyOptions);
 
-            Map map = new HashMap();
-            map.put("key", key);
-            map.put("checked", tapeSearch.getSearchCriteriaMap().containsKey(key) ? "checked" : "");
-            warrantyOptions.add(map);
-        }
-        request.setAttribute("warrantyOptions", warrantyOptions);
-
-        List options = new ArrayList();
-        options.add(new SelectOneLabelValueBean(requestContext, "0"));
-        request.setAttribute("componentTypeOptions",
-                attributeManager.getActiveAttrFieldOptionsCache(Attributes.TAPE_COMPONENT_TYPE, options));
+//        List options = new ArrayList();
+//        options.add(new SelectOneLabelValueBean(requestContext, "0"));
+//        request.setAttribute("componentTypeOptions",
+//                attributeManager.getActiveAttrFieldOptionsCache(Attributes.TAPE_COMPONENT_TYPE, options));
     }
 
     public String getFormAction() {
@@ -176,15 +176,15 @@ public class TapeSearchTemplate extends BaseTemplate {
     public void setFormAction(String formAction) {
         this.formAction = formAction;
     }
-    public void setTapeTypeData(List<AttributeFieldCount> tapeTypeData) {
-        this.tapeTypeData = tapeTypeData;
-    }
-    public void setTapeStatusData(List<AttributeFieldCount> tapeStatusData) {
-        this.tapeStatusData = tapeStatusData;
-    }
-    public void setTapeLocationData(List<AttributeFieldCount> tapeLocationData) {
-        this.tapeLocationData = tapeLocationData;
-    }
+//    public void setTapeTypeData(List<AttributeFieldCount> tapeTypeData) {
+//        this.tapeTypeData = tapeTypeData;
+//    }
+//    public void setTapeStatusData(List<AttributeFieldCount> tapeStatusData) {
+//        this.tapeStatusData = tapeStatusData;
+//    }
+//    public void setTapeLocationData(List<AttributeFieldCount> tapeLocationData) {
+//        this.tapeLocationData = tapeLocationData;
+//    }
 
     public boolean getHideSearchButton() {
         return hideSearchButton;
