@@ -32,46 +32,46 @@
 </div>
 
 <%-- Tape summary. --%>
-<h3><bean:message key="itMgmt.index.tapeTypeCountHeader"/></h3>
-<table class="section standard">
-    <tr>
-    <%-- Tape type count --%>
-    <th>
-        <p><b><bean:message key="itMgmt.index.tapeTypeCountDesc"/></b> &nbsp;
-        <p>
-        <table class="stats">
-        <logic:iterate id="row" name="tapeTypeCountList">
-            <tr class="${row.style}">
-                <th><a href="${row.path}"><div><bean:write name="row" property="countKey" filter="false"/></div></a></th>
-                <td><a href="${row.path}"><div><bean:write name="row" property="countValue"/></div></a></td></tr>
-        </logic:iterate>
-        </table>
-    </th>
+<%--<h3><bean:message key="itMgmt.index.tapeTypeCountHeader"/></h3>--%>
+<%--<table class="section standard">--%>
+    <%--<tr>--%>
+     <%--Tape type count --%>
+    <%--<th>--%>
+        <%--<p><b><bean:message key="itMgmt.index.tapeTypeCountDesc"/></b> &nbsp;--%>
+        <%--<p>--%>
+        <%--<table class="stats">--%>
+        <%--<logic:iterate id="row" name="tapeTypeCountList">--%>
+            <%--<tr class="${row.style}">--%>
+                <%--<th><a href="${row.path}"><div><bean:write name="row" property="countKey" filter="false"/></div></a></th>--%>
+                <%--<td><a href="${row.path}"><div><bean:write name="row" property="countValue"/></div></a></td></tr>--%>
+        <%--</logic:iterate>--%>
+        <%--</table>--%>
+    <%--</th>--%>
     <%-- Tape status count --%>
-    <th class="borderLeft">
-        <p><b><bean:message key="itMgmt.index.tapeStatusCountDesc"/></b> &nbsp;
-        <p>
-        <table class="stats">
-        <logic:iterate id="row" name="tapeStatusCounts">
-            <tr class="${row.style}">
-                <th><a href="${row.path}"><div><bean:write name="row" property="countKey"/></div></a></th>
-                <td><a href="${row.path}"><div><bean:write name="row" property="countValue"/></div></a></td></tr>
-        </logic:iterate>
-        </table>
-    </th>
+    <%--<th class="borderLeft">--%>
+        <%--<p><b><bean:message key="itMgmt.index.tapeStatusCountDesc"/></b> &nbsp;--%>
+        <%--<p>--%>
+        <%--<table class="stats">--%>
+        <%--<logic:iterate id="row" name="tapeStatusCounts">--%>
+            <%--<tr class="${row.style}">--%>
+                <%--<th><a href="${row.path}"><div><bean:write name="row" property="countKey"/></div></a></th>--%>
+                <%--<td><a href="${row.path}"><div><bean:write name="row" property="countValue"/></div></a></td></tr>--%>
+        <%--</logic:iterate>--%>
+        <%--</table>--%>
+    <%--</th>--%>
     <%-- Tape location count --%>
-    <th class="borderLeft">
-        <p><b><bean:message key="itMgmt.index.tapeLocationCountDesc"/></b>
-        <p><table class="stats">
-        <logic:iterate id="row" name="tapeLocationCountList">
-            <tr class="${row.style}">
-                <th><a href="${row.path}"><div><bean:write name="row" property="countKey"/></div></a></th>
-                <td><a href="${row.path}"><div><bean:write name="row" property="countValue"/></div></a></td></tr>
-        </logic:iterate>
-        </table>
-    </th>
-    </tr>
-</table>
+    <%--<th class="borderLeft">--%>
+        <%--<p><b><bean:message key="itMgmt.index.tapeLocationCountDesc"/></b>--%>
+        <%--<p><table class="stats">--%>
+        <%--<logic:iterate id="row" name="tapeLocationCountList">--%>
+            <%--<tr class="${row.style}">--%>
+                <%--<th><a href="${row.path}"><div><bean:write name="row" property="countKey"/></div></a></th>--%>
+                <%--<td><a href="${row.path}"><div><bean:write name="row" property="countValue"/></div></a></td></tr>--%>
+        <%--</logic:iterate>--%>
+        <%--</table>--%>
+    <%--</th>--%>
+    <%--</tr>--%>
+<%--</table>--%>
 
 <%-- Tape search --%>
 <h3><bean:message key="itMgmt.index.tapeSearchHeader"/></h3>
