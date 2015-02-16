@@ -20,7 +20,7 @@
 package com.kwoksys.action.tape;
 
 import com.kwoksys.action.common.template.*;
-import com.kwoksys.action.tape.TapeLicenseForm;
+//import com.kwoksys.action.tape.TapeLicenseForm;
 import com.kwoksys.action.tape.TapeSpecTemplate;
 import com.kwoksys.biz.ServiceProvider;
 import com.kwoksys.biz.admin.dto.AccessUser;
@@ -54,144 +54,148 @@ import java.util.Map;
 public class TapeDetailAction extends Action2 {
 
     public String execute() throws Exception {
-        TapeLicenseForm actionForm = (TapeLicenseForm) getBaseForm(TapeLicenseForm.class);
+//        TapeLicenseForm actionForm = (TapeLicenseForm) getBaseForm(TapeLicenseForm.class);
         AccessUser user = requestContext.getUser();
 
         TapeService tapeService = ServiceProvider.getTapeService(requestContext);
-        Tape tape = tapeService.getTape(actionForm.getTapeId());
+//        Tape tape = tapeService.getTape(actionForm.getTapeId());
 
+//        get tape by extracting tapeId na binato ni tape add controller
+        Tape tape = tapeService.getTape(Integer.parseInt(request.getParameter("tapeId")));
+
+//        System.out.println("tape id: "+tape.getTapeName());
         int colSpan = 4;
-        String softwareId = "";
+//        String softwareId = "";
 
         // For adding Software.
-        List softwareOptions = new ArrayList();
-        String formSoftwareLicense = AppPaths.IT_MGMT_AJAX_TAPE_ASSIGN_LICENSE + "?softwareId=";
-        String cmd = actionForm.getCmd();
+//        List softwareOptions = new ArrayList();
+//        String formSoftwareLicense = AppPaths.IT_MGMT_AJAX_TAPE_ASSIGN_LICENSE + "?softwareId=";
+//        String cmd = actionForm.getCmd();
 
         RowStyle ui = new RowStyle();
 
-        QueryBits query = new QueryBits();
-        query.addSortColumn(Software.NAME);
-        query.addSortColumn("license_key");
+//        QueryBits query = new QueryBits();
+//        query.addSortColumn(Software.NAME);
+//        query.addSortColumn("license_key");
 
-        List<TapeSoftwareMap> maps = tapeService.getInstalledLicense(query, tape.getId());
-        List installedLicenses = new ArrayList();
+//        List<TapeSoftwareMap> maps = tapeService.getInstalledLicense(query, tape.getId());
+//        List installedLicenses = new ArrayList();
 
         //
         // Template: StandardTemplate
         //
         StandardTemplate standardTemplate = new StandardTemplate(requestContext);
-        standardTemplate.setAttribute("softwareOptions", softwareOptions);
-        standardTemplate.setPathAttribute("formAddLicAction", AppPaths.TAPE_LICENSE_ADD_2);
-        standardTemplate.setAttribute("canRemoveLicense", Access.hasPermission(user, AppPaths.TAPE_LICENSE_REMOVE_2));
-        standardTemplate.setPathAttribute("formRemoveLicenseAction", AppPaths.TAPE_LICENSE_REMOVE_2);
+//        standardTemplate.setAttribute("softwareOptions", softwareOptions);
+//        standardTemplate.setPathAttribute("formAddLicAction", AppPaths.TAPE_LICENSE_ADD_2);
+//        standardTemplate.setAttribute("canRemoveLicense", Access.hasPermission(user, AppPaths.TAPE_LICENSE_REMOVE_2));
+//        standardTemplate.setPathAttribute("formRemoveLicenseAction", AppPaths.TAPE_LICENSE_REMOVE_2);
         standardTemplate.setAttribute("formCancelLink", Links.getCancelLink(requestContext, AppPaths.TAPE_DETAIL + "?tapeId=" + tape.getId()).getString());
-        standardTemplate.setPathAttribute("formGetSoftwareLicenseAction", formSoftwareLicense);
-        if (Access.hasPermission(user, AppPaths.SOFTWARE_AJAX_DETAILS)) {
-            standardTemplate.setPathAttribute("formLicenseAjaxAction", AppPaths.SOFTWARE_AJAX_DETAILS);
-        }
+//        standardTemplate.setPathAttribute("formGetSoftwareLicenseAction", formSoftwareLicense);
+//        if (Access.hasPermission(user, AppPaths.SOFTWARE_AJAX_DETAILS)) {
+//            standardTemplate.setPathAttribute("formLicenseAjaxAction", AppPaths.SOFTWARE_AJAX_DETAILS);
+//        }
         standardTemplate.setAttribute("colSpan", colSpan);
 
         //
         // Template: CustomFieldsTemplate
         //
-        CustomFieldsTemplate customFieldsTemplate = new CustomFieldsTemplate();
-        standardTemplate.addTemplate(customFieldsTemplate);
-        customFieldsTemplate.setObjectTypeId(ObjectTypes.TAPE);
-        customFieldsTemplate.setObjectId(tape.getId());
-        customFieldsTemplate.setObjectAttrTypeId(tape.getType());
-        customFieldsTemplate.setShowDefaultHeader(false);
+//        CustomFieldsTemplate customFieldsTemplate = new CustomFieldsTemplate();
+//        standardTemplate.addTemplate(customFieldsTemplate);
+//        customFieldsTemplate.setObjectTypeId(ObjectTypes.TAPE);
+//        customFieldsTemplate.setObjectId(tape.getId());
+//        customFieldsTemplate.setObjectAttrTypeId(tape.getType());
+//        customFieldsTemplate.setShowDefaultHeader(false);
 
         //
         // Template: HeaderTemplate
         //
         HeaderTemplate headerTemplate = standardTemplate.getHeaderTemplate();
         TapeUtils.addTapeHeaderCommands(requestContext, headerTemplate, tape.getId());
-        headerTemplate.setPageTitleKey("itMgmt.tapeDetail.header", new Object[] {tape.getName()});
+        headerTemplate.setPageTitleKey("itMgmt.tapeDetail.header", new Object[] {tape.getTapeName()});
 
-        // Assign Software link.
-        if (Access.hasPermission(user, AppPaths.TAPE_LICENSE_ADD_2)) {
-            Link link = new Link(requestContext);
-            link.setAjaxPath(AppPaths.TAPE_DETAIL + "?cmd=add&tapeId=" + tape.getId());
-            link.setTitleKey("itMgmt.cmd.softwareLicenseAssign");
-            headerTemplate.addHeaderCmds(link);
-        }
+//        // Assign Software link.
+//        if (Access.hasPermission(user, AppPaths.TAPE_LICENSE_ADD_2)) {
+//            Link link = new Link(requestContext);
+//            link.setAjaxPath(AppPaths.TAPE_DETAIL + "?cmd=add&tapeId=" + tape.getId());
+//            link.setTitleKey("itMgmt.cmd.softwareLicenseAssign");
+//            headerTemplate.addHeaderCmds(link);
+//        }
 
-        if (cmd.equals("add")) {
-            // The user is trying to add a Software, show him the Software list.
-            query = new QueryBits();
-            query.addSortColumn(TapeQueries.getOrderByColumn(Software.NAME));
+//        if (cmd.equals("add")) {
+//            // The user is trying to add a Software, show him the Software list.
+//            query = new QueryBits();
+//            query.addSortColumn(TapeQueries.getOrderByColumn(Software.NAME));
+//
+//            List<Map> softwareList = tapeService.getAvailableSoftware(query);
+//            for (Map software : softwareList) {
+//                softwareOptions.add(new LabelValueBean(software.get("software_name").toString(),
+//                        software.get("software_id").toString()));
+//            }
+//
+//            if (!softwareList.isEmpty()) {
+//                // Get the first software, we want to show licenses for the first software.
+//                LabelValueBean b = (LabelValueBean) softwareOptions.get(0);
+//                softwareId = b.getValue();
+//
+//                //
+//                // Template: FooterTemplate
+//                //
+//                FooterTemplate footerTemplate = standardTemplate.getFooterTemplate();
+//                footerTemplate.setOnloadJavascript("updateView('softwareLicensesDiv', '" + AppPaths.ROOT + formSoftwareLicense + softwareId + "');");
+//            }
+//        }
 
-            List<Map> softwareList = tapeService.getAvailableSoftware(query);
-            for (Map software : softwareList) {
-                softwareOptions.add(new LabelValueBean(software.get("software_name").toString(),
-                        software.get("software_id").toString()));
-            }
-
-            if (!softwareList.isEmpty()) {
-                // Get the first software, we want to show licenses for the first software.
-                LabelValueBean b = (LabelValueBean) softwareOptions.get(0);
-                softwareId = b.getValue();
-
-                //
-                // Template: FooterTemplate
-                //
-                FooterTemplate footerTemplate = standardTemplate.getFooterTemplate();
-                footerTemplate.setOnloadJavascript("updateView('softwareLicensesDiv', '" + AppPaths.ROOT + formSoftwareLicense + softwareId + "');");
-            }
-        }
-
-        if (!maps.isEmpty()) {
-            boolean viewSoftwareDetail = Access.hasPermission(user, AppPaths.SOFTWARE_DETAIL);
-            for (TapeSoftwareMap map : maps) {
-                Map datamap = new HashMap();
-                datamap.put("rowClass", ui.getRowClass());
-                datamap.put("mapId", map.getMapId());
-
-                Link softwareLink = new Link(requestContext);
-                softwareLink.setTitle(map.getSoftware().getName());
-
-                if (viewSoftwareDetail) {
-                    // Show the link only if user has access to the page.
-                    softwareLink.setAjaxPath(AppPaths.SOFTWARE_DETAIL + "?softwareId=" + map.getSoftwareId());
-                }
-                datamap.put("softwareName", softwareLink);
-
-                String licenseKey = HtmlUtils.encode(map.getLicense().getKey());
-                if (licenseKey.isEmpty()) {
-                    licenseKey = Localizer.getText(requestContext, "itMgmt.tapeDetail.unknownLicense");
-                }
-                datamap.put("softwareId", map.getSoftwareId());
-                datamap.put("licenseId", map.getLicenseId());
-                datamap.put("licenseKey", licenseKey);
-                datamap.put("licenseNote", SoftwareUtils.formatLicenseKey(map.getLicense().getNote()));
-                installedLicenses.add(datamap);
-            }
-            standardTemplate.setAttribute("installedLicenses", installedLicenses);
-        } else {
-            //
-            // Template: TableEmptyTemplate
-            //
-            TableEmptyTemplate empty = new TableEmptyTemplate();
-            standardTemplate.addTemplate(empty);
-            empty.setColSpan(colSpan);
-            empty.setRowText(Localizer.getText(requestContext, "itMgmt.tapeDetail.emptyTableMessage"));
-        }
+//        if (!maps.isEmpty()) {
+//            boolean viewSoftwareDetail = Access.hasPermission(user, AppPaths.SOFTWARE_DETAIL);
+//            for (TapeSoftwareMap map : maps) {
+//                Map datamap = new HashMap();
+//                datamap.put("rowClass", ui.getRowClass());
+//                datamap.put("mapId", map.getMapId());
+//
+//                Link softwareLink = new Link(requestContext);
+//                softwareLink.setTitle(map.getSoftware().getName());
+//
+//                if (viewSoftwareDetail) {
+//                    // Show the link only if user has access to the page.
+//                    softwareLink.setAjaxPath(AppPaths.SOFTWARE_DETAIL + "?softwareId=" + map.getSoftwareId());
+//                }
+//                datamap.put("softwareName", softwareLink);
+//
+//                String licenseKey = HtmlUtils.encode(map.getLicense().getKey());
+//                if (licenseKey.isEmpty()) {
+//                    licenseKey = Localizer.getText(requestContext, "itMgmt.tapeDetail.unknownLicense");
+//                }
+//                datamap.put("softwareId", map.getSoftwareId());
+//                datamap.put("licenseId", map.getLicenseId());
+//                datamap.put("licenseKey", licenseKey);
+//                datamap.put("licenseNote", SoftwareUtils.formatLicenseKey(map.getLicense().getNote()));
+//                installedLicenses.add(datamap);
+//            }
+//            standardTemplate.setAttribute("installedLicenses", installedLicenses);
+//        } else {
+//            //
+//            // Template: TableEmptyTemplate
+//            //
+//            TableEmptyTemplate empty = new TableEmptyTemplate();
+//            standardTemplate.addTemplate(empty);
+//            empty.setColSpan(colSpan);
+//            empty.setRowText(Localizer.getText(requestContext, "itMgmt.tapeDetail.emptyTableMessage"));
+//        }
 
         //
         // Template: TapeSpecTemplate
         //
         TapeSpecTemplate tmpl = new TapeSpecTemplate(tape);
         standardTemplate.addTemplate(tmpl);
-        tmpl.setPopulateLinkedContract(!cmd.equals("add"));
+//        tmpl.setPopulateLinkedContract(!cmd.equals("add"));
 
         //
         // Template: TabsTemplate
         //
-        TabsTemplate tabs = new TabsTemplate();
-        standardTemplate.addTemplate(tabs);
-        tabs.setTabList(TapeUtils.tapeTabList(tape, requestContext));
-        tabs.setTabActive(TapeUtils.TAPE_LICENSE_TAB);
+//        TabsTemplate tabs = new TabsTemplate();
+//        standardTemplate.addTemplate(tabs);
+//        tabs.setTabList(TapeUtils.tapeTabList(tape, requestContext));
+//        tabs.setTabActive(TapeUtils.TAPE_LICENSE_TAB);
 
         //
         // Template: ActionErrorsTemplate
