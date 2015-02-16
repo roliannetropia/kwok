@@ -54,15 +54,16 @@ public class TapeQueries {
      * Return all tape.
      */
     public static String selectTapeListQuery(QueryBits query) {
-        return "select at.tape_id, at.tape_name, at.serial_number, at.barcode_number, " +
-                "at.manufacturer_company_id, at.vendor_company_id, at.media_type, " +
-                "at.manufactured_date, at.location, at.retention, at.system, at.status, " +
-                "at.transaction_date, at.transaction_time, at.date_move, at.date_expire" +
+        return "select at.tape_id, at.tape_name, at.serial_number, at.barcode_number " +
+//                "at.manufacturer_company_id, at.vendor_company_id, at.media_type, " +
+//                "at.manufactured_date, at.location, at.retention, at.system, at.status, " +
+//                "at.transaction_date, at.transaction_time, at.date_move, at.date_expire" +
                 "from asset_tape_view at " +
-                "left outer join company mftr on at.manufacturer_company_id = mftr.company_id " +
-                "left outer join company vndr on at.vendor_company_id = vndr.company_id " +
-                "left outer join attribute_field_view hwloc on hwloc.attribute_field_id = at.tape_location "
-                + query.createWhereClause();
+//                "left outer join company mftr on at.manufacturer_company_id = mftr.company_id " +
+//                "left outer join company vndr on at.vendor_company_id = vndr.company_id " +
+//                "left outer join attribute_field_view hwloc on hwloc.attribute_field_id = at.tape_location "
+//                + query.createWhereClause();
+                 query.createWhereClause();
     }
 
     /**
