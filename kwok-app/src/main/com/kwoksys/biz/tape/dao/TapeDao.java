@@ -362,9 +362,11 @@ public class TapeDao extends BaseDao {
         Connection conn = getConnection();
 
         QueryHelper queryHelper = new QueryHelper(TapeQueries.insertTapeQuery());
-//        queryHelper.addOutputParam(Types.INTEGER);
+        queryHelper.addOutputParam(Types.INTEGER);
         queryHelper.addInputStringConvertNull(tape.getTapeName());
 //        queryHelper.addInputStringConvertNull("");
+        queryHelper.addInputStringConvertNull(tape.getTapeSerialNumber());
+        queryHelper.addInputStringConvertNull(tape.getTapeBarcodeNumber());
 //        queryHelper.addInputStringConvertNull(tape.getDescription());
 //        queryHelper.addInputIntegerConvertNull(tape.getManufacturerId());
 //        queryHelper.addInputIntegerConvertNull(tape.getVendorId());
@@ -376,8 +378,8 @@ public class TapeDao extends BaseDao {
 //        queryHelper.addInputInt(tape.getTapeLocation());
 //        queryHelper.addInputStringConvertNull(tape.getModelName());
 //        queryHelper.addInputStringConvertNull(tape.getModelNumber());
-        queryHelper.addInputStringConvertNull(tape.getTapeSerialNumber());
-        queryHelper.addInputStringConvertNull(tape.getTapeBarcodeNumber());
+//        queryHelper.addInputStringConvertNull(tape.getTapeSerialNumber());
+//        queryHelper.addInputStringConvertNull(tape.getTapeBarcodeNumber());
 //        if (tape.getPurchasePriceRaw() == 0) {
 //            queryHelper.addInputDoubleConvertNull(null);
 //        } else {
@@ -392,7 +394,7 @@ public class TapeDao extends BaseDao {
             queryHelper.executeProcedure(conn);
 
             // Put some values in the result.
-//            tape.setId((Integer) queryHelper.getSqlOutputs().get(0));
+            tape.setId((Integer) queryHelper.getSqlOutputs().get(0));
 
             // Update custom fields
 //            if (!tape.getCustomValues().isEmpty()) {
@@ -616,10 +618,14 @@ public class TapeDao extends BaseDao {
     private Tape newTape(ResultSet rs) throws SQLException, DatabaseException {
         Tape tape = new Tape();
         tape.setId(rs.getInt("tape_id"));
+        System.out.println("tape id: " + rs.getInt("tape_id"));
         tape.setTapeName(rs.getString("tape_name"));
+        System.out.println("tape name: "+rs.getString("tape_name"));
 //        tape.setDescription(StringUtils.replaceNull(rs.getString("tape_description")));
         tape.setTapeSerialNumber(StringUtils.replaceNull(rs.getString("serial_number")));
+        System.out.println("serial number: " + rs.getString("serial_number"));
         tape.setTapeBarcodeNumber(StringUtils.replaceNull(rs.getString("barcode_number")));
+        System.out.println("barcode number: "+rs.getString("barcode_number"));
 //        tape.setModelName(StringUtils.replaceNull(rs.getString("tape_model_name")));
 //        tape.setModelNumber(StringUtils.replaceNull(rs.getString("tape_model_number")));
 //        tape.setManufacturerId(rs.getInt("manufacturer_company_id"));
