@@ -79,9 +79,9 @@ public class TapeUtils {
     /**
      * Specify the column header for the list page.
      */
-    public static List<String> getColumnHeaderList() {
-        return ConfigManager.app.getTapeColumns();
-    }
+//    public static List<String> getColumnHeaderList() {
+//        return ConfigManager.app.getTapeColumns();
+//    }
 
 //    public static boolean isValidCostFormat(String input) {
 //        // \\d means decimal point.
@@ -204,10 +204,10 @@ public class TapeUtils {
 //        return tabList;
 //    }
 
-    public static List formatTapeList(RequestContext requestContext, List<Tape> tapeDataset, Counter counter,
-                                          String tapePath) throws Exception {
-        return formatTapeList(requestContext, tapeDataset, TapeUtils.getColumnHeaderList(), counter, tapePath);
-    }
+//    public static List formatTapeList(RequestContext requestContext, List<Tape> tapeDataset, Counter counter,
+//                                          String tapePath) throws Exception {
+//        return formatTapeList(requestContext, tapeDataset, TapeUtils.getColumnHeaderList(), counter, tapePath);
+//    }
 
     public static List formatTapeList(RequestContext requestContext, List<Tape> tapeDataset, List<String> columnHeaders,
                                       Counter counter, String tapePath) throws Exception {
