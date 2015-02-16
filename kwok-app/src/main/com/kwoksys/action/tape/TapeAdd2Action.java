@@ -40,7 +40,6 @@ import java.util.Map;
 public class TapeAdd2Action extends Action2 {
 
     public String execute() throws Exception {
-        System.out.println("pumasok na sa tape add 2 controller!");
         TapeForm actionForm = saveActionForm(new TapeForm());
 
         Tape tape = new Tape();
@@ -58,6 +57,8 @@ public class TapeAdd2Action extends Action2 {
             saveActionErrors(errors);
             return redirect(AppPaths.TAPE_ADD + "?" + RequestContext.URL_PARAM_ERROR_TRUE);
         } else {
+            System.out.println("tape id tape add 2 action: "+tape.getId());
+            System.out.println("tape name tape add 2 action: "+tape.getTapeName());
             return redirect(AppPaths.TAPE_DETAIL + "?tapeId=" + tape.getId());
         }
     }
