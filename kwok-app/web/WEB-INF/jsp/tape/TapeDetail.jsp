@@ -24,7 +24,7 @@
 <jsp:include page="/WEB-INF/jsp/tape/TapeSpecTemplate.jsp"/>
 
 <%-- The user is trying to add a Software to this Tape --%>
-<logic:equal name="form" property="cmd" value="add">
+<%--<logic:equal name="form" property="cmd" value="add">--%>
 <jsp:include page="/WEB-INF/jsp/common/template/ActionError.jsp"/>
 
 <%--<form action="${formAddLicAction}" method="post">--%>
@@ -71,50 +71,50 @@
 <%--</tr>--%>
 <%--</table>--%>
 <%--</form>--%>
-</logic:equal>
+<%--</logic:equal>--%>
 
 <p>
-<jsp:include page="/WEB-INF/jsp/common/template/CustomFieldsTableToggle.jsp"/>
+<%--<jsp:include page="/WEB-INF/jsp/common/template/CustomFieldsTableToggle.jsp"/>--%>
 
-<jsp:include page="/WEB-INF/jsp/common/template/Tabs.jsp"/>
+<%--<jsp:include page="/WEB-INF/jsp/common/template/Tabs.jsp"/>--%>
 
-<table class="listTable">
-<form action="${formRemoveLicenseAction}" method="post">
-    <html:hidden name="form" property="tapeId"/>
-    <tr class="header1">
-        <logic:equal name="canRemoveLicense" value="true">
-            <td>&nbsp;</td>
-        </logic:equal>
-        <th align="left" width="34%"><bean:message key="common.column.software_name"/></th>
-        <th align="left" width="33%"><bean:message key="common.column.license_key"/></th>
-        <th align="left" width="33%"><bean:message key="software.license.details"/></th>
-    </tr>
-    <%-- Show the data --%>
-    <logic:notEmpty name="installedLicenses">
-        <logic:iterate id="row" name="installedLicenses">
-            <tr class="${row.rowClass}">
-                <logic:equal name="canRemoveLicense" value="true">
-                    <td valign="top"><html:radio name="form" property="mapId" value="${row.mapId}"/></td>
-                </logic:equal>
-                <td valign="top"><bean:write name="row" property="softwareName" filter="false"/></td>
-                <td valign="top"><bean:write name="row" property="licenseKey" filter="false"/>
-                    <logic:notEmpty name="formLicenseAjaxAction">
-                        &nbsp;<a href="javascript:void(0);" onClick="toggleView('note${row.licenseId}');toggleViewUpdate('cf${row.licenseId}','${formLicenseAjaxAction}?softwareId=<bean:write name="row" property="softwareId"/>&licenseId=<bean:write name="row" property="licenseId"/>')"><img src="${image.magGlassIcon}"></a>
-                    </logic:notEmpty>
-                </td>
-                <td valign="top">
-                    <span id="note${row.licenseId}"><bean:write name="row" property="licenseNote" filter="false"/></span>
-                    <span id="cf${row.licenseId}" class="customFieldEmbedded" style="display:none;"></span>
-                </td>
-            </tr>
-        </logic:iterate>
-        <logic:equal name="canRemoveLicense" value="true">
-            <tr class="header1"><td colspan="${colSpan}"><input type="submit" value="<bean:message key="itMgmt.tapeDetail.removeLicenseButton"/>" onclick="return confirmSubmit('<bean:message key="common.form.confirmRemove"/>')"></td></tr>
-        </logic:equal>
-    </logic:notEmpty>
-    <%-- Show some message when there is no data --%>
-    <logic:empty name="installedLicenses">
-        <jsp:include page="/WEB-INF/jsp/common/template/TableEmpty.jsp"/>
-    </logic:empty>
-</form>
-</table>
+<%--<table class="listTable">--%>
+<%--<form action="${formRemoveLicenseAction}" method="post">--%>
+    <%--<html:hidden name="form" property="tapeId"/>--%>
+    <%--<tr class="header1">--%>
+        <%--<logic:equal name="canRemoveLicense" value="true">--%>
+            <%--<td>&nbsp;</td>--%>
+        <%--</logic:equal>--%>
+        <%--<th align="left" width="34%"><bean:message key="common.column.software_name"/></th>--%>
+        <%--<th align="left" width="33%"><bean:message key="common.column.license_key"/></th>--%>
+        <%--<th align="left" width="33%"><bean:message key="software.license.details"/></th>--%>
+    <%--</tr>--%>
+    <%--&lt;%&ndash; Show the data &ndash;%&gt;--%>
+    <%--<logic:notEmpty name="installedLicenses">--%>
+        <%--<logic:iterate id="row" name="installedLicenses">--%>
+            <%--<tr class="${row.rowClass}">--%>
+                <%--<logic:equal name="canRemoveLicense" value="true">--%>
+                    <%--<td valign="top"><html:radio name="form" property="mapId" value="${row.mapId}"/></td>--%>
+                <%--</logic:equal>--%>
+                <%--<td valign="top"><bean:write name="row" property="softwareName" filter="false"/></td>--%>
+                <%--<td valign="top"><bean:write name="row" property="licenseKey" filter="false"/>--%>
+                    <%--<logic:notEmpty name="formLicenseAjaxAction">--%>
+                        <%--&nbsp;<a href="javascript:void(0);" onClick="toggleView('note${row.licenseId}');toggleViewUpdate('cf${row.licenseId}','${formLicenseAjaxAction}?softwareId=<bean:write name="row" property="softwareId"/>&licenseId=<bean:write name="row" property="licenseId"/>')"><img src="${image.magGlassIcon}"></a>--%>
+                    <%--</logic:notEmpty>--%>
+                <%--</td>--%>
+                <%--<td valign="top">--%>
+                    <%--<span id="note${row.licenseId}"><bean:write name="row" property="licenseNote" filter="false"/></span>--%>
+                    <%--<span id="cf${row.licenseId}" class="customFieldEmbedded" style="display:none;"></span>--%>
+                <%--</td>--%>
+            <%--</tr>--%>
+        <%--</logic:iterate>--%>
+        <%--<logic:equal name="canRemoveLicense" value="true">--%>
+            <%--<tr class="header1"><td colspan="${colSpan}"><input type="submit" value="<bean:message key="itMgmt.tapeDetail.removeLicenseButton"/>" onclick="return confirmSubmit('<bean:message key="common.form.confirmRemove"/>')"></td></tr>--%>
+        <%--</logic:equal>--%>
+    <%--</logic:notEmpty>--%>
+    <%--&lt;%&ndash; Show some message when there is no data &ndash;%&gt;--%>
+    <%--<logic:empty name="installedLicenses">--%>
+        <%--<jsp:include page="/WEB-INF/jsp/common/template/TableEmpty.jsp"/>--%>
+    <%--</logic:empty>--%>
+<%--</form>--%>
+<%--</table>--%>
