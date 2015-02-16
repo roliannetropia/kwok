@@ -82,120 +82,130 @@ public class TapeSpecTemplate extends BaseTemplate {
         detailTableTemplate.addTd(td);
 
         td = detailTableTemplate.new Td();
-        td.setHeaderKey("common.column.tape_description");
-        td.setValue(HtmlUtils.formatMultiLineDisplay(tape.getDescription()));
-        detailTableTemplate.addTd(td);
-
-        td = detailTableTemplate.new Td();
-        td.setHeaderKey("common.column.tape_manufacturer_name");
-        td.setValue(Links.getCompanyDetailsLink(requestContext, tape.getManufacturerName(),
-                tape.getManufacturerId()).getString());
-        detailTableTemplate.addTd(td);
-
-        td = detailTableTemplate.new Td();
-        td.setHeaderKey("common.column.tape_vendor_name");
-        td.setValue(Links.getCompanyDetailsLink(requestContext, tape.getVendorName(), tape.getVendorId()).getString());
-        detailTableTemplate.addTd(td);
-
-        AttributeField attrField = attributeManager.getAttrFieldMapCache(Attributes.TAPE_TYPE).get(tape.getType());
-
-        td = detailTableTemplate.new Td();
-        td.setHeaderKey("common.column.tape_type");
-        td.setValue(Links.getAttrFieldIcon(requestContext, attrField).getString());
-        detailTableTemplate.addTd(td);
-
-        td = detailTableTemplate.new Td();
-        td.setHeaderKey("common.column.tape_status");
-        td.setValue(HtmlUtils.encode(attributeManager.getAttrFieldNameCache(Attributes.TAPE_STATUS, tape.getStatus())));
-        detailTableTemplate.addTd(td);
-
-        td = detailTableTemplate.new Td();
-        td.setHeaderKey("common.column.tape_model_name");
-        td.setValue(HtmlUtils.encode(tape.getModelName()));
-        detailTableTemplate.addTd(td);
-
-        td = detailTableTemplate.new Td();
-        td.setHeaderKey("common.column.tape_model_number");
-        td.setValue(HtmlUtils.encode(tape.getModelNumber()));
-        detailTableTemplate.addTd(td);
-
-        td = detailTableTemplate.new Td();
         td.setHeaderKey("common.column.tape_serial_number");
-        td.setValue(HtmlUtils.encode(tape.getSerialNumber()));
+        td.setValue(HtmlUtils.formatMultiLineDisplay(tape.getTapeSerialNumber()));
         detailTableTemplate.addTd(td);
 
         td = detailTableTemplate.new Td();
-        td.setHeaderKey("common.column.tape_purchase_price");
-        td.setValue(CurrencyUtils.formatCurrency(tape.getPurchasePriceRaw(), ConfigManager.system.getCurrencySymbol()));
+        td.setHeaderKey("common.column.tape_barcode_number");
+        td.setValue(HtmlUtils.formatMultiLineDisplay(tape.getTapeBarcodeNumber()));
         detailTableTemplate.addTd(td);
 
-        td = detailTableTemplate.new Td();
-        td.setHeaderKey("common.column.tape_purchase_date");
-        td.setValue(DatetimeUtils.toShortDate(tape.getTapePurchaseDate()));
-        detailTableTemplate.addTd(td);
+//        td = detailTableTemplate.new Td();
+//        td.setHeaderKey("common.column.tape_description");
+//        td.setValue(HtmlUtils.formatMultiLineDisplay(tape.getDescription()));
+//        detailTableTemplate.addTd(td);
+//
+//        td = detailTableTemplate.new Td();
+//        td.setHeaderKey("common.column.tape_manufacturer_name");
+//        td.setValue(Links.getCompanyDetailsLink(requestContext, tape.getManufacturerName(),
+//                tape.getManufacturerId()).getString());
+//        detailTableTemplate.addTd(td);
+//
+//        td = detailTableTemplate.new Td();
+//        td.setHeaderKey("common.column.tape_vendor_name");
+//        td.setValue(Links.getCompanyDetailsLink(requestContext, tape.getVendorName(), tape.getVendorId()).getString());
+//        detailTableTemplate.addTd(td);
 
-        td = detailTableTemplate.new Td();
-        td.setHeaderKey("common.column.tape_warranty_expire_date");
-        td.setValue(TapeUtils.formatWarrantyExpirationDate(requestContext, requestContext.getSysdate().getTime(),
-                tape.getWarrantyExpireDate()));
-        detailTableTemplate.addTd(td);
+//        AttributeField attrField = attributeManager.getAttrFieldMapCache(Attributes.TAPE_TYPE).get(tape.getType());
+//
+//        td = detailTableTemplate.new Td();
+//        td.setHeaderKey("common.column.tape_type");
+//        td.setValue(Links.getAttrFieldIcon(requestContext, attrField).getString());
+//        detailTableTemplate.addTd(td);
+//
+//        td = detailTableTemplate.new Td();
+//        td.setHeaderKey("common.column.tape_status");
+//        td.setValue(HtmlUtils.encode(attributeManager.getAttrFieldNameCache(Attributes.TAPE_STATUS, tape.getStatus())));
+//        detailTableTemplate.addTd(td);
+//
+//        td = detailTableTemplate.new Td();
+//        td.setHeaderKey("common.column.tape_model_name");
+//        td.setValue(HtmlUtils.encode(tape.getModelName()));
+//        detailTableTemplate.addTd(td);
+//
+//        td = detailTableTemplate.new Td();
+//        td.setHeaderKey("common.column.tape_model_number");
+//        td.setValue(HtmlUtils.encode(tape.getModelNumber()));
+//        detailTableTemplate.addTd(td);
+//
+//        td = detailTableTemplate.new Td();
+//        td.setHeaderKey("common.column.tape_serial_number");
+//        td.setValue(HtmlUtils.encode(tape.getSerialNumber()));
+//        detailTableTemplate.addTd(td);
+//
+//        td = detailTableTemplate.new Td();
+//        td.setHeaderKey("common.column.tape_purchase_price");
+//        td.setValue(CurrencyUtils.formatCurrency(tape.getPurchasePriceRaw(), ConfigManager.system.getCurrencySymbol()));
+//        detailTableTemplate.addTd(td);
+//
+//        td = detailTableTemplate.new Td();
+//        td.setHeaderKey("common.column.tape_purchase_date");
+//        td.setValue(DatetimeUtils.toShortDate(tape.getTapePurchaseDate()));
+//        detailTableTemplate.addTd(td);
+//
+//        td = detailTableTemplate.new Td();
+//        td.setHeaderKey("common.column.tape_warranty_expire_date");
+//        td.setValue(TapeUtils.formatWarrantyExpirationDate(requestContext, requestContext.getSysdate().getTime(),
+//                tape.getWarrantyExpireDate()));
+//        detailTableTemplate.addTd(td);
+//
+//        td = detailTableTemplate.new Td();
+//        td.setHeaderKey("common.column.tape_last_service_date");
+//        td.setValue(tape.getLastServicedOn());
+//        detailTableTemplate.addTd(td);
+//
+//        td = detailTableTemplate.new Td();
+//        td.setHeaderKey("common.column.tape_location");
+//        td.setValue(HtmlUtils.encode(attributeManager.getAttrFieldNameCache(Attributes.TAPE_LOCATION, tape.getLocation())));
+//        detailTableTemplate.addTd(td);
+//
+//        td = detailTableTemplate.new Td();
+//        td.setHeaderKey("common.column.tape_owner_name");
+//        boolean canViewUserPage = Access.hasPermission(accessUser, AppPaths.ADMIN_USER_DETAIL);
+//        td.setValue(Links.getUserIconLink(requestContext, tape.getOwner(), canViewUserPage, true).getString());
+//        detailTableTemplate.addTd(td);
+//
+//        td = detailTableTemplate.new Td();
+//        td.setHeaderKey("common.column.creator");
+//        td.setValue(WidgetUtils.formatCreatorInfo(requestContext, tape.getCreationDate(), tape.getCreator()));
+//        detailTableTemplate.addTd(td);
+//
+//        td = detailTableTemplate.new Td();
+//        td.setHeaderKey("common.column.modifier");
+//        td.setValue(WidgetUtils.formatCreatorInfo(requestContext, tape.getModificationDate(), tape.getModifier()));
+//        detailTableTemplate.addTd(td);
 
-        td = detailTableTemplate.new Td();
-        td.setHeaderKey("common.column.tape_last_service_date");
-        td.setValue(tape.getLastServicedOn());
-        detailTableTemplate.addTd(td);
+//        if (populateLinkedContract) {
+//            boolean canViewContract = Access.hasPermission(accessUser, AppPaths.CONTRACTS_DETAIL);
+//
+//            // Get linked contracts
+//            TapeService tapeService = ServiceProvider.getTapeService(requestContext);
+//
+//            QueryBits contractQuery = new QueryBits();
+//            contractQuery.addSortColumn(ContractQueries.getOrderByColumn(Contract.NAME));
+//
+//            List<Contract> contractDataset = tapeService.getLinkedContracts(contractQuery, tape.getId());
+//
+//            StringBuilder contracts = new StringBuilder();
+//            for (Contract contract: contractDataset) {
+//                Link link = new Link(requestContext);
+//                link.setTitle(contract.getName());
+//
+//                if (canViewContract) {
+//                    link.setAjaxPath(AppPaths.CONTRACTS_DETAIL + "?contractId=" + contract.getId());
+//                }
+//                if (contracts.length() != 0) {
+//                    contracts.append(", ");
+//                }
+//                contracts.append(link.getString());
+//            }
+//            if (contracts.length() != 0) {
+//	            request.setAttribute("TapeSpecTemplate_linkedContracts", contracts);
+//            }
+//        }
 
-        td = detailTableTemplate.new Td();
-        td.setHeaderKey("common.column.tape_location");
-        td.setValue(HtmlUtils.encode(attributeManager.getAttrFieldNameCache(Attributes.TAPE_LOCATION, tape.getLocation())));
-        detailTableTemplate.addTd(td);
-
-        td = detailTableTemplate.new Td();
-        td.setHeaderKey("common.column.tape_owner_name");
-        boolean canViewUserPage = Access.hasPermission(accessUser, AppPaths.ADMIN_USER_DETAIL);
-        td.setValue(Links.getUserIconLink(requestContext, tape.getOwner(), canViewUserPage, true).getString());
-        detailTableTemplate.addTd(td);
-
-        td = detailTableTemplate.new Td();
-        td.setHeaderKey("common.column.creator");
-        td.setValue(WidgetUtils.formatCreatorInfo(requestContext, tape.getCreationDate(), tape.getCreator()));
-        detailTableTemplate.addTd(td);
-
-        td = detailTableTemplate.new Td();
-        td.setHeaderKey("common.column.modifier");
-        td.setValue(WidgetUtils.formatCreatorInfo(requestContext, tape.getModificationDate(), tape.getModifier()));
-        detailTableTemplate.addTd(td);
-
-        if (populateLinkedContract) {
-            boolean canViewContract = Access.hasPermission(accessUser, AppPaths.CONTRACTS_DETAIL);
-
-            // Get linked contracts
-            TapeService tapeService = ServiceProvider.getTapeService(requestContext);
-
-            QueryBits contractQuery = new QueryBits();
-            contractQuery.addSortColumn(ContractQueries.getOrderByColumn(Contract.NAME));
-
-            List<Contract> contractDataset = tapeService.getLinkedContracts(contractQuery, tape.getId());
-
-            StringBuilder contracts = new StringBuilder();
-            for (Contract contract: contractDataset) {
-                Link link = new Link(requestContext);
-                link.setTitle(contract.getName());
-
-                if (canViewContract) {
-                    link.setAjaxPath(AppPaths.CONTRACTS_DETAIL + "?contractId=" + contract.getId());
-                }
-                if (contracts.length() != 0) {
-                    contracts.append(", ");
-                }
-                contracts.append(link.getString());
-            }
-            if (contracts.length() != 0) {
-	            request.setAttribute("TapeSpecTemplate_linkedContracts", contracts);
-            }
-        }
-
-        headerText = Localizer.getText(requestContext, "itMgmt.tapeDetail.header", new String[]{tape.getName()});
+        headerText = Localizer.getText(requestContext, "itMgmt.tapeDetail.header", new String[]{tape.getTapeName()});
     }
 
     @Override
@@ -203,9 +213,9 @@ public class TapeSpecTemplate extends BaseTemplate {
         return "/WEB-INF/jsp/tape/TapeSpecTemplate.jsp";
     }
 
-    public void setPopulateLinkedContract(boolean populateLinkedContract) {
-        this.populateLinkedContract = populateLinkedContract;
-    }
+//    public void setPopulateLinkedContract(boolean populateLinkedContract) {
+//        this.populateLinkedContract = populateLinkedContract;
+//    }
 
     public int getColumns() {
         return columns;
