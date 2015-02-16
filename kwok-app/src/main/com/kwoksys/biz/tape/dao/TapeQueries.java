@@ -204,7 +204,7 @@ public class TapeQueries {
      */
 //  todo eto yung nag cacall ng function
     public static String insertTapeQuery() {
-        return "{call sp_tape_add(?,?,?)}";
+        return "{call sp_tape_add(?,?,?,?)}";
     }
 
     /**
