@@ -618,7 +618,8 @@ public class TapeDao extends BaseDao {
         tape.setId(rs.getInt("tape_id"));
         tape.setTapeName(rs.getString("tape_name"));
 //        tape.setDescription(StringUtils.replaceNull(rs.getString("tape_description")));
-        tape.setTapeSerialNumber(StringUtils.replaceNull(rs.getString("tape_serial_number")));
+        tape.setTapeSerialNumber(StringUtils.replaceNull(rs.getString("serial_number")));
+        tape.setTapeSerialNumber(StringUtils.replaceNull(rs.getString("barcode_number")));
 //        tape.setModelName(StringUtils.replaceNull(rs.getString("tape_model_name")));
 //        tape.setModelNumber(StringUtils.replaceNull(rs.getString("tape_model_number")));
 //        tape.setManufacturerId(rs.getInt("manufacturer_company_id"));
