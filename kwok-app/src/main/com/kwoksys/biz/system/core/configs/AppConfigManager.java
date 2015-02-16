@@ -87,8 +87,17 @@ public class AppConfigManager extends BaseConfigManager {
     private List<String> hardwareImportExportColumns;
     private int hardwareWarrantyExpireCountdown;
     private boolean isCheckUniqueHardwareName;
-    private boolean isCheckUniqueTapeName;
     private boolean isCheckUniqueSerialNumber;
+
+    /*
+     * Tape module
+     */
+    private int tapeRowsToShow;
+    private List<String> tapeColumns;
+    private List<String> tapeExportColumns;
+    private List<String> tapeImportExportColumns;
+    private boolean isCheckUniqueTapeName;
+    private boolean isCheckUniqueTapeSerialNumber;
 
     /*
      * Knowledge Base module
@@ -194,8 +203,21 @@ public class AppConfigManager extends BaseConfigManager {
         hardwareLicenseExportColumns = Arrays.asList("hardware_id", "hardware_name", "software_name", "license_key", "license_note");
         hardwareWarrantyExpireCountdown = getInt(SystemConfigNames.HARDWARE_WARRANTY_EXPIRE_COUNTDOWN);
         isCheckUniqueHardwareName = getBoolean(SystemConfigNames.HARDWARE_CHECK_UNIQUE_NAME);
-        isCheckUniqueTapeName = getBoolean(SystemConfigNames.TAPE_CHECK_UNIQUE_NAME);
         isCheckUniqueSerialNumber = getBoolean(SystemConfigNames.HARDWARE_CHECK_SERIAL_NUMBER);
+
+//        todo all about tape columns
+        /*
+         * Tape module
+         */
+        tapeRowsToShow = getInt(SystemConfigNames.TAPE_ROWS);
+        tapeColumns = Arrays.asList(getStringArray(SystemConfigNames.TAPE_COLUMNS));
+        tapeExportColumns = Arrays.asList("tape_id", "tape_name","tape_serial_number","tape_barcode_number");
+
+        // Another set of columns that are for exporting in importable format.
+        tapeImportExportColumns = Arrays.asList("tape_id", "tape_name", "tape_serial_number","tape_barcode_number");
+
+        isCheckUniqueTapeName = getBoolean(SystemConfigNames.TAPE_CHECK_UNIQUE_NAME);
+        isCheckUniqueTapeSerialNumber = getBoolean(SystemConfigNames.TAPE_CHECK_SERIAL_NUMBER);
 
         /**
          * Knowledge Base module
@@ -275,6 +297,9 @@ public class AppConfigManager extends BaseConfigManager {
 
     public List<String> getHardwareColumns() {
         return hardwareColumns;
+    }
+    public List<String> getTapeColumns() {
+        return tapeColumns;
     }
     public String[] getSoftwareColumns() {
         return softwareColumns;
