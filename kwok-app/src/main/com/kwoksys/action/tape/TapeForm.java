@@ -138,14 +138,6 @@ public class TapeForm extends BaseObjectForm {
     public Integer getCopyTapeId() {
         return copyTapeId;
     }
-
-//    public String getTapeModelName() {
-//        return tapeModelName;
-//    }
-
-//    public String getTapeModelNumber() {
-//        return tapeModelNumber;
-//    }
     public String getTapeName() {
     return tapeName;
 }
