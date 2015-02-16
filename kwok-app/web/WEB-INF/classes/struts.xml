@@ -473,9 +473,9 @@
             <result name="success">/WEB-INF/jsp/tape/TapeAdd.jsp</result>
         </action>
         <action name="tape/add-2" class="com.kwoksys.action.tape.TapeAdd2Action"/>
-        <!--<action name="tape/detail" class="com.kwoksys.action.tape.TapeDetailAction">-->
-            <!--<result name="success">/WEB-INF/jsp/tape/TapeDetail.jsp</result>-->
-        <!--</action>-->
+        <action name="tape/detail" class="com.kwoksys.action.tape.TapeDetailAction">
+            <result name="success">/WEB-INF/jsp/tape/TapeDetail.jsp</result>
+        </action>
         <!--<action name="tape/delete" class="com.kwoksys.action.tape.TapeDeleteAction"/>-->
         <!--<action name="tape/delete-2" class="com.kwoksys.action.tape.TapeDelete2Action"/>-->
         <!--<action name="tape/edit" class="com.kwoksys.action.tape.TapeEditAction">-->
