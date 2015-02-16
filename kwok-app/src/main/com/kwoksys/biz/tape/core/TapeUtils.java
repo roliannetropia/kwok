@@ -52,19 +52,16 @@ public class TapeUtils {
     public static final String TAPE_MEMBER_TAB = "memberTab";
     public static final String TAPE_CONTACT_TAB = "contactTab";
 
+//    todo default columns in tape details
     public static String[] getTapeDefaultColumns() {
-        return new String[] {Tape.ROWNUM, Tape.ID, Tape.TAPE_NAME, Tape.TYPE, Tape.STATUS, Tape.MODEL_NAME,
-                Tape.MODEL_NUMBER, Tape.SERIAL_NUMBER, Tape.LOCATION, Tape.WARRANTY_EXPIRATION,
-                Tape.SERVICE_DATE, Tape.OWNER_NAME};
+        return new String[] {Tape.ROWNUM, Tape.ID, Tape.TAPE_NAME, Tape.TAPE_SERIAL_NUMBER, Tape.TAPE_BARCODE_NUMBER};
     }
 
     /**
      * Speficify the sortable columns allowed.
      */
     public static List<String> getSortableColumns() {
-        return Arrays.asList(Tape.ID, Tape.TAPE_NAME, Tape.MODEL_NAME, Tape.MODEL_NUMBER,
-                Tape.SERIAL_NUMBER, Tape.WARRANTY_EXPIRATION, Tape.SERVICE_DATE, Tape.OWNER_NAME,
-                Tape.LOCATION);
+        return Arrays.asList(Tape.ID, Tape.TAPE_NAME, Tape.TAPE_SERIAL_NUMBER, Tape.TAPE_BARCODE_NUMBER);
     }
 
     /**
@@ -86,15 +83,15 @@ public class TapeUtils {
         return ConfigManager.app.getTapeColumns();
     }
 
-    public static boolean isValidCostFormat(String input) {
-        // \\d means decimal point.
-        if (input != null && !input.isEmpty()) {
-            String pattern = "(\\d{1,8})|(\\d{1,8}\\.\\d{0,2})";
-            return Pattern.matches(pattern, input);
-        } else {
-            return true;
-        }
-    }
+//    public static boolean isValidCostFormat(String input) {
+//        // \\d means decimal point.
+//        if (input != null && !input.isEmpty()) {
+//            String pattern = "(\\d{1,8})|(\\d{1,8}\\.\\d{0,2})";
+//            return Pattern.matches(pattern, input);
+//        } else {
+//            return true;
+//        }
+//    }
 
     public static void addTapeHeaderCommands(RequestContext requestContext, HeaderTemplate headerTemplate, Integer tapeId) throws DatabaseException {
         AccessUser accessUser = requestContext.getUser();
@@ -134,78 +131,78 @@ public class TapeUtils {
     /**
      * This is for generating tape tabs.
      *
-     * @param request
-     * @param tape
+//     * @param request
+//     * @param tape
      * @return ..
      */
-    public static List tapeTabList(Tape tape, RequestContext requestContext) throws DatabaseException {
-        AccessUser user = requestContext.getUser();
-
-        List tabList = new ArrayList();
-
-        // Link to Tape assigned software tab.
-        if (Access.hasPermission(user, AppPaths.TAPE_DETAIL)) {
-            Map tabMap = new HashMap();
-            tabMap.put("tabName", TAPE_LICENSE_TAB);
-            tabMap.put("tabPath", AppPaths.TAPE_DETAIL + "?tapeId=" + tape.getId());
-            tabMap.put("tabText", Localizer.getText(requestContext, "itMgmt.tab.tapeAssignedSoftware",
-                    new Object[]{tape.getCountSoftware()}));
-            tabList.add(tabMap);
-        }
-
-        // Link to Tape components tab.
-        if (Access.hasPermission(user, AppPaths.TAPE_COMP)) {
-            Map tabMap = new HashMap();
-            tabMap.put("tabName", TAPE_COMP_TAB);
-            tabMap.put("tabPath", AppPaths.TAPE_COMP + "?tapeId=" + tape.getId());
-            tabMap.put("tabText", Localizer.getText(requestContext, "itMgmt.tab.tapeComponents",
-                    new Object[] {tape.getCountComponent()}));
-            tabList.add(tabMap);
-        }
-
-        // Link to Tape attachments tab.
-        if (Access.hasPermission(user, AppPaths.TAPE_FILE)) {
-            Map tabMap = new HashMap();
-            tabMap.put("tabName", TAPE_FILE_TAB);
-            tabMap.put("tabPath", AppPaths.TAPE_FILE + "?tapeId=" + tape.getId());
-            tabMap.put("tabText", Localizer.getText(requestContext, "itMgmt.tab.tapeFile",
-                    new Object[] {tape.getCountFile()}));
-            tabList.add(tabMap);
-        }
-
-        // Link to Tape association tab.
-        if (Access.hasPermission(user, AppPaths.TAPE_MEMBER)) {
-            Map tabMap = new HashMap();
-            tabMap.put("tabName", TAPE_MEMBER_TAB);
-            tabMap.put("tabPath", AppPaths.TAPE_MEMBER + "?tapeId=" + tape.getId());
-            tabMap.put("tabText", Localizer.getText(requestContext, "tape.tab.tapeMembers"));
-            tabList.add(tabMap);
-        }
-
-        // Link to Tape Issues tab.
-        if (Access.hasPermission(user, AppPaths.TAPE_ISSUE)) {
-            Map tabMap = new HashMap();
-            tabMap.put("tabName", TAPE_ISSUE_TAB);
-            tabMap.put("tabPath", AppPaths.TAPE_ISSUE + "?tapeId=" + tape.getId());
-            tabMap.put("tabText", Localizer.getText(requestContext, "itMgmt.tab.tapeIssues"));
-            tabList.add(tabMap);
-        }
-
-        // Link to Tape Contacts tab.
-        if (Access.hasPermission(user, AppPaths.TAPE_CONTACTS)) {
-            SystemService systemService = ServiceProvider.getSystemService(requestContext);
-            List linkedTypes = Arrays.asList(String.valueOf(ObjectTypes.CONTACT));
-            int relationshipCount = systemService.getLinkedObjectMapCount(linkedTypes, tape.getId(), ObjectTypes.TAPE);
-
-            Map tabMap = new HashMap();
-            tabMap.put("tabName", TAPE_CONTACT_TAB);
-            tabMap.put("tabPath", AppPaths.TAPE_CONTACTS + "?tapeId=" + tape.getId());
-            tabMap.put("tabText", Localizer.getText(requestContext, "common.linking.tab.linkedContacts",
-                    new Object[] {relationshipCount}));
-            tabList.add(tabMap);
-        }
-        return tabList;
-    }
+//    public static List tapeTabList(Tape tape, RequestContext requestContext) throws DatabaseException {
+//        AccessUser user = requestContext.getUser();
+//
+//        List tabList = new ArrayList();
+//
+//        // Link to Tape assigned software tab.
+////        if (Access.hasPermission(user, AppPaths.TAPE_DETAIL)) {
+////            Map tabMap = new HashMap();
+////            tabMap.put("tabName", TAPE_LICENSE_TAB);
+////            tabMap.put("tabPath", AppPaths.TAPE_DETAIL + "?tapeId=" + tape.getId());
+////            tabMap.put("tabText", Localizer.getText(requestContext, "itMgmt.tab.tapeAssignedSoftware",
+////                    new Object[]{tape.getCountSoftware()}));
+////            tabList.add(tabMap);
+////        }
+//
+//        // Link to Tape components tab.
+////        if (Access.hasPermission(user, AppPaths.TAPE_COMP)) {
+////            Map tabMap = new HashMap();
+////            tabMap.put("tabName", TAPE_COMP_TAB);
+////            tabMap.put("tabPath", AppPaths.TAPE_COMP + "?tapeId=" + tape.getId());
+////            tabMap.put("tabText", Localizer.getText(requestContext, "itMgmt.tab.tapeComponents",
+////                    new Object[] {tape.getCountComponent()}));
+////            tabList.add(tabMap);
+////        }
+//
+//        // Link to Tape attachments tab.
+////        if (Access.hasPermission(user, AppPaths.TAPE_FILE)) {
+////            Map tabMap = new HashMap();
+////            tabMap.put("tabName", TAPE_FILE_TAB);
+////            tabMap.put("tabPath", AppPaths.TAPE_FILE + "?tapeId=" + tape.getId());
+////            tabMap.put("tabText", Localizer.getText(requestContext, "itMgmt.tab.tapeFile",
+////                    new Object[] {tape.getCountFile()}));
+////            tabList.add(tabMap);
+////        }
+//
+//        // Link to Tape association tab.
+////        if (Access.hasPermission(user, AppPaths.TAPE_MEMBER)) {
+////            Map tabMap = new HashMap();
+////            tabMap.put("tabName", TAPE_MEMBER_TAB);
+////            tabMap.put("tabPath", AppPaths.TAPE_MEMBER + "?tapeId=" + tape.getId());
+////            tabMap.put("tabText", Localizer.getText(requestContext, "tape.tab.tapeMembers"));
+////            tabList.add(tabMap);
+////        }
+//
+//        // Link to Tape Issues tab.
+////        if (Access.hasPermission(user, AppPaths.TAPE_ISSUE)) {
+////            Map tabMap = new HashMap();
+////            tabMap.put("tabName", TAPE_ISSUE_TAB);
+////            tabMap.put("tabPath", AppPaths.TAPE_ISSUE + "?tapeId=" + tape.getId());
+////            tabMap.put("tabText", Localizer.getText(requestContext, "itMgmt.tab.tapeIssues"));
+////            tabList.add(tabMap);
+////        }
+//
+//        // Link to Tape Contacts tab.
+////        if (Access.hasPermission(user, AppPaths.TAPE_CONTACTS)) {
+////            SystemService systemService = ServiceProvider.getSystemService(requestContext);
+////            List linkedTypes = Arrays.asList(String.valueOf(ObjectTypes.CONTACT));
+////            int relationshipCount = systemService.getLinkedObjectMapCount(linkedTypes, tape.getId(), ObjectTypes.TAPE);
+////
+////            Map tabMap = new HashMap();
+////            tabMap.put("tabName", TAPE_CONTACT_TAB);
+////            tabMap.put("tabPath", AppPaths.TAPE_CONTACTS + "?tapeId=" + tape.getId());
+////            tabMap.put("tabText", Localizer.getText(requestContext, "common.linking.tab.linkedContacts",
+////                    new Object[] {relationshipCount}));
+////            tabList.add(tabMap);
+////        }
+//        return tabList;
+//    }
 
     public static List formatTapeList(RequestContext requestContext, List<Tape> tapeDataset, Counter counter,
                                           String tapePath) throws Exception {
@@ -228,7 +225,7 @@ public class TapeUtils {
 
         boolean hasTapeAccess = Access.hasPermission(user, tapePath);
         boolean hasUserDetailAccess = Access.hasPermission(user, AppPaths.ADMIN_USER_DETAIL);
-        boolean hasHwAjaxAccess = Access.hasPermission(user, AppPaths.IT_MGMT_AJAX_GET_TAPE_DETAIL);
+//        boolean hasHwAjaxAccess = Access.hasPermission(user, AppPaths.IT_MGMT_AJAX_GET_TAPE_DETAIL);
 
         AttributeManager attributeManager = new AttributeManager(requestContext);
 
@@ -245,53 +242,56 @@ public class TapeUtils {
                 } else if (column.equals(Tape.TAPE_NAME)) {
                     if (hasTapeAccess) {
                         Link link = new Link(requestContext);
-                        link.setTitle(tape.getName());
+                        link.setTitle(tape.getTapeName());
                         link.setAjaxPath(tapePath + "?tapeId=" + tape.getId());
                         String tempTapeName = link.getString();
 
-                        if (hasHwAjaxAccess) {
-                            link = new Link(requestContext);
-                            link.setJavascript("tapePopup(this," + tape.getId() + ")");
-                            link.setImgSrc(Image.getInstance().getMagGlassIcon());
-                            tempTapeName += "&nbsp;" + link.getString();
-                        }
+//                        if (hasHwAjaxAccess) {
+//                            link = new Link(requestContext);
+//                            link.setJavascript("tapePopup(this," + tape.getId() + ")");
+//                            link.setImgSrc(Image.getInstance().getMagGlassIcon());
+//                            tempTapeName += "&nbsp;" + link.getString();
+//                        }
                         columns.add(tempTapeName);
                     } else {
-                        columns.add(HtmlUtils.encode(tape.getName()));
+                        columns.add(HtmlUtils.encode(tape.getTapeName()));
                     }
 
-                } else if (column.equals(Tape.OWNER_NAME)) {
-                    columns.add(Links.getUserIconLink(requestContext, tape.getOwner(), hasUserDetailAccess, true));
+//                } else if (column.equals(Tape.OWNER_NAME)) {
+//                    columns.add(Links.getUserIconLink(requestContext, tape.getOwner(), hasUserDetailAccess, true));
+//
+//                } else if (column.equals(Tape.MODEL_NAME)) {
+//                    columns.add(HtmlUtils.encode(tape.getModelName()));
+//
+//                } else if (column.equals(Tape.MODEL_NUMBER)) {
+//                    columns.add(HtmlUtils.encode(tape.getModelNumber()));
+//
+                } else if (column.equals(Tape.TAPE_SERIAL_NUMBER)) {
+                    columns.add(HtmlUtils.encode(tape.getTapeSerialNumber()));
 
-                } else if (column.equals(Tape.MODEL_NAME)) {
-                    columns.add(HtmlUtils.encode(tape.getModelName()));
+                } else if (column.equals(Tape.TAPE_BARCODE_NUMBER)) {
+                    columns.add(HtmlUtils.encode(tape.getTapeBarcodeNumber()));
 
-                } else if (column.equals(Tape.MODEL_NUMBER)) {
-                    columns.add(HtmlUtils.encode(tape.getModelNumber()));
+//                } else if (column.equals(Tape.WARRANTY_EXPIRATION)) {
+//                    columns.add(com.kwoksys.biz.tape.core.TapeUtils.formatWarrantyExpirationDate(requestContext, unixTimestamp,
+//                            tape.getWarrantyExpireDate()));
+//
+//                } else if (column.equals(Tape.SERVICE_DATE)) {
+//                    columns.add(tape.getLastServicedOn());
 
-                } else if (column.equals(Tape.SERIAL_NUMBER)) {
-                    columns.add(HtmlUtils.encode(tape.getSerialNumber()));
-
-                } else if (column.equals(Tape.WARRANTY_EXPIRATION)) {
-                    columns.add(com.kwoksys.biz.tape.core.TapeUtils.formatWarrantyExpirationDate(requestContext, unixTimestamp,
-                            tape.getWarrantyExpireDate()));
-
-                } else if (column.equals(Tape.SERVICE_DATE)) {
-                    columns.add(tape.getLastServicedOn());
-
-                } else if (column.equals(Tape.STATUS)) {
-                    AttributeField attrField = attributeManager.getAttrFieldMapCache(
-                            Attributes.TAPE_STATUS).get(tape.getStatus());
-                    columns.add(Links.getAttrFieldIcon(requestContext, attrField));
-
-                } else if (column.equals(Tape.TYPE)) {
-                    AttributeField attrField = attributeManager.getAttrFieldMapCache(
-                            Attributes.TAPE_TYPE).get(tape.getType());
-                    columns.add(Links.getAttrFieldIcon(requestContext, attrField));
-
-                } else if (column.equals(Tape.LOCATION)) {
-                    columns.add(HtmlUtils.encode(attributeManager.getAttrFieldNameCache(Attributes.TAPE_LOCATION,
-                            tape.getLocation())));
+//                } else if (column.equals(Tape.STATUS)) {
+//                    AttributeField attrField = attributeManager.getAttrFieldMapCache(
+//                            Attributes.TAPE_STATUS).get(tape.getStatus());
+//                    columns.add(Links.getAttrFieldIcon(requestContext, attrField));
+//
+//                } else if (column.equals(Tape.TYPE)) {
+//                    AttributeField attrField = attributeManager.getAttrFieldMapCache(
+//                            Attributes.TAPE_TYPE).get(tape.getType());
+//                    columns.add(Links.getAttrFieldIcon(requestContext, attrField));
+//
+//                } else if (column.equals(Tape.LOCATION)) {
+//                    columns.add(HtmlUtils.encode(attributeManager.getAttrFieldNameCache(Attributes.TAPE_LOCATION,
+//                            tape.getLocation())));
                 }
             }
 
@@ -303,8 +303,8 @@ public class TapeUtils {
         }
         return list;
     }
-
-    public static String formatWarrantyExpirationDate(RequestContext requestContext, Long unixTimestamp, Date expirationDate) {
-        return SystemUtils.formatExpirationDate(requestContext, unixTimestamp, expirationDate, ConfigManager.app.getTapeWarrantyExpireCountdown());
-    }
+//
+//    public static String formatWarrantyExpirationDate(RequestContext requestContext, Long unixTimestamp, Date expirationDate) {
+//        return SystemUtils.formatExpirationDate(requestContext, unixTimestamp, expirationDate, ConfigManager.app.getTapeWarrantyExpireCountdown());
+//    }
 }
