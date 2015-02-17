@@ -109,6 +109,17 @@ public class SessionManager {
     public static final String HARDWARE_MEMBER_OF_ORDER_BY = "HARDWARE_MEMBER_OF_ORDER_BY";
     public static final String HARDWARE_ROW_START = "HARDWARE_ROW_START";
 
+//    tape
+    public static final String TAPE_ORDER = "TAPE_ORDER";
+    public static final String TAPE_ORDER_BY = "TAPE_ORDER_BY";
+    public static final String TAPE_CONTACTS_ORDER = "TAPE_CONTACTS_ORDER";
+    public static final String TAPE_CONTACTS_ORDER_BY = "TAPE_CONTACTS_ORDER_BY";
+    public static final String TAPE_MEMBER_ORDER = "TAPE_MEMBER_ORDER";
+    public static final String TAPE_MEMBER_ORDER_BY = "TAPE_MEMBER_ORDER_BY";
+    public static final String TAPE_MEMBER_OF_ORDER = "TAPE_MEMBER_OF_ORDER";
+    public static final String TAPE_MEMBER_OF_ORDER_BY = "TAPE_MEMBER_OF_ORDER_BY";
+    public static final String TAPE_ROW_START = "TAPE_ROW_START";
+
     public static final String ISSUES_ORDER = "ISSUES_ORDER";
     public static final String ISSUES_ORDER_BY = "ISSUES_ORDER_BY";
     public static final String ISSUES_ROW_START = "ISSUES_ROW_START";
