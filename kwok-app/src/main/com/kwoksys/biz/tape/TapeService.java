@@ -59,9 +59,9 @@ public class TapeService {
         return new TapeDao(requestContext).getCount(query);
     }
 
-//    public List<AttributeFieldCount> getTapeTypeCount(QueryBits query) throws DatabaseException {
-//        return new TapeDao(requestContext).getTapeTypeCount(query);
-//    }
+    public List<AttributeFieldCount> getMediaTypeCount(QueryBits query) throws DatabaseException {
+        return new TapeDao(requestContext).getMediaTypeCount(query);
+    }
 //
 //    public List<AttributeFieldCount> getTapeStatusCount(QueryBits query) throws DatabaseException {
 //        return new TapeDao(requestContext).getTapeStatusCount(query);
