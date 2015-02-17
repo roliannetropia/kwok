@@ -79,9 +79,9 @@ public class TapeUtils {
     /**
      * Specify the column header for the list page.
      */
-//    public static List<String> getColumnHeaderList() {
-//        return ConfigManager.app.getTapeColumns();
-//    }
+    public static List<String> getColumnHeaderList() {
+        return ConfigManager.app.getTapeColumns();
+    }
 
 //    public static boolean isValidCostFormat(String input) {
 //        // \\d means decimal point.
@@ -204,14 +204,19 @@ public class TapeUtils {
 //        return tabList;
 //    }
 
-//    public static List formatTapeList(RequestContext requestContext, List<Tape> tapeDataset, Counter counter,
-//                                          String tapePath) throws Exception {
-//        return formatTapeList(requestContext, tapeDataset, TapeUtils.getColumnHeaderList(), counter, tapePath);
-//    }
+    public static List formatTapeList(RequestContext requestContext, List<Tape> tapeDataset, Counter counter,
+                                          String tapePath) throws Exception {
+        System.out.println("format tape list: request context -> "+requestContext);
+        System.out.println("format tape list: tape data set -> "+tapeDataset);
+        System.out.println("format tape list: counter -> "+counter);
+        System.out.println("format tape list: counter -> "+tapePath);
+        return formatTapeList(requestContext, tapeDataset, TapeUtils.getSortableColumns(), counter, tapePath);
+    }
 
     public static List formatTapeList(RequestContext requestContext, List<Tape> tapeDataset, List<String> columnHeaders,
                                       Counter counter, String tapePath) throws Exception {
         List list = new ArrayList();
+        System.out.println("column headers: "+columnHeaders);
 
         if (tapeDataset.isEmpty()) {
             return list;
@@ -234,16 +239,20 @@ public class TapeUtils {
 
             for (String column : columnHeaders) {
                 if (column.equals(Tape.ROWNUM)) {
+                    System.out.println("1");
                     columns.add(counter.incrCounter() + ".");
 
                 } else if (column.equals(Tape.ID)) {
+                    System.out.println("2");
                     columns.add(tape.getId());
 
                 } else if (column.equals(Tape.TAPE_NAME)) {
+                    System.out.println("3");
+
                     if (hasTapeAccess) {
                         Link link = new Link(requestContext);
                         link.setTitle(tape.getTapeName());
-                        link.setAjaxPath(tapePath + "?tapeId=" + tape.getId());
+//                        link.setAjaxPath(tapePath + "?tapeId=" + tape.getId());
                         String tempTapeName = link.getString();
 
 //                        if (hasHwAjaxAccess) {
@@ -267,9 +276,11 @@ public class TapeUtils {
 //                    columns.add(HtmlUtils.encode(tape.getModelNumber()));
 //
                 } else if (column.equals(Tape.TAPE_SERIAL_NUMBER)) {
+                    System.out.println("4");
                     columns.add(HtmlUtils.encode(tape.getTapeSerialNumber()));
 
                 } else if (column.equals(Tape.TAPE_BARCODE_NUMBER)) {
+                    System.out.println("5");
                     columns.add(HtmlUtils.encode(tape.getTapeBarcodeNumber()));
 
 //                } else if (column.equals(Tape.WARRANTY_EXPIRATION)) {
