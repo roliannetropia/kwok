@@ -107,7 +107,7 @@ public class TapeQueries {
     /**
      * Return number of tape grouped by type.
      */
-    public static String selectTapeTypeCountQuery(QueryBits query) {
+    public static String selectMediaTypeCountQuery(QueryBits query) {
         return "select t.media_type, count(t.tape_id) as tape_count " +
                 "from asset_tape t " +
                 "left outer join (select af.attribute_field_id, af.attribute_field_name " +
