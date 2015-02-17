@@ -123,33 +123,33 @@ public class TapeDao extends BaseDao {
      *
      * @return ..
      */
-//    public List<AttributeFieldCount> getTapeTypeCount(QueryBits query) throws DatabaseException {
-//        Connection conn = getConnection();
-//
-//        QueryHelper queryHelper = new QueryHelper(TapeQueries.selectTapeTypeCountQuery(query));
-//
-//        try {
-//            List list = new ArrayList();
-//            ResultSet rs = queryHelper.executeQuery(conn);
-//
-//            while (rs.next()) {
-//                AttributeFieldCount count = new AttributeFieldCount();
-//                count.setAttrFieldId(rs.getInt("media_type"));
-//                count.setObjectCount(rs.getInt("tape_count"));
-//
-//                list.add(count);
-//            }
-//            return list;
-//
-//        } catch (Exception e) {
-//            // Database problem
-//            throw new DatabaseException(e, queryHelper);
-//
-//        } finally {
-//            queryHelper.closeRs();
-//            closeConnection(conn);
-//        }
-//    }
+    public List<AttributeFieldCount> getMediaTypeCount(QueryBits query) throws DatabaseException {
+        Connection conn = getConnection();
+
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.selectMediaTypeCountQuery(query));
+
+        try {
+            List list = new ArrayList();
+            ResultSet rs = queryHelper.executeQuery(conn);
+
+            while (rs.next()) {
+                AttributeFieldCount count = new AttributeFieldCount();
+                count.setAttrFieldId(rs.getInt("media_type"));
+                count.setObjectCount(rs.getInt("tape_count"));
+
+                list.add(count);
+            }
+            return list;
+
+        } catch (Exception e) {
+            // Database problem
+            throw new DatabaseException(e, queryHelper);
+
+        } finally {
+            queryHelper.closeRs();
+            closeConnection(conn);
+        }
+    }
 
     /**
      * Return number of tape grouped by status.
