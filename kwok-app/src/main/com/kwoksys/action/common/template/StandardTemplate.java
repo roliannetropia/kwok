@@ -40,7 +40,7 @@ public class StandardTemplate extends RootTemplate {
         headerTemplate = new HeaderTemplate();
         addTemplate(headerTemplate);
 
-        System.out.println("standard template request context page name!" + requestContext.getPageName());
+        System.out.println("Standard Template: sinong tumatawag sayo -> " + requestContext.getPageName());
 
         ajax = requestContext.isAjax();
 
