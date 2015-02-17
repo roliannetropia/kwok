@@ -482,9 +482,9 @@
             <!--<result name="success">/WEB-INF/jsp/tape/TapeEdit.jsp</result>-->
         <!--</action>-->
         <!--<action name="tape/edit-2" class="com.kwoksys.action.tape.TapeEdit2Action"/>-->
-        <!--<action name="tape/list" class="com.kwoksys.action.tape.TapeListAction">-->
-            <!--<result name="success">/WEB-INF/jsp/tape/TapeList.jsp</result>-->
-        <!--</action>-->
+        <action name="tape/list" class="com.kwoksys.action.tape.TapeListAction">
+            <result name="success">/WEB-INF/jsp/tape/TapeList.jsp</result>
+        </action>
         <!--<action name="tape/list-export" class="com.kwoksys.action.tape.TapeListExportAction"/>-->
         <!--end of tapes-->
         
