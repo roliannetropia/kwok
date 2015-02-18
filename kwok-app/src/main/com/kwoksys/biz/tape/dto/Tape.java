@@ -402,7 +402,7 @@ public class Tape extends BaseObject {
     public void setManufacturerName(String manufacturerName) {
         this.manufacturerName = manufacturerName;
     }
-//
+
     public String getVendorName() {
         return vendorName;
     }

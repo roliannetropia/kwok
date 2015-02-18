@@ -426,7 +426,7 @@ public class TapeService {
             if (tape.getId() != null) {
                 tapeSearch.put(TapeSearch.TAPE_ID_NOT_EQUALS, tape.getId());
             }
-//            tapeSearch.put(TapeSearch.TAPE_MANUFACTURER_EQUALS, tape.getManufacturerId());
+            tapeSearch.put(TapeSearch.TAPE_MANUFACTURER_EQUALS, tape.getManufacturerId());
             tapeSearch.put(TapeSearch.TAPE_SERIAL_NUMBER_EQUALS, tape.getTapeSerialNumber());
 
             return getTapeCount(new QueryBits(tapeSearch)) > 0;
