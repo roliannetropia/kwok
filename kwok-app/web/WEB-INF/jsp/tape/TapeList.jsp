@@ -29,8 +29,8 @@
     <th><bean:write name="searchResultText" filter="false"/></th>
 </logic:notEmpty>    
 <td align="right">
-<bean:message key="itMgmt.tapeList.tapeTypeFilter"/>:
-    <html:select name="TapeSearchForm" property="tapeType" onchange="changeSelectedOption(this);">
+<bean:message key="itMgmt.tapeList.mediaTypeFilter"/>:
+    <html:select name="TapeSearchForm" property="mediaType" onchange="changeSelectedOption(this);">
         <html:options collection="tapeTypeOptions" property="value" labelProperty="label"/>
     </html:select>
 </td>

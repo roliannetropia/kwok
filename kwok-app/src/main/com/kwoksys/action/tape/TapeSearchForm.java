@@ -38,8 +38,8 @@ public class TapeSearchForm extends ReportForm {
     private String tapeModelName;
     private String tapeModelNumber;
     private String tapeOwner;
-    private List<Integer> tapeTypes;
-    private Integer tapeType;
+    private List<Integer> mediaTypes;
+    private Integer mediaType;
     private List<Integer> tapeStatus;
     private List<Integer> tapeLocation;
     private String tapeNameCriteria;
@@ -67,8 +67,8 @@ public class TapeSearchForm extends ReportForm {
         tapeModelName = requestContext.getParameterString("tapeModelName");
         tapeModelNumber = requestContext.getParameterString("tapeModelNumber");
         tapeOwner = requestContext.getParameterString("tapeOwner");
-        tapeTypes = requestContext.getParameters("tapeTypes");
-        tapeType = requestContext.getParameterInteger("tapeType");
+        mediaTypes = requestContext.getParameters("mediaTypes");
+        mediaType = requestContext.getParameterInteger("mediaType");
         tapeStatus = requestContext.getParameters("tapeStatus");
         tapeLocation = requestContext.getParameters("tapeLocation");
         tapeNameCriteria = requestContext.getParameterString("tapeNameCriteria");
@@ -126,12 +126,12 @@ public class TapeSearchForm extends ReportForm {
         return tapeOwner;
     }
 
-    public List<Integer> getTapeTypes() {
-        return tapeTypes;
+    public List<Integer> getMediaTypes() {
+        return mediaTypes;
     }
 
-    public void setTapeTypes(List<Integer> tapeTypes) {
-        this.tapeTypes = tapeTypes;
+    public void setMediaTypes(List<Integer> mediaTypes) {
+        this.mediaTypes = mediaTypes;
     }
 
     public List<Integer> getTapeStatus() {
@@ -154,8 +154,8 @@ public class TapeSearchForm extends ReportForm {
         return attrValue;
     }
 
-    public Integer getTapeType() {
-        return tapeType;
+    public Integer getMediaType() {
+        return mediaType;
     }
 
     public Integer getManufacturerId() {
@@ -198,8 +198,8 @@ public class TapeSearchForm extends ReportForm {
         return purchasedBeforeYear;
     }
 
-    public void setTapeType(Integer tapeType) {
-        this.tapeType = tapeType;
+    public void setMediaType(Integer mediaType) {
+        this.mediaType = mediaType;
     }
 
     public void setTapeStatus(List<Integer> tapeStatus) {

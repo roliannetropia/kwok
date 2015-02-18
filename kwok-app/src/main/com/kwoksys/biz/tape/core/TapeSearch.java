@@ -27,7 +27,7 @@ public class TapeSearch extends BaseSearch {
 
     public static final String TAPE_NAME_BEGINS_WITH = "tapeNameBeginsWith";
 
-    public static final String TAPE_TYPE_CONTAINS = "tapeTypeContains";
+    public static final String MEDIA_TYPE_CONTAINS = "tapeTypeContains";
 
     public static final String TAPE_PURCHASED_BEFORE = "purchasedBefore";
 
@@ -71,22 +71,22 @@ public class TapeSearch extends BaseSearch {
 
         if (!cmd.isEmpty()) {
             if (cmd.equals("filter")) {
-                Integer tapeType = requestContext.getParameterInteger("tapeType");
-                if (tapeType != null) {
-                    tapeSearchForm.setTapeTypes(Arrays.asList(tapeType));
-                    tapeSearchForm.setTapeType(tapeType);
-                    searchCriteriaMap.put(TapeSearch.TAPE_TYPE_CONTAINS, tapeSearchForm.getTapeTypes());
+                Integer mediaType = requestContext.getParameterInteger("mediaType");
+                if (mediaType != null) {
+                    tapeSearchForm.setMediaTypes(Arrays.asList(mediaType));
+                    tapeSearchForm.setMediaType(mediaType);
+                    searchCriteriaMap.put(TapeSearch.MEDIA_TYPE_CONTAINS, tapeSearchForm.getMediaTypes());
                 }
             } else {
                 reset();
                 tapeSearchForm.setRequest(requestContext);
 
                 if (cmd.equals("groupBy")) {
-                    Integer tapeType = tapeSearchForm.getTapeType();
-                    if (tapeType != null) {
-                        tapeSearchForm.setTapeTypes(Arrays.asList(tapeType));
-                        tapeSearchForm.setTapeType(tapeType);
-                        searchCriteriaMap.put(com.kwoksys.biz.tape.core.TapeSearch.TAPE_TYPE_CONTAINS, tapeSearchForm.getTapeTypes());
+                    Integer mediaType = tapeSearchForm.getMediaType();
+                    if (mediaType != null) {
+                        tapeSearchForm.setMediaTypes(Arrays.asList(mediaType));
+                        tapeSearchForm.setMediaType(mediaType);
+                        searchCriteriaMap.put(com.kwoksys.biz.tape.core.TapeSearch.MEDIA_TYPE_CONTAINS, tapeSearchForm.getMediaTypes());
                     }
                     Integer tapeStatus = requestContext.getParameterInteger("tapeStatus");
                     if (tapeStatus != null) {
@@ -145,9 +145,9 @@ public class TapeSearch extends BaseSearch {
                     }
 
                     // Search by Tape type.
-                    List<Integer> typeList = tapeSearchForm.getTapeTypes();
+                    List<Integer> typeList = tapeSearchForm.getMediaTypes();
                     if (!typeList.isEmpty()) {
-                        searchCriteriaMap.put(TAPE_TYPE_CONTAINS, typeList);
+                        searchCriteriaMap.put(MEDIA_TYPE_CONTAINS, typeList);
                     }
                     // Search by Tape status.
                     List<Integer> statusList = tapeSearchForm.getTapeStatus();
@@ -304,8 +304,8 @@ public class TapeSearch extends BaseSearch {
             query.appendWhereClause("ah.tape_owner_id = " + SqlUtils.encodeInteger(searchCriteriaMap.get("tapeOwnerId")));
         }
         // For Tape type
-        if (searchCriteriaMap.containsKey(TAPE_TYPE_CONTAINS)) {
-            query.appendWhereClause("ah.tape_type in (" + SqlUtils.encodeIntegers((List<Integer>) searchCriteriaMap.get(TAPE_TYPE_CONTAINS)) + ")");
+        if (searchCriteriaMap.containsKey(MEDIA_TYPE_CONTAINS)) {
+            query.appendWhereClause("ah.tape_type in (" + SqlUtils.encodeIntegers((List<Integer>) searchCriteriaMap.get(MEDIA_TYPE_CONTAINS)) + ")");
         }
         // For Tape status
         if (searchCriteriaMap.containsKey("tapeStatusContains")) {

@@ -67,14 +67,14 @@ public class TapeListAction extends Action2 {
         String order = SessionManager.getOrSetAttribute(requestContext, "order", SessionManager.TAPE_ORDER, QueryBits.ASCENDING);
 
 //        Filter by tape type
-//        Integer typeFilter = requestContext.getParameterInteger("mediaType");
-//        boolean hasTypeFilter = typeFilter != null;
-//        if (hasTypeFilter) {
-//            actionForm.setTapeType(typeFilter);
-//        }
+        Integer typeFilter = requestContext.getParameterInteger("mediaType");
+        boolean hasTypeFilter = typeFilter != null;
+        if (hasTypeFilter) {
+            actionForm.setMediaType(typeFilter);
+        }
 
         int rowStart = 0;
-        if (!cmd.isEmpty() || rowCmd.equals("showAll") /*|| hasTypeFilter*/) {
+        if (!cmd.isEmpty() || rowCmd.equals("showAll") || hasTypeFilter) {
             request.getSession().setAttribute(SessionManager.TAPE_ROW_START, rowStart);
         } else {
             rowStart = SessionManager.getOrSetAttribute(requestContext, "rowStart", SessionManager.TAPE_ROW_START, rowStart);
@@ -99,13 +99,13 @@ public class TapeListAction extends Action2 {
 
         QueryBits typeQuery = new QueryBits();
         typeQuery.addSortColumn(TapeQueries.getOrderByColumn("attribute_field_name"));
-//
+
         for (AttributeFieldCount tape : tapeService.getMediaTypeCount(typeQuery)) {
             AttributeField attrField = (AttributeField) attrFieldTypeMap.get(tape.getAttrFieldId());
-//
+
             String mediaTypeName = attrField == null ? Localizer.getText(requestContext, "itMgmt.index.na") :
                     attrField.getName();
-//
+
             mediaTypeOptions.add(new LabelValueBean(mediaTypeName, String.valueOf(tape.getAttrFieldId())));
         }
 
@@ -133,7 +133,7 @@ public class TapeListAction extends Action2 {
         if (!tapeSearch.getSearchCriteriaMap().isEmpty()) {
             standardTemplate.setAttribute("searchResultText", Localizer.getText(requestContext, "itMgmt.tapeList.searchResult"));
         }
-//        standardTemplate.setAttribute("ajaxTapeDetailPath", AppPaths.IT_MGMT_AJAX_GET_TAPE_DETAIL + "?tapeId=");
+        standardTemplate.setAttribute("ajaxTapeDetailPath", AppPaths.IT_MGMT_AJAX_GET_TAPE_DETAIL + "?tapeId=");
         standardTemplate.setPathAttribute("formAction", AppPaths.TAPE_LIST);
         standardTemplate.setAttribute("tapeTypeOptions", mediaTypeOptions);
 
