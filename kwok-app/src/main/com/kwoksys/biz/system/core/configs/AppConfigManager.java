@@ -96,6 +96,7 @@ public class AppConfigManager extends BaseConfigManager {
     private List<String> tapeColumns;
 //    private List<String> tapeExportColumns;
     private boolean isCheckUniqueTapeName;
+    private boolean isCheckUniqueTapeSerialNumber;
 
     /*
      * Knowledge Base module
@@ -206,9 +207,10 @@ public class AppConfigManager extends BaseConfigManager {
         * Tape module
         * */
         tapeRowsToShow = getInt(SystemConfigNames.TAPE_ROWS);
-//        tapeColumns = Arrays.asList(getStringArray(SystemConfigNames.TAPE_COLUMNS));
+        tapeColumns = Arrays.asList(getStringArray(SystemConfigNames.TAPE_COLUMNS));
 //        tapeExportColumns = Arrays.asList("tape_id", "tape_name","tape_serial_number","tape_barcode_number");
         isCheckUniqueTapeName = getBoolean(SystemConfigNames.TAPE_CHECK_UNIQUE_NAME);
+        isCheckUniqueTapeSerialNumber = getBoolean(SystemConfigNames.TAPE_CHECK_SERIAL_NUMBER);
 
         /**
          * Knowledge Base module
@@ -407,6 +409,10 @@ public class AppConfigManager extends BaseConfigManager {
 
     public boolean isCheckUniqueTapeName() {
         return isCheckUniqueTapeName;
+    }
+
+    public boolean isCheckUniqueTapeSerialNumber() {
+        return isCheckUniqueTapeSerialNumber;
     }
 
     public boolean isIssuesGuestSubmitModuleEnabled() {
