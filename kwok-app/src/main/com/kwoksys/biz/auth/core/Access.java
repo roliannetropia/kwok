@@ -79,6 +79,7 @@ public class Access {
         issuesGuestSubmitPages.add(AppPaths.ISSUE_PLUGIN_ADD_2);
         issuesGuestSubmitPages.add(AppPaths.ISSUE_PLUGIN_ADD_3);
         issuesGuestSubmitPages.add(AppPaths.ISSUE_PLUGIN_LEGEND_DETAIL);
+
     }
 
     /**

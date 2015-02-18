@@ -260,7 +260,7 @@ public class AppPaths {
 
 //    tape module
 //    public static final String IT_MGMT_AJAX_GET_SOFTWARE_BY_MAKER = "/IT/ajax-get-software-by-maker" + EXT;
-//    public static final String IT_MGMT_AJAX_GET_TAPE_DETAIL = "/IT/ajax-get-tape-detail" + EXT;
+    public static final String IT_MGMT_AJAX_GET_TAPE_DETAIL = "/IT/ajax-get-tape-detail" + EXT;
 //    public static final String IT_MGMT_AJAX_TAPE_ASSIGN_LICENSE = "/IT/ajax-get-license-by-software" + EXT;
 //    public static final String TAPE_AJAX_COMP_CUSTOM_FIELDS = "/tape/ajax-get-component-custom-fields" + EXT;
 
