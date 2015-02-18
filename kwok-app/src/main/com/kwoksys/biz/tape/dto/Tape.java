@@ -37,9 +37,10 @@ public class Tape extends BaseObject {
 //    public static final String PURCHASE_DATE = "tape_purchase_date";
 //    public static final String WARRANTY_EXPIRATION = "tape_warranty_expire_date";
 
-//    public static final String MANUFACTURER_NAME = "tape_manufacturer_name";
+    public static final String MANUFACTURER_NAME = "tape_manufacturer_name";
 //    public static final String MANUFACTURED_DATE = "tapeManufacturedDate";
-    public static final String TAPE_VENDOR_NAME = "tape_vendor_name";
+    public static final String VENDOR_NAME = "tape_vendor_name";
+
     public static final String TAPE_RETENTION = "tape_retention";
     public static final String TAPE_SYSTEM = "tape_system";
 //
@@ -130,8 +131,8 @@ public class Tape extends BaseObject {
 //        setDescription(actionForm.getTapeDescription());
 //        setOwnerId(actionForm.getTapeOwner());
 
-//        setManufacturerId(actionForm.getManufacturerId());
-//        setVendorId(actionForm.getVendorId());
+        setManufacturerId(actionForm.getManufacturerId());
+        setVendorId(actionForm.getVendorId());
 //
 //        setTapeLocation(actionForm.getTapeLocation());
 //        setMediaType(actionForm.getMediaType());
@@ -389,31 +390,31 @@ public class Tape extends BaseObject {
 //        this.tapeStatus = tapeStatus;
 //    }
 
-//    public Integer getManufacturerId() {
-//        return manufacturerId;
-//    }
-//    public void setManufacturerId(Integer manufacturerId) {
-//        this.manufacturerId = manufacturerId;
-//    }
-//    public String getManufacturerName() {
-//        return manufacturerName;
-//    }
-//    public void setManufacturerName(String manufacturerName) {
-//        this.manufacturerName = manufacturerName;
-//    }
-
-//    public String getVendorName() {
-//        return vendorName;
-//    }
-//    public void setVendorName(String vendorName) {
-//        this.vendorName = vendorName;
-//    }
-//    public Integer getVendorId() {
-//        return vendorId;
-//    }
-//    public void setVendorId(Integer vendorId) {
-//        this.vendorId = vendorId;
-//    }
+    public Integer getManufacturerId() {
+        return manufacturerId;
+    }
+    public void setManufacturerId(Integer manufacturerId) {
+        this.manufacturerId = manufacturerId;
+    }
+    public String getManufacturerName() {
+        return manufacturerName;
+    }
+    public void setManufacturerName(String manufacturerName) {
+        this.manufacturerName = manufacturerName;
+    }
+//
+    public String getVendorName() {
+        return vendorName;
+    }
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
+    }
+    public Integer getVendorId() {
+        return vendorId;
+    }
+    public void setVendorId(Integer vendorId) {
+        this.vendorId = vendorId;
+    }
 
 //
 //    public int getResetLastServiceDate() {

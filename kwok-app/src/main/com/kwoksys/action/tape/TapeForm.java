@@ -54,8 +54,8 @@ public class TapeForm extends BaseObjectForm {
 
 //    private Integer tapeOwner;
 
-//    private Integer manufacturerId;
-//    private Integer vendorId;
+    private Integer manufacturerId;
+    private Integer vendorId;
 
 //    private Integer retention;
 //    private Integer system;
@@ -90,8 +90,8 @@ public class TapeForm extends BaseObjectForm {
 //        mediaType = requestContext.getParameterInteger("mediaType");
 //        tapeStatus = requestContext.getParameterInteger("tapeStatus");
 //        tapeOwner = requestContext.getParameterInteger("tapeOwner");
-//        manufacturerId = requestContext.getParameterInteger("manufacturerId");
-//        vendorId = requestContext.getParameterInteger("vendorId");
+        manufacturerId = requestContext.getParameterInteger("manufacturerId");
+        vendorId = requestContext.getParameterInteger("vendorId");
 //
 //        retention = requestContext.getParameterInteger("retention");
 //        system = requestContext.getParameterInteger("system");
@@ -116,8 +116,8 @@ public class TapeForm extends BaseObjectForm {
 //        tapeModelNumber = tape.getModelNumber();
 //        tapeCost = tape.getPurchasePrice();
 //        lastServicedOn = tape.getResetLastServiceDate();
-//        manufacturerId = tape.getManufacturerId();
-//        vendorId = tape.getVendorId();
+        manufacturerId = tape.getManufacturerId();
+        vendorId = tape.getVendorId();
 //        purchaseYear = tape.getPurchaseYear();
 //        purchaseMonth = tape.getPurchaseMonth();
 //        purchaseDate = tape.getPurchaseDate();
@@ -198,12 +198,12 @@ public class TapeForm extends BaseObjectForm {
 //        return tapeOwner;
 //    }
 
-//    public Integer getManufacturerId() {
-//        return manufacturerId;
-//    }
-//    public Integer getVendorId() {
-//        return vendorId;
-//    }
+    public Integer getManufacturerId() {
+        return manufacturerId;
+    }
+    public Integer getVendorId() {
+        return vendorId;
+    }
 //
 //    public Integer getRetention() {
 //        return retention;

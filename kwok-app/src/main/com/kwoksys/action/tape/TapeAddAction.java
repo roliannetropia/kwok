@@ -95,25 +95,25 @@ public class TapeAddAction extends Action2 {
 //        tapeOwnerOptions.addAll(AdminUtils.getUserOptions(requestContext));
 
         // Get company list
-//        List tapeVendors = new ArrayList();
-//        tapeVendors.add(selectOneLabel);
-//
-//        CompanySearch vendorSearch = new CompanySearch();
-//        vendorSearch.put(CompanySearch.COMPANY_TYPE_EQUALS, AttributeFieldIds.COMPANY_TYPE_TAPE_VENDOR);
-//
-//        QueryBits vendorQuery = new QueryBits(vendorSearch);
-//        vendorQuery.addSortColumn(Company.COMPANY_NAME);
-//        tapeVendors.addAll(CompanyUtils.getCompanyOptions(requestContext, vendorQuery));
-//
-//        List tapeManufacturers = new ArrayList();
-//        tapeManufacturers.add(selectOneLabel);
-//
-//        CompanySearch manufacturerSearch = new CompanySearch();
-//        manufacturerSearch.put(CompanySearch.COMPANY_TYPE_EQUALS, AttributeFieldIds.COMPANY_TYPE_TAPE_MANUFACTURER);
-//
-//        QueryBits manufacturerQuery = new QueryBits(manufacturerSearch);
-//        manufacturerQuery.addSortColumn(Company.COMPANY_NAME);
-//        tapeManufacturers.addAll(CompanyUtils.getCompanyOptions(requestContext, manufacturerQuery));
+        List tapeVendors = new ArrayList();
+        tapeVendors.add(selectOneLabel);
+
+        CompanySearch vendorSearch = new CompanySearch();
+        vendorSearch.put(CompanySearch.COMPANY_TYPE_EQUALS, AttributeFieldIds.COMPANY_TYPE_TAPE_VENDOR);
+
+        QueryBits vendorQuery = new QueryBits(vendorSearch);
+        vendorQuery.addSortColumn(Company.COMPANY_NAME);
+        tapeVendors.addAll(CompanyUtils.getCompanyOptions(requestContext, vendorQuery));
+
+        List tapeManufacturers = new ArrayList();
+        tapeManufacturers.add(selectOneLabel);
+
+        CompanySearch manufacturerSearch = new CompanySearch();
+        manufacturerSearch.put(CompanySearch.COMPANY_TYPE_EQUALS, AttributeFieldIds.COMPANY_TYPE_TAPE_MANUFACTURER);
+
+        QueryBits manufacturerQuery = new QueryBits(manufacturerSearch);
+        manufacturerQuery.addSortColumn(Company.COMPANY_NAME);
+        tapeManufacturers.addAll(CompanyUtils.getCompanyOptions(requestContext, manufacturerQuery));
 
 //        List warrantyOptions = new ArrayList();
 //        warrantyOptions.add(new LabelValueBean(Localizer.getText(requestContext, "tape.selectWarrantyPeriod"), "0"));
@@ -142,8 +142,8 @@ public class TapeAddAction extends Action2 {
 //        request.setAttribute("warrantyDateOptions", CalendarUtils.getDateOptions(requestContext));
 //        request.setAttribute("tapeOwnerOptions", tapeOwnerOptions);
 //        request.setAttribute("locationOptions", locationOptions);
-//        request.setAttribute("manufacturersOptions", tapeManufacturers);
-//        request.setAttribute("vendorsOptions", tapeVendors);
+        request.setAttribute("manufacturersOptions", tapeManufacturers);
+        request.setAttribute("vendorsOptions", tapeVendors);
 //        request.setAttribute("warrantyPeriodOptions", warrantyOptions);
 
         //
