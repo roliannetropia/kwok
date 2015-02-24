@@ -73,9 +73,9 @@
 <%--</form>--%>
 <%--</logic:equal>--%>
 
-<p>
+<%--<p>--%>
 <%--<jsp:include page="/WEB-INF/jsp/common/template/CustomFieldsTableToggle.jsp"/>--%>
-
+<%----%>
 <%--<jsp:include page="/WEB-INF/jsp/common/template/Tabs.jsp"/>--%>
 
 <%--<table class="listTable">--%>

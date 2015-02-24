@@ -38,8 +38,8 @@ public class Tape extends BaseObject {
 //    public static final String WARRANTY_EXPIRATION = "tape_warranty_expire_date";
 
     public static final String MANUFACTURER_NAME = "tape_manufacturer_name";
-//    public static final String MANUFACTURED_DATE = "tapeManufacturedDate";
     public static final String VENDOR_NAME = "tape_vendor_name";
+//    public static final String MANUFACTURED_DATE = "tapeManufacturedDate";
 
     public static final String TAPE_RETENTION = "tape_retention";
     public static final String TAPE_SYSTEM = "tape_system";
