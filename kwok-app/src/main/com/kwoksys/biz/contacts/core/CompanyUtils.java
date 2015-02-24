@@ -202,6 +202,10 @@ public class CompanyUtils {
                 String.valueOf(AttributeFieldIds.COMPANY_TYPE_HARDWARE_MANUFACTURER)));
         companyTypes.add(new LabelValueBean(Localizer.getText(requestContext, "system.attribute_field.company_type_hardware_vendor"),
                 String.valueOf(AttributeFieldIds.COMPANY_TYPE_HARDWARE_VENDOR)));
+        companyTypes.add(new LabelValueBean(Localizer.getText(requestContext, "system.attribute_field.company_type_tape_manufacturer"),
+                String.valueOf(AttributeFieldIds.COMPANY_TYPE_TAPE_MANUFACTURER)));
+        companyTypes.add(new LabelValueBean(Localizer.getText(requestContext, "system.attribute_field.company_type_tape_vendor"),
+                String.valueOf(AttributeFieldIds.COMPANY_TYPE_TAPE_VENDOR)));
         companyTypes.add(new LabelValueBean(Localizer.getText(requestContext, "system.attribute_field.company_type_software_maker"),
                 String.valueOf(AttributeFieldIds.COMPANY_TYPE_SOFTWARE_MAKER)));
         companyTypes.add(new LabelValueBean(Localizer.getText(requestContext, "system.attribute_field.company_type_software_vendor"),
@@ -212,6 +216,8 @@ public class CompanyUtils {
     public static final List<Integer> DEFAULT_COMPANY_TYPES = Arrays.asList(
             AttributeFieldIds.COMPANY_TYPE_HARDWARE_MANUFACTURER,
             AttributeFieldIds.COMPANY_TYPE_HARDWARE_VENDOR,
+            AttributeFieldIds.COMPANY_TYPE_TAPE_MANUFACTURER,
+            AttributeFieldIds.COMPANY_TYPE_TAPE_VENDOR,
             AttributeFieldIds.COMPANY_TYPE_SOFTWARE_MAKER,
             AttributeFieldIds.COMPANY_TYPE_SOFTWARE_VENDOR);
 }
