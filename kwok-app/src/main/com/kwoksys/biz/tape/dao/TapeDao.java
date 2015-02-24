@@ -418,6 +418,8 @@ public class TapeDao extends BaseDao {
         queryHelper.addInputStringConvertNull(tape.getTapeName());
 //        queryHelper.addInputStringConvertNull(null);
 //        queryHelper.addInputStringConvertNull(tape.getDescription());
+        queryHelper.addInputStringConvertNull(tape.getTapeSerialNumber());
+        queryHelper.addInputStringConvertNull(tape.getTapeBarcodeNumber());
         queryHelper.addInputIntegerConvertNull(tape.getManufacturerId());
         queryHelper.addInputIntegerConvertNull(tape.getVendorId());
 
@@ -428,8 +430,7 @@ public class TapeDao extends BaseDao {
 //        queryHelper.addInputInt(tape.getTapeLocation());
 //        queryHelper.addInputStringConvertNull(tape.getModelName());
 //        queryHelper.addInputStringConvertNull(tape.getModelNumber());
-        queryHelper.addInputStringConvertNull(tape.getTapeSerialNumber());
-        queryHelper.addInputStringConvertNull(tape.getTapeBarcodeNumber());
+
 //        if (tape.getPurchasePriceRaw() == 0) {
 //            queryHelper.addInputDoubleConvertNull(null);
 //        } else {
@@ -627,9 +628,13 @@ public class TapeDao extends BaseDao {
 //        tape.setModelName(StringUtils.replaceNull(rs.getString("tape_model_name")));
 //        tape.setModelNumber(StringUtils.replaceNull(rs.getString("tape_model_number")));
         tape.setManufacturerId(rs.getInt("manufacturer_company_id"));
-//        tape.setManufacturerName(StringUtils.replaceNull(rs.getString("tape_manufacturer_name")));
+        tape.setManufacturerName(StringUtils.replaceNull(rs.getString("tape_manufacturer_name")));
+        System.out.println("Manufacturer id: "+ rs.getInt("manufacturer_company_id") + " and manufacturer name: "+StringUtils.replaceNull(rs.getString("tape_manufacturer_name")));
+
         tape.setVendorId(rs.getInt("vendor_company_id"));
-//        tape.setVendorName(StringUtils.replaceNull(rs.getString("tape_vendor_name")));
+        tape.setVendorName(StringUtils.replaceNull(rs.getString("tape_vendor_name")));
+        System.out.println("Vendor id: "+ rs.getInt("vendor_company_id") + " and vendor name: "+ StringUtils.replaceNull(rs.getString("tape_vendor_name")));
+
 //
 //        tape.setTapeLocation(rs.getInt("tape_location"));
 //        tape.setMediaType(rs.getInt("media_type"));
