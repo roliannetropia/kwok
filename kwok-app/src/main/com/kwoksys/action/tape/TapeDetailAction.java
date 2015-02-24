@@ -86,25 +86,25 @@ public class TapeDetailAction extends Action2 {
         //
         StandardTemplate standardTemplate = new StandardTemplate(requestContext);
 //        standardTemplate.setAttribute("softwareOptions", softwareOptions);
-//        standardTemplate.setPathAttribute("formAddLicAction", AppPaths.TAPE_LICENSE_ADD_2);
-//        standardTemplate.setAttribute("canRemoveLicense", Access.hasPermission(user, AppPaths.TAPE_LICENSE_REMOVE_2));
-//        standardTemplate.setPathAttribute("formRemoveLicenseAction", AppPaths.TAPE_LICENSE_REMOVE_2);
+        standardTemplate.setPathAttribute("formAddLicAction", AppPaths.TAPE_LICENSE_ADD_2);
+        standardTemplate.setAttribute("canRemoveLicense", Access.hasPermission(user, AppPaths.TAPE_LICENSE_REMOVE_2));
+        standardTemplate.setPathAttribute("formRemoveLicenseAction", AppPaths.TAPE_LICENSE_REMOVE_2);
         standardTemplate.setAttribute("formCancelLink", Links.getCancelLink(requestContext, AppPaths.TAPE_DETAIL + "?tapeId=" + tape.getId()).getString());
 //        standardTemplate.setPathAttribute("formGetSoftwareLicenseAction", formSoftwareLicense);
-//        if (Access.hasPermission(user, AppPaths.SOFTWARE_AJAX_DETAILS)) {
-//            standardTemplate.setPathAttribute("formLicenseAjaxAction", AppPaths.SOFTWARE_AJAX_DETAILS);
-//        }
+        if (Access.hasPermission(user, AppPaths.SOFTWARE_AJAX_DETAILS)) {
+            standardTemplate.setPathAttribute("formLicenseAjaxAction", AppPaths.SOFTWARE_AJAX_DETAILS);
+        }
         standardTemplate.setAttribute("colSpan", colSpan);
 
         //
         // Template: CustomFieldsTemplate
         //
-//        CustomFieldsTemplate customFieldsTemplate = new CustomFieldsTemplate();
-//        standardTemplate.addTemplate(customFieldsTemplate);
-//        customFieldsTemplate.setObjectTypeId(ObjectTypes.TAPE);
-//        customFieldsTemplate.setObjectId(tape.getId());
+        CustomFieldsTemplate customFieldsTemplate = new CustomFieldsTemplate();
+        standardTemplate.addTemplate(customFieldsTemplate);
+        customFieldsTemplate.setObjectTypeId(ObjectTypes.TAPE);
+        customFieldsTemplate.setObjectId(tape.getId());
 //        customFieldsTemplate.setObjectAttrTypeId(tape.getType());
-//        customFieldsTemplate.setShowDefaultHeader(false);
+        customFieldsTemplate.setShowDefaultHeader(false);
 
         //
         // Template: HeaderTemplate
@@ -114,15 +114,15 @@ public class TapeDetailAction extends Action2 {
         headerTemplate.setPageTitleKey("itMgmt.tapeDetail.header", new Object[] {tape.getTapeName()});
 
 //        // Assign Software link.
-//        if (Access.hasPermission(user, AppPaths.TAPE_LICENSE_ADD_2)) {
-//            Link link = new Link(requestContext);
-//            link.setAjaxPath(AppPaths.TAPE_DETAIL + "?cmd=add&tapeId=" + tape.getId());
-//            link.setTitleKey("itMgmt.cmd.softwareLicenseAssign");
-//            headerTemplate.addHeaderCmds(link);
-//        }
+        if (Access.hasPermission(user, AppPaths.TAPE_LICENSE_ADD_2)) {
+            Link link = new Link(requestContext);
+            link.setAjaxPath(AppPaths.TAPE_DETAIL + "?cmd=add&tapeId=" + tape.getId());
+            link.setTitleKey("itMgmt.cmd.softwareLicenseAssign");
+            headerTemplate.addHeaderCmds(link);
+        }
 
 //        if (cmd.equals("add")) {
-//            // The user is trying to add a Software, show him the Software list.
+            // The user is trying to add a Software, show him the Software list.
 //            query = new QueryBits();
 //            query.addSortColumn(TapeQueries.getOrderByColumn(Software.NAME));
 //
@@ -192,10 +192,10 @@ public class TapeDetailAction extends Action2 {
         //
         // Template: TabsTemplate
         //
-//        TabsTemplate tabs = new TabsTemplate();
-//        standardTemplate.addTemplate(tabs);
-//        tabs.setTabList(TapeUtils.tapeTabList(tape, requestContext));
-//        tabs.setTabActive(TapeUtils.TAPE_LICENSE_TAB);
+        TabsTemplate tabs = new TabsTemplate();
+        standardTemplate.addTemplate(tabs);
+        tabs.setTabList(TapeUtils.tapeTabList(tape, requestContext));
+        tabs.setTabActive(TapeUtils.TAPE_LICENSE_TAB);
 
         //
         // Template: ActionErrorsTemplate
