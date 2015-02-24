@@ -135,21 +135,21 @@ public class TapeUtils {
 //     * @param tape
      * @return ..
      */
-//    public static List tapeTabList(Tape tape, RequestContext requestContext) throws DatabaseException {
-//        AccessUser user = requestContext.getUser();
-//
-//        List tabList = new ArrayList();
-//
-//        // Link to Tape assigned software tab.
-////        if (Access.hasPermission(user, AppPaths.TAPE_DETAIL)) {
-////            Map tabMap = new HashMap();
-////            tabMap.put("tabName", TAPE_LICENSE_TAB);
-////            tabMap.put("tabPath", AppPaths.TAPE_DETAIL + "?tapeId=" + tape.getId());
-////            tabMap.put("tabText", Localizer.getText(requestContext, "itMgmt.tab.tapeAssignedSoftware",
-////                    new Object[]{tape.getCountSoftware()}));
-////            tabList.add(tabMap);
-////        }
-//
+    public static List tapeTabList(Tape tape, RequestContext requestContext) throws DatabaseException {
+        AccessUser user = requestContext.getUser();
+
+        List tabList = new ArrayList();
+
+        // Link to Tape assigned software tab.
+        if (Access.hasPermission(user, AppPaths.TAPE_DETAIL)) {
+            Map tabMap = new HashMap();
+            tabMap.put("tabName", TAPE_LICENSE_TAB);
+            tabMap.put("tabPath", AppPaths.TAPE_DETAIL + "?tapeId=" + tape.getId());
+//            tabMap.put("tabText", Localizer.getText(requestContext, "itMgmt.tab.tapeAssignedSoftware",
+//                    new Object[]{tape.getCountSoftware()}));
+            tabList.add(tabMap);
+        }
+
 //        // Link to Tape components tab.
 ////        if (Access.hasPermission(user, AppPaths.TAPE_COMP)) {
 ////            Map tabMap = new HashMap();
@@ -201,8 +201,8 @@ public class TapeUtils {
 ////                    new Object[] {relationshipCount}));
 ////            tabList.add(tabMap);
 ////        }
-//        return tabList;
-//    }
+        return tabList;
+    }
 
     public static List formatTapeList(RequestContext requestContext, List<Tape> tapeDataset, Counter counter,
                                           String tapePath) throws Exception {
