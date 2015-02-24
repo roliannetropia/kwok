@@ -97,23 +97,30 @@ public class TapeAddAction extends Action2 {
         // Get company list
         List tapeVendors = new ArrayList();
         tapeVendors.add(selectOneLabel);
+//        System.out.println("select one label: "+selectOneLabel);
 
         CompanySearch vendorSearch = new CompanySearch();
-        vendorSearch.put(CompanySearch.COMPANY_TYPE_EQUALS, AttributeFieldIds.COMPANY_TYPE_TAPE_VENDOR);
+        vendorSearch.put(CompanySearch.COMPANY_TYPE_EQUALS, AttributeFieldIds.COMPANY_TYPE_HARDWARE_VENDOR);
 
         QueryBits vendorQuery = new QueryBits(vendorSearch);
+        System.out.println("vendor search -> "+vendorSearch);
+
         vendorQuery.addSortColumn(Company.COMPANY_NAME);
         tapeVendors.addAll(CompanyUtils.getCompanyOptions(requestContext, vendorQuery));
+        System.out.println("tape vendor query -> " + vendorQuery);
+        System.out.println("tape vendor add all -> " + CompanyUtils.getCompanyOptions(requestContext, vendorQuery));
 
         List tapeManufacturers = new ArrayList();
         tapeManufacturers.add(selectOneLabel);
 
         CompanySearch manufacturerSearch = new CompanySearch();
-        manufacturerSearch.put(CompanySearch.COMPANY_TYPE_EQUALS, AttributeFieldIds.COMPANY_TYPE_TAPE_MANUFACTURER);
+        manufacturerSearch.put(CompanySearch.COMPANY_TYPE_EQUALS, AttributeFieldIds.COMPANY_TYPE_HARDWARE_MANUFACTURER);
 
         QueryBits manufacturerQuery = new QueryBits(manufacturerSearch);
         manufacturerQuery.addSortColumn(Company.COMPANY_NAME);
         tapeManufacturers.addAll(CompanyUtils.getCompanyOptions(requestContext, manufacturerQuery));
+        System.out.println("tape manufacturer add all -> " + CompanyUtils.getCompanyOptions(requestContext, manufacturerQuery));
+
 
 //        List warrantyOptions = new ArrayList();
 //        warrantyOptions.add(new LabelValueBean(Localizer.getText(requestContext, "tape.selectWarrantyPeriod"), "0"));
@@ -143,7 +150,9 @@ public class TapeAddAction extends Action2 {
 //        request.setAttribute("tapeOwnerOptions", tapeOwnerOptions);
 //        request.setAttribute("locationOptions", locationOptions);
         request.setAttribute("manufacturersOptions", tapeManufacturers);
+        System.out.println("manufacturers: " + tapeManufacturers);
         request.setAttribute("vendorsOptions", tapeVendors);
+        System.out.println("vendors: " + tapeVendors);
 //        request.setAttribute("warrantyPeriodOptions", warrantyOptions);
 
         //
@@ -155,14 +164,14 @@ public class TapeAddAction extends Action2 {
         //
         // Template: CustomFieldsTemplate
         //
-//        CustomFieldsTemplate customFieldsTemplate = new CustomFieldsTemplate();
-//        standardTemplate.addTemplate(customFieldsTemplate);
-//        customFieldsTemplate.setObjectTypeId(ObjectTypes.TAPE);
-//        if (copyTapeId != 0) {
-//            customFieldsTemplate.setObjectId(copyTapeId);
-//        }
+        CustomFieldsTemplate customFieldsTemplate = new CustomFieldsTemplate();
+        standardTemplate.addTemplate(customFieldsTemplate);
+        customFieldsTemplate.setObjectTypeId(ObjectTypes.TAPE);
+        if (copyTapeId != 0) {
+            customFieldsTemplate.setObjectId(copyTapeId);
+        }
 //        customFieldsTemplate.setObjectAttrTypeId(actionForm.getMediaType());
-//        customFieldsTemplate.setForm(actionForm);
+        customFieldsTemplate.setForm(actionForm);
 
         //
         // Template: ActionErrorsTemplate
