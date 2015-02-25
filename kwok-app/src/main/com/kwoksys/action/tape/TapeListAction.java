@@ -133,6 +133,7 @@ public class TapeListAction extends Action2 {
         if (!tapeSearch.getSearchCriteriaMap().isEmpty()) {
             standardTemplate.setAttribute("searchResultText", Localizer.getText(requestContext, "itMgmt.tapeList.searchResult"));
         }
+//        todo tape list to tape detail
         standardTemplate.setAttribute("ajaxTapeDetailPath", AppPaths.IT_MGMT_AJAX_GET_TAPE_DETAIL + "?tapeId=");
         standardTemplate.setPathAttribute("formAction", AppPaths.TAPE_LIST);
         standardTemplate.setAttribute("tapeTypeOptions", mediaTypeOptions);

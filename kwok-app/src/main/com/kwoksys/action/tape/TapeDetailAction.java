@@ -185,6 +185,11 @@ public class TapeDetailAction extends Action2 {
         //
         // Template: TapeSpecTemplate
         //
+        System.out.println("tape -> " + tape.getTapeName());
+        System.out.println("serial -> " + tape.getTapeSerialNumber());
+        System.out.println("barcode -> " + tape.getTapeBarcodeNumber());
+        System.out.println("manufacturer -> " + tape.getManufacturerName());
+        System.out.println("vendor -> " + tape.getVendorName());
         TapeSpecTemplate tmpl = new TapeSpecTemplate(tape);
         standardTemplate.addTemplate(tmpl);
 //        tmpl.setPopulateLinkedContract(!cmd.equals("add"));

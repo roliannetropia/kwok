@@ -96,16 +96,16 @@ public class TapeSpecTemplate extends BaseTemplate {
 //        td.setValue(HtmlUtils.formatMultiLineDisplay(tape.getDescription()));
 //        detailTableTemplate.addTd(td);
 //
-//        td = detailTableTemplate.new Td();
-//        td.setHeaderKey("common.column.tape_manufacturer_name");
-//        td.setValue(Links.getCompanyDetailsLink(requestContext, tape.getManufacturerName(),
-//                tape.getManufacturerId()).getString());
-//        detailTableTemplate.addTd(td);
-//
-//        td = detailTableTemplate.new Td();
-//        td.setHeaderKey("common.column.tape_vendor_name");
-//        td.setValue(Links.getCompanyDetailsLink(requestContext, tape.getVendorName(), tape.getVendorId()).getString());
-//        detailTableTemplate.addTd(td);
+        td = detailTableTemplate.new Td();
+        td.setHeaderKey("common.column.tape_manufacturer_name");
+        td.setValue(Links.getCompanyDetailsLink(requestContext, tape.getManufacturerName(),
+                tape.getManufacturerId()).getString());
+        detailTableTemplate.addTd(td);
+
+        td = detailTableTemplate.new Td();
+        td.setHeaderKey("common.column.tape_vendor_name");
+        td.setValue(Links.getCompanyDetailsLink(requestContext, tape.getVendorName(), tape.getVendorId()).getString());
+        detailTableTemplate.addTd(td);
 
 //        AttributeField attrField = attributeManager.getAttrFieldMapCache(Attributes.TAPE_TYPE).get(tape.getType());
 //
