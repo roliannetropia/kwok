@@ -22,56 +22,68 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 
 <div class="section">
-<p><bean:message key="itMgmt.tapeIndex.numRecords" arg0="${numTapeRecords}"/>
+    <p><bean:message key="itMgmt.tapeIndex.numRecords" arg0="${numTapeRecords}"/>
 
-<div>
-    <ul><logic:iterate id="row" name="linkList">
-        <li><html:link action="${row.urlPath}"><bean:write name="row" property="urlText"/></html:link></li>
+    <div>
+        <ul><logic:iterate id="row" name="linkList">
+            <li><html:link action="${row.urlPath}"><bean:write name="row" property="urlText"/></html:link></li>
         </logic:iterate></ul>
-</div>
+    </div>
 </div>
 
 <%-- Tape summary. --%>
-<%--<h3><bean:message key="itMgmt.index.tapeTypeCountHeader"/></h3>--%>
-<%--<table class="section standard">--%>
-    <%--<tr>--%>
-     <%--Tape type count --%>
-    <%--<th>--%>
-        <%--<p><b><bean:message key="itMgmt.index.tapeTypeCountDesc"/></b> &nbsp;--%>
-        <%--<p>--%>
-        <%--<table class="stats">--%>
-        <%--<logic:iterate id="row" name="tapeTypeCountList">--%>
-            <%--<tr class="${row.style}">--%>
-                <%--<th><a href="${row.path}"><div><bean:write name="row" property="countKey" filter="false"/></div></a></th>--%>
-                <%--<td><a href="${row.path}"><div><bean:write name="row" property="countValue"/></div></a></td></tr>--%>
-        <%--</logic:iterate>--%>
-        <%--</table>--%>
-    <%--</th>--%>
-    <%-- Tape status count --%>
-    <%--<th class="borderLeft">--%>
-        <%--<p><b><bean:message key="itMgmt.index.tapeStatusCountDesc"/></b> &nbsp;--%>
-        <%--<p>--%>
-        <%--<table class="stats">--%>
-        <%--<logic:iterate id="row" name="tapeStatusCounts">--%>
-            <%--<tr class="${row.style}">--%>
-                <%--<th><a href="${row.path}"><div><bean:write name="row" property="countKey"/></div></a></th>--%>
-                <%--<td><a href="${row.path}"><div><bean:write name="row" property="countValue"/></div></a></td></tr>--%>
-        <%--</logic:iterate>--%>
-        <%--</table>--%>
-    <%--</th>--%>
-    <%-- Tape location count --%>
-    <%--<th class="borderLeft">--%>
-        <%--<p><b><bean:message key="itMgmt.index.tapeLocationCountDesc"/></b>--%>
-        <%--<p><table class="stats">--%>
-        <%--<logic:iterate id="row" name="tapeLocationCountList">--%>
-            <%--<tr class="${row.style}">--%>
-                <%--<th><a href="${row.path}"><div><bean:write name="row" property="countKey"/></div></a></th>--%>
-                <%--<td><a href="${row.path}"><div><bean:write name="row" property="countValue"/></div></a></td></tr>--%>
-        <%--</logic:iterate>--%>
-        <%--</table>--%>
-    <%--</th>--%>
-    <%--</tr>--%>
-<%--</table>--%>
+<h3><bean:message key="itMgmt.index.tapeTypeCountHeader"/></h3>
+<table class="section standard">
+    <tr>
+        <%--Media type count --%>
+        <th>
+            <p><b><bean:message key="itMgmt.index.tapeTypeCountDesc"/></b> &nbsp;
+            <p>
+            <table class="stats">
+                <logic:iterate id="row" name="mediaTypeCountList">
+                    <tr class="${row.style}">
+                        <th><a href="${row.path}"><div><bean:write name="row" property="countKey" filter="false"/></div></a></th>
+                        <td><a href="${row.path}"><div><bean:write name="row" property="countValue"/></div></a></td></tr>
+                </logic:iterate>
+            </table>
+        </th>
+        <%--Tape system count --%>
+        <th class="borderLeft">
+            <p><b><bean:message key="itMgmt.index.tapeSystemCountDesc"/></b> &nbsp;
+            <p>
+            <table class="stats">
+                <logic:iterate id="row" name="tapeSystemCounts">
+                    <tr class="${row.style}">
+                        <th><a href="${row.path}"><div><bean:write name="row" property="countKey"/></div></a></th>
+                        <td><a href="${row.path}"><div><bean:write name="row" property="countValue"/></div></a></td></tr>
+                </logic:iterate>
+            </table>
+        </th>
+        <%--Tape status count --%>
+        <th class="borderLeft">
+            <p><b><bean:message key="itMgmt.index.tapeStatusCountDesc"/></b> &nbsp;
+            <p>
+            <table class="stats">
+                <logic:iterate id="row" name="tapeStatusCounts">
+                    <tr class="${row.style}">
+                        <th><a href="${row.path}"><div><bean:write name="row" property="countKey"/></div></a></th>
+                        <td><a href="${row.path}"><div><bean:write name="row" property="countValue"/></div></a></td></tr>
+                </logic:iterate>
+            </table>
+        </th>
+        <%--Tape location count --%>
+        <th class="borderLeft">
+            <p><b><bean:message key="itMgmt.index.tapeLocationCountDesc"/></b>
+            <p><table class="stats">
+            <logic:iterate id="row" name="tapeLocationCountList">
+                <tr class="${row.style}">
+                    <th><a href="${row.path}"><div><bean:write name="row" property="countKey"/></div></a></th>
+                    <td><a href="${row.path}"><div><bean:write name="row" property="countValue"/></div></a></td></tr>
+            </logic:iterate>
+        </table>
+        </th>
+    </tr>
+</table>
 
 <%-- Tape search --%>
 <h3><bean:message key="itMgmt.index.tapeSearchHeader"/></h3>
