@@ -20,7 +20,7 @@
     <%--<tr>--%>
         <%--<th><bean:message name="tape" property="attrRequiredMsgKey(tape_type)"/><bean:message key="common.column.tape_type"/>:</th>--%>
         <%--<td><html:select name="form" property="mediaType" onchange="changeAction(this, '${formThisAction}');">--%>
-            <%--<html:options collection="tapeTypeOptions" property="value" labelProperty="label"/>--%>
+            <%--<html:options collection="mediaTypeOptions" property="value" labelProperty="label"/>--%>
             <%--</html:select></td>--%>
     <%--<tr>--%>
     <%--</tr>--%>
@@ -43,7 +43,6 @@
         <th><bean:message key="common.requiredFieldIndicator.true"/><bean:message key="common.column.tape_barcode_number"/>:</th>
         <td><html:text name="form" property="barcodeNumber" size="40"/></td>
     </tr>
-
     <tr>
         <th><bean:message key="common.column.tape_manufacturer_name"/>:</th>
         <td><html:select name="form" property="manufacturerId">
@@ -55,6 +54,37 @@
         <td><html:select name="form" property="vendorId">
             <html:options collection="vendorsOptions" property="value" labelProperty="label"/>
         </html:select> <html:img src="${image.helpIcon}" titleKey="help.addTapeVendor" styleClass="standard" alt=""/></td>
+    </tr>
+
+    <tr>
+        <th><%--<bean:message name="tape" property="attrRequiredMsgKey(media_type)"/>--%><bean:message key="common.column.media_type"/>:</th>
+        <td><html:select name="form" property="mediaType" onchange="changeAction(this, '${formThisAction}');">
+            <html:options collection="mediaTypeOptions" property="value" labelProperty="label"/>
+        </html:select></td>
+    <tr>
+    </tr>
+        <th><%--<bean:message name="tape" property="attrRequiredMsgKey(tape_location)"/>--%><bean:message key="common.column.tape_location"/>:</th>
+        <td><html:select name="form" property="tapeLocation">
+            <html:options collection="tapeLocationOptions" property="value" labelProperty="label"/>
+        </html:select></td>
+    </tr>
+    </tr>
+        <th><%--<bean:message name="tape" property="attrRequiredMsgKey(tape_retention)"/>--%><bean:message key="common.column.tape_retention"/>:</th>
+        <td><html:select name="form" property="tapeRetention">
+            <html:options collection="tapeRetentionOptions" property="value" labelProperty="label"/>
+        </html:select></td>
+    </tr>
+    </tr>
+        <th><%--<bean:message name="tape" property="attrRequiredMsgKey(tape_retention)"/>--%><bean:message key="common.column.tape_system"/>:</th>
+        <td><html:select name="form" property="tapeSystem">
+            <html:options collection="tapeSystemOptions" property="value" labelProperty="label"/>
+        </html:select></td>
+    </tr>
+    </tr>
+        <th><%--<bean:message name="tape" property="attrRequiredMsgKey(tape_retention)"/>--%><bean:message key="common.column.tape_status"/>:</th>
+        <td><html:select name="form" property="tapeStatus">
+            <html:options collection="tapeStatusOptions" property="value" labelProperty="label"/>
+        </html:select></td>
     </tr>
         <%--<th><bean:message key="common.column.tape_purchase_price"/>:</th>--%>
         <%--<td><bean:write name="currencySymbol"/><html:text name="form" property="tapeCost" size="20"/>--%>

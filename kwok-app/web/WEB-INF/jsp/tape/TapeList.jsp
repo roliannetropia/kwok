@@ -31,7 +31,7 @@
 <td align="right">
 <bean:message key="itMgmt.tapeList.mediaTypeFilter"/>:
     <html:select name="TapeSearchForm" property="mediaType" onchange="changeSelectedOption(this);">
-        <html:options collection="tapeTypeOptions" property="value" labelProperty="label"/>
+        <html:options collection="mediaTypeOptions" property="value" labelProperty="label"/>
     </html:select>
 </td>
 <td width="20%" align="right" nowrap>
