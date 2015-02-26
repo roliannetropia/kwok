@@ -74,20 +74,30 @@ public class TapeAddAction extends Action2 {
 
         LabelValueBean selectOneLabel = new SelectOneLabelValueBean(requestContext, "0");
 
-//        // Get tape_location options
-//        List locationOptions = new ArrayList();
-//        locationOptions.add(selectOneLabel);
-//        attributeManager.getActiveAttrFieldOptionsCache(Attributes.TAPE_LOCATION, locationOptions);
-//
-//        // Get tape_type options
-//        List typeOptions = new ArrayList();
-//        typeOptions.add(selectOneLabel);
-//        attributeManager.getActiveAttrFieldOptionsCache(Attributes.MEDIA_TYPE, typeOptions);
-//
-//        // Get tape_status options
-//        List statusOptions = new ArrayList();
-//        statusOptions.add(selectOneLabel);
-//        attributeManager.getActiveAttrFieldOptionsCache(Attributes.TAPE_STATUS, statusOptions);
+        // Get tape_type options
+        List typeOptions = new ArrayList();
+        typeOptions.add(selectOneLabel);
+        attributeManager.getActiveAttrFieldOptionsCache(Attributes.MEDIA_TYPE, typeOptions);
+
+        // Get tape_location options
+        List locationOptions = new ArrayList();
+        locationOptions.add(selectOneLabel);
+        attributeManager.getActiveAttrFieldOptionsCache(Attributes.TAPE_LOCATION, locationOptions);
+
+        // Get tape_retention options
+        List retentionOptions = new ArrayList();
+        retentionOptions.add(selectOneLabel);
+        attributeManager.getActiveAttrFieldOptionsCache(Attributes.TAPE_RETENTION, retentionOptions);
+
+//        Get tape_system options
+        List systemOptions = new ArrayList();
+        systemOptions.add(selectOneLabel);
+        attributeManager.getActiveAttrFieldOptionsCache(Attributes.TAPE_SYSTEM, systemOptions);
+
+        //        Get tape_status options
+        List statusOptions = new ArrayList();
+        statusOptions.add(selectOneLabel);
+        attributeManager.getActiveAttrFieldOptionsCache(Attributes.TAPE_STATUS, statusOptions);
 
         // Tape owner options
 //        List<LabelValueBean> tapeOwnerOptions = new ArrayList();
@@ -97,7 +107,6 @@ public class TapeAddAction extends Action2 {
         // Get company list
         List tapeVendors = new ArrayList();
         tapeVendors.add(selectOneLabel);
-//        System.out.println("select one label: "+selectOneLabel);
 
         CompanySearch vendorSearch = new CompanySearch();
         vendorSearch.put(CompanySearch.COMPANY_TYPE_EQUALS, AttributeFieldIds.COMPANY_TYPE_HARDWARE_VENDOR);
@@ -139,8 +148,16 @@ public class TapeAddAction extends Action2 {
         standardTemplate.setPathAttribute("formThisAction", AppPaths.TAPE_ADD);
         standardTemplate.setAttribute("formCancelLink", Links.getCancelLink(requestContext, AppPaths.TAPE_LIST).getString());
 //        request.setAttribute("currencySymbol", ConfigManager.system.getCurrencySymbol());
-//        request.setAttribute("mediaTypeOptions", typeOptions);
-//        request.setAttribute("tapeStatusOptions", statusOptions);
+        request.setAttribute("mediaTypeOptions", typeOptions);
+        System.out.println("typeOptions: " + typeOptions);
+        request.setAttribute("tapeLocationOptions", locationOptions);
+        System.out.println("locationOptions: " + locationOptions);
+        request.setAttribute("tapeRetentionOptions", retentionOptions);
+        System.out.println("retentionOptions: " + retentionOptions);
+        request.setAttribute("tapeSystemOptions", systemOptions);
+        System.out.println("systemOptions: " + systemOptions);
+        request.setAttribute("tapeStatusOptions", statusOptions);
+        System.out.println("statusOptions: " + statusOptions);
 //        request.setAttribute("purchaseYearOptions", CalendarUtils.getPastYearOptions(requestContext));
 //        request.setAttribute("purchaseMonthOptions", CalendarUtils.getMonthOptions(requestContext));
 //        request.setAttribute("purchaseDateOptions", CalendarUtils.getDateOptions(requestContext));
@@ -148,11 +165,8 @@ public class TapeAddAction extends Action2 {
 //        request.setAttribute("warrantyMonthOptions", CalendarUtils.getMonthOptions(requestContext));
 //        request.setAttribute("warrantyDateOptions", CalendarUtils.getDateOptions(requestContext));
 //        request.setAttribute("tapeOwnerOptions", tapeOwnerOptions);
-//        request.setAttribute("locationOptions", locationOptions);
         request.setAttribute("manufacturersOptions", tapeManufacturers);
-        System.out.println("manufacturers: " + tapeManufacturers);
         request.setAttribute("vendorsOptions", tapeVendors);
-        System.out.println("vendors: " + tapeVendors);
 //        request.setAttribute("warrantyPeriodOptions", warrantyOptions);
 
         //
@@ -170,7 +184,7 @@ public class TapeAddAction extends Action2 {
         if (copyTapeId != 0) {
             customFieldsTemplate.setObjectId(copyTapeId);
         }
-//        customFieldsTemplate.setObjectAttrTypeId(actionForm.getMediaType());
+        customFieldsTemplate.setObjectAttrTypeId(actionForm.getMediaType());
         customFieldsTemplate.setForm(actionForm);
 
         //
