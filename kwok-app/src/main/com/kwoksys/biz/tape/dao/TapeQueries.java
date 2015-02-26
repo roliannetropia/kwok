@@ -55,8 +55,7 @@ public class TapeQueries {
      */
     public static String selectTapeListQuery(QueryBits query) {
         return "select at.tape_id, at.tape_name, at.serial_number, at.barcode_number, " +
-                "at.manufacturer_company_id, at.vendor_company_id, " +
-// at.media_type, " +
+                "at.manufacturer_company_id, at.vendor_company_id, at.media_type, at.location, at.retention, at.system, at.status, " +
 //                "at.manufactured_date, at.location, at.retention, at.system, at.status, " +
 //                "at.transaction_date, at.transaction_time, at.date_move, at.date_expire" +
                 "at.manufacturer_company_id, mftr.company_name as tape_manufacturer_name, " +
@@ -134,6 +133,19 @@ public class TapeQueries {
     }
 
     /**
+     * Return number of tape grouped by status.
+     */
+    public static String selectTapeCountBySystemQuery(QueryBits query) {
+        return "select t.system, count(t.tape_id) as tape_count " +
+                "from asset_tape t " +
+                "left outer join (select af.attribute_field_id, af.attribute_field_name " +
+                "from attribute_view an, attribute_field_view af " +
+                "where an.object_key='tape' and an.attribute_name='system' " +
+                "and an.attribute_id = af.attribute_id) af on t.status = af.attribute_field_id " +
+                "group by system, af.attribute_field_name " + query.createClause();
+    }
+
+    /**
      * Return number of tape grouped by location.
      */
     public static String selectTapeCountByLocationQuery(QueryBits query) {
@@ -207,7 +219,7 @@ public class TapeQueries {
      */
 //  todo eto yung nag cacall ng function
     public static String insertTapeQuery() {
-        return "{call sp_tape_add(?,?,?,?,?,?)}";
+        return "{call sp_tape_add(?,?,?,?,?,?,?,?,?,?,?)}";
     }
 
     /**
