@@ -111,7 +111,7 @@ public class TapeListAction extends Action2 {
 
         QueryBits query = new QueryBits(tapeSearch);
         query.setLimit(rowLimit, rowStart);
-//
+
         if (TapeUtils.isSortableColumn(orderBy)) {
             query.addSortColumn(TapeQueries.getOrderByColumn(orderBy), order);
         }
@@ -120,7 +120,6 @@ public class TapeListAction extends Action2 {
         List dataList = null;
 
         if (rowCount != 0) {
-            System.out.println("pasok -> tape list action");
             List<Tape> tapeList = tapeService.getTapeList(query);
             dataList = TapeUtils.formatTapeList(requestContext, tapeList, new Counter(rowStart), AppPaths.TAPE_DETAIL);
         }
@@ -136,7 +135,7 @@ public class TapeListAction extends Action2 {
 //        todo tape list to tape detail
         standardTemplate.setAttribute("ajaxTapeDetailPath", AppPaths.IT_MGMT_AJAX_GET_TAPE_DETAIL + "?tapeId=");
         standardTemplate.setPathAttribute("formAction", AppPaths.TAPE_LIST);
-        standardTemplate.setAttribute("tapeTypeOptions", mediaTypeOptions);
+        standardTemplate.setAttribute("mediaTypeOptions", mediaTypeOptions);
 
         //
         // Template: TableTemplate
@@ -144,7 +143,7 @@ public class TapeListAction extends Action2 {
         TableTemplate tableTemplate = new TableTemplate();
         standardTemplate.addTemplate(tableTemplate);
         tableTemplate.setDataList(dataList);
-        tableTemplate.setColumnHeaders(TapeUtils.getSortableColumns());
+        tableTemplate.setColumnHeaders(TapeUtils.getColumnHeaderList());
         tableTemplate.setSortableColumnHeaders(TapeUtils.getSortableColumns());
         tableTemplate.setColumnPath(AppPaths.TAPE_LIST);
         tableTemplate.setColumnTextKey("common.column.");
@@ -169,6 +168,7 @@ public class TapeListAction extends Action2 {
             header.addHeaderCmds(link);
         }
 
+//todo add new links to sub navbar here
         // Link to Tape export.
 //        if (Access.hasPermission(user, AppPaths.TAPE_LIST_EXPORT)) {
 //            Link link = new Link(requestContext);

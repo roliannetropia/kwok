@@ -86,14 +86,14 @@ public class TapeDetailAction extends Action2 {
         //
         StandardTemplate standardTemplate = new StandardTemplate(requestContext);
 //        standardTemplate.setAttribute("softwareOptions", softwareOptions);
-        standardTemplate.setPathAttribute("formAddLicAction", AppPaths.TAPE_LICENSE_ADD_2);
-        standardTemplate.setAttribute("canRemoveLicense", Access.hasPermission(user, AppPaths.TAPE_LICENSE_REMOVE_2));
-        standardTemplate.setPathAttribute("formRemoveLicenseAction", AppPaths.TAPE_LICENSE_REMOVE_2);
+//        standardTemplate.setPathAttribute("formAddLicAction", AppPaths.TAPE_LICENSE_ADD_2);
+//        standardTemplate.setAttribute("canRemoveLicense", Access.hasPermission(user, AppPaths.TAPE_LICENSE_REMOVE_2));
+//        standardTemplate.setPathAttribute("formRemoveLicenseAction", AppPaths.TAPE_LICENSE_REMOVE_2);
         standardTemplate.setAttribute("formCancelLink", Links.getCancelLink(requestContext, AppPaths.TAPE_DETAIL + "?tapeId=" + tape.getId()).getString());
 //        standardTemplate.setPathAttribute("formGetSoftwareLicenseAction", formSoftwareLicense);
-        if (Access.hasPermission(user, AppPaths.SOFTWARE_AJAX_DETAILS)) {
-            standardTemplate.setPathAttribute("formLicenseAjaxAction", AppPaths.SOFTWARE_AJAX_DETAILS);
-        }
+//        if (Access.hasPermission(user, AppPaths.SOFTWARE_AJAX_DETAILS)) {
+//            standardTemplate.setPathAttribute("formLicenseAjaxAction", AppPaths.SOFTWARE_AJAX_DETAILS);
+//        }
         standardTemplate.setAttribute("colSpan", colSpan);
 
         //
@@ -103,7 +103,7 @@ public class TapeDetailAction extends Action2 {
         standardTemplate.addTemplate(customFieldsTemplate);
         customFieldsTemplate.setObjectTypeId(ObjectTypes.TAPE);
         customFieldsTemplate.setObjectId(tape.getId());
-//        customFieldsTemplate.setObjectAttrTypeId(tape.getType());
+//        customFieldsTemplate.setObjectAttrTypeId(tape.getMediaType());
         customFieldsTemplate.setShowDefaultHeader(false);
 
         //
@@ -190,6 +190,11 @@ public class TapeDetailAction extends Action2 {
         System.out.println("barcode -> " + tape.getTapeBarcodeNumber());
         System.out.println("manufacturer -> " + tape.getManufacturerName());
         System.out.println("vendor -> " + tape.getVendorName());
+        System.out.println("media type -> " + tape.getMediaType());
+        System.out.println("location -> " + tape.getTapeLocation());
+        System.out.println("retention -> " + tape.getTapeRetention());
+        System.out.println("system -> " + tape.getTapeSystem());
+        System.out.println("status -> " + tape.getTapeStatus());
         TapeSpecTemplate tmpl = new TapeSpecTemplate(tape);
         standardTemplate.addTemplate(tmpl);
 //        tmpl.setPopulateLinkedContract(!cmd.equals("add"));
