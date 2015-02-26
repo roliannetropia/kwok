@@ -41,6 +41,7 @@ public class TapeSearchForm extends ReportForm {
     private List<Integer> mediaTypes;
     private Integer mediaType;
     private List<Integer> tapeStatus;
+    private List<Integer> tapeSystem;
     private List<Integer> tapeLocation;
     private String tapeNameCriteria;
     private Integer manufacturerId;
@@ -70,6 +71,7 @@ public class TapeSearchForm extends ReportForm {
         mediaTypes = requestContext.getParameters("mediaTypes");
         mediaType = requestContext.getParameterInteger("mediaType");
         tapeStatus = requestContext.getParameters("tapeStatus");
+        tapeSystem = requestContext.getParameters("tapeSystem");
         tapeLocation = requestContext.getParameters("tapeLocation");
         tapeNameCriteria = requestContext.getParameterString("tapeNameCriteria");
         manufacturerId = requestContext.getParameterInteger("manufacturerId");
@@ -132,6 +134,10 @@ public class TapeSearchForm extends ReportForm {
 
     public void setMediaTypes(List<Integer> mediaTypes) {
         this.mediaTypes = mediaTypes;
+    }
+
+    public List<Integer> getTapeSystem() {
+        return tapeSystem;
     }
 
     public List<Integer> getTapeStatus() {
@@ -204,6 +210,10 @@ public class TapeSearchForm extends ReportForm {
 
     public void setTapeStatus(List<Integer> tapeStatus) {
         this.tapeStatus = tapeStatus;
+    }
+
+    public void setTapeSystem(List<Integer> tapeSystem) {
+        this.tapeSystem = tapeSystem;
     }
 
     public void setTapeLocation(List<Integer> tapeLocation) {
