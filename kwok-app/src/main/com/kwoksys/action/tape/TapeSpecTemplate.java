@@ -107,17 +107,32 @@ public class TapeSpecTemplate extends BaseTemplate {
         td.setValue(Links.getCompanyDetailsLink(requestContext, tape.getVendorName(), tape.getVendorId()).getString());
         detailTableTemplate.addTd(td);
 
-//        AttributeField attrField = attributeManager.getAttrFieldMapCache(Attributes.TAPE_TYPE).get(tape.getType());
+        AttributeField attrField = attributeManager.getAttrFieldMapCache(Attributes.MEDIA_TYPE).get(tape.getMediaType());
 //
-//        td = detailTableTemplate.new Td();
-//        td.setHeaderKey("common.column.tape_type");
-//        td.setValue(Links.getAttrFieldIcon(requestContext, attrField).getString());
-//        detailTableTemplate.addTd(td);
-//
-//        td = detailTableTemplate.new Td();
-//        td.setHeaderKey("common.column.tape_status");
-//        td.setValue(HtmlUtils.encode(attributeManager.getAttrFieldNameCache(Attributes.TAPE_STATUS, tape.getStatus())));
-//        detailTableTemplate.addTd(td);
+        td = detailTableTemplate.new Td();
+        td.setHeaderKey("common.column.media_type");
+        td.setValue(Links.getAttrFieldIcon(requestContext, attrField).getString());
+        detailTableTemplate.addTd(td);
+
+        td = detailTableTemplate.new Td();
+        td.setHeaderKey("common.column.tape_location");
+        td.setValue(HtmlUtils.encode(attributeManager.getAttrFieldNameCache(Attributes.TAPE_LOCATION, tape.getTapeLocation())));
+        detailTableTemplate.addTd(td);
+
+        td = detailTableTemplate.new Td();
+        td.setHeaderKey("common.column.tape_retention");
+        td.setValue(HtmlUtils.encode(attributeManager.getAttrFieldNameCache(Attributes.TAPE_RETENTION, tape.getTapeRetention())));
+        detailTableTemplate.addTd(td);
+
+        td = detailTableTemplate.new Td();
+        td.setHeaderKey("common.column.tape_system");
+        td.setValue(HtmlUtils.encode(attributeManager.getAttrFieldNameCache(Attributes.TAPE_SYSTEM, tape.getTapeSystem())));
+        detailTableTemplate.addTd(td);
+
+        td = detailTableTemplate.new Td();
+        td.setHeaderKey("common.column.tape_status");
+        td.setValue(HtmlUtils.encode(attributeManager.getAttrFieldNameCache(Attributes.TAPE_STATUS, tape.getTapeStatus())));
+        detailTableTemplate.addTd(td);
 //
 //        td = detailTableTemplate.new Td();
 //        td.setHeaderKey("common.column.tape_model_name");
@@ -153,11 +168,6 @@ public class TapeSpecTemplate extends BaseTemplate {
 //        td = detailTableTemplate.new Td();
 //        td.setHeaderKey("common.column.tape_last_service_date");
 //        td.setValue(tape.getLastServicedOn());
-//        detailTableTemplate.addTd(td);
-//
-//        td = detailTableTemplate.new Td();
-//        td.setHeaderKey("common.column.tape_location");
-//        td.setValue(HtmlUtils.encode(attributeManager.getAttrFieldNameCache(Attributes.TAPE_LOCATION, tape.getLocation())));
 //        detailTableTemplate.addTd(td);
 //
 //        td = detailTableTemplate.new Td();
