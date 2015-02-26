@@ -152,70 +152,131 @@ public class TapeDao extends BaseDao {
     }
 
     /**
+     * Return number of tape grouped by system.
+     *
+     * @return ..
+     */
+    public List<AttributeFieldCount> getTapeSystemCount(QueryBits query) throws DatabaseException {
+        Connection conn = getConnection();
+
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.selectTapeCountBySystemQuery(query));
+
+        try {
+            List list = new ArrayList();
+            ResultSet rs = queryHelper.executeQuery(conn);
+
+            while (rs.next()) {
+                AttributeFieldCount count = new AttributeFieldCount();
+                count.setAttrFieldId(rs.getInt("system"));
+                count.setObjectCount(rs.getInt("tape_count"));
+
+                list.add(count);
+            }
+            return list;
+
+        } catch (Exception e) {
+            // Database problem
+            throw new DatabaseException(e, queryHelper);
+
+        } finally {
+            queryHelper.closeRs();
+            closeConnection(conn);
+        }
+    }
+
+    /**
      * Return number of tape grouped by status.
      *
      * @return ..
      */
-//    public List<AttributeFieldCount> getTapeStatusCount(QueryBits query) throws DatabaseException {
-//        Connection conn = getConnection();
-//
-//        QueryHelper queryHelper = new QueryHelper(TapeQueries.selectTapeCountByStatusQuery(query));
-//
-//        try {
-//            List list = new ArrayList();
-//            ResultSet rs = queryHelper.executeQuery(conn);
-//
-//            while (rs.next()) {
-//                AttributeFieldCount count = new AttributeFieldCount();
-//                count.setAttrFieldId(rs.getInt("status"));
-//                count.setObjectCount(rs.getInt("tape_count"));
-//
-//                list.add(count);
-//            }
-//            return list;
-//
-//        } catch (Exception e) {
-//            // Database problem
-//            throw new DatabaseException(e, queryHelper);
-//
-//        } finally {
-//            queryHelper.closeRs();
-//            closeConnection(conn);
-//        }
-//    }
+    public List<AttributeFieldCount> getTapeStatusCount(QueryBits query) throws DatabaseException {
+        Connection conn = getConnection();
+
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.selectTapeCountByStatusQuery(query));
+
+        try {
+            List list = new ArrayList();
+            ResultSet rs = queryHelper.executeQuery(conn);
+
+            while (rs.next()) {
+                AttributeFieldCount count = new AttributeFieldCount();
+                count.setAttrFieldId(rs.getInt("status"));
+                count.setObjectCount(rs.getInt("tape_count"));
+
+                list.add(count);
+            }
+            return list;
+
+        } catch (Exception e) {
+            // Database problem
+            throw new DatabaseException(e, queryHelper);
+
+        } finally {
+            queryHelper.closeRs();
+            closeConnection(conn);
+        }
+    }
 
     /**
      * Return number of tape grouped by location.
      *
      * @return ..
      */
-//    public List<AttributeFieldCount> getTapeLocationCount(QueryBits query) throws DatabaseException {
-//        Connection conn = getConnection();
-//
-//        QueryHelper queryHelper = new QueryHelper(TapeQueries.selectTapeCountByLocationQuery(query));
-//
-//        try {
-//            List list = new ArrayList();
-//            ResultSet rs = queryHelper.executeQuery(conn);
-//
-//            while (rs.next()) {
-//                AttributeFieldCount count = new AttributeFieldCount();
-//                count.setAttrFieldId(rs.getInt("location"));
-//                count.setObjectCount(rs.getInt("tape_count"));
-//
-//                list.add(count);
-//            }
-//            return list;
-//
-//        } catch (Exception e) {
-//            // Database problem
-//            throw new DatabaseException(e, queryHelper);
-//
-//        } finally {
-//            queryHelper.closeRs();
-//            closeConnection(conn);
-//        }
-//    }
+    public List<AttributeFieldCount> getTapeLocationCount(QueryBits query) throws DatabaseException {
+        Connection conn = getConnection();
+
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.selectTapeCountByLocationQuery(query));
+
+        try {
+            List list = new ArrayList();
+            ResultSet rs = queryHelper.executeQuery(conn);
+
+            while (rs.next()) {
+                AttributeFieldCount count = new AttributeFieldCount();
+                count.setAttrFieldId(rs.getInt("location"));
+                count.setObjectCount(rs.getInt("tape_count"));
+
+                list.add(count);
+            }
+            return list;
+
+        } catch (Exception e) {
+            // Database problem
+            throw new DatabaseException(e, queryHelper);
+
+        } finally {
+            queryHelper.closeRs();
+            closeConnection(conn);
+        }
+    }
+
+    public List<AttributeFieldCount> getTapeRetentionCount(QueryBits query) throws DatabaseException {
+        Connection conn = getConnection();
+
+        QueryHelper queryHelper = new QueryHelper(TapeQueries.selectTapeCountByLocationQuery(query));
+
+        try {
+            List list = new ArrayList();
+            ResultSet rs = queryHelper.executeQuery(conn);
+
+            while (rs.next()) {
+                AttributeFieldCount count = new AttributeFieldCount();
+                count.setAttrFieldId(rs.getInt("retention"));
+                count.setObjectCount(rs.getInt("tape_count"));
+
+                list.add(count);
+            }
+            return list;
+
+        } catch (Exception e) {
+            // Database problem
+            throw new DatabaseException(e, queryHelper);
+
+        } finally {
+            queryHelper.closeRs();
+            closeConnection(conn);
+        }
+    }
 
 //    public List getAvailableSoftware(QueryBits query) throws DatabaseException {
 //        QueryHelper queryHelper = new QueryHelper(TapeQueries.selectTapeAvailableSoftwareQuery(query));
@@ -372,10 +433,12 @@ public class TapeDao extends BaseDao {
         queryHelper.addInputIntegerConvertNull(tape.getVendorId());
 
         // We don't want tape type to be null before it's hard to search for it.
-//        queryHelper.addInputInt(tape.getMediaType());
-//        queryHelper.addInputInt(tape.getTapeStatus());
+        queryHelper.addInputInt(tape.getMediaType());
+        queryHelper.addInputInt(tape.getTapeLocation());
+        queryHelper.addInputInt(tape.getTapeRetention());
+        queryHelper.addInputInt(tape.getTapeSystem());
+        queryHelper.addInputInt(tape.getTapeStatus());
 //        queryHelper.addInputIntegerConvertNull(tape.getOwnerId());
-//        queryHelper.addInputInt(tape.getTapeLocation());
 //        queryHelper.addInputStringConvertNull(tape.getModelName());
 //        queryHelper.addInputStringConvertNull(tape.getModelNumber());
 //        if (tape.getPurchasePriceRaw() == 0) {
@@ -424,10 +487,12 @@ public class TapeDao extends BaseDao {
         queryHelper.addInputIntegerConvertNull(tape.getVendorId());
 
         // We don't want tape type to be null before it's hard to search for it.
-//        queryHelper.addInputInt(tape.getMediaType());
-//        queryHelper.addInputInt(tape.getTapeStatus());
+        queryHelper.addInputInt(tape.getMediaType());
+        queryHelper.addInputInt(tape.getTapeLocation());
+        queryHelper.addInputInt(tape.getTapeRetention());
+        queryHelper.addInputInt(tape.getTapeSystem());
+        queryHelper.addInputInt(tape.getTapeStatus());
 //        queryHelper.addInputIntegerConvertNull(tape.getOwnerId());
-//        queryHelper.addInputInt(tape.getTapeLocation());
 //        queryHelper.addInputStringConvertNull(tape.getModelName());
 //        queryHelper.addInputStringConvertNull(tape.getModelNumber());
 
@@ -636,9 +701,12 @@ public class TapeDao extends BaseDao {
         System.out.println("Vendor id: "+ rs.getInt("vendor_company_id") + " and vendor name: "+ StringUtils.replaceNull(rs.getString("tape_vendor_name")));
 
 //
-//        tape.setTapeLocation(rs.getInt("tape_location"));
-//        tape.setMediaType(rs.getInt("media_type"));
-//        tape.setTapeStatus(rs.getInt("tape_status"));
+        tape.setMediaType(rs.getInt("media_type"));
+        tape.setTapeLocation(rs.getInt("location"));
+        tape.setTapeRetention(rs.getInt("retention"));
+
+        tape.setTapeSystem(rs.getInt("system"));
+        tape.setTapeStatus(rs.getInt("status"));
 
 //        tape.setPurchasePrice(CurrencyUtils.formatCurrency(rs.getDouble("tape_purchase_price"), ""));
 //        tape.setLastServicedOn(DatetimeUtils.getDate(rs, "tape_last_service_date"));
