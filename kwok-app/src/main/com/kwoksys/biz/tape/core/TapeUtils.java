@@ -61,7 +61,7 @@ public class TapeUtils {
      * Speficify the sortable columns allowed.
      */
     public static List<String> getSortableColumns() {
-        return Arrays.asList(Tape.ID, Tape.TAPE_NAME, Tape.TAPE_SERIAL_NUMBER, Tape.TAPE_BARCODE_NUMBER);
+        return Arrays.asList(Tape.ID, Tape.TAPE_NAME);
     }
 
     /**
@@ -206,11 +206,8 @@ public class TapeUtils {
 
     public static List formatTapeList(RequestContext requestContext, List<Tape> tapeDataset, Counter counter,
                                           String tapePath) throws Exception {
-        System.out.println("format tape list: request context -> "+requestContext);
-        System.out.println("format tape list: tape data set -> "+tapeDataset);
-        System.out.println("format tape list: counter -> "+counter);
-        System.out.println("format tape list: counter -> "+tapePath);
-        return formatTapeList(requestContext, tapeDataset, TapeUtils.getSortableColumns(), counter, tapePath);
+//        todo tape header
+        return formatTapeList(requestContext, tapeDataset, TapeUtils.getColumnHeaderList(), counter, tapePath);
     }
 
     public static List formatTapeList(RequestContext requestContext, List<Tape> tapeDataset, List<String> columnHeaders,
@@ -230,7 +227,7 @@ public class TapeUtils {
 
         boolean hasTapeAccess = Access.hasPermission(user, tapePath);
         boolean hasUserDetailAccess = Access.hasPermission(user, AppPaths.ADMIN_USER_DETAIL);
-//        boolean hasHwAjaxAccess = Access.hasPermission(user, AppPaths.IT_MGMT_AJAX_GET_TAPE_DETAIL);
+        boolean hasTpAjaxAccess = Access.hasPermission(user, AppPaths.IT_MGMT_AJAX_GET_TAPE_DETAIL);
 
         AttributeManager attributeManager = new AttributeManager(requestContext);
 
@@ -252,15 +249,15 @@ public class TapeUtils {
                     if (hasTapeAccess) {
                         Link link = new Link(requestContext);
                         link.setTitle(tape.getTapeName());
-//                        link.setAjaxPath(tapePath + "?tapeId=" + tape.getId());
+                        link.setAjaxPath(tapePath + "?tapeId=" + tape.getId());
                         String tempTapeName = link.getString();
 
-//                        if (hasHwAjaxAccess) {
-//                            link = new Link(requestContext);
-//                            link.setJavascript("tapePopup(this," + tape.getId() + ")");
-//                            link.setImgSrc(Image.getInstance().getMagGlassIcon());
-//                            tempTapeName += "&nbsp;" + link.getString();
-//                        }
+                        if (hasTpAjaxAccess) {
+                            link = new Link(requestContext);
+                            link.setJavascript("tapePopup(this," + tape.getId() + ")");
+                            link.setImgSrc(Image.getInstance().getMagGlassIcon());
+                            tempTapeName += "&nbsp;" + link.getString();
+                        }
                         columns.add(tempTapeName);
                     } else {
                         columns.add(HtmlUtils.encode(tape.getTapeName()));
