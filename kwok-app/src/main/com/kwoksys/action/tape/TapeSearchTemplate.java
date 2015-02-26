@@ -47,7 +47,8 @@ import java.util.*;
 public class TapeSearchTemplate extends BaseTemplate {
 
     private String formAction;
-    private List<AttributeFieldCount> tapeTypeData;
+    private List<AttributeFieldCount> mediaTypeData;
+    private List<AttributeFieldCount> tapeSystemData;
     private List<AttributeFieldCount> tapeStatusData;
     private List<AttributeFieldCount> tapeLocationData;
     private boolean hideSearchButton;
@@ -76,66 +77,86 @@ public class TapeSearchTemplate extends BaseTemplate {
 
         AttributeManager attributeManager = new AttributeManager(requestContext);
 
-//        Map attrFieldTypeMap = attributeManager.getAttrFieldMapCache(Attributes.MEDIA_TYPE);
-//        Map attrFieldStatusMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_STATUS);
-//        Map attrFieldLocMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_LOCATION);
+        Map attrFieldTypeMap = attributeManager.getAttrFieldMapCache(Attributes.MEDIA_TYPE);
+        Map attrFieldSystemMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_SYSTEM);
+        Map attrFieldStatusMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_STATUS);
+        Map attrFieldLocMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_LOCATION);
 
         // Group by Tape type.
-//        List tapeTypeOptions = new ArrayList();
-//        tapeTypeOptions.add(new SelectOneLabelValueBean(requestContext));
-
-//        if (tapeTypeData == null) {
-//            tapeTypeData = tapeService.getTapeTypeCount(query);
-//        }
-//        for (AttributeFieldCount tape : tapeTypeData) {
-//            AttributeField attrField = (AttributeField) attrFieldTypeMap.get(tape.getAttrFieldId());
-//            String tapeTypeName;
+        List mediaTypeOptions = new ArrayList();
+        mediaTypeOptions.add(new SelectOneLabelValueBean(requestContext));
 //
-//            if (attrField != null) {
-//                tapeTypeName = attrField.getName();
-//            } else {
-//                tapeTypeName = Localizer.getText(requestContext, "itMgmt.index.na");
-//            }
-//            tapeTypeOptions.add(new LabelValueBean(tapeTypeName, String.valueOf(tape.getAttrFieldId())));
-//        }
+        if (mediaTypeData == null) {
+            mediaTypeData = tapeService.getMediaTypeCount(query);
+        }
+        for (AttributeFieldCount tape : mediaTypeData) {
+            AttributeField attrField = (AttributeField) attrFieldTypeMap.get(tape.getAttrFieldId());
+            String mediaTypeName;
+
+            if (attrField != null) {
+                mediaTypeName = attrField.getName();
+            } else {
+                mediaTypeName = Localizer.getText(requestContext, "itMgmt.index.na");
+            }
+            mediaTypeOptions.add(new LabelValueBean(mediaTypeName, String.valueOf(tape.getAttrFieldId())));
+        }
+
+        // Group by Tape system.
+        List systemOptions = new ArrayList();
+        systemOptions.add(new SelectOneLabelValueBean(requestContext));
+
+        if (tapeSystemData == null) {
+            tapeSystemData = tapeService.getTapeSystemCount(query);
+        }
+        for (AttributeFieldCount tape : tapeSystemData) {
+            AttributeField attrField = (AttributeField) attrFieldStatusMap.get(tape.getAttrFieldId());
+            String tapeSystemName;
+
+            if (attrField != null) {
+                tapeSystemName = attrField.getName();
+            } else {
+                tapeSystemName = Localizer.getText(requestContext, "itMgmt.index.na");
+            }
+            systemOptions.add(new LabelValueBean(tapeSystemName, String.valueOf(tape.getAttrFieldId())));
+        }
 
         // Group by Tape status.
-//        List statusOptions = new ArrayList();
-//        statusOptions.add(new SelectOneLabelValueBean(requestContext));
-//
-//        if (tapeStatusData == null) {
-//            tapeStatusData = tapeService.getTapeStatusCount(query);
-//        }
-//        for (AttributeFieldCount tape : tapeStatusData) {
-//            AttributeField attrField = (AttributeField) attrFieldStatusMap.get(tape.getAttrFieldId());
-//            String tapeStatusName;
-//
-//            if (attrField != null) {
-//                tapeStatusName = attrField.getName();
-//            } else {
-//                tapeStatusName = Localizer.getText(requestContext, "itMgmt.index.na");
-//            }
-//            statusOptions.add(new LabelValueBean(tapeStatusName, String.valueOf(tape.getAttrFieldId())));
-//        }
+        List statusOptions = new ArrayList();
+        statusOptions.add(new SelectOneLabelValueBean(requestContext));
+
+        if (tapeStatusData == null) {
+            tapeStatusData = tapeService.getTapeStatusCount(query);
+        }
+        for (AttributeFieldCount tape : tapeStatusData) {
+            AttributeField attrField = (AttributeField) attrFieldStatusMap.get(tape.getAttrFieldId());
+            String tapeStatusName;
+
+            if (attrField != null) {
+                tapeStatusName = attrField.getName();
+            } else {
+                tapeStatusName = Localizer.getText(requestContext, "itMgmt.index.na");
+            }
+            statusOptions.add(new LabelValueBean(tapeStatusName, String.valueOf(tape.getAttrFieldId())));
+        }
 
         // Group by Tape location.
-//        List locationOptions = new ArrayList();
-//        locationOptions.add(new SelectOneLabelValueBean(requestContext));
-//
-//        if (tapeLocationData == null) {
-//            tapeLocationData = tapeService.getTapeLocationCount(query);
-//        }
-//        for (AttributeFieldCount tape : tapeLocationData) {
-//            AttributeField attrField = (AttributeField) attrFieldLocMap.get(tape.getAttrFieldId());
-//            String tapeLocName;
-//
-//            if (attrField != null) {
-//                tapeLocName = attrField.getName();
-//            } else {
-//                tapeLocName = Localizer.getText(requestContext, "itMgmt.index.na");
-//            }
-//            locationOptions.add(new LabelValueBean(tapeLocName, String.valueOf(tape.getAttrFieldId())));
-//        }
+        List locationOptions = new ArrayList();
+        locationOptions.add(new SelectOneLabelValueBean(requestContext));
+
+        if (tapeLocationData == null) {
+            tapeLocationData = tapeService.getTapeLocationCount(query);
+        }
+        for (AttributeFieldCount tape : tapeLocationData) {
+            AttributeField attrField = (AttributeField) attrFieldLocMap.get(tape.getAttrFieldId());
+            String tapeLocName;
+
+            if (attrField != null) {
+                tapeLocName = attrField.getName();
+            } else {
+                tapeLocName = Localizer.getText(requestContext, "itMgmt.index.na");
+            }
+            locationOptions.add(new LabelValueBean(tapeLocName, String.valueOf(tape.getAttrFieldId())));
+        }
 
         request.setAttribute("TapeSearchTemplate_formAction", AppPaths.ROOT + formAction);
         request.setAttribute("tapeNameCriteriaOptions", nameCriteriaOptions);
@@ -144,9 +165,10 @@ public class TapeSearchTemplate extends BaseTemplate {
         request.setAttribute("monthOptions", CalendarUtils.getMonthOptions(requestContext));
         request.setAttribute("dateOptions", CalendarUtils.getDateOptions(requestContext));
         request.setAttribute("yearOptions", CalendarUtils.getPastYearOptions(requestContext));
-//        request.setAttribute("tapeTypeOptions", tapeTypeOptions);
-//        request.setAttribute("tapeStatusOptions", statusOptions);
-//        request.setAttribute("tapeLocationOptions", locationOptions);
+        request.setAttribute("mediaTypeOptions", mediaTypeOptions);
+        request.setAttribute("tapeLocationOptions", locationOptions);
+        request.setAttribute("tapeSystemOptions", systemOptions);
+        request.setAttribute("tapeStatusOptions", statusOptions);
         request.setAttribute("customFieldsOptions", new AttributeManager(requestContext).getCustomFieldOptions(ObjectTypes.TAPE));
         request.setAttribute("TapeSearchTemplate_hideSearchButton", hideSearchButton);
 
@@ -176,15 +198,20 @@ public class TapeSearchTemplate extends BaseTemplate {
     public void setFormAction(String formAction) {
         this.formAction = formAction;
     }
-//    public void setTapeTypeData(List<AttributeFieldCount> tapeTypeData) {
-//        this.tapeTypeData = tapeTypeData;
-//    }
-//    public void setTapeStatusData(List<AttributeFieldCount> tapeStatusData) {
-//        this.tapeStatusData = tapeStatusData;
-//    }
-//    public void setTapeLocationData(List<AttributeFieldCount> tapeLocationData) {
-//        this.tapeLocationData = tapeLocationData;
-//    }
+
+    public void setMediaTypeData(List<AttributeFieldCount> mediaTypeData) {
+        this.mediaTypeData = mediaTypeData;
+    }
+    public void setTapeLocationData(List<AttributeFieldCount> tapeLocationData) {
+        this.tapeLocationData = tapeLocationData;
+    }
+    public void setTapeSystemData(List<AttributeFieldCount> tapeSystemData) {
+        this.tapeSystemData = tapeSystemData;
+    }
+    public void setTapeStatusData(List<AttributeFieldCount> tapeStatusData) {
+        this.tapeStatusData = tapeStatusData;
+    }
+
 
     public boolean getHideSearchButton() {
         return hideSearchButton;
