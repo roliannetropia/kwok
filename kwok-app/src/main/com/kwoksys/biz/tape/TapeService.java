@@ -62,14 +62,18 @@ public class TapeService {
     public List<AttributeFieldCount> getMediaTypeCount(QueryBits query) throws DatabaseException {
         return new TapeDao(requestContext).getMediaTypeCount(query);
     }
-//
-//    public List<AttributeFieldCount> getTapeStatusCount(QueryBits query) throws DatabaseException {
-//        return new TapeDao(requestContext).getTapeStatusCount(query);
-//    }
-//
-//    public List<AttributeFieldCount> getTapeLocationCount(QueryBits query) throws DatabaseException {
-//        return new TapeDao(requestContext).getTapeLocationCount(query);
-//    }
+
+    public List<AttributeFieldCount> getTapeStatusCount(QueryBits query) throws DatabaseException {
+        return new TapeDao(requestContext).getTapeStatusCount(query);
+    }
+
+    public List<AttributeFieldCount> getTapeSystemCount(QueryBits query) throws DatabaseException {
+        return new TapeDao(requestContext).getTapeSystemCount(query);
+    }
+
+    public List<AttributeFieldCount> getTapeLocationCount(QueryBits query) throws DatabaseException {
+        return new TapeDao(requestContext).getTapeLocationCount(query);
+    }
 
     public Tape getTape(Integer tapeId) throws DatabaseException, ObjectNotFoundException {
         return new TapeDao(requestContext).getTape(tapeId);
