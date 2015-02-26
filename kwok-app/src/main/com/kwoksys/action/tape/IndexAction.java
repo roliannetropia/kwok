@@ -70,60 +70,78 @@ public class IndexAction extends Action2 {
         QueryBits query = new QueryBits();
         query.addSortColumn(TapeQueries.getOrderByColumn(AttributeField.NAME));
 
-//        Map attrFieldTypeMap = attributeManager.getAttrFieldMapCache(Attributes.MEDIA_TYPE);
-//        Map attrFieldStatusMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_STATUS);
-//        Map attrFieldLocMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_LOCATION);
+        Map attrFieldTypeMap = attributeManager.getAttrFieldMapCache(Attributes.MEDIA_TYPE);
+        Map attrFieldSystemMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_SYSTEM);
+        Map attrFieldStatusMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_STATUS);
+        Map attrFieldLocMap = attributeManager.getAttrFieldMapCache(Attributes.TAPE_LOCATION);
 
-        // Group by Tape type.
-//        List tapeTypeCounts = new ArrayList();
-//        List<AttributeFieldCount> tapeTypeData = tapeService.getTapeTypeCount(query);
-//        RowStyle ui = new RowStyle();
+//        Group by Media type.
+        List mediaTypeCounts = new ArrayList();
+        List<AttributeFieldCount> mediaTypeData = tapeService.getMediaTypeCount(query);
+        RowStyle ui = new RowStyle();
 
-//        for (AttributeFieldCount tape : tapeTypeData) {
-//            AttributeField attrField = (AttributeField) attrFieldTypeMap.get(tape.getAttrFieldId());
-//            String tapeTypeName = attrField != null ? Links.getAttrFieldIcon(requestContext, attrField).getString() : Localizer.getText(requestContext, "itMgmt.index.na");
-//
-//            Map map = new HashMap();
-//            map.put("countKey", tapeTypeName);
-//            map.put("countValue", tape.getObjectCount());
-//            map.put("style", ui.getRowClass());
-//            map.put("path", AppPaths.ROOT + AppPaths.TAPE_LIST + "?cmd=groupBy&tapeType=" + tape.getAttrFieldId());
-//            tapeTypeCounts.add(map);
-//        }
+        for (AttributeFieldCount tape : mediaTypeData) {
+            AttributeField attrField = (AttributeField) attrFieldTypeMap.get(tape.getAttrFieldId());
+            String mediaTypeName = attrField != null ? Links.getAttrFieldIcon(requestContext, attrField).getString() : Localizer.getText(requestContext, "itMgmt.index.na");
+
+            Map map = new HashMap();
+            map.put("countKey", mediaTypeName);
+            map.put("countValue", tape.getObjectCount());
+            map.put("style", ui.getRowClass());
+            map.put("path", AppPaths.ROOT + AppPaths.TAPE_LIST + "?cmd=groupBy&mediaType=" + tape.getAttrFieldId());
+            mediaTypeCounts.add(map);
+        }
+
+        // Group by Tape system.
+        List tapeSystemCounts = new ArrayList();
+        List<AttributeFieldCount> tapeSystemData = tapeService.getTapeSystemCount(query);
+        ui = new RowStyle();
+
+        for (AttributeFieldCount tape : tapeSystemData) {
+            AttributeField attrField = (AttributeField) attrFieldSystemMap.get(tape.getAttrFieldId());
+            String tapeSystemName = attrField != null ? attrField.getName() : Localizer.getText(requestContext, "itMgmt.index.na");
+
+            Map map = new HashMap();
+            map.put("countKey", tapeSystemName);
+            map.put("countValue", tape.getObjectCount());
+            map.put("style", ui.getRowClass());
+            map.put("path", AppPaths.ROOT + AppPaths.TAPE_LIST + "?cmd=groupBy&tapeSystem=" + tape.getAttrFieldId());
+            tapeSystemCounts.add(map);
+        }
 
         // Group by Tape status.
-//        List tapeStatusCounts = new ArrayList();
-//        List<AttributeFieldCount> tapeStatusData = tapeService.getTapeStatusCount(query);
-//        ui = new RowStyle();
-//
-//        for (AttributeFieldCount tape : tapeStatusData) {
-//            AttributeField attrField = (AttributeField) attrFieldStatusMap.get(tape.getAttrFieldId());
-//            String tapeStatusName = attrField != null ? attrField.getName() : Localizer.getText(requestContext, "itMgmt.index.na");
-//
-//            Map map = new HashMap();
-//            map.put("countKey", tapeStatusName);
-//            map.put("countValue", tape.getObjectCount());
-//            map.put("style", ui.getRowClass());
-//            map.put("path", AppPaths.ROOT + AppPaths.TAPE_LIST + "?cmd=groupBy&tapeStatus=" + tape.getAttrFieldId());
-//            tapeStatusCounts.add(map);
-//        }
+        List tapeStatusCounts = new ArrayList();
+        List<AttributeFieldCount> tapeStatusData = tapeService.getTapeStatusCount(query);
+        ui = new RowStyle();
+
+        for (AttributeFieldCount tape : tapeStatusData) {
+            AttributeField attrField = (AttributeField) attrFieldStatusMap.get(tape.getAttrFieldId());
+            String tapeStatusName = attrField != null ? attrField.getName() : Localizer.getText(requestContext, "itMgmt.index.na");
+
+            Map map = new HashMap();
+            map.put("countKey", tapeStatusName);
+            map.put("countValue", tape.getObjectCount());
+            map.put("style", ui.getRowClass());
+            map.put("path", AppPaths.ROOT + AppPaths.TAPE_LIST + "?cmd=groupBy&tapeStatus=" + tape.getAttrFieldId());
+            tapeStatusCounts.add(map);
+        }
 
         // Group by Tape location.
-//        List locationCounts = new ArrayList();
-//        List<AttributeFieldCount> tapeLocationData = tapeService.getTapeLocationCount(query);
-//        ui = new RowStyle();
+        List locationCounts = new ArrayList();
+        List<AttributeFieldCount> tapeLocationData = tapeService.getTapeLocationCount(query);
+        ui = new RowStyle();
 
-//        for (AttributeFieldCount tape : tapeLocationData) {
-//            AttributeField attrField = (AttributeField) attrFieldLocMap.get(tape.getAttrFieldId());
-//            String tapeLocName = attrField != null ? attrField.getName() : Localizer.getText(requestContext, "itMgmt.index.na");
+        for (AttributeFieldCount tape : tapeLocationData) {
+            AttributeField attrField = (AttributeField) attrFieldLocMap.get(tape.getAttrFieldId());
+            String tapeLocName = attrField != null ? attrField.getName() : Localizer.getText(requestContext, "itMgmt.index.na");
 
-//            Map map = new HashMap();
-//            map.put("countKey", tapeLocName);
-//            map.put("countValue", tape.getObjectCount());
-//            map.put("style", ui.getRowClass());
-//            map.put("path", AppPaths.ROOT + AppPaths.TAPE_LIST + "?cmd=groupBy&tapeLocation=" + tape.getAttrFieldId());
-//            locationCounts.add(map);
-//        }
+            Map map = new HashMap();
+            map.put("countKey", tapeLocName);
+            map.put("countValue", tape.getObjectCount());
+            map.put("style", ui.getRowClass());
+            map.put("path", AppPaths.ROOT + AppPaths.TAPE_LIST + "?cmd=groupBy&tapeLocation=" + tape.getAttrFieldId());
+            locationCounts.add(map);
+        }
 
         //
         // Template: StandardTemplate
@@ -131,15 +149,16 @@ public class IndexAction extends Action2 {
         StandardTemplate standardTemplate = new StandardTemplate(requestContext);
         standardTemplate.setAttribute("numTapeRecords", numTapeRecords);
         standardTemplate.setAttribute("linkList", links);
-//        standardTemplate.setAttribute("tapeTypeCountList", tapeTypeCounts);
-//        standardTemplate.setAttribute("tapeStatusCounts", tapeStatusCounts);
-//        standardTemplate.setAttribute("tapeLocationCountList", locationCounts);
+        standardTemplate.setAttribute("mediaTypeCountList", mediaTypeCounts);
+        standardTemplate.setAttribute("tapeLocationCountList", locationCounts);
+        standardTemplate.setAttribute("tapeSystemCounts", tapeSystemCounts);
+        standardTemplate.setAttribute("tapeStatusCounts", tapeStatusCounts);
 
         //
         // Template: HeaderTemplate
         //
         HeaderTemplate header = standardTemplate.getHeaderTemplate();
-        header.setTitleKey("core.moduleName.9");
+        header.setTitleKey("core.moduleName.16");
         header.setTitleClassNoLine();
         
         // Link to add tape.
@@ -157,9 +176,10 @@ public class IndexAction extends Action2 {
         standardTemplate.addTemplate(searchTemplate);
         searchTemplate.setFormAction(AppPaths.TAPE_LIST);
 //        todo media type
-//        searchTemplate.setTapeTypeData(tapeTypeData);
-//        searchTemplate.setTapeStatusData(tapeStatusData);
-//        searchTemplate.setTapeLocationData(tapeLocationData);
+        searchTemplate.setMediaTypeData(mediaTypeData);
+        searchTemplate.setTapeLocationData(tapeLocationData);
+        searchTemplate.setTapeSystemData(tapeSystemData);
+        searchTemplate.setTapeStatusData(tapeStatusData);
 
         return standardTemplate.findTemplate(STANDARD_TEMPLATE);
     }
