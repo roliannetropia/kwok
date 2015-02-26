@@ -26,17 +26,51 @@
         <td><html:text name="TapeSearchForm" property="barcodeNumber" size="40"/></td>
     </tr>
 
-    <%--<tr>--%>
-        <%--<th><bean:message key="common.column.tape_manufacturer_name"/>:</th>--%>
-        <%--<td><html:select name="TapeSearchForm" property="manufacturerId">--%>
-            <%--<html:options collection="manufacturersOptions" property="value" labelProperty="label"/>--%>
-            <%--</html:select></td>--%>
-    <%--</tr>--%>
-    <%--<tr>--%>
-        <%--<th><bean:message key="common.column.tape_vendor_name"/>:</th>--%>
-        <%--<td><html:select name="TapeSearchForm" property="vendorId">--%>
-            <%--<html:options collection="vendorsOptions" property="value" labelProperty="label"/>--%>
-            <%--</html:select></td>--%>
-    <%--</tr>--%>
+    <tr>
+        <th><bean:message key="common.column.tape_manufacturer_name"/>:</th>
+        <td><html:select name="TapeSearchForm" property="manufacturerId">
+            <html:options collection="manufacturersOptions" property="value" labelProperty="label"/>
+            </html:select></td>
+    </tr>
+    <tr>
+        <th><bean:message key="common.column.tape_vendor_name"/>:</th>
+        <td><html:select name="TapeSearchForm" property="vendorId">
+            <html:options collection="vendorsOptions" property="value" labelProperty="label"/>
+            </html:select></td>
+    </tr>
+    <tr><td colspan="2">
+        <table><tr>
+            <th><bean:message key="common.column.media_type"/>:</th>
+            <th>
+                <html:select name="TapeSearchForm" property="mediaTypes" multiple="true" size="5">
+                    <html:options collection="mediaTypeOptions" property="value" labelProperty="label"/>
+                </html:select>
+            </th>
+            <th><bean:message key="common.column.tape_system"/>:</th>
+            <th>
+                <html:select name="TapeSearchForm" property="tapeSystem" multiple="true" size="5">
+                    <html:options collection="tapeSystemOptions" property="value" labelProperty="label"/>
+                </html:select>
+            </th>
+            <th><bean:message key="common.column.tape_status"/>:</th>
+            <th>
+                <html:select name="TapeSearchForm" property="tapeStatus" multiple="true" size="5">
+                    <html:options collection="tapeStatusOptions" property="value" labelProperty="label"/>
+                </html:select>
+            </th>
+            <th><bean:message key="common.column.tape_location"/>:</th>
+            <th>
+                <html:select name="TapeSearchForm" property="tapeLocation" multiple="true" size="5">
+                    <html:options collection="tapeLocationOptions" property="value" labelProperty="label"/>
+                </html:select>
+            </th>
+        </tr></table>
+    </td>
+    </tr>
+    <tr><td colspan="2">
+        <logic:notEqual name="TapeSearchTemplate_hideSearchButton" value="true">
+            <html:submit onclick="disableButton(this)"><bean:message key="form.button.search"/></html:submit>
+        </logic:notEqual>
+    </td></tr>
 </table>
 </form>
