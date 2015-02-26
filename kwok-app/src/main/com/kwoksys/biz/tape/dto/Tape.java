@@ -22,6 +22,9 @@ public class Tape extends BaseObject {
     public static final String TAPE_BARCODE_NUMBER = "tape_barcode_number";
     public static final String TAPE_SERIAL_NUMBER = "tape_serial_number";
 
+    public static final String MANUFACTURER_NAME = "tape_manufacturer_name";
+    public static final String VENDOR_NAME = "tape_vendor_name";
+
 //    public static final String TAPE_DESCRIPTION = "tape_description";
 //    public static final String MODEL_NAME = "tape_model_name";
 //
@@ -30,19 +33,20 @@ public class Tape extends BaseObject {
 //    public static final String SERVICE_DATE = "tape_last_service_date";
 
     public static final String MEDIA_TYPE = "media_type";
-    public static final String TAPE_STATUS = "tape_status";
     public static final String TAPE_LOCATION = "tape_location";
-//
+    public static final String TAPE_RETENTION = "tape_retention";
+
+    public static final String TAPE_STATUS = "tape_status";
+    public static final String TAPE_SYSTEM = "tape_system";
+
 //    public static final String PURCAHSE_PRICE = "tape_purchase_price";
 //    public static final String PURCHASE_DATE = "tape_purchase_date";
 //    public static final String WARRANTY_EXPIRATION = "tape_warranty_expire_date";
 
-    public static final String MANUFACTURER_NAME = "tape_manufacturer_name";
-    public static final String VENDOR_NAME = "tape_vendor_name";
+
 //    public static final String MANUFACTURED_DATE = "tapeManufacturedDate";
 
-    public static final String TAPE_RETENTION = "tape_retention";
-    public static final String TAPE_SYSTEM = "tape_system";
+
 //
 //    public static final String OWNER_NAME = "tape_owner_name";
 //    public static final String OWNER_USERNAME = "tape_owner_username";
@@ -58,11 +62,11 @@ public class Tape extends BaseObject {
     private Integer vendorId;
     private String vendorName;
 
-    private Integer tapeRetention;
-    private Integer tapeSystem;
-
-    private Integer tapeLocation;
     private Integer mediaType;
+    private Integer tapeLocation;
+    private Integer tapeRetention;
+
+    private Integer tapeSystem;
     private Integer tapeStatus;
 
 //    private String modelName;
@@ -102,22 +106,22 @@ public class Tape extends BaseObject {
         tapeName = "";
         tapeSerialNumber = "";
         tapeBarcodeNumber = "";
-//
+
 //        modelName = "";
 //        modelNumber = "";
 
         manufacturerId = 0;
         vendorId = 0;
 
+        mediaType = new CacheManager().getSystemAttrCache(Attributes.MEDIA_TYPE).getDefaultAttrFieldId();
+        tapeLocation = 0;
         tapeRetention = 0;
+
         tapeSystem = 0;
-//
+        tapeStatus = 0;
+
 //        resetLastServiceDate = 0;
 
-        tapeLocation = 0;
-//        mediaType = new CacheManager().getSystemAttrCache(Attributes.MEDIA_TYPE).getDefaultAttrFieldId();
-        tapeStatus = 0;
-//
 //        countSoftware = 0;
 //        countComponent = 0;
 //        countFile = 0;
@@ -133,11 +137,13 @@ public class Tape extends BaseObject {
 
         setManufacturerId(actionForm.getManufacturerId());
         setVendorId(actionForm.getVendorId());
-//
-//        setTapeLocation(actionForm.getTapeLocation());
-//        setMediaType(actionForm.getMediaType());
-//        setTapeStatus(actionForm.getTapeStatus());
 
+        setMediaType(actionForm.getMediaType());
+        setTapeLocation(actionForm.getTapeLocation());
+        setTapeRetention(actionForm.getTapeRetention());
+
+        setTapeSystem(actionForm.getTapeSystem());
+        setTapeStatus(actionForm.getTapeStatus());
 //        setModelName(actionForm.getTapeModelName());
 //        setModelNumber(actionForm.getTapeModelNumber());
 //        setPurchasePrice(actionForm.getTapeCost());
@@ -240,18 +246,24 @@ public class Tape extends BaseObject {
 //        return DatetimeUtils.isValidDate(warrantyYear, warrantyMonth, warrantyDate);
 //    }
 //
-//    public boolean isAttrEmpty(String attrName) {
-//        if (attrName.equals(Tape.TAPE_STATUS)) {
-//            return tapeStatus == 0;
-//
-//        } else if (attrName.equals(Tape.TAPE_LOCATION)) {
-//            return tapeLocation == 0;
-//
-//        } else if (attrName.equals(Tape.MEDIA_TYPE)) {
-//            return mediaType == 0;
-//        }
-//        return false;
-//    }
+    public boolean isAttrEmpty(String attrName) {
+        if (attrName.equals(Tape.TAPE_RETENTION)) {
+            return tapeRetention == 0;
+
+        } else if (attrName.equals(Tape.TAPE_LOCATION)) {
+            return tapeLocation == 0;
+
+        } else if (attrName.equals(Tape.MEDIA_TYPE)) {
+            return mediaType == 0;
+
+        } else if (attrName.equals(Tape.TAPE_SYSTEM)) {
+            return tapeSystem == 0;
+
+        } else if (attrName.equals(Tape.TAPE_STATUS)) {
+            return tapeStatus == 0;
+        }
+        return false;
+    }
 
 //    public String getWarrantyExpireDateString() {
 //        return DatetimeUtils.createDatetimeString(warrantyYear, warrantyMonth, warrantyDate);
@@ -302,6 +314,12 @@ public class Tape extends BaseObject {
     public void setTapeSerialNumber(String tapeSerialNumber) {
         this.tapeSerialNumber = tapeSerialNumber;
     }
+    public String getTapeBarcodeNumber() {
+        return tapeBarcodeNumber;
+    }
+    public void setTapeBarcodeNumber(String tapeBarcodeNumber) {
+        this.tapeBarcodeNumber = tapeBarcodeNumber;
+    }
 //    public String getModelName() {
 //        return modelName;
 //    }
@@ -326,10 +344,9 @@ public class Tape extends BaseObject {
 //    public void setLastServicedOn(Date lastServicedOn) {
 //        this.lastServicedOn = lastServicedOn;
 //    }
-
 //    public String getTapeManufacturedDateString() {
-//    return DatetimeUtils.createDatetimeString(manufacturedYear, manufacturedMonth, manufacturedDate);
-//}
+//        return DatetimeUtils.createDatetimeString(manufacturedYear, manufacturedMonth, manufacturedDate);
+//    }
 //    public Date getTapeManufacturedDate() {
 //        return tapeManufacturedDate;
 //    }
@@ -370,19 +387,6 @@ public class Tape extends BaseObject {
 //    public String getPurchasePrice() {
 //        return purchasePrice;
 //    }
-
-//    public Integer getTapeLocation() {
-//        return tapeLocation;
-//    }
-//    public void setTapeLocation(Integer tapeLocation) {
-//        this.tapeLocation = tapeLocation;
-//    }
-//    public Integer getMediaType() {
-//        return mediaType;
-//    }
-//    public void setMediaType(Integer mediaType) {
-//        this.mediaType = mediaType;
-//    }
 //    public Integer getTapeStatus() {
 //        return tapeStatus;
 //    }
@@ -416,6 +420,38 @@ public class Tape extends BaseObject {
         this.vendorId = vendorId;
     }
 
+    public Integer getMediaType() {
+        return mediaType;
+    }
+    public void setMediaType(Integer mediaType) {
+        this.mediaType = mediaType;
+    }
+    public Integer getTapeLocation() {
+        return tapeLocation;
+    }
+    public void setTapeLocation(Integer tapeLocation) {
+        this.tapeLocation = tapeLocation;
+    }
+    public Integer getTapeRetention() {
+        return tapeRetention;
+    }
+    public void setTapeRetention(Integer tapeRetention) {
+        this.tapeRetention = tapeRetention;
+    }
+
+    public Integer getTapeSystem() {
+        return tapeSystem;
+    }
+    public void setTapeSystem(Integer tapeSystem) {
+        this.tapeSystem = tapeSystem;
+    }
+
+    public Integer getTapeStatus() {
+        return tapeStatus;
+    }
+    public void setTapeStatus(Integer tapeStatus) {
+        this.tapeStatus = tapeStatus;
+    }
 //
 //    public int getResetLastServiceDate() {
 //        return resetLastServiceDate;
@@ -465,26 +501,6 @@ public class Tape extends BaseObject {
 //    public void setOwnerId(Integer ownerId) {
 //        this.ownerId = ownerId;
 //    }
-
-
-//    public Integer getTapeRetention() {
-//        return tapeRetention;
-//    }
-//    public void setTapeRetention(Integer tapeRetention) {
-//        this.tapeRetention = tapeRetention;
-//    }
-//    public Integer getTapeSystem() {
-//        return tapeSystem;
-//    }
-//    public void setTapeSystem(Integer tapeSystem) {
-//        this.tapeSystem = tapeSystem;
-//    }
-    public String getTapeBarcodeNumber() {
-        return tapeBarcodeNumber;
-    }
-    public void setTapeBarcodeNumber(String tapeBarcodeNumber) {
-        this.tapeBarcodeNumber = tapeBarcodeNumber;
-    }
 
 //    public String getPurchaseYear() {
 //        return purchaseYear;
