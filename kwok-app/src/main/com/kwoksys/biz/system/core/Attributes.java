@@ -60,15 +60,7 @@ public class Attributes {
     public static final Integer HARDWARE_TYPE = -10;
 
     public static final Integer HARDWARE_STATUS = -12;
-//    todo what is this?
-    public static final Integer TAPE_COMPONENT_TYPE = -22;
 
-    public static final Integer TAPE_LOCATION = -23;
-
-    public static final Integer MEDIA_TYPE = -24;
-
-    public static final Integer TAPE_STATUS = -25;
-// todo what is this
     public static final Integer CONTRACT_STAGE = -21;
 
     public static final Integer CONTRACT_TYPE = -14;
@@ -78,6 +70,16 @@ public class Attributes {
     public static final Integer KB_ARTICLE_SYNTAX_TYPE = -19;
 
     public static final Integer USER_STATUS_TYPE = -13;
+
+    public static final Integer MEDIA_TYPE = -22;
+
+    public static final Integer TAPE_LOCATION = -23;
+
+    public static final Integer TAPE_RETENTION = -24;
+
+    public static final Integer TAPE_SYSTEM = -25;
+
+    public static final Integer TAPE_STATUS = -26;
 
     private static final Map<String, Integer> nameIdMap = new HashMap();
 
@@ -90,9 +92,11 @@ public class Attributes {
         nameIdMap.put(Hardware.STATUS, HARDWARE_STATUS);
         nameIdMap.put(Hardware.TYPE, HARDWARE_TYPE);
 
-        nameIdMap.put(Tape.TAPE_LOCATION, TAPE_LOCATION);
-        nameIdMap.put(Tape.TAPE_STATUS, TAPE_STATUS);
         nameIdMap.put(Tape.MEDIA_TYPE, MEDIA_TYPE);
+        nameIdMap.put(Tape.TAPE_LOCATION, TAPE_LOCATION);
+        nameIdMap.put(Tape.TAPE_RETENTION, TAPE_RETENTION);
+        nameIdMap.put(Tape.TAPE_SYSTEM, TAPE_SYSTEM);
+        nameIdMap.put(Tape.TAPE_STATUS, TAPE_STATUS);
 
         nameIdMap.put(Software.TYPE, SOFTWARE_TYPE);
         nameIdMap.put(Software.OS, SOFTWARE_OS);

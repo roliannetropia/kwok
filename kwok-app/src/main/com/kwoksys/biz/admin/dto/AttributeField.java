@@ -104,11 +104,9 @@ public class AttributeField {
     public void setDisabled(boolean disabled) {
         isDisabled = disabled;
     }
-
     public List<Integer> getLinkedAttrIds() {
         return linkedAttrIds;
     }
-
     public void setLinkedAttrIds(List<Integer> linkedAttrIds) {
         this.linkedAttrIds = linkedAttrIds;
     }
