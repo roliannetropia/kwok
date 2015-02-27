@@ -120,6 +120,19 @@ public class TapeQueries {
     }
 
     /**
+     * Return number of tape grouped by system.
+     */
+    public static String selectTapeCountBySystemQuery(QueryBits query) {
+        return "select t.system, count(t.tape_id) as tape_count " +
+                "from asset_tape t " +
+                "left outer join (select af.attribute_field_id, af.attribute_field_name " +
+                "from attribute_view an, attribute_field_view af " +
+                "where an.object_key='tape' and an.attribute_name='system' " +
+                "and an.attribute_id = af.attribute_id) af on t.system = af.attribute_field_id " +
+                "group by system, af.attribute_field_name " + query.createClause();
+    }
+
+    /**
      * Return number of tape grouped by status.
      */
     public static String selectTapeCountByStatusQuery(QueryBits query) {
@@ -130,19 +143,6 @@ public class TapeQueries {
                 "where an.object_key='tape' and an.attribute_name='status' " +
                 "and an.attribute_id = af.attribute_id) af on t.status = af.attribute_field_id " +
                 "group by status, af.attribute_field_name " + query.createClause();
-    }
-
-    /**
-     * Return number of tape grouped by status.
-     */
-    public static String selectTapeCountBySystemQuery(QueryBits query) {
-        return "select t.system, count(t.tape_id) as tape_count " +
-                "from asset_tape t " +
-                "left outer join (select af.attribute_field_id, af.attribute_field_name " +
-                "from attribute_view an, attribute_field_view af " +
-                "where an.object_key='tape' and an.attribute_name='system' " +
-                "and an.attribute_id = af.attribute_id) af on t.status = af.attribute_field_id " +
-                "group by system, af.attribute_field_name " + query.createClause();
     }
 
     /**

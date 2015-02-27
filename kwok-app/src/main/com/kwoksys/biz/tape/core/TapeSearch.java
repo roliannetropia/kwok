@@ -312,13 +312,17 @@ public class TapeSearch extends BaseSearch {
         if (searchCriteriaMap.containsKey(MEDIA_TYPE_CONTAINS)) {
             query.appendWhereClause("at.media_type in (" + SqlUtils.encodeIntegers((List<Integer>) searchCriteriaMap.get(MEDIA_TYPE_CONTAINS)) + ")");
         }
+        // For Tape system
+        if (searchCriteriaMap.containsKey("tapeSystemContains")) {
+            query.appendWhereClause("at.system in (" + SqlUtils.encodeIntegers((List<Integer>) searchCriteriaMap.get("tapeSystemContains")) + ")");
+        }
         // For Tape status
         if (searchCriteriaMap.containsKey("tapeStatusContains")) {
-            query.appendWhereClause("at.tape_status in (" + SqlUtils.encodeIntegers((List<Integer>) searchCriteriaMap.get("tapeStatusContains")) + ")");
+            query.appendWhereClause("at.status in (" + SqlUtils.encodeIntegers((List<Integer>) searchCriteriaMap.get("tapeStatusContains")) + ")");
         }
         // For Tape location
         if (searchCriteriaMap.containsKey("tapeLocationContains")) {
-            query.appendWhereClause("at.tape_location in (" + SqlUtils.encodeIntegers((List<Integer>) searchCriteriaMap.get("tapeLocationContains")) + ")");
+            query.appendWhereClause("at.location in (" + SqlUtils.encodeIntegers((List<Integer>) searchCriteriaMap.get("tapeLocationContains")) + ")");
         }
         // For manufacturer by id
         if (searchCriteriaMap.containsKey(TAPE_MANUFACTURER_EQUALS)) {

@@ -109,7 +109,7 @@ public class TapeSearchTemplate extends BaseTemplate {
             tapeSystemData = tapeService.getTapeSystemCount(query);
         }
         for (AttributeFieldCount tape : tapeSystemData) {
-            AttributeField attrField = (AttributeField) attrFieldStatusMap.get(tape.getAttrFieldId());
+            AttributeField attrField = (AttributeField) attrFieldSystemMap.get(tape.getAttrFieldId());
             String tapeSystemName;
 
             if (attrField != null) {
