@@ -249,7 +249,7 @@ public class TapeDao extends BaseDao {
             closeConnection(conn);
         }
     }
-
+//todo not yet used!!
     public List<AttributeFieldCount> getTapeRetentionCount(QueryBits query) throws DatabaseException {
         Connection conn = getConnection();
 
@@ -447,6 +447,7 @@ public class TapeDao extends BaseDao {
 //            queryHelper.addInputDouble(tape.getPurchasePriceRaw());
 //        }
 //        queryHelper.addInputInt(tape.getResetLastServiceDate());
+        queryHelper.addInputStringConvertNull(tape.getTapeManufacturedDateString());
 //        queryHelper.addInputStringConvertNull(tape.getTapePurchaseDateString());
 //        queryHelper.addInputStringConvertNull(tape.getWarrantyExpireDateString());
 //        queryHelper.addInputInt(requestContext.getUser().getId());
@@ -502,6 +503,8 @@ public class TapeDao extends BaseDao {
 //            queryHelper.addInputDouble(tape.getPurchasePriceRaw());
 //        }
 //        queryHelper.addInputInt(tape.getResetLastServiceDate());
+        queryHelper.addInputStringConvertNull(tape.hasTapeManufacturedDate() ?
+                tape.getTapeManufacturedDateString() : null);
 //        queryHelper.addInputStringConvertNull(tape.hasTapePurchaseDate() ?
 //                tape.getTapePurchaseDateString() : null);
 //        queryHelper.addInputStringConvertNull(tape.hasTapeWarrantyExpireDate() ?
@@ -711,7 +714,15 @@ public class TapeDao extends BaseDao {
 //        tape.setPurchasePrice(CurrencyUtils.formatCurrency(rs.getDouble("tape_purchase_price"), ""));
 //        tape.setLastServicedOn(DatetimeUtils.getDate(rs, "tape_last_service_date"));
 
-//        tape.setTapePurchaseDate(DatetimeUtils.getDate(rs, "tape_purchase_date"));
+        tape.setTapeManufacturedDate(DatetimeUtils.getDate(rs, "manufactured_date"));
+        if (tape.getTapeManufacturedDate() != null) {
+            tape.setTapeManufacturedDate(
+                    DatetimeUtils.toYearString(tape.getTapeManufacturedDate()),
+                    DatetimeUtils.toMonthString(tape.getTapeManufacturedDate()),
+                    DatetimeUtils.toDateString(tape.getTapeManufacturedDate()));
+        }
+
+//       tape.setTapePurchaseDate(DatetimeUtils.getDate(rs, "tape_purchase_date"));
 //        if (tape.getTapePurchaseDate() != null) {
 //            tape.setTapePurchaseDate(
 //                    DatetimeUtils.toYearString(tape.getTapePurchaseDate()),

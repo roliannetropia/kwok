@@ -80,7 +80,6 @@ public class TapeSearch extends BaseSearch {
             } else {
                 reset();
                 tapeSearchForm.setRequest(requestContext);
-                    // todo tape search for system. dito nagkaerror
                 if (cmd.equals("groupBy")) {
                     Integer mediaType = tapeSearchForm.getMediaType();
                     if (mediaType != null) {
