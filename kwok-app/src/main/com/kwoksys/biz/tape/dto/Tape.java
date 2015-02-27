@@ -356,10 +356,10 @@ public class Tape extends BaseObject {
     public String getManufacturedMonth() {
         return manufacturedMonth;
     }
-
     public String getManufacturedYear() {
         return manufacturedYear;
     }
+
     public void setTapeManufacturedDate(Date tapeManufacturedDate) {
         this.tapeManufacturedDate = tapeManufacturedDate;
     }
