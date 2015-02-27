@@ -80,7 +80,7 @@ public class TapeSearch extends BaseSearch {
             } else {
                 reset();
                 tapeSearchForm.setRequest(requestContext);
-// todo tape search for system. dito nagkaerror
+                    // todo tape search for system. dito nagkaerror
                 if (cmd.equals("groupBy")) {
                     Integer mediaType = tapeSearchForm.getMediaType();
                     if (mediaType != null) {
@@ -149,7 +149,7 @@ public class TapeSearch extends BaseSearch {
                         searchCriteriaMap.put("tapeOwnerContains", tapeOwner);
                     }
 
-                    // Search by Tape type.
+                    // Search by Media type.
                     List<Integer> typeList = tapeSearchForm.getMediaTypes();
                     if (!typeList.isEmpty()) {
                         searchCriteriaMap.put(MEDIA_TYPE_CONTAINS, typeList);
@@ -158,6 +158,11 @@ public class TapeSearch extends BaseSearch {
                     List<Integer> statusList = tapeSearchForm.getTapeStatus();
                     if (!statusList.isEmpty()) {
                         searchCriteriaMap.put("tapeStatusContains", statusList);
+                    }
+                    // Search by Tape status.
+                    List<Integer> systemList = tapeSearchForm.getTapeSystem();
+                    if (!systemList.isEmpty()) {
+                        searchCriteriaMap.put("tapeSystemContains", systemList);
                     }
                     // Search by Tape location.
                     List<Integer> locationList = tapeSearchForm.getTapeLocation();
@@ -235,7 +240,7 @@ public class TapeSearch extends BaseSearch {
         }
         // For Tape Id
         if (searchCriteriaMap.containsKey(TAPE_ID_EQUALS)) {
-            query.appendWhereClause("ah.tape_id = " + SqlUtils.encodeInteger(searchCriteriaMap.get(TAPE_ID_EQUALS)));
+            query.appendWhereClause("at.tape_id = " + SqlUtils.encodeInteger(searchCriteriaMap.get(TAPE_ID_EQUALS)));
         }
         // For custom fields
         if (searchCriteriaMap.containsKey("attrId") && searchCriteriaMap.containsKey("attrValue")) {
@@ -284,16 +289,16 @@ public class TapeSearch extends BaseSearch {
             }
         }
         // For Tape model number
-        if (searchCriteriaMap.containsKey("modelNumberContains")) {
-            query.appendWhereClause("lower(ah.tape_model_number) like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get("modelNumberContains")) + "%')");
-        }
-        if (searchCriteriaMap.containsKey(TAPE_MODEL_NUMBER_EQUALS)) {
-            if (((String)searchCriteriaMap.get(TAPE_MODEL_NUMBER_EQUALS)).isEmpty()) {
-                query.appendWhereClause("ah.tape_model_number is null");
-            } else {
-                query.appendWhereClause("lower(ah.tape_model_number) = lower('" + SqlUtils.encodeString(searchCriteriaMap.get(TAPE_MODEL_NUMBER_EQUALS)) + "')");
-            }
-        }
+//        if (searchCriteriaMap.containsKey("modelNumberContains")) {
+//            query.appendWhereClause("lower(ah.tape_model_number) like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get("modelNumberContains")) + "%')");
+//        }
+//        if (searchCriteriaMap.containsKey(TAPE_MODEL_NUMBER_EQUALS)) {
+//            if (((String)searchCriteriaMap.get(TAPE_MODEL_NUMBER_EQUALS)).isEmpty()) {
+//                query.appendWhereClause("ah.tape_model_number is null");
+//            } else {
+//                query.appendWhereClause("lower(ah.tape_model_number) = lower('" + SqlUtils.encodeString(searchCriteriaMap.get(TAPE_MODEL_NUMBER_EQUALS)) + "')");
+//            }
+//        }
         // For Tape serial number
         if (searchCriteriaMap.containsKey(TAPE_SERIAL_NUMBER_CONTAINS)) {
             query.appendWhereClause("lower(at.tape_serial_number) like lower('%" + SqlUtils.encodeString(searchCriteriaMap.get("serialNumberContains")) + "%')");
