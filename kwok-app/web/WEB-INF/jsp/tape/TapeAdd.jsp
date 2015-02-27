@@ -75,16 +75,30 @@
         </html:select></td>
     </tr>
     </tr>
-        <th><%--<bean:message name="tape" property="attrRequiredMsgKey(tape_retention)"/>--%><bean:message key="common.column.tape_system"/>:</th>
+        <th><%--<bean:message name="tape" property="attrRequiredMsgKey(tape_system)"/>--%><bean:message key="common.column.tape_system"/>:</th>
         <td><html:select name="form" property="tapeSystem">
             <html:options collection="tapeSystemOptions" property="value" labelProperty="label"/>
         </html:select></td>
     </tr>
     </tr>
-        <th><%--<bean:message name="tape" property="attrRequiredMsgKey(tape_retention)"/>--%><bean:message key="common.column.tape_status"/>:</th>
+        <th><%--<bean:message name="tape" property="attrRequiredMsgKey(tape_status)"/>--%><bean:message key="common.column.tape_status"/>:</th>
         <td><html:select name="form" property="tapeStatus">
             <html:options collection="tapeStatusOptions" property="value" labelProperty="label"/>
         </html:select></td>
+    </tr>
+
+    <tr>
+        <th><bean:message key="common.column.tape_manufactured_date"/>:</th>
+        <td><html:select name="form" property="manufacturedMonth">
+            <html:options collection="manufacturedMonthOptions" property="value" labelProperty="label"/>
+        </html:select>
+            <html:select name="form" property="manufacturedDate">
+                <html:options collection="manufacturedDateOptions" property="value" labelProperty="label"/>
+            </html:select>
+            <html:select name="form" property="manufacturedYear">
+                <html:options collection="manufacturedYearOptions" property="value" labelProperty="label"/>
+            </html:select>
+        </td>
     </tr>
         <%--<th><bean:message key="common.column.tape_purchase_price"/>:</th>--%>
         <%--<td><bean:write name="currencySymbol"/><html:text name="form" property="tapeCost" size="20"/>--%>
