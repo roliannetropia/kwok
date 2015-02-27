@@ -159,8 +159,11 @@ public class TapeAddAction extends Action2 {
         request.setAttribute("tapeStatusOptions", statusOptions);
         System.out.println("statusOptions: " + statusOptions);
 //        request.setAttribute("purchaseYearOptions", CalendarUtils.getPastYearOptions(requestContext));
+        request.setAttribute("manufacturedYearOptions", CalendarUtils.getPastYearOptions(requestContext));
 //        request.setAttribute("purchaseMonthOptions", CalendarUtils.getMonthOptions(requestContext));
+        request.setAttribute("manufacturedMonthOptions", CalendarUtils.getMonthOptions(requestContext));
 //        request.setAttribute("purchaseDateOptions", CalendarUtils.getDateOptions(requestContext));
+        request.setAttribute("manufacturedDateOptions", CalendarUtils.getDateOptions(requestContext));
 //        request.setAttribute("warrantyYearOptions", CalendarUtils.getYearOptions(requestContext));
 //        request.setAttribute("warrantyMonthOptions", CalendarUtils.getMonthOptions(requestContext));
 //        request.setAttribute("warrantyDateOptions", CalendarUtils.getDateOptions(requestContext));
