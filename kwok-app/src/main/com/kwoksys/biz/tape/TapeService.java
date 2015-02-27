@@ -149,6 +149,10 @@ public class TapeService {
 //            errors.add("validCostFormat", new ActionMessage("common.form.fieldFormatError",
 //                    Localizer.getText(requestContext, "common.column.tape_purchase_price")));
 //        }
+        if (tape.hasTapeManufacturedDate() && !tape.isValidManufacturedDate()) {
+            errors.add("validManufacturedDateFormat", new ActionMessage("common.form.fieldDateInvalid",
+                    Localizer.getText(requestContext, "common.column.tape_manufactured_date")));
+        }
 //        if (tape.hasTapePurchaseDate() && !tape.isValidPurchaseDate()) {
 //            errors.add("validPurchaseDateFormat", new ActionMessage("common.form.fieldDateInvalid",
 //                    Localizer.getText(requestContext, "common.column.tape_purchase_date")));
