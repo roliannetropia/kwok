@@ -153,7 +153,12 @@ public class TapeSpecTemplate extends BaseTemplate {
 //        td.setHeaderKey("common.column.tape_purchase_price");
 //        td.setValue(CurrencyUtils.formatCurrency(tape.getPurchasePriceRaw(), ConfigManager.system.getCurrencySymbol()));
 //        detailTableTemplate.addTd(td);
-//
+
+        td = detailTableTemplate.new Td();
+        td.setHeaderKey("common.column.tape_manufactured_date");
+        td.setValue(DatetimeUtils.toShortDate(tape.getTapeManufacturedDate()));
+        detailTableTemplate.addTd(td);
+
 //        td = detailTableTemplate.new Td();
 //        td.setHeaderKey("common.column.tape_purchase_date");
 //        td.setValue(DatetimeUtils.toShortDate(tape.getTapePurchaseDate()));
