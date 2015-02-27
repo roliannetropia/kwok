@@ -42,6 +42,9 @@ public class TapeForm extends BaseObjectForm {
 //    private String purchaseDate;
 //    private String purchaseMonth;
 //    private String purchaseYear;
+    private String manufacturedDate;
+    private String manufacturedMonth;
+    private String manufacturedYear;
 //    private String warrantyDate;
 //    private String warrantyMonth;
 //    private String warrantyYear;
@@ -82,11 +85,19 @@ public class TapeForm extends BaseObjectForm {
         tapeLocation = requestContext.getParameterInteger("tapeLocation");
         tapeRetention = requestContext.getParameterInteger("tapeRetention");
 
+        manufacturerId = requestContext.getParameterInteger("manufacturerId");
+        vendorId = requestContext.getParameterInteger("vendorId");
+
+        tapeSystem = requestContext.getParameterInteger("tapeSystem");
+        tapeStatus = requestContext.getParameterInteger("tapeStatus");
 //        tapeCost = requestContext.getParameterString("tapeCost");
 //        lastServicedOn = requestContext.getParameter("lastServicedOn");
 //        purchaseDate = requestContext.getParameterString("purchaseDate");
 //        purchaseMonth = requestContext.getParameterString("purchaseMonth");
 //        purchaseYear = requestContext.getParameterString("purchaseYear");
+        manufacturedDate = requestContext.getParameterString("manufacturedDate");
+        manufacturedMonth = requestContext.getParameterString("manufacturedMonth");
+        manufacturedYear = requestContext.getParameterString("manufacturedYear");
 //        warrantyDate = requestContext.getParameterString("warrantyDate");
 //        warrantyMonth = requestContext.getParameterString("warrantyMonth");
 //        warrantyYear = requestContext.getParameterString("warrantyYear");
@@ -94,11 +105,7 @@ public class TapeForm extends BaseObjectForm {
 //        tapeDescription = requestContext.getParameterString("tapeDescription");
 
 //        tapeOwner = requestContext.getParameterInteger("tapeOwner");
-        manufacturerId = requestContext.getParameterInteger("manufacturerId");
-        vendorId = requestContext.getParameterInteger("vendorId");
 
-        tapeSystem = requestContext.getParameterInteger("tapeSystem");
-        tapeStatus = requestContext.getParameterInteger("tapeStatus");
 //
 //        system = requestContext.getParameterInteger("system");
 //        issueId = requestContext.getParameterString("issueId");
@@ -132,6 +139,9 @@ public class TapeForm extends BaseObjectForm {
 //        purchaseYear = tape.getPurchaseYear();
 //        purchaseMonth = tape.getPurchaseMonth();
 //        purchaseDate = tape.getPurchaseDate();
+        manufacturedYear = tape.getManufacturedYear();
+        manufacturedMonth = tape.getManufacturedMonth();
+        manufacturedDate = tape.getManufacturedDate();
 //        warrantyYear = tape.getWarrantyYear();
 //        warrantyMonth = tape.getWarrantyMonth();
 //        warrantyDate = tape.getWarrantyDate();
@@ -183,6 +193,18 @@ public class TapeForm extends BaseObjectForm {
 //    public String getPurchaseYear() {
 //        return purchaseYear;
 //    }
+
+    public String getManufacturedDate() {
+        return manufacturedDate;
+    }
+
+    public String getManufacturedMonth() {
+        return manufacturedMonth;
+    }
+
+    public String getManufacturedYear() {
+        return manufacturedYear;
+    }
 
 //    public String getWarrantyDate() {
 //        return warrantyDate;
