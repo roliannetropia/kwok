@@ -100,6 +100,63 @@
             </html:select>
         </td>
     </tr>
+
+    <tr>
+        <th><bean:message key="common.column.tape_transaction_date"/>:</th>
+        <td><html:select name="form" property="transactionMonth">
+            <html:options collection="transactionMonthOptions" property="value" labelProperty="label"/>
+        </html:select>
+            <html:select name="form" property="transactionDate">
+                <html:options collection="transactionDateOptions" property="value" labelProperty="label"/>
+            </html:select>
+            <html:select name="form" property="transactionYear">
+                <html:options collection="transactionYearOptions" property="value" labelProperty="label"/>
+            </html:select>
+        </td>
+    </tr>
+
+    <tr>
+        <th><bean:message key="common.column.tape_move_date"/>:</th>
+        <td><html:select name="form" property="moveMonth">
+            <html:options collection="moveMonthOptions" property="value" labelProperty="label"/>
+        </html:select>
+            <html:select name="form" property="moveDate">
+                <html:options collection="moveDateOptions" property="value" labelProperty="label"/>
+            </html:select>
+            <html:select name="form" property="moveYear">
+                <html:options collection="moveYearOptions" property="value" labelProperty="label"/>
+            </html:select>
+        </td>
+    </tr>
+
+    <tr>
+        <th><bean:message key="common.column.tape_expire_date"/>:</th>
+        <td><html:select name="form" property="expireMonth">
+            <html:options collection="expireMonthOptions" property="value" labelProperty="label"/>
+        </html:select>
+            <html:select name="form" property="expireDate">
+                <html:options collection="expireDateOptions" property="value" labelProperty="label"/>
+            </html:select>
+            <html:select name="form" property="expireYear">
+                <html:options collection="expireYearOptions" property="value" labelProperty="label"/>
+            </html:select>
+        </td>
+    </tr>
+
+    <%--<tr>--%>
+        <%--<th><bean:message key="common.column.tape_transaction_time"/>:</th>--%>
+        <%--<td><html:select name="form" property="expireMonth">--%>
+            <%--<html:options collection="expireMonthOptions" property="value" labelProperty="label"/>--%>
+        <%--</html:select>--%>
+            <%--<html:select name="form" property="expireDate">--%>
+                <%--<html:options collection="expireDateOptions" property="value" labelProperty="label"/>--%>
+            <%--</html:select>--%>
+            <%--<html:select name="form" property="expireYear">--%>
+                <%--<html:options collection="expireYearOptions" property="value" labelProperty="label"/>--%>
+            <%--</html:select>--%>
+        <%--</td>--%>
+    <%--</tr>--%>
+
         <%--<th><bean:message key="common.column.tape_purchase_price"/>:</th>--%>
         <%--<td><bean:write name="currencySymbol"/><html:text name="form" property="tapeCost" size="20"/>--%>
             <%--<span class="formFieldDesc"><bean:message key="itMgmt.colDesc.tape_cost" arg0="${currencySymbol}"/></span>--%>
