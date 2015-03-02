@@ -56,8 +56,9 @@ public class TapeQueries {
     public static String selectTapeListQuery(QueryBits query) {
         return "select at.tape_id, at.tape_name, at.serial_number, at.barcode_number, " +
                 "at.manufacturer_company_id, at.vendor_company_id, at.media_type, at.location, " +
-                "at.retention, at.system, at.status, at.manufactured_date," +
-//                "at.transaction_date, at.transaction_time, at.date_move, at.date_expire" +
+                "at.retention, at.system, at.status, at.manufactured_date, at.transaction_date, " +
+                "at.date_move, at.date_expire, " +
+//                "at.transaction_time, at.date_move, at.date_expire" +
                 "at.manufacturer_company_id, mftr.company_name as tape_manufacturer_name, " +
                 "at.vendor_company_id, vndr.company_name as tape_vendor_name " +
                 "from asset_tape_view at " +
@@ -219,7 +220,7 @@ public class TapeQueries {
      */
 //  todo eto yung nag cacall ng function
     public static String insertTapeQuery() {
-        return "{call sp_tape_add(?,?,?,?,?,?,?,?,?,?,?,?)}";
+        return "{call sp_tape_add(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
     }
 
     /**
