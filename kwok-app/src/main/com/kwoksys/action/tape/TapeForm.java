@@ -45,6 +45,11 @@ public class TapeForm extends BaseObjectForm {
     private String manufacturedDate;
     private String manufacturedMonth;
     private String manufacturedYear;
+
+    private String transactionDate;
+    private String transactionMonth;
+    private String transactionYear;
+
 //    private String warrantyDate;
 //    private String warrantyMonth;
 //    private String warrantyYear;
@@ -98,6 +103,10 @@ public class TapeForm extends BaseObjectForm {
         manufacturedDate = requestContext.getParameterString("manufacturedDate");
         manufacturedMonth = requestContext.getParameterString("manufacturedMonth");
         manufacturedYear = requestContext.getParameterString("manufacturedYear");
+
+        transactionDate = requestContext.getParameterString("transactionDate");
+        transactionMonth = requestContext.getParameterString("transactionMonth");
+        transactionYear = requestContext.getParameterString("transactionYear");
 //        warrantyDate = requestContext.getParameterString("warrantyDate");
 //        warrantyMonth = requestContext.getParameterString("warrantyMonth");
 //        warrantyYear = requestContext.getParameterString("warrantyYear");
@@ -142,6 +151,10 @@ public class TapeForm extends BaseObjectForm {
         manufacturedYear = tape.getManufacturedYear();
         manufacturedMonth = tape.getManufacturedMonth();
         manufacturedDate = tape.getManufacturedDate();
+
+        transactionYear = tape.getTransactionYear();
+        transactionMonth = tape.getTransactionMonth();
+        transactionDate = tape.getTransactionDate();
 //        warrantyYear = tape.getWarrantyYear();
 //        warrantyMonth = tape.getWarrantyMonth();
 //        warrantyDate = tape.getWarrantyDate();
@@ -197,13 +210,21 @@ public class TapeForm extends BaseObjectForm {
     public String getManufacturedDate() {
         return manufacturedDate;
     }
-
     public String getManufacturedMonth() {
         return manufacturedMonth;
     }
-
     public String getManufacturedYear() {
         return manufacturedYear;
+    }
+
+    public String getTransactionDate() {
+        return transactionDate;
+    }
+    public String getTransactionMonth() {
+        return transactionMonth;
+    }
+    public String getTransactionYear() {
+        return transactionYear;
     }
 
 //    public String getWarrantyDate() {
