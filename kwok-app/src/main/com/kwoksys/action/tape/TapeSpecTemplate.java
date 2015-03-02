@@ -133,7 +133,7 @@ public class TapeSpecTemplate extends BaseTemplate {
         td.setHeaderKey("common.column.tape_status");
         td.setValue(HtmlUtils.encode(attributeManager.getAttrFieldNameCache(Attributes.TAPE_STATUS, tape.getTapeStatus())));
         detailTableTemplate.addTd(td);
-//
+
 //        td = detailTableTemplate.new Td();
 //        td.setHeaderKey("common.column.tape_model_name");
 //        td.setValue(HtmlUtils.encode(tape.getModelName()));
@@ -157,6 +157,21 @@ public class TapeSpecTemplate extends BaseTemplate {
         td = detailTableTemplate.new Td();
         td.setHeaderKey("common.column.tape_manufactured_date");
         td.setValue(DatetimeUtils.toShortDate(tape.getTapeManufacturedDate()));
+        detailTableTemplate.addTd(td);
+
+        td = detailTableTemplate.new Td();
+        td.setHeaderKey("common.column.tape_transaction_date");
+        td.setValue(DatetimeUtils.toShortDate(tape.getTapeTransactionDate()));
+        detailTableTemplate.addTd(td);
+
+        td = detailTableTemplate.new Td();
+        td.setHeaderKey("common.column.tape_move_date");
+        td.setValue(DatetimeUtils.toShortDate(tape.getTapeMoveDate()));
+        detailTableTemplate.addTd(td);
+
+        td = detailTableTemplate.new Td();
+        td.setHeaderKey("common.column.tape_expire_date");
+        td.setValue(DatetimeUtils.toShortDate(tape.getTapeExpireDate()));
         detailTableTemplate.addTd(td);
 
 //        td = detailTableTemplate.new Td();
