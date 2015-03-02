@@ -39,13 +39,14 @@ public class Tape extends BaseObject {
     public static final String TAPE_STATUS = "tape_status";
     public static final String TAPE_SYSTEM = "tape_system";
 
+//    public static final String WARRANTY_EXPIRATION = "tape_warranty_expire_date";
 //    public static final String PURCAHSE_PRICE = "tape_purchase_price";
 //    public static final String PURCHASE_DATE = "tape_purchase_date";
+
     public static final String TRANSACTION_DATE = "tape_transaction_date";
-//    public static final String WARRANTY_EXPIRATION = "tape_warranty_expire_date";
-
-
     public static final String MANUFACTURED_DATE = "tapeManufacturedDate";
+    public static final String MOVE_DATE = "tapeMoveDate";
+    public static final String MOVE_EXPIRE = "tapeExpireDate";
 
 
 
@@ -90,6 +91,16 @@ public class Tape extends BaseObject {
     private String transactionDate = "";
     private String transactionMonth = "";
     private String transactionYear = "";
+
+    private Date tapeMoveDate;
+    private String moveDate = "";
+    private String moveMonth = "";
+    private String moveYear = "";
+
+    private Date tapeExpireDate;
+    private String expireDate = "";
+    private String expireMonth = "";
+    private String expireYear = "";
 
 //    private Date warrantyExpireDate;
 //    private String warrantyDate = "";
@@ -153,6 +164,8 @@ public class Tape extends BaseObject {
 
         setTapeManufacturedDate(actionForm.getManufacturedYear(), actionForm.getManufacturedMonth(), actionForm.getManufacturedDate());
         setTapeTransactionDate(actionForm.getTransactionYear(), actionForm.getTransactionMonth(), actionForm.getTransactionDate());
+        setTapeMoveDate(actionForm.getMoveYear(), actionForm.getMoveMonth(), actionForm.getMoveDate());
+        setTapeExpireDate(actionForm.getExpireYear(), actionForm.getExpireMonth(), actionForm.getExpireDate());
 //        setModelName(actionForm.getTapeModelName());
 //        setModelNumber(actionForm.getTapeModelNumber());
 //        setPurchasePrice(actionForm.getTapeCost());
@@ -203,6 +216,20 @@ public class Tape extends BaseObject {
         }
     }
 
+    public void setTapeExpireDate(String fullDate) {
+        if (!fullDate.isEmpty()) {
+            String[] dateArray = fullDate.split("-");
+
+            expireYear = dateArray[0];
+            expireMonth = dateArray[1];
+            expireDate = dateArray[2];
+        } else {
+            expireYear = "";
+            expireMonth = "";
+            expireDate = "";
+        }
+    }
+
 //    public void setTapePurchaseDate(String year, String month, String date) {
 //        purchaseYear = year;
 //        purchaseMonth = month;
@@ -221,6 +248,18 @@ public class Tape extends BaseObject {
         transactionDate = date;
     }
 
+    public void setTapeMoveDate(String year, String month, String date) {
+        moveYear = year;
+        moveMonth = month;
+        moveDate = date;
+    }
+
+    public void setTapeExpireDate(String year, String month, String date) {
+        expireYear = year;
+        expireMonth = month;
+        expireDate = date;
+    }
+
 //    public boolean hasTapePurchaseDate() {
 //        return (!purchaseYear.isEmpty() || !purchaseMonth.isEmpty() || !purchaseDate.isEmpty());
 //    }
@@ -231,6 +270,14 @@ public class Tape extends BaseObject {
 
     public boolean hasTapeTransactionDate() {
         return (!transactionYear.isEmpty() || !transactionMonth.isEmpty() || !transactionDate.isEmpty());
+    }
+
+    public boolean hasTapeMoveDate() {
+        return (!moveYear.isEmpty() || !moveMonth.isEmpty() || !moveDate.isEmpty());
+    }
+
+    public boolean hasTapeExpireDate() {
+        return (!expireYear.isEmpty() || !expireMonth.isEmpty() || !expireDate.isEmpty());
     }
 
     /**
@@ -249,6 +296,14 @@ public class Tape extends BaseObject {
 
     public boolean isValidTransactionDate() {
         return DatetimeUtils.isValidDate(transactionYear, transactionMonth, transactionDate);
+    }
+
+    public boolean isValidMoveDate() {
+        return DatetimeUtils.isValidDate(moveYear, moveMonth, moveDate);
+    }
+
+    public boolean isValidExpireDate() {
+        return DatetimeUtils.isValidDate(expireYear, expireMonth, expireDate);
     }
 
 //    public void setTapeWarrantyExpireDate(String fullDate) {
@@ -411,6 +466,38 @@ public class Tape extends BaseObject {
         return transactionYear;
     }
 
+    public String getTapeMoveDateString() {
+        return DatetimeUtils.createDatetimeString(moveYear, moveMonth, moveDate);
+    }
+    public Date getTapeMoveDate() {
+        return tapeMoveDate;
+    }
+    public String getMoveDate() {
+        return moveDate;
+    }
+    public String getMoveMonth() {
+        return moveMonth;
+    }
+    public String getMoveYear() {
+        return moveYear;
+    }
+
+    public String getTapeExpireDateString() {
+        return DatetimeUtils.createDatetimeString(expireYear, expireMonth, expireDate);
+    }
+    public Date getTapeExpireDate() {
+        return tapeExpireDate;
+    }
+    public String getExpireDate() {
+        return expireDate;
+    }
+    public String getExpireMonth() {
+        return expireMonth;
+    }
+    public String getExpireYear() {
+        return expireYear;
+    }
+
     public void setTapeManufacturedDate(Date tapeManufacturedDate) {
         this.tapeManufacturedDate = tapeManufacturedDate;
     }
@@ -435,6 +522,32 @@ public class Tape extends BaseObject {
     }
     public void setTransactionYear(String transactionYear) {
         this.transactionYear = transactionYear;
+    }
+
+    public void setTapeMoveDate(Date tapeMoveDate) {
+        this.tapeMoveDate = tapeMoveDate;
+    }
+    public void setMoveDate(String moveDate) {
+        this.moveDate = moveDate;
+    }
+    public void setMoveMonth(String moveMonth) {
+        this.moveMonth = moveMonth;
+    }
+    public void setMoveYear(String moveYear) {
+        this.moveYear = moveYear;
+    }
+
+    public void setTapeExpireDate(Date tapeExpireDate) {
+        this.tapeExpireDate = tapeExpireDate;
+    }
+    public void setExpireDate(String expireDate) {
+        this.expireDate = expireDate;
+    }
+    public void setExpireMonth(String expireMonth) {
+        this.expireMonth = expireMonth;
+    }
+    public void setExpireYear(String expireYear) {
+        this.expireYear = expireYear;
     }
 
 //    public String getWarrantyDate() {
