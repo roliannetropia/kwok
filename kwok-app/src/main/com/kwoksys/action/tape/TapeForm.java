@@ -50,6 +50,14 @@ public class TapeForm extends BaseObjectForm {
     private String transactionMonth;
     private String transactionYear;
 
+    private String moveDate;
+    private String moveMonth;
+    private String moveYear;
+
+    private String expireDate;
+    private String expireMonth;
+    private String expireYear;
+
 //    private String warrantyDate;
 //    private String warrantyMonth;
 //    private String warrantyYear;
@@ -107,6 +115,14 @@ public class TapeForm extends BaseObjectForm {
         transactionDate = requestContext.getParameterString("transactionDate");
         transactionMonth = requestContext.getParameterString("transactionMonth");
         transactionYear = requestContext.getParameterString("transactionYear");
+
+        moveDate = requestContext.getParameterString("moveDate");
+        moveMonth = requestContext.getParameterString("moveMonth");
+        moveYear = requestContext.getParameterString("moveYear");
+
+        expireDate = requestContext.getParameterString("expireDate");
+        expireMonth = requestContext.getParameterString("expireMonth");
+        expireYear = requestContext.getParameterString("expireYear");
 //        warrantyDate = requestContext.getParameterString("warrantyDate");
 //        warrantyMonth = requestContext.getParameterString("warrantyMonth");
 //        warrantyYear = requestContext.getParameterString("warrantyYear");
@@ -155,6 +171,15 @@ public class TapeForm extends BaseObjectForm {
         transactionYear = tape.getTransactionYear();
         transactionMonth = tape.getTransactionMonth();
         transactionDate = tape.getTransactionDate();
+
+        moveYear = tape.getMoveYear();
+        moveMonth = tape.getMoveMonth();
+        moveDate = tape.getMoveDate();
+
+        expireYear = tape.getExpireYear();
+        expireMonth = tape.getExpireMonth();
+        expireDate = tape.getExpireDate();
+
 //        warrantyYear = tape.getWarrantyYear();
 //        warrantyMonth = tape.getWarrantyMonth();
 //        warrantyDate = tape.getWarrantyDate();
@@ -225,6 +250,26 @@ public class TapeForm extends BaseObjectForm {
     }
     public String getTransactionYear() {
         return transactionYear;
+    }
+
+    public String getMoveDate() {
+        return moveDate;
+    }
+    public String getMoveMonth() {
+        return moveMonth;
+    }
+    public String getMoveYear() {
+        return moveYear;
+    }
+
+    public String getExpireDate() {
+        return expireDate;
+    }
+    public String getExpireMonth() {
+        return expireMonth;
+    }
+    public String getExpireYear() {
+        return expireYear;
     }
 
 //    public String getWarrantyDate() {
