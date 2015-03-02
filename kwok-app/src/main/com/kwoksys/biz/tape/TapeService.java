@@ -153,6 +153,22 @@ public class TapeService {
             errors.add("validManufacturedDateFormat", new ActionMessage("common.form.fieldDateInvalid",
                     Localizer.getText(requestContext, "common.column.tape_manufactured_date")));
         }
+
+        if (tape.hasTapeTransactionDate() && !tape.isValidTransactionDate()) {
+            errors.add("validTransactionDateFormat", new ActionMessage("common.form.fieldDateInvalid",
+                    Localizer.getText(requestContext, "common.column.tape_transaction_date")));
+        }
+
+        if (tape.hasTapeMoveDate() && !tape.isValidMoveDate()) {
+            errors.add("validMoveDateFormat", new ActionMessage("common.form.fieldDateInvalid",
+                    Localizer.getText(requestContext, "common.column.tape_move_date")));
+        }
+
+        if (tape.hasTapeExpireDate() && !tape.isValidExpireDate()) {
+            errors.add("validExpireDateFormat", new ActionMessage("common.form.fieldDateInvalid",
+                    Localizer.getText(requestContext, "common.column.tape_expire_date")));
+        }
+
 //        if (tape.hasTapePurchaseDate() && !tape.isValidPurchaseDate()) {
 //            errors.add("validPurchaseDateFormat", new ActionMessage("common.form.fieldDateInvalid",
 //                    Localizer.getText(requestContext, "common.column.tape_purchase_date")));
