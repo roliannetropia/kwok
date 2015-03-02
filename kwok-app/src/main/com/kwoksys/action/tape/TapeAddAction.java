@@ -159,11 +159,26 @@ public class TapeAddAction extends Action2 {
         request.setAttribute("tapeStatusOptions", statusOptions);
         System.out.println("statusOptions: " + statusOptions);
 //        request.setAttribute("purchaseYearOptions", CalendarUtils.getPastYearOptions(requestContext));
-        request.setAttribute("manufacturedYearOptions", CalendarUtils.getPastYearOptions(requestContext));
 //        request.setAttribute("purchaseMonthOptions", CalendarUtils.getMonthOptions(requestContext));
+        request.setAttribute("manufacturedYearOptions", CalendarUtils.getPastYearOptions(requestContext));
         request.setAttribute("manufacturedMonthOptions", CalendarUtils.getMonthOptions(requestContext));
-//        request.setAttribute("purchaseDateOptions", CalendarUtils.getDateOptions(requestContext));
         request.setAttribute("manufacturedDateOptions", CalendarUtils.getDateOptions(requestContext));
+
+        request.setAttribute("transactionYearOptions", CalendarUtils.getPastYearOptions(requestContext));
+        request.setAttribute("transactionMonthOptions", CalendarUtils.getMonthOptions(requestContext));
+        request.setAttribute("transactionDateOptions", CalendarUtils.getDateOptions(requestContext));
+
+        request.setAttribute("moveYearOptions", CalendarUtils.getPastYearOptions(requestContext));
+        request.setAttribute("moveMonthOptions", CalendarUtils.getMonthOptions(requestContext));
+        request.setAttribute("moveDateOptions", CalendarUtils.getDateOptions(requestContext));
+
+        request.setAttribute("expireYearOptions", CalendarUtils.getPastYearOptions(requestContext));
+        request.setAttribute("expireMonthOptions", CalendarUtils.getMonthOptions(requestContext));
+        request.setAttribute("expireDateOptions", CalendarUtils.getDateOptions(requestContext));
+
+//        System.out.println(CalendarUtils.);
+
+//        request.setAttribute("purchaseDateOptions", CalendarUtils.getDateOptions(requestContext));
 //        request.setAttribute("warrantyYearOptions", CalendarUtils.getYearOptions(requestContext));
 //        request.setAttribute("warrantyMonthOptions", CalendarUtils.getMonthOptions(requestContext));
 //        request.setAttribute("warrantyDateOptions", CalendarUtils.getDateOptions(requestContext));
