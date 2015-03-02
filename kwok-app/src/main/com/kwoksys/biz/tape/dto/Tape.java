@@ -41,13 +41,14 @@ public class Tape extends BaseObject {
 
 //    public static final String PURCAHSE_PRICE = "tape_purchase_price";
 //    public static final String PURCHASE_DATE = "tape_purchase_date";
+    public static final String TRANSACTION_DATE = "tape_transaction_date";
 //    public static final String WARRANTY_EXPIRATION = "tape_warranty_expire_date";
 
 
     public static final String MANUFACTURED_DATE = "tapeManufacturedDate";
 
 
-//
+
 //    public static final String OWNER_NAME = "tape_owner_name";
 //    public static final String OWNER_USERNAME = "tape_owner_username";
 //    public static final String OWNER_DISPLAY_NAME = "tape_owner_display_name";
@@ -84,6 +85,11 @@ public class Tape extends BaseObject {
     private String manufacturedDate = "";
     private String manufacturedMonth = "";
     private String manufacturedYear = "";
+
+    private Date tapeTransactionDate;
+    private String transactionDate = "";
+    private String transactionMonth = "";
+    private String transactionYear = "";
 
 //    private Date warrantyExpireDate;
 //    private String warrantyDate = "";
@@ -146,6 +152,7 @@ public class Tape extends BaseObject {
         setTapeStatus(actionForm.getTapeStatus());
 
         setTapeManufacturedDate(actionForm.getManufacturedYear(), actionForm.getManufacturedMonth(), actionForm.getManufacturedDate());
+        setTapeTransactionDate(actionForm.getTransactionYear(), actionForm.getTransactionMonth(), actionForm.getTransactionDate());
 //        setModelName(actionForm.getTapeModelName());
 //        setModelNumber(actionForm.getTapeModelNumber());
 //        setPurchasePrice(actionForm.getTapeCost());
@@ -182,6 +189,20 @@ public class Tape extends BaseObject {
         }
     }
 
+    public void setTapeTransactionDate(String fullDate) {
+        if (!fullDate.isEmpty()) {
+            String[] dateArray = fullDate.split("-");
+
+            transactionYear = dateArray[0];
+            transactionMonth = dateArray[1];
+            transactionDate = dateArray[2];
+        } else {
+            transactionYear = "";
+            transactionMonth = "";
+            transactionDate = "";
+        }
+    }
+
 //    public void setTapePurchaseDate(String year, String month, String date) {
 //        purchaseYear = year;
 //        purchaseMonth = month;
@@ -194,12 +215,22 @@ public class Tape extends BaseObject {
         manufacturedDate = date;
     }
 
+    public void setTapeTransactionDate(String year, String month, String date) {
+        transactionYear = year;
+        transactionMonth = month;
+        transactionDate = date;
+    }
+
 //    public boolean hasTapePurchaseDate() {
 //        return (!purchaseYear.isEmpty() || !purchaseMonth.isEmpty() || !purchaseDate.isEmpty());
 //    }
 
     public boolean hasTapeManufacturedDate() {
         return (!manufacturedYear.isEmpty() || !manufacturedMonth.isEmpty() || !manufacturedDate.isEmpty());
+    }
+
+    public boolean hasTapeTransactionDate() {
+        return (!transactionYear.isEmpty() || !transactionMonth.isEmpty() || !transactionDate.isEmpty());
     }
 
     /**
@@ -214,6 +245,10 @@ public class Tape extends BaseObject {
 
     public boolean isValidManufacturedDate() {
         return DatetimeUtils.isValidDate(manufacturedYear, manufacturedMonth, manufacturedDate);
+    }
+
+    public boolean isValidTransactionDate() {
+        return DatetimeUtils.isValidDate(transactionYear, transactionMonth, transactionDate);
     }
 
 //    public void setTapeWarrantyExpireDate(String fullDate) {
@@ -360,6 +395,22 @@ public class Tape extends BaseObject {
         return manufacturedYear;
     }
 
+    public String getTapeTransactionDateString() {
+        return DatetimeUtils.createDatetimeString(transactionYear, transactionMonth, transactionDate);
+    }
+    public Date getTapeTransactionDate() {
+        return tapeTransactionDate;
+    }
+    public String getTransactionDate() {
+        return transactionDate;
+    }
+    public String getTransactionMonth() {
+        return transactionMonth;
+    }
+    public String getTransactionYear() {
+        return transactionYear;
+    }
+
     public void setTapeManufacturedDate(Date tapeManufacturedDate) {
         this.tapeManufacturedDate = tapeManufacturedDate;
     }
@@ -371,6 +422,19 @@ public class Tape extends BaseObject {
     }
     public void setManufacturedYear(String manufacturedYear) {
         this.manufacturedYear = manufacturedYear;
+    }
+
+    public void setTapeTransactionDate(Date tapeTransactionDate) {
+        this.tapeTransactionDate = tapeTransactionDate;
+    }
+    public void setTransactionDate(String transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+    public void setTransactionMonth(String transactionMonth) {
+        this.transactionMonth = transactionMonth;
+    }
+    public void setTransactionYear(String transactionYear) {
+        this.transactionYear = transactionYear;
     }
 
 //    public String getWarrantyDate() {
