@@ -448,6 +448,9 @@ public class TapeDao extends BaseDao {
 //        }
 //        queryHelper.addInputInt(tape.getResetLastServiceDate());
         queryHelper.addInputStringConvertNull(tape.getTapeManufacturedDateString());
+        queryHelper.addInputStringConvertNull(tape.getTapeTransactionDateString());
+        queryHelper.addInputStringConvertNull(tape.getTapeMoveDateString());
+        queryHelper.addInputStringConvertNull(tape.getTapeExpireDateString());
 //        queryHelper.addInputStringConvertNull(tape.getTapePurchaseDateString());
 //        queryHelper.addInputStringConvertNull(tape.getWarrantyExpireDateString());
 //        queryHelper.addInputInt(requestContext.getUser().getId());
@@ -505,6 +508,16 @@ public class TapeDao extends BaseDao {
 //        queryHelper.addInputInt(tape.getResetLastServiceDate());
         queryHelper.addInputStringConvertNull(tape.hasTapeManufacturedDate() ?
                 tape.getTapeManufacturedDateString() : null);
+
+        queryHelper.addInputStringConvertNull(tape.hasTapeTransactionDate() ?
+                tape.getTapeTransactionDateString() : null);
+
+        queryHelper.addInputStringConvertNull(tape.hasTapeMoveDate() ?
+                tape.getTapeMoveDateString() : null);
+
+        queryHelper.addInputStringConvertNull(tape.hasTapeExpireDate() ?
+                tape.getTapeMoveDateString() : null);
+
 //        queryHelper.addInputStringConvertNull(tape.hasTapePurchaseDate() ?
 //                tape.getTapePurchaseDateString() : null);
 //        queryHelper.addInputStringConvertNull(tape.hasTapeWarrantyExpireDate() ?
@@ -720,6 +733,30 @@ public class TapeDao extends BaseDao {
                     DatetimeUtils.toYearString(tape.getTapeManufacturedDate()),
                     DatetimeUtils.toMonthString(tape.getTapeManufacturedDate()),
                     DatetimeUtils.toDateString(tape.getTapeManufacturedDate()));
+        }
+
+        tape.setTapeTransactionDate(DatetimeUtils.getDate(rs, "transaction_date"));
+        if (tape.getTapeTransactionDate() != null) {
+            tape.setTapeTransactionDate(
+                    DatetimeUtils.toYearString(tape.getTapeTransactionDate()),
+                    DatetimeUtils.toMonthString(tape.getTapeTransactionDate()),
+                    DatetimeUtils.toDateString(tape.getTapeTransactionDate()));
+        }
+
+        tape.setTapeMoveDate(DatetimeUtils.getDate(rs, "date_move"));
+        if (tape.getTapeMoveDate() != null) {
+            tape.setTapeMoveDate(
+                    DatetimeUtils.toYearString(tape.getTapeMoveDate()),
+                    DatetimeUtils.toMonthString(tape.getTapeMoveDate()),
+                    DatetimeUtils.toDateString(tape.getTapeMoveDate()));
+        }
+
+        tape.setTapeExpireDate(DatetimeUtils.getDate(rs, "date_expire"));
+        if (tape.getTapeExpireDate() != null) {
+            tape.setTapeExpireDate(
+                    DatetimeUtils.toYearString(tape.getTapeExpireDate()),
+                    DatetimeUtils.toMonthString(tape.getTapeExpireDate()),
+                    DatetimeUtils.toDateString(tape.getTapeExpireDate()));
         }
 
 //       tape.setTapePurchaseDate(DatetimeUtils.getDate(rs, "tape_purchase_date"));
