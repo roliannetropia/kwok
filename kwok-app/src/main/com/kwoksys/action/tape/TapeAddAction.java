@@ -38,9 +38,11 @@ import com.kwoksys.framework.connections.database.QueryBits;
 import com.kwoksys.framework.properties.Localizer;
 import com.kwoksys.framework.struts2.Action2;
 import com.kwoksys.framework.ui.SelectOneLabelValueBean;
+import com.kwoksys.framework.util.DatetimeUtils;
 import org.apache.struts.util.LabelValueBean;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -176,7 +178,8 @@ public class TapeAddAction extends Action2 {
         request.setAttribute("expireMonthOptions", CalendarUtils.getMonthOptions(requestContext));
         request.setAttribute("expireDateOptions", CalendarUtils.getDateOptions(requestContext));
 
-//        System.out.println(CalendarUtils.);
+        request.setAttribute("transactionHourOptions", CalendarUtils.getHourOptions(requestContext));
+        request.setAttribute("transactionMinOptions", CalendarUtils.getMinOptions(requestContext));
 
 //        request.setAttribute("purchaseDateOptions", CalendarUtils.getDateOptions(requestContext));
 //        request.setAttribute("warrantyYearOptions", CalendarUtils.getYearOptions(requestContext));
