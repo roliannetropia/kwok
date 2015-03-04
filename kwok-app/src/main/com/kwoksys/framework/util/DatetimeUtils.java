@@ -47,6 +47,14 @@ public class DatetimeUtils {
         }
     }
 
+    public static String createTimeString(String hour, String min) {
+        if (hour.isEmpty() || min.isEmpty()) {
+            return "";
+        } else {
+            return "0000-00-00 " + hour + ":" + min + ":00";
+        }
+    }
+
     public static boolean isValidDate(String year, String month, String date) {
         try {
             GregorianCalendar gc = newCalendar();
@@ -83,6 +91,10 @@ public class DatetimeUtils {
         return rs.getTimestamp(column, newCalendar());
     }
 
+    public static Date getTime(ResultSet rs, String column) throws SQLException {
+        return rs.getTimestamp(column, newCalendar());
+    }
+
     public static String toLocalDate(Date date) {
         return toLocalString(date, ConfigManager.system.getDateFormat());
     }
@@ -93,6 +105,10 @@ public class DatetimeUtils {
 
     public static String toShortDate(Date date) {
         return toString(date, ConfigManager.system.getDateFormat());
+    }
+
+    public static String toTime(Date date) {
+        return toString(date, ConfigManager.system.getTimeFormat());
     }
 
     public static String toShortDate(long milliseconds) {
@@ -110,6 +126,16 @@ public class DatetimeUtils {
     public static String toDateString(Date date) {
         return toString(date, "dd");
     }
+
+
+    public static String toHourString(Date date) {
+        return toString(date, "hh");
+    }
+
+    public static String toMinString(Date date) {
+        return toString(date, "mm");
+    }
+
 
     private static String toLocalString(Date date, String pattern) {
         if (date == null) {
