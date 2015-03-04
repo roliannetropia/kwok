@@ -174,6 +174,11 @@ public class TapeSpecTemplate extends BaseTemplate {
         td.setValue(DatetimeUtils.toShortDate(tape.getTapeExpireDate()));
         detailTableTemplate.addTd(td);
 
+        td = detailTableTemplate.new Td();
+        td.setHeaderKey("common.column.tape_transaction_time");
+        td.setValue(DatetimeUtils.toTime(tape.getTapeTransactionTime()));
+        detailTableTemplate.addTd(td);
+
 //        td = detailTableTemplate.new Td();
 //        td.setHeaderKey("common.column.tape_purchase_date");
 //        td.setValue(DatetimeUtils.toShortDate(tape.getTapePurchaseDate()));
