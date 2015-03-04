@@ -195,6 +195,7 @@ public class TapeDetailAction extends Action2 {
         System.out.println("retention -> " + tape.getTapeRetention());
         System.out.println("system -> " + tape.getTapeSystem());
         System.out.println("status -> " + tape.getTapeStatus());
+        System.out.println("time -> " + tape.getTapeTransactionTime());
         TapeSpecTemplate tmpl = new TapeSpecTemplate(tape);
         standardTemplate.addTemplate(tmpl);
 //        tmpl.setPopulateLinkedContract(!cmd.equals("add"));

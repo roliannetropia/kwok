@@ -50,6 +50,9 @@ public class TapeForm extends BaseObjectForm {
     private String transactionMonth;
     private String transactionYear;
 
+    private String transactionHour;
+    private String transactionMin;
+
     private String moveDate;
     private String moveMonth;
     private String moveYear;
@@ -116,6 +119,9 @@ public class TapeForm extends BaseObjectForm {
         transactionMonth = requestContext.getParameterString("transactionMonth");
         transactionYear = requestContext.getParameterString("transactionYear");
 
+        transactionHour = requestContext.getParameterString("transactionHour");
+        transactionMin = requestContext.getParameterString("transactionMin");
+
         moveDate = requestContext.getParameterString("moveDate");
         moveMonth = requestContext.getParameterString("moveMonth");
         moveYear = requestContext.getParameterString("moveYear");
@@ -172,6 +178,9 @@ public class TapeForm extends BaseObjectForm {
         transactionMonth = tape.getTransactionMonth();
         transactionDate = tape.getTransactionDate();
 
+        transactionHour = tape.getTransactionHour();
+        transactionMin = tape.getTransactionMin();
+
         moveYear = tape.getMoveYear();
         moveMonth = tape.getMoveMonth();
         moveDate = tape.getMoveDate();
@@ -212,6 +221,7 @@ public class TapeForm extends BaseObjectForm {
     public Integer getVendorId() {
         return vendorId;
     }
+
 //    public String getTapeCost() {
 //        return tapeCost;
 //    }
@@ -250,6 +260,13 @@ public class TapeForm extends BaseObjectForm {
     }
     public String getTransactionYear() {
         return transactionYear;
+    }
+
+    public String getTransactionHour() {
+        return transactionHour;
+    }
+    public String getTransactionMin() {
+        return transactionMin;
     }
 
     public String getMoveDate() {
