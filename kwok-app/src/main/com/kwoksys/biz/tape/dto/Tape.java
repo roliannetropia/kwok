@@ -45,10 +45,9 @@ public class Tape extends BaseObject {
 
     public static final String TRANSACTION_DATE = "tape_transaction_date";
     public static final String MANUFACTURED_DATE = "tapeManufacturedDate";
+
     public static final String MOVE_DATE = "tapeMoveDate";
     public static final String MOVE_EXPIRE = "tapeExpireDate";
-
-
 
 //    public static final String OWNER_NAME = "tape_owner_name";
 //    public static final String OWNER_USERNAME = "tape_owner_username";
@@ -91,6 +90,10 @@ public class Tape extends BaseObject {
     private String transactionDate = "";
     private String transactionMonth = "";
     private String transactionYear = "";
+
+    private Date tapeTransactionTime;
+    private String transactionHour = "";
+    private String transactionMin = "";
 
     private Date tapeMoveDate;
     private String moveDate = "";
@@ -166,6 +169,8 @@ public class Tape extends BaseObject {
         setTapeTransactionDate(actionForm.getTransactionYear(), actionForm.getTransactionMonth(), actionForm.getTransactionDate());
         setTapeMoveDate(actionForm.getMoveYear(), actionForm.getMoveMonth(), actionForm.getMoveDate());
         setTapeExpireDate(actionForm.getExpireYear(), actionForm.getExpireMonth(), actionForm.getExpireDate());
+
+        setTapeTransactionTime(actionForm.getTransactionHour(), actionForm.getTransactionMin());
 //        setModelName(actionForm.getTapeModelName());
 //        setModelNumber(actionForm.getTapeModelNumber());
 //        setPurchasePrice(actionForm.getTapeCost());
@@ -216,6 +221,18 @@ public class Tape extends BaseObject {
         }
     }
 
+    public void setTapeTransactionTime(String fullTime) {
+        if (!fullTime.isEmpty()) {
+            String[] timeArray = fullTime.split(":");
+
+            transactionHour = timeArray[0];
+            transactionMin = timeArray[1];
+        } else {
+            transactionHour = "";
+            transactionMin = "";
+        }
+    }
+
     public void setTapeExpireDate(String fullDate) {
         if (!fullDate.isEmpty()) {
             String[] dateArray = fullDate.split("-");
@@ -248,6 +265,11 @@ public class Tape extends BaseObject {
         transactionDate = date;
     }
 
+    public void setTapeTransactionTime(String hour, String min) {
+        transactionHour = hour;
+        transactionMin = min;
+    }
+
     public void setTapeMoveDate(String year, String month, String date) {
         moveYear = year;
         moveMonth = month;
@@ -270,6 +292,10 @@ public class Tape extends BaseObject {
 
     public boolean hasTapeTransactionDate() {
         return (!transactionYear.isEmpty() || !transactionMonth.isEmpty() || !transactionDate.isEmpty());
+    }
+
+    public boolean hasTapeTransactionTime() {
+        return (!transactionHour.isEmpty() || !transactionMin.isEmpty());
     }
 
     public boolean hasTapeMoveDate() {
@@ -466,6 +492,19 @@ public class Tape extends BaseObject {
         return transactionYear;
     }
 
+    public String getTapeTransactionTimeString() {
+        return DatetimeUtils.createTimeString(transactionHour, transactionMin);
+    }
+    public Date getTapeTransactionTime() {
+        return tapeTransactionTime;
+    }
+    public String getTransactionHour() {
+        return transactionHour;
+    }
+    public String getTransactionMin() {
+        return transactionMin;
+    }
+
     public String getTapeMoveDateString() {
         return DatetimeUtils.createDatetimeString(moveYear, moveMonth, moveDate);
     }
@@ -522,6 +561,16 @@ public class Tape extends BaseObject {
     }
     public void setTransactionYear(String transactionYear) {
         this.transactionYear = transactionYear;
+    }
+
+    public void setTapeTransactionTime(Date tapeTransactionTime) {
+        this.tapeTransactionTime = tapeTransactionTime;
+    }
+    public void setTransactionHour(String transactionHour) {
+        this.transactionHour = transactionHour;
+    }
+    public void setTransactionMin(String transactionMin) {
+        this.transactionMin = transactionMin;
     }
 
     public void setTapeMoveDate(Date tapeMoveDate) {
