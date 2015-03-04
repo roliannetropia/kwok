@@ -449,8 +449,11 @@ public class TapeDao extends BaseDao {
 //        queryHelper.addInputInt(tape.getResetLastServiceDate());
         queryHelper.addInputStringConvertNull(tape.getTapeManufacturedDateString());
         queryHelper.addInputStringConvertNull(tape.getTapeTransactionDateString());
+
         queryHelper.addInputStringConvertNull(tape.getTapeMoveDateString());
         queryHelper.addInputStringConvertNull(tape.getTapeExpireDateString());
+
+        queryHelper.addInputStringConvertNull(tape.getTapeTransactionTimeString());
 //        queryHelper.addInputStringConvertNull(tape.getTapePurchaseDateString());
 //        queryHelper.addInputStringConvertNull(tape.getWarrantyExpireDateString());
 //        queryHelper.addInputInt(requestContext.getUser().getId());
@@ -517,6 +520,9 @@ public class TapeDao extends BaseDao {
 
         queryHelper.addInputStringConvertNull(tape.hasTapeExpireDate() ?
                 tape.getTapeMoveDateString() : null);
+
+        queryHelper.addInputStringConvertNull(tape.hasTapeTransactionTime() ?
+                tape.getTapeTransactionTimeString() : null);
 
 //        queryHelper.addInputStringConvertNull(tape.hasTapePurchaseDate() ?
 //                tape.getTapePurchaseDateString() : null);
@@ -742,6 +748,14 @@ public class TapeDao extends BaseDao {
                     DatetimeUtils.toMonthString(tape.getTapeTransactionDate()),
                     DatetimeUtils.toDateString(tape.getTapeTransactionDate()));
         }
+
+        tape.setTapeTransactionTime(DatetimeUtils.getTime(rs, "transaction_time"));
+        if (tape.getTapeTransactionTime() != null) {
+            tape.setTapeTransactionTime(
+                    DatetimeUtils.toHourString(tape.getTapeTransactionTime()),
+                    DatetimeUtils.toMinString(tape.getTapeTransactionTime()));
+        }
+//        System.out.println("Transaction time: "+ DatetimeUtils.getTime(rs, "transaction_time"));
 
         tape.setTapeMoveDate(DatetimeUtils.getDate(rs, "date_move"));
         if (tape.getTapeMoveDate() != null) {
