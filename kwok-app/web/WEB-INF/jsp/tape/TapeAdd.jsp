@@ -143,19 +143,17 @@
         </td>
     </tr>
 
-    <%--<tr>--%>
-        <%--<th><bean:message key="common.column.tape_transaction_time"/>:</th>--%>
-        <%--<td><html:select name="form" property="expireMonth">--%>
-            <%--<html:options collection="expireMonthOptions" property="value" labelProperty="label"/>--%>
-        <%--</html:select>--%>
-            <%--<html:select name="form" property="expireDate">--%>
-                <%--<html:options collection="expireDateOptions" property="value" labelProperty="label"/>--%>
-            <%--</html:select>--%>
-            <%--<html:select name="form" property="expireYear">--%>
-                <%--<html:options collection="expireYearOptions" property="value" labelProperty="label"/>--%>
-            <%--</html:select>--%>
-        <%--</td>--%>
-    <%--</tr>--%>
+    <tr>
+        <th><bean:message key="common.column.tape_transaction_time"/>:</th>
+        <td>
+            <html:select name="form" property="transactionHour">
+                <html:options collection="transactionHourOptions" property="value" labelProperty="label"/>
+            </html:select>
+            <html:select name="form" property="transactionMin">
+                <html:options collection="transactionMinOptions" property="value" labelProperty="label"/>
+            </html:select>
+        </td>
+    </tr>
 
         <%--<th><bean:message key="common.column.tape_purchase_price"/>:</th>--%>
         <%--<td><bean:write name="currencySymbol"/><html:text name="form" property="tapeCost" size="20"/>--%>
