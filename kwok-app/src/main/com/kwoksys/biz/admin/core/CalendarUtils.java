@@ -73,6 +73,24 @@ public class CalendarUtils {
         return dateOptions;
     }
 
+    public static List getHourOptions(RequestContext requestContext) {
+        List hourOptions = new ArrayList();
+        hourOptions.add(new LabelValueBean(Localizer.getText(requestContext, "webCalendar.selectHour"), ""));
+        for (int i = 0;i<24;i++) {
+            hourOptions.add(new LabelValueBean(String.format("%02d",i), String.format("%02d",i)));
+        }
+        return hourOptions;
+    }
+
+    public static List getMinOptions(RequestContext requestContext) {
+        List minOptions = new ArrayList();
+        minOptions.add(new LabelValueBean(Localizer.getText(requestContext, "webCalendar.selectMin"), ""));
+        for (int i = 0;i<60;i++) {
+            minOptions.add(new LabelValueBean(String.format("%02d",i), String.format("%02d",i)));
+        }
+        return minOptions;
+    }
+
     public static List getMonthOptions(RequestContext requestContext) {
         List monthOptions = new ArrayList();
         monthOptions.add(new LabelValueBean(Localizer.getText(requestContext, "webCalendar.selectMonth"), ""));
