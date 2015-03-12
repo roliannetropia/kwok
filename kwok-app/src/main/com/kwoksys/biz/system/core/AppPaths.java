@@ -269,6 +269,7 @@ public class AppPaths {
     public static final String TAPE_LIST_EXPORT = "/tape/list-export" + EXT;
     public static final String TAPE_DETAIL = "/tape/detail" + EXT;
     public static final String TAPE_ADD = "/tape/add" + EXT;
+    public static final String TAPE_SEARCH = "/tape/search" + EXT;
     public static final String TAPE_ADD_2 = "/tape/add-2" + EXT;
     public static final String TAPE_EDIT = "/tape/edit" + EXT;
     public static final String TAPE_EDIT_2 = "/tape/edit-2" + EXT;
