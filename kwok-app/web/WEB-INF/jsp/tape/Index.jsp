@@ -85,7 +85,4 @@
     </tr>
 </table>
 
-<%-- Tape search --%>
-<h3><bean:message key="itMgmt.index.tapeSearchHeader"/></h3>
 
-<jsp:include page="/WEB-INF/jsp/tape/TapeSearchTemplate.jsp"/>
