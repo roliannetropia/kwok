@@ -169,6 +169,14 @@ public class IndexAction extends Action2 {
             header.addHeaderCmds(link);
         }
 
+        // Link to search tape.
+        if (Access.hasPermission(user, AppPaths.TAPE_SEARCH)) {
+            Link link = new Link(requestContext);
+            link.setAjaxPath(AppPaths.TAPE_SEARCH);
+            link.setTitleKey("itMgmt.cmd.tapeSearch");
+            header.addHeaderCmds(link);
+        }
+
         //
         // Template: TapeSearchTemplate
         //

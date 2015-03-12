@@ -168,6 +168,14 @@ public class TapeListAction extends Action2 {
             header.addHeaderCmds(link);
         }
 
+        // Link to search tape.
+        if (Access.hasPermission(user, AppPaths.TAPE_SEARCH)) {
+            Link link = new Link(requestContext);
+            link.setAjaxPath(AppPaths.TAPE_SEARCH);
+            link.setTitleKey("itMgmt.cmd.tapeSearch");
+            header.addHeaderCmds(link);
+        }
+
 //todo add new links to sub navbar here
         // Link to Tape export.
 //        if (Access.hasPermission(user, AppPaths.TAPE_LIST_EXPORT)) {
