@@ -467,10 +467,13 @@
             <!--<result name="success">/WEB-INF/jsp/tape/AjaxGetComponentCustomFields.jsp</result>-->
         <!--</action>-->
         <action name="tape/index" class="com.kwoksys.action.tape.IndexAction">
-        <result name="success">/WEB-INF/jsp/tape/Index.jsp</result>
-    </action>
+            <result name="success">/WEB-INF/jsp/tape/Index.jsp</result>
+        </action>
         <action name="tape/add" class="com.kwoksys.action.tape.TapeAddAction">
             <result name="success">/WEB-INF/jsp/tape/TapeAdd.jsp</result>
+        </action>
+        <action name="tape/search" class="com.kwoksys.action.tape.TapeSearchAction">
+            <result name="success">/WEB-INF/jsp/tape/TapeSearch.jsp</result>
         </action>
         <action name="tape/add-2" class="com.kwoksys.action.tape.TapeAdd2Action"/>
         <action name="tape/detail" class="com.kwoksys.action.tape.TapeDetailAction">
