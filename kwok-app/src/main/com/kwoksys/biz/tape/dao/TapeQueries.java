@@ -33,9 +33,15 @@ public class TapeQueries {
         if (column.equals(Tape.TAPE_NAME)) {
             return "lower(tape_name)";
 
-//        } else if (column.equals(Tape.TAPE_LOCATION)) {
-//            return "lower(tape_location)";
-//
+        } else if (column.equals(Tape.TAPE_BARCODE_NUMBER)) {
+            return "lower(barcode_number)";
+
+        } else if (column.equals(Tape.TAPE_RETENTION)) {
+            return "lower(retention)";
+
+        } else if (column.equals(Tape.TAPE_LOCATION)) {
+            return "lower(location)";
+
 //        } else if (column.equals(Tape.MEDIA_TYPE)) {
 //            return "lower(media_type)";
 //
