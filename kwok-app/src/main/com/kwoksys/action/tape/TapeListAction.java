@@ -63,7 +63,7 @@ public class TapeListAction extends Action2 {
 
         String cmd = requestContext.getParameterString("cmd");
         String rowCmd = requestContext.getParameterString("rowCmd");
-        String orderBy = SessionManager.getOrSetAttribute(requestContext, "orderBy", SessionManager.TAPE_ORDER_BY, Tape.TAPE_NAME);
+        String orderBy = SessionManager.getOrSetAttribute(requestContext, "orderBy", SessionManager.TAPE_ORDER_BY, Tape.TAPE_BARCODE_NUMBER);
         String order = SessionManager.getOrSetAttribute(requestContext, "order", SessionManager.TAPE_ORDER, QueryBits.ASCENDING);
 
 //        Filter by tape type

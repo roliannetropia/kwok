@@ -61,7 +61,7 @@ public class TapeUtils {
      * Speficify the sortable columns allowed.
      */
     public static List<String> getSortableColumns() {
-        return Arrays.asList(Tape.ID, Tape.TAPE_NAME);
+        return Arrays.asList(Tape.ID);
     }
 
     /**
@@ -296,10 +296,14 @@ public class TapeUtils {
 //                    AttributeField attrField = attributeManager.getAttrFieldMapCache(
 //                            Attributes.TAPE_TYPE).get(tape.getType());
 //                    columns.add(Links.getAttrFieldIcon(requestContext, attrField));
-//
-//                } else if (column.equals(Tape.LOCATION)) {
-//                    columns.add(HtmlUtils.encode(attributeManager.getAttrFieldNameCache(Attributes.TAPE_LOCATION,
-//                            tape.getLocation())));
+
+                } else if (column.equals(Tape.TAPE_RETENTION)) {
+                    columns.add(HtmlUtils.encode(attributeManager.getAttrFieldNameCache(Attributes.TAPE_RETENTION,
+                            tape.getTapeRetention())));
+
+                } else if (column.equals(Tape.TAPE_LOCATION)) {
+                    columns.add(HtmlUtils.encode(attributeManager.getAttrFieldNameCache(Attributes.TAPE_LOCATION,
+                            tape.getTapeLocation())));
                 }
             }
 
