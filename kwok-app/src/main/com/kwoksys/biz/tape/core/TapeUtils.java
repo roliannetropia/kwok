@@ -278,7 +278,24 @@ public class TapeUtils {
 
                 } else if (column.equals(Tape.TAPE_BARCODE_NUMBER)) {
                     System.out.println("5");
-                    columns.add(HtmlUtils.encode(tape.getTapeBarcodeNumber()));
+//                    columns.add(HtmlUtils.encode(tape.getTapeBarcodeNumber()));
+
+                    if (hasTapeAccess) {
+                        Link link = new Link(requestContext);
+                        link.setTitle(tape.getTapeBarcodeNumber());
+                        link.setAjaxPath(tapePath + "?tapeId=" + tape.getId());
+                        String tempTapeBarcodeNumber = link.getString();
+
+                        if (hasTpAjaxAccess) {
+                            link = new Link(requestContext);
+                            link.setJavascript("tapePopup(this," + tape.getId() + ")");
+                            link.setImgSrc(Image.getInstance().getMagGlassIcon());
+                            tempTapeBarcodeNumber += "&nbsp;" + link.getString();
+                        }
+                        columns.add(tempTapeBarcodeNumber);
+                    } else {
+                        columns.add(HtmlUtils.encode(tape.getTapeBarcodeNumber()));
+                    }
 
 //                } else if (column.equals(Tape.WARRANTY_EXPIRATION)) {
 //                    columns.add(com.kwoksys.biz.tape.core.TapeUtils.formatWarrantyExpirationDate(requestContext, unixTimestamp,
