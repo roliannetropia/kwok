@@ -424,7 +424,7 @@ public class TapeDao extends BaseDao {
 
         QueryHelper queryHelper = new QueryHelper(TapeQueries.insertTapeQuery());
         queryHelper.addOutputParam(Types.INTEGER);
-        queryHelper.addInputStringConvertNull(tape.getTapeName());
+//        queryHelper.addInputStringConvertNull(tape.getTapeName());
 //        queryHelper.addInputStringConvertNull("");
         queryHelper.addInputStringConvertNull(tape.getTapeSerialNumber());
         queryHelper.addInputStringConvertNull(tape.getTapeBarcodeNumber());
@@ -485,7 +485,7 @@ public class TapeDao extends BaseDao {
 
         QueryHelper queryHelper = new QueryHelper(TapeQueries.updateTapeQuery());
         queryHelper.addInputInt(tape.getId());
-        queryHelper.addInputStringConvertNull(tape.getTapeName());
+//        queryHelper.addInputStringConvertNull(tape.getTapeName());
 //        queryHelper.addInputStringConvertNull(null);
 //        queryHelper.addInputStringConvertNull(tape.getDescription());
         queryHelper.addInputStringConvertNull(tape.getTapeSerialNumber());
@@ -705,8 +705,8 @@ public class TapeDao extends BaseDao {
         Tape tape = new Tape();
         tape.setId(rs.getInt("tape_id"));
         System.out.println("tape id: " + rs.getInt("tape_id"));
-        tape.setTapeName(rs.getString("tape_name"));
-        System.out.println("tape name: "+rs.getString("tape_name"));
+//        tape.setTapeName(rs.getString("tape_name"));
+//        System.out.println("tape name: "+rs.getString("tape_name"));
 //        tape.setDescription(StringUtils.replaceNull(rs.getString("tape_description")));
         tape.setTapeSerialNumber(StringUtils.replaceNull(rs.getString("serial_number")));
         System.out.println("serial number: " + rs.getString("serial_number"));

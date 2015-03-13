@@ -58,7 +58,7 @@ public class TapeAdd2Action extends Action2 {
             return redirect(AppPaths.TAPE_ADD + "?" + RequestContext.URL_PARAM_ERROR_TRUE);
         } else {
             System.out.println("tape id tape add 2 action: "+tape.getId());
-            System.out.println("tape name tape add 2 action: "+tape.getTapeName());
+//            System.out.println("tape name tape add 2 action: "+tape.getTapeName());
             return redirect(AppPaths.TAPE_DETAIL + "?tapeId=" + tape.getId());
         }
     }

@@ -54,7 +54,7 @@ public class TapeUtils {
 
 //    todo default columns in tape details
     public static String[] getTapeDefaultColumns() {
-        return new String[] {Tape.ROWNUM, Tape.ID, Tape.TAPE_NAME, Tape.TAPE_SERIAL_NUMBER, Tape.TAPE_BARCODE_NUMBER};
+        return new String[] {Tape.ROWNUM, Tape.ID, Tape.TAPE_SERIAL_NUMBER, Tape.TAPE_BARCODE_NUMBER};
     }
 
     /**
@@ -243,25 +243,25 @@ public class TapeUtils {
                     System.out.println("2");
                     columns.add(tape.getId());
 
-                } else if (column.equals(Tape.TAPE_NAME)) {
-                    System.out.println("3");
-
-                    if (hasTapeAccess) {
-                        Link link = new Link(requestContext);
-                        link.setTitle(tape.getTapeName());
-                        link.setAjaxPath(tapePath + "?tapeId=" + tape.getId());
-                        String tempTapeName = link.getString();
-
-                        if (hasTpAjaxAccess) {
-                            link = new Link(requestContext);
-                            link.setJavascript("tapePopup(this," + tape.getId() + ")");
-                            link.setImgSrc(Image.getInstance().getMagGlassIcon());
-                            tempTapeName += "&nbsp;" + link.getString();
-                        }
-                        columns.add(tempTapeName);
-                    } else {
-                        columns.add(HtmlUtils.encode(tape.getTapeName()));
-                    }
+//                } else if (column.equals(Tape.TAPE_NAME)) {
+//                    System.out.println("3");
+//
+//                    if (hasTapeAccess) {
+//                        Link link = new Link(requestContext);
+//                        link.setTitle(tape.getTapeName());
+//                        link.setAjaxPath(tapePath + "?tapeId=" + tape.getId());
+//                        String tempTapeName = link.getString();
+//
+//                        if (hasTpAjaxAccess) {
+//                            link = new Link(requestContext);
+//                            link.setJavascript("tapePopup(this," + tape.getId() + ")");
+//                            link.setImgSrc(Image.getInstance().getMagGlassIcon());
+//                            tempTapeName += "&nbsp;" + link.getString();
+//                        }
+//                        columns.add(tempTapeName);
+//                    } else {
+//                        columns.add(HtmlUtils.encode(tape.getTapeName()));
+//                    }
 
 //                } else if (column.equals(Tape.OWNER_NAME)) {
 //                    columns.add(Links.getUserIconLink(requestContext, tape.getOwner(), hasUserDetailAccess, true));

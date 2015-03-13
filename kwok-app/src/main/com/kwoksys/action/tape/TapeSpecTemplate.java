@@ -75,11 +75,11 @@ public class TapeSpecTemplate extends BaseTemplate {
         td.setHeaderKey("common.column.tape_id");
         td.setValue(String.valueOf(tape.getId()));
         detailTableTemplate.addTd(td);
-
-        td = detailTableTemplate.new Td();
-        td.setHeaderKey("common.column.tape_name");
-        td.setValue(HtmlUtils.encode(tape.getTapeName()));
-        detailTableTemplate.addTd(td);
+//
+//        td = detailTableTemplate.new Td();
+//        td.setHeaderKey("common.column.tape_name");
+//        td.setValue(HtmlUtils.encode(tape.getTapeName()));
+//        detailTableTemplate.addTd(td);
 
         td = detailTableTemplate.new Td();
         td.setHeaderKey("common.column.tape_serial_number");
@@ -240,7 +240,7 @@ public class TapeSpecTemplate extends BaseTemplate {
 //            }
 //        }
 
-        headerText = Localizer.getText(requestContext, "itMgmt.tapeDetail.header", new String[]{tape.getTapeName()});
+        headerText = Localizer.getText(requestContext, "itMgmt.tapeDetail.header", new String[]{tape.getTapeBarcodeNumber()});
     }
 
     @Override

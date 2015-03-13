@@ -111,7 +111,7 @@ public class TapeDetailAction extends Action2 {
         //
         HeaderTemplate headerTemplate = standardTemplate.getHeaderTemplate();
         TapeUtils.addTapeHeaderCommands(requestContext, headerTemplate, tape.getId());
-        headerTemplate.setPageTitleKey("itMgmt.tapeDetail.header", new Object[] {tape.getTapeName()});
+        headerTemplate.setPageTitleKey("itMgmt.tapeDetail.header", new Object[] {tape.getTapeBarcodeNumber()});
 
 //        // Assign Software link.
         if (Access.hasPermission(user, AppPaths.TAPE_LICENSE_ADD_2)) {
@@ -185,7 +185,7 @@ public class TapeDetailAction extends Action2 {
         //
         // Template: TapeSpecTemplate
         //
-        System.out.println("tape -> " + tape.getTapeName());
+//        System.out.println("tape -> " + tape.getTapeName());
         System.out.println("serial -> " + tape.getTapeSerialNumber());
         System.out.println("barcode -> " + tape.getTapeBarcodeNumber());
         System.out.println("manufacturer -> " + tape.getManufacturerName());
