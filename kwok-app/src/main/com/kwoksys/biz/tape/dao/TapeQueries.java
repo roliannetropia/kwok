@@ -30,10 +30,11 @@ import com.kwoksys.biz.system.core.configs.ConfigManager;
 public class TapeQueries {
 
     public static String getOrderByColumn(String column) {
-        if (column.equals(Tape.TAPE_NAME)) {
-            return "lower(tape_name)";
-
-        } else if (column.equals(Tape.TAPE_BARCODE_NUMBER)) {
+//        if (column.equals(Tape.TAPE_NAME)) {
+//            return "lower(tape_name)";
+//
+//        } else
+        if (column.equals(Tape.TAPE_BARCODE_NUMBER)) {
             return "lower(barcode_number)";
 
         } else if (column.equals(Tape.TAPE_RETENTION)) {
@@ -60,7 +61,9 @@ public class TapeQueries {
      * Return all tape.
      */
     public static String selectTapeListQuery(QueryBits query) {
-        return "select at.tape_id, at.tape_name, at.serial_number, at.barcode_number, " +
+        return "select at.tape_id, " +
+//                "at.tape_name, " +
+                "at.serial_number, at.barcode_number, " +
                 "at.manufacturer_company_id, at.vendor_company_id, at.media_type, at.location, " +
                 "at.retention, at.system, at.status, at.manufactured_date, at.transaction_date, " +
                 "at.date_move, at.date_expire, at.transaction_time, " +
@@ -226,7 +229,7 @@ public class TapeQueries {
      */
 //  todo eto yung nag cacall ng function
     public static String insertTapeQuery() {
-        return "{call sp_tape_add(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        return "{call sp_tape_add(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
     }
 
     /**
