@@ -18,7 +18,7 @@ import java.util.Date;
 public class Tape extends BaseObject {
 
     public static final String ID = "tape_id";
-    public static final String TAPE_NAME = "tape_name";
+//    public static final String TAPE_NAME = "tape_name";
     public static final String TAPE_BARCODE_NUMBER = "tape_barcode_number";
     public static final String TAPE_SERIAL_NUMBER = "tape_serial_number";
 
@@ -54,7 +54,7 @@ public class Tape extends BaseObject {
 //    public static final String OWNER_DISPLAY_NAME = "tape_owner_display_name";
 //    public static final String OWNER_ID = "tape_owner_id";
 
-    private String tapeName;
+//    private String tapeName;
     private String tapeSerialNumber;
     private String tapeBarcodeNumber;
 
@@ -123,7 +123,7 @@ public class Tape extends BaseObject {
     public Tape() throws DatabaseException {
         super(ObjectTypes.TAPE);
 
-        tapeName = "";
+//        tapeName = "";
         tapeSerialNumber = "";
         tapeBarcodeNumber = "";
 
@@ -149,7 +149,7 @@ public class Tape extends BaseObject {
     }
 
     public void setForm(TapeForm actionForm) {
-        setTapeName(actionForm.getTapeName());
+//        setTapeName(actionForm.getTapeName());
         setTapeSerialNumber(actionForm.getSerialNumber());
         setTapeBarcodeNumber(actionForm.getBarcodeNumber());
 //        setDescription(actionForm.getTapeDescription());
@@ -418,12 +418,12 @@ public class Tape extends BaseObject {
     //
     // Getter and Setter
     //
-    public String getTapeName() {
-        return tapeName;
-    }
-    public void setTapeName(String tapeName) {
-        this.tapeName = tapeName;
-    }
+//    public String getTapeName() {
+//        return tapeName;
+//    }
+//    public void setTapeName(String tapeName) {
+//        this.tapeName = tapeName;
+//    }
     public String getTapeSerialNumber() {
         return tapeSerialNumber;
     }

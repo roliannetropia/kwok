@@ -13,10 +13,10 @@
         <th><bean:message key="common.column.tape_id"/>:</th>
         <td><bean:message key="form.autoId"/></td>
     </tr>
-    <tr>
-        <th><bean:message key="common.requiredFieldIndicator.true"/><bean:message key="common.column.tape_name"/>:</th>
-        <td><input type="text" name="tapeName" value="<bean:write name="form" property="tapeName"/>" size="40" autofocus></td>
-    </tr>
+    <%--<tr>--%>
+        <%--<th><bean:message key="common.requiredFieldIndicator.true"/><bean:message key="common.column.tape_name"/>:</th>--%>
+        <%--<td><input type="text" name="tapeName" value="<bean:write name="form" property="tapeName"/>" size="40" autofocus></td>--%>
+    <%--</tr>--%>
     <%--<tr>--%>
         <%--<th><bean:message name="tape" property="attrRequiredMsgKey(tape_type)"/><bean:message key="common.column.tape_type"/>:</th>--%>
         <%--<td><html:select name="form" property="mediaType" onchange="changeAction(this, '${formThisAction}');">--%>

@@ -31,7 +31,7 @@ public class TapeForm extends BaseObjectForm {
     private Integer tapeId;
     private Integer copyTapeId;
 
-    private String tapeName;
+//    private String tapeName;
     private String serialNumber;
     private String barcodeNumber;
 //    private String tapeModelName;
@@ -91,7 +91,7 @@ public class TapeForm extends BaseObjectForm {
         tapeId = requestContext.getParameterInteger("tapeId");
         copyTapeId = requestContext.getParameterInteger("copyTapeId");
 
-        tapeName = requestContext.getParameterString("tapeName");
+//        tapeName = requestContext.getParameterString("tapeName");
         serialNumber = requestContext.getParameterString("serialNumber");
         barcodeNumber = requestContext.getParameterString("barcodeNumber");
 //        tapeModelName = requestContext.getParameterString("tapeModelName");
@@ -148,7 +148,7 @@ public class TapeForm extends BaseObjectForm {
     public void setTape(Tape tape) {
 //        tapeDescription = tape.getDescription();
 //        tapeOwner = tape.getOwner() != null ? tape.getOwner().getId() : 0;
-        tapeName = tape.getTapeName();
+//        tapeName = tape.getTapeName();
         serialNumber = tape.getTapeSerialNumber();
         barcodeNumber = tape.getTapeBarcodeNumber();
 
@@ -205,9 +205,9 @@ public class TapeForm extends BaseObjectForm {
     public Integer getCopyTapeId() {
         return copyTapeId;
     }
-    public String getTapeName() {
-    return tapeName;
-}
+//    public String getTapeName() {
+//    return tapeName;
+//}
     public String getSerialNumber() {
         return serialNumber;
     }

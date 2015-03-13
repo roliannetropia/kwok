@@ -119,18 +119,18 @@ public class TapeService {
         ActionMessages errors = new ActionMessages();
 
         // Check inputs
-        if (StringUtils.isEmpty(tape.getTapeName())) {
-            errors.add("emptyName", new ActionMessage("common.form.fieldRequired",
-                    Localizer.getText(requestContext, "common.column.tape_name")));
+//        if (StringUtils.isEmpty(tape.getTapeName())) {
+//            errors.add("emptyName", new ActionMessage("common.form.fieldRequired",
+//                    Localizer.getText(requestContext, "common.column.tape_name")));
 
-        } else if (tape.getTapeName().length() > Schema.AssetTapeTable.TAPE_NAME_MAX_LEN) {
-            String fieldName = Localizer.getText(requestContext, "common.column.tape_name");
-            errors.add("nameMaxLength", new ActionMessage("common.form.fieldExceededMaxLen", new Object[]{fieldName, Schema.AssetTapeTable.TAPE_NAME_MAX_LEN}));
+//        } else if (tape.getTapeName().length() > Schema.AssetTapeTable.TAPE_NAME_MAX_LEN) {
+//            String fieldName = Localizer.getText(requestContext, "common.column.tape_name");
+//            errors.add("nameMaxLength", new ActionMessage("common.form.fieldExceededMaxLen", new Object[]{fieldName, Schema.AssetTapeTable.TAPE_NAME_MAX_LEN}));
 
 //        } else if (isDuplicatedTapeName(tape.getId(), tape.getName())) {
 //            // Check unique name
 //            errors.add("duplicatedName", new ActionMessage("itMgmt.tapeAdd.error.nameDuplicated", tape.getName()));
-        }
+//        }
 //        if (tape.getModelName().length() > Schema.AssetTapeTable.TAPE_MODEL_NAME_MAX_LEN) {
 //            String fieldName = Localizer.getText(requestContext, "common.column.tape_model_name");
 //            errors.add("modelNameMaxLength", new ActionMessage("common.form.fieldExceededMaxLen", new Object[]{fieldName, Schema.AssetTapeTable.TAPE_MODEL_NAME_MAX_LEN}));
@@ -427,20 +427,20 @@ public class TapeService {
      * @return
      * @throws Exception
      */
-    public boolean isDuplicatedTapeName(Integer tapeId, String tapeName)
-            throws DatabaseException {
-
-        if (ConfigManager.app.isCheckUniqueTapeName()) {
-            TapeSearch tapeSearch = new TapeSearch();
-            if (tapeId != null) {
-                tapeSearch.put(TapeSearch.TAPE_ID_NOT_EQUALS, tapeId);
-            }
-            tapeSearch.put(TapeSearch.TAPE_NAME_EQUALS, tapeName);
-            return getTapeCount(new QueryBits(tapeSearch)) > 0;
-        } else {
-            return false;
-        }
-    }
+//    public boolean isDuplicatedTapeName(Integer tapeId, String tapeName)
+//            throws DatabaseException {
+//
+//        if (ConfigManager.app.isCheckUniqueTapeName()) {
+//            TapeSearch tapeSearch = new TapeSearch();
+//            if (tapeId != null) {
+//                tapeSearch.put(TapeSearch.TAPE_ID_NOT_EQUALS, tapeId);
+//            }
+//            tapeSearch.put(TapeSearch.TAPE_NAME_EQUALS, tapeName);
+//            return getTapeCount(new QueryBits(tapeSearch)) > 0;
+//        } else {
+//            return false;
+//        }
+//    }
 
     private boolean validateDuplicatedTapeSerialNumber(Tape tape)
             throws DatabaseException {
@@ -459,18 +459,18 @@ public class TapeService {
         }
     }
 
-    public Tape getSingleTapeByName(String tapeName) throws DatabaseException {
-        TapeSearch tapeSearch = new TapeSearch();
-        tapeSearch.put(TapeSearch.TAPE_NAME_EQUALS, tapeName);
-        QueryBits queryBits = new QueryBits(tapeSearch);
-        queryBits.setLimit(2, 0);
-
-        List<Tape> tapeList = getTapeList(queryBits);
-
-        if (tapeList.size() == 1) {
-            return tapeList.get(0);
-        } else {
-            return null;
-        }
-    }
+//    public Tape getSingleTapeByName(String tapeName) throws DatabaseException {
+//        TapeSearch tapeSearch = new TapeSearch();
+//        tapeSearch.put(TapeSearch.TAPE_NAME_EQUALS, tapeName);
+//        QueryBits queryBits = new QueryBits(tapeSearch);
+//        queryBits.setLimit(2, 0);
+//
+//        List<Tape> tapeList = getTapeList(queryBits);
+//
+//        if (tapeList.size() == 1) {
+//            return tapeList.get(0);
+//        } else {
+//            return null;
+//        }
+//    }
 }
