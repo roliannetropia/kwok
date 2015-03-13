@@ -89,6 +89,7 @@ public class SystemConfigNames {
 //    Tape
     public static final String TAPE_CHECK_UNIQUE_NAME = "Tape.CheckUniqueTapeName";
     public static final String TAPE_CHECK_SERIAL_NUMBER = "Tape.CheckUniqueSerialNumber";
+    public static final String TAPE_CHECK_BARCODE_NUMBER = "Tape.CheckUniqueBarcodeNumber";
     public static final String TAPE_ROWS = "tape.numberOfRowsToShow";
     public static final String TAPE_COLUMNS = "tape.columnList";
     public static final String TAPE_WARRANTY_EXPIRE_COUNTDOWN = "tape.warrantyExpireCountdown";

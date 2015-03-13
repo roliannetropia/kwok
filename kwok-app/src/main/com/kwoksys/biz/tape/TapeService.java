@@ -144,6 +144,8 @@ public class TapeService {
             errors.add("serialNumberMaxLength", new ActionMessage("common.form.fieldExceededMaxLen", new Object[]{fieldName, Schema.AssetTapeTable.TAPE_SERIAL_NUMBER_MAX_LEN}));
         } else if (validateDuplicatedTapeSerialNumber(tape)) {
             errors.add("duplicatedSerialNumber", new ActionMessage("itMgmt.tapeAdd.error.duplicatedSerialNumber", new String[]{tape.getTapeSerialNumber()}));
+        } else if (validateDuplicatedTapeBarcodeNumber(tape)) {
+            errors.add("duplicatedBarcodeNumber", new ActionMessage("itMgmt.tapeAdd.error.duplicatedBarcodeNumber", new String[]{tape.getTapeBarcodeNumber()}));
         }
 //        if (!tape.isValidTapeCost()) {
 //            errors.add("validCostFormat", new ActionMessage("common.form.fieldFormatError",
@@ -452,6 +454,23 @@ public class TapeService {
             }
             tapeSearch.put(TapeSearch.TAPE_MANUFACTURER_EQUALS, tape.getManufacturerId());
             tapeSearch.put(TapeSearch.TAPE_SERIAL_NUMBER_EQUALS, tape.getTapeSerialNumber());
+
+            return getTapeCount(new QueryBits(tapeSearch)) > 0;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean validateDuplicatedTapeBarcodeNumber(Tape tape)
+            throws DatabaseException {
+
+        if (ConfigManager.app.isCheckUniqueBarcodeNumber()) {
+            TapeSearch tapeSearch = new TapeSearch();
+            if (tape.getId() != null) {
+                tapeSearch.put(TapeSearch.TAPE_ID_NOT_EQUALS, tape.getId());
+            }
+            tapeSearch.put(TapeSearch.TAPE_MANUFACTURER_EQUALS, tape.getManufacturerId());
+            tapeSearch.put(TapeSearch.TAPE_BARCODE_NUMBER_EQUALS, tape.getTapeBarcodeNumber());
 
             return getTapeCount(new QueryBits(tapeSearch)) > 0;
         } else {

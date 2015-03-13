@@ -88,6 +88,7 @@ public class AppConfigManager extends BaseConfigManager {
     private int hardwareWarrantyExpireCountdown;
     private boolean isCheckUniqueHardwareName;
     private boolean isCheckUniqueSerialNumber;
+    private boolean isCheckUniqueBarcodeNumber;
 
     /*
     * Tape
@@ -97,6 +98,7 @@ public class AppConfigManager extends BaseConfigManager {
 //    private List<String> tapeExportColumns;
     private boolean isCheckUniqueTapeName;
     private boolean isCheckUniqueTapeSerialNumber;
+    private boolean isCheckUniqueTapeBarcodeNumber;
 
     /*
      * Knowledge Base module
@@ -211,6 +213,7 @@ public class AppConfigManager extends BaseConfigManager {
 //        tapeExportColumns = Arrays.asList("tape_id", "tape_name","tape_serial_number","tape_barcode_number");
         isCheckUniqueTapeName = getBoolean(SystemConfigNames.TAPE_CHECK_UNIQUE_NAME);
         isCheckUniqueTapeSerialNumber = getBoolean(SystemConfigNames.TAPE_CHECK_SERIAL_NUMBER);
+        isCheckUniqueTapeBarcodeNumber = getBoolean(SystemConfigNames.TAPE_CHECK_BARCODE_NUMBER);
 
         /**
          * Knowledge Base module
@@ -449,5 +452,9 @@ public class AppConfigManager extends BaseConfigManager {
 
     public boolean isCheckUniqueSerialNumber() {
         return isCheckUniqueSerialNumber;
+    }
+
+    public boolean isCheckUniqueBarcodeNumber() {
+        return isCheckUniqueBarcodeNumber;
     }
 }
