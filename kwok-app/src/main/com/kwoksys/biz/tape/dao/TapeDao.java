@@ -434,10 +434,10 @@ public class TapeDao extends BaseDao {
 
         // We don't want tape type to be null before it's hard to search for it.
         queryHelper.addInputInt(tape.getMediaType());
-        queryHelper.addInputInt(tape.getTapeLocation());
-        queryHelper.addInputInt(tape.getTapeRetention());
-        queryHelper.addInputInt(tape.getTapeSystem());
-        queryHelper.addInputInt(tape.getTapeStatus());
+        queryHelper.addInputIntegerConvertNull(tape.getTapeLocation());
+        queryHelper.addInputIntegerConvertNull(tape.getTapeRetention());
+        queryHelper.addInputIntegerConvertNull(tape.getTapeSystem());
+        queryHelper.addInputIntegerConvertNull(tape.getTapeStatus());
 //        queryHelper.addInputIntegerConvertNull(tape.getOwnerId());
 //        queryHelper.addInputStringConvertNull(tape.getModelName());
 //        queryHelper.addInputStringConvertNull(tape.getModelNumber());
