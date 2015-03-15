@@ -245,13 +245,13 @@ public class TapeUtils {
 
 //                } else if (column.equals(Tape.TAPE_NAME)) {
 //                    System.out.println("3");
-//
+
 //                    if (hasTapeAccess) {
 //                        Link link = new Link(requestContext);
 //                        link.setTitle(tape.getTapeName());
 //                        link.setAjaxPath(tapePath + "?tapeId=" + tape.getId());
 //                        String tempTapeName = link.getString();
-//
+
 //                        if (hasTpAjaxAccess) {
 //                            link = new Link(requestContext);
 //                            link.setJavascript("tapePopup(this," + tape.getId() + ")");
@@ -265,13 +265,13 @@ public class TapeUtils {
 
 //                } else if (column.equals(Tape.OWNER_NAME)) {
 //                    columns.add(Links.getUserIconLink(requestContext, tape.getOwner(), hasUserDetailAccess, true));
-//
+
 //                } else if (column.equals(Tape.MODEL_NAME)) {
 //                    columns.add(HtmlUtils.encode(tape.getModelName()));
-//
+
 //                } else if (column.equals(Tape.MODEL_NUMBER)) {
 //                    columns.add(HtmlUtils.encode(tape.getModelNumber()));
-//
+
                 } else if (column.equals(Tape.TAPE_SERIAL_NUMBER)) {
                     System.out.println("4");
                     columns.add(HtmlUtils.encode(tape.getTapeSerialNumber()));
@@ -300,7 +300,7 @@ public class TapeUtils {
 //                } else if (column.equals(Tape.WARRANTY_EXPIRATION)) {
 //                    columns.add(com.kwoksys.biz.tape.core.TapeUtils.formatWarrantyExpirationDate(requestContext, unixTimestamp,
 //                            tape.getWarrantyExpireDate()));
-//
+
 //                } else if (column.equals(Tape.SERVICE_DATE)) {
 //                    columns.add(tape.getLastServicedOn());
 
@@ -308,7 +308,7 @@ public class TapeUtils {
 //                    AttributeField attrField = attributeManager.getAttrFieldMapCache(
 //                            Attributes.TAPE_STATUS).get(tape.getStatus());
 //                    columns.add(Links.getAttrFieldIcon(requestContext, attrField));
-//
+
 //                } else if (column.equals(Tape.TYPE)) {
 //                    AttributeField attrField = attributeManager.getAttrFieldMapCache(
 //                            Attributes.TAPE_TYPE).get(tape.getType());

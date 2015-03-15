@@ -159,13 +159,21 @@ public class Tape extends BaseObject {
         setVendorId(actionForm.getVendorId());
 
         setMediaType(actionForm.getMediaType());
+        setTapeManufacturedDate(actionForm.getManufacturedYear(), actionForm.getManufacturedMonth(), actionForm.getManufacturedDate());
+
+        System.out.println("Tape setForm ----> barcode number: "+getTapeBarcodeNumber());
+
+        System.out.println("Tape setForm ----> barcode number first element: "+getTapeBarcodeNumber().substring(0,1));
+
+        setTapeSystem(actionForm.getTapeSystem());
+
         setTapeLocation(actionForm.getTapeLocation());
         setTapeRetention(actionForm.getTapeRetention());
 
-        setTapeSystem(actionForm.getTapeSystem());
+
         setTapeStatus(actionForm.getTapeStatus());
 
-        setTapeManufacturedDate(actionForm.getManufacturedYear(), actionForm.getManufacturedMonth(), actionForm.getManufacturedDate());
+
         setTapeTransactionDate(actionForm.getTransactionYear(), actionForm.getTransactionMonth(), actionForm.getTransactionDate());
         setTapeMoveDate(actionForm.getMoveYear(), actionForm.getMoveMonth(), actionForm.getMoveDate());
         setTapeExpireDate(actionForm.getExpireYear(), actionForm.getExpireMonth(), actionForm.getExpireDate());

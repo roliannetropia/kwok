@@ -151,11 +151,14 @@ public class TapeForm extends BaseObjectForm {
 //        tapeName = tape.getTapeName();
         serialNumber = tape.getTapeSerialNumber();
         barcodeNumber = tape.getTapeBarcodeNumber();
-
         manufacturerId = tape.getManufacturerId();
         vendorId = tape.getVendorId();
-
         mediaType = tape.getMediaType();
+        manufacturedYear = tape.getManufacturedYear();
+        manufacturedMonth = tape.getManufacturedMonth();
+        manufacturedDate = tape.getManufacturedDate();
+
+        System.out.println("Tape form ----> barcode number: "+barcodeNumber);
         tapeLocation = tape.getTapeLocation();
         tapeRetention = tape.getTapeRetention();
 
@@ -170,9 +173,7 @@ public class TapeForm extends BaseObjectForm {
 //        purchaseYear = tape.getPurchaseYear();
 //        purchaseMonth = tape.getPurchaseMonth();
 //        purchaseDate = tape.getPurchaseDate();
-        manufacturedYear = tape.getManufacturedYear();
-        manufacturedMonth = tape.getManufacturedMonth();
-        manufacturedDate = tape.getManufacturedDate();
+
 
         transactionYear = tape.getTransactionYear();
         transactionMonth = tape.getTransactionMonth();
